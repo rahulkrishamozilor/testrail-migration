@@ -1,0 +1,32 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+
+# uv
+.uv/
+
+# TestRail search index (ChromaDB + incremental sentinel)
+.claude/mcp-servers/testrail-search/chroma_db/
+.claude/mcp-servers/testrail-search/.last_indexed_testrail
+
+# Local editor / agent settings
+.claude/settings.local.json
+.cursor/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

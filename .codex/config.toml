@@ -1,0 +1,6 @@
+[mcp_servers.testrail-search]
+command = "uv"
+args = [
+    "run",
+    ".claude/mcp-servers/testrail-search/server.py",
+]

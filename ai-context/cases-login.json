@@ -1,0 +1,106 @@
+[
+  {
+    "title": "[Login] Verify that the login page renders with all required fields and controls",
+    "templateId": 2,
+    "customPreconds": "User is on the Login page.",
+    "customStepsSeparated": [
+      { "content": "Verify the Email address field is present and marked as mandatory.", "expected": "Email address field should be visible and marked as a required field." },
+      { "content": "Verify the Password field is present and marked as mandatory.", "expected": "Password field should be visible and marked as a required field." },
+      { "content": "Verify the show/hide toggle (eye icon) is present on the Password field.", "expected": "Eye icon should be visible on the Password field." },
+      { "content": "Verify the \"Log In\" button is present.", "expected": "\"Log In\" button should be visible and interactive." },
+      { "content": "Verify the \"Forgot your password?\" link is present.", "expected": "\"Forgot your password?\" link should be visible and interactive." },
+      { "content": "Verify the \"Sign Up\" link is present.", "expected": "\"Sign Up\" link should be visible and interactive." }
+    ],
+    "custom_case_test_run_type": 1
+  },
+  {
+    "title": "[Login] Verify that valid credentials log the user in and redirect to the Dashboard",
+    "templateId": 2,
+    "customPreconds": "User has a registered account and is on the Login page.",
+    "customStepsSeparated": [
+      { "content": "Enter valid credentials in the email and password fields.", "expected": "Credentials should be accepted in the fields." },
+      { "content": "Click \"Log In\".", "expected": "Dashboard page should be displayed." }
+    ],
+    "custom_case_test_run_type": 2
+  },
+  {
+    "title": "[Login] Verify that submitting login with an empty email field shows a validation error",
+    "templateId": 2,
+    "customPreconds": "User is on the Login page.",
+    "customStepsSeparated": [
+      { "content": "Enter a valid password in the password field, leaving the email field empty.", "expected": "Password should be entered." },
+      { "content": "Click \"Log In\".", "expected": "\"Email is required\" error message should be displayed." }
+    ],
+    "custom_case_test_run_type": 1
+  },
+  {
+    "title": "[Login] Verify that submitting login with an invalid email format shows a validation error",
+    "templateId": 2,
+    "customPreconds": "User is on the Login page.",
+    "customStepsSeparated": [
+      { "content": "Enter an invalid email address in the email field.", "expected": "Invalid email should be entered." },
+      { "content": "Enter a password in the password field.", "expected": "Password should be entered." },
+      { "content": "Click \"Log In\".", "expected": "\"Valid email required\" error message should be displayed." }
+    ],
+    "custom_case_test_run_type": 1
+  },
+  {
+    "title": "[Login] Verify that submitting login with a non-existing email shows an authentication error",
+    "templateId": 2,
+    "customPreconds": "User is on the Login page.",
+    "customStepsSeparated": [
+      { "content": "Enter an email address that has no registered account.", "expected": "Email should be entered." },
+      { "content": "Enter a password.", "expected": "Password should be entered." },
+      { "content": "Click \"Log In\".", "expected": "\"Invalid email/password. Please try again\" error message should be displayed." }
+    ],
+    "custom_case_test_run_type": 1
+  },
+  {
+    "title": "[Login] Verify that the password visibility toggle reveals and hides the entered password",
+    "templateId": 2,
+    "customPreconds": "User is on the Login page.",
+    "customStepsSeparated": [
+      { "content": "Enter a password in the password field.", "expected": "The entered characters should be masked (displayed as dots)." },
+      { "content": "Click the eye icon on the password field.", "expected": "The entered password should be displayed in plain text." }
+    ],
+    "custom_case_test_run_type": 1
+  },
+  {
+    "title": "[Login] Verify that submitting login with an empty password field shows a validation error",
+    "templateId": 2,
+    "customPreconds": "User is on the Login page.",
+    "customStepsSeparated": [
+      { "content": "Enter a valid email address in the email field, leaving the password field empty.", "expected": "Email should be entered." },
+      { "content": "Click \"Log In\".", "expected": "\"Password is required\" error message should be displayed." }
+    ],
+    "custom_case_test_run_type": 1
+  },
+  {
+    "title": "[Login] Verify that submitting login with an incorrect password shows an authentication error",
+    "templateId": 2,
+    "customPreconds": "User is on the Login page. A registered account exists for the email being used.",
+    "customStepsSeparated": [
+      { "content": "Enter a registered email address in the email field.", "expected": "Email should be entered." },
+      { "content": "Enter an incorrect password in the password field.", "expected": "Incorrect password should be entered." },
+      { "content": "Click \"Log In\".", "expected": "\"Invalid email/password. Please try again\" error message should be displayed." }
+    ],
+    "custom_case_test_run_type": 1
+  },
+  {
+    "title": "[Login] Verify that the \"Sign Up\" link on the login page navigates to the signup page",
+    "templateId": 2,
+    "customPreconds": "User is on the Login page.",
+    "customStepsSeparated": [
+      { "content": "Click the \"Sign Up\" link.", "expected": "Sign Up page should be displayed." }
+    ]
+  },
+  {
+    "title": "[Login] Verify that the \"Forgot your password?\" link on the login page navigates to the Forgot Password page",
+    "templateId": 2,
+    "customPreconds": "User is on the Login page.",
+    "customStepsSeparated": [
+      { "content": "Click the \"Forgot your password?\" link.", "expected": "Forgot Password page should be displayed." }
+    ],
+    "custom_case_test_run_type": 1
+  }
+]

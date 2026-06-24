@@ -1,0 +1,37 @@
+[
+  {
+    "title": "[Sign Up] Verify that the signup page renders with all required fields and controls",
+    "templateId": 2,
+    "customPreconds": "User is on the Sign Up page.",
+    "customStepsSeparated": [
+      { "content": "Verify the Email address field is present and marked as mandatory.", "expected": "Email address field should be visible and marked as a required field." },
+      { "content": "Verify the Website field is present and marked as mandatory.", "expected": "Website field should be visible and marked as a required field." },
+      { "content": "Verify the Password field is present and marked as mandatory.", "expected": "Password field should be visible and marked as a required field." },
+      { "content": "Verify the show/hide toggle (eye icon) is present on the Password field.", "expected": "Eye icon should be visible on the Password field." },
+      { "content": "Verify the Terms and Conditions & Privacy Policy checkbox is present.", "expected": "Checkbox with \"I accept the Terms and Conditions & Privacy Policy\" text should be visible and unchecked by default." },
+      { "content": "Verify the \"Get Started\" button is present.", "expected": "\"Get Started\" button should be visible and interactive." },
+      { "content": "Verify the \"Log In\" link is present.", "expected": "\"Log In\" link should be displayed." }
+    ],
+    "custom_case_test_run_type": 1
+  },
+  {
+    "title": "[Sign Up] Verify that the \"Log In\" link on the signup page navigates to the login page",
+    "templateId": 2,
+    "customPreconds": "User is on the Sign Up page.",
+    "customStepsSeparated": [
+      { "content": "Click the \"Log In\" link.", "expected": "The Login page should be displayed." }
+    ]
+  },
+  {
+    "title": "[Sign Up] Verify that completing signup with valid credentials creates an account and sends a verification email",
+    "templateId": 2,
+    "customPreconds": "User is on the Sign Up page.",
+    "customStepsSeparated": [
+      { "content": "Enter a valid email address, website URL, and password in the corresponding fields.", "expected": "User should be able to enter values in all fields." },
+      { "content": "Check the \"I accept the Terms and Conditions & Privacy Policy\" checkbox.", "expected": "Checkbox should be checked." },
+      { "content": "Click \"Get Started\".", "expected": "The onboarding / banner setup page should be displayed." },
+      { "content": "Verify that a verification email with subject \"Verify your email for CookieYes\" is received at the registered email address.", "expected": "Verification email should be received." }
+    ],
+    "custom_case_test_run_type": 2
+  }
+]

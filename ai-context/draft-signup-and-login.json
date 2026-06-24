@@ -1,0 +1,660 @@
+{
+  "section": "Webapp (Free Signup) > Signup and Login",
+  "fetched_at": "2026-06-19T12:25:26Z",
+  "searched_section_ids": [9, 10],
+  "cases": [
+    {
+      "title": "[Sign Up] Verify that the signup page renders with all required fields and controls",
+      "preconditions": "none",
+      "steps": [
+        { "content": "Navigate to the Sign Up page.", "expected": "Sign Up page should be displayed." },
+        { "content": "Verify the Email address field is present and marked as mandatory.", "expected": "Email address field should be visible and marked as a required field." },
+        { "content": "Verify the Website field is present and marked as mandatory.", "expected": "Website field should be visible and marked as a required field." },
+        { "content": "Verify the Password field is present and marked as mandatory.", "expected": "Password field should be visible and marked as a required field." },
+        { "content": "Verify the show/hide toggle (eye icon) is present on the Password field.", "expected": "Eye icon should be visible on the Password field." },
+        { "content": "Verify the Terms and Conditions & Privacy Policy checkbox is present.", "expected": "Checkbox with \"I accept the Terms and Conditions & Privacy Policy\" text should be visible and unchecked by default." },
+        { "content": "Verify the \"Get Started\" button is present.", "expected": "\"Get Started\" button should be visible and interactive." },
+        { "content": "Verify the \"Log In\" link is present for users who already have an account.", "expected": "\"Log In\" link should be displayed." }
+      ],
+      "source_case_ids": [49],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Replaced pure layout/copy case with per-element presence checks following page top-to-bottom structure. Dropped title/subtitle alignment, placeholder copy text, and client testimonial position checks."
+    },
+    {
+      "title": "[Sign Up] Verify that the \"Log In\" link on the signup page navigates to the login page",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Click the \"Log In\" link.", "expected": "The Login page should be displayed." }
+      ],
+      "source_case_ids": [50],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped display-verify step for the \"Already have an account?\" text; kept only the functional navigation assertion."
+    },
+    {
+      "title": "[Sign Up] Verify that completing signup with valid credentials creates an account and sends a verification email",
+      "preconditions": "none",
+      "steps": [
+        { "content": "Navigate to the Sign Up page.", "expected": "Sign Up page should be displayed." },
+        { "content": "Enter a valid email address, website URL, and password in the corresponding fields.", "expected": "User should be able to enter values in all fields." },
+        { "content": "Check the \"I accept the Terms and Conditions & Privacy Policy\" checkbox.", "expected": "Checkbox should be checked." },
+        { "content": "Click \"Get Started\".", "expected": "The onboarding / banner setup page should be displayed." },
+        { "content": "Verify that a verification email with subject \"Verify your email for CookieYes\" is received at the registered email address.", "expected": "Verification email should be received." }
+      ],
+      "source_case_ids": [65],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped \"user should be allowed to enter\" filler expected results; added email receipt as an explicit verification step (it was an implicit expected result in the source)."
+    },
+    {
+      "title": "[Sign Up] Verify that submitting the signup form without an email shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Enter a website URL and password, leaving the email field empty.", "expected": "Values should be entered in website and password fields." },
+        { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
+        { "content": "Click \"Get Started\".", "expected": "\"Email is required\" error message should be displayed." }
+      ],
+      "source_case_ids": [51],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Sign Up] Verify that submitting signup with an already-registered email shows a validation error",
+      "preconditions": "User is on the Sign Up page. An existing account is registered with a known email address.",
+      "steps": [
+        { "content": "Enter the existing account's email address in the email field.", "expected": "Email address should be entered." },
+        { "content": "Enter a valid website URL and password.", "expected": "Values should be entered." },
+        { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
+        { "content": "Click \"Get Started\".", "expected": "\"The email has already been taken.\" error message should be displayed." }
+      ],
+      "source_case_ids": [53],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results; added precondition for pre-existing account."
+    },
+    {
+      "title": "[Sign Up] Verify that submitting signup with an invalid email format shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Enter an invalid email address (e.g., \"notanemail\") in the email field.", "expected": "Invalid email should be entered." },
+        { "content": "Enter a valid website URL and password.", "expected": "Values should be entered." },
+        { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
+        { "content": "Click \"Get Started\".", "expected": "\"Valid email required\" error message should be displayed." }
+      ],
+      "source_case_ids": [54],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Sign Up] Verify that submitting signup with an email longer than 190 characters shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Enter an email address exceeding 190 characters in the email field.", "expected": "Oversized email should be entered." },
+        { "content": "Enter a valid website URL and password.", "expected": "Values should be entered." },
+        { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
+        { "content": "Click \"Get Started\".", "expected": "\"Your email address exceeds the maximum value of 190 characters\" error message should be displayed." }
+      ],
+      "source_case_ids": [55],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Sign Up] Verify that submitting signup without a website shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Enter a valid email address and password, leaving the website field empty.", "expected": "Values should be entered." },
+        { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
+        { "content": "Click \"Get Started\".", "expected": "\"Website is required\" error message should be displayed." }
+      ],
+      "source_case_ids": [56],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Sign Up] Verify that submitting signup with an invalid website URL shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Enter a valid email address and password.", "expected": "Values should be entered." },
+        { "content": "Enter an invalid website URL (not in \"example.com\" format) in the website field.", "expected": "Invalid URL should be entered." },
+        { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
+        { "content": "Click \"Get Started\".", "expected": "\"Please enter URL in the format example.com\" error message should be displayed." }
+      ],
+      "source_case_ids": [57],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Sign Up] Verify that submitting signup with a website URL longer than 75 characters shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Enter a valid email address and password.", "expected": "Values should be entered." },
+        { "content": "Enter a website URL longer than 75 characters in the website field.", "expected": "Oversized URL should be entered." },
+        { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
+        { "content": "Click \"Get Started\".", "expected": "\"URL should be less than 75 characters\" error message should be displayed." }
+      ],
+      "source_case_ids": [58],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Sign Up] Verify that submitting signup without a password shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Enter a valid email address and website URL, leaving the password field empty.", "expected": "Values should be entered." },
+        { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
+        { "content": "Click \"Get Started\".", "expected": "\"Password is required\" error message should be displayed." }
+      ],
+      "source_case_ids": [59],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Sign Up] Verify that submitting signup with a password shorter than 8 characters shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Enter a valid email address and website URL.", "expected": "Values should be entered." },
+        { "content": "Enter a password with fewer than 8 characters in the password field.", "expected": "Short password should be entered." },
+        { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
+        { "content": "Click \"Get Started\".", "expected": "\"Minimum 8 characters required\" error message should be displayed below the password field." }
+      ],
+      "source_case_ids": [60],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Sign Up] Verify that submitting signup with a password longer than 64 characters shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Enter a valid email address and website URL.", "expected": "Values should be entered." },
+        { "content": "Enter a password longer than 64 characters in the password field.", "expected": "Oversized password should be entered." },
+        { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
+        { "content": "Click \"Get Started\".", "expected": "\"The password is too long\" error message should be displayed." }
+      ],
+      "source_case_ids": [61],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Sign Up] Verify that submitting signup without accepting Terms and Conditions shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Enter a valid email address, website URL, and password.", "expected": "Values should be entered." },
+        { "content": "Leave the Terms and Conditions checkbox unchecked.", "expected": "Checkbox should remain unchecked." },
+        { "content": "Click \"Get Started\".", "expected": "\"Please agree to terms and conditions to proceed\" error message should be displayed." }
+      ],
+      "source_case_ids": [62],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Sign Up] Verify that the \"Terms and Conditions\" link opens the CookieYes Terms and Conditions page",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Click the \"Terms and Conditions\" link in the acceptance checkbox label.", "expected": "The CookieYes Terms and Conditions page should be displayed." }
+      ],
+      "source_case_ids": [63],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped display-verify step for the link text; kept only the navigation assertion."
+    },
+    {
+      "title": "[Sign Up] Verify that the \"Privacy Policy\" link opens the CookieYes Privacy Policy page",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        { "content": "Click the \"Privacy Policy\" link in the acceptance checkbox label.", "expected": "The CookieYes Privacy Policy page should be displayed." }
+      ],
+      "source_case_ids": [64],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped display-verify step for the link text; kept only the navigation assertion."
+    },
+    {
+      "title": "[Sign Up] Verify that clicking \"Verify Email\" in the signup confirmation email opens the email verification success page",
+      "preconditions": "User has completed signup with a new email address [C65]. The inbox contains a \"Verify your email for CookieYes\" email.",
+      "steps": [
+        { "content": "Open the \"Verify your email for CookieYes\" email in the inbox.", "expected": "Verification email should be present and opened." },
+        { "content": "Click the \"Verify Email\" button in the email.", "expected": "The email verification success page should be displayed." }
+      ],
+      "source_case_ids": [2109, 67],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed C2109 and C67 — C2109 verified email receipt and body copy; C67 verified the button click. After dropping copy-check steps from C2109 (static email body text), the two cases share the same behavioral scenario. C67 used as base."
+    },
+    {
+      "title": "[Sign Up] Verify that clicking \"Go to Dashboard\" after email verification navigates to the Dashboard",
+      "preconditions": "User has clicked \"Verify Email\" and is on the email verification success page. [C67]",
+      "steps": [
+        { "content": "Click \"Go to Dashboard\".", "expected": "Dashboard page should be displayed." }
+      ],
+      "source_case_ids": [68],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped layout/copy steps (title alignment, green tick image, static success text); kept only the functional navigation step. Step count is inherently short for this terminal-action case."
+    },
+    {
+      "title": "[Sign Up] Verify that clicking an expired verification email link shows a failure page with a resend option",
+      "preconditions": "User has signed up [C65] but has not verified their email within 1 hour. The original \"Verify your email for CookieYes\" email is still in the inbox.",
+      "steps": [
+        { "content": "Open the \"Verify your email for CookieYes\" email (more than 1 hour after signup).", "expected": "Email should be accessible in the inbox." },
+        { "content": "Click \"Verify Email\".", "expected": "\"Your email verification failed!\" page should be displayed." },
+        { "content": "Click \"Resend Verification Email\".", "expected": "A new verification email should be received at the registered address and a \"Verification email has been resent successfully.\" notification should appear." }
+      ],
+      "source_case_ids": [69],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Chained reference C44 becomes a precondition; stripped \"user is allowed to open email\" filler."
+    },
+    {
+      "title": "[Sign Up] Verify that clicking a verification link after account deletion shows a failure page",
+      "preconditions": "User completed signup [C65] but deleted their account before verifying email. The original \"Verify your email for CookieYes\" email is still in the inbox.",
+      "steps": [
+        { "content": "Open the \"Verify your email for CookieYes\" email from the inbox.", "expected": "Email should be accessible." },
+        { "content": "Click \"Verify Email\".", "expected": "\"Your email verification failed!\" page should be displayed with a \"Resend Verification Email\" button." },
+        { "content": "Click \"Resend Verification Email\".", "expected": "A new verification email should be received at the registered address and a success notification should appear. [inferred — C70 states notification + email received; C1148 states \"Login Page displayed\"; C70 expected result used as it is more specific; discrepancy should be manually verified]" }
+      ],
+      "source_case_ids": [70, 1148],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed C70 and C1148 — after stripping layout/copy steps from C1148 (logo alignment, red cross display, body text), remaining behavioral steps are identical to C70. C70 used as base. Discrepancy noted: C70 and C1148 differ on the expected result of the Resend button — C70 says email + notification, C1148 says Login page displayed."
+    },
+    {
+      "title": "[Login] Verify that the login page renders with all required fields and controls",
+      "preconditions": "none",
+      "steps": [
+        { "content": "Navigate to the Login page.", "expected": "Login page should be displayed." },
+        { "content": "Verify the Email address field is present and marked as mandatory.", "expected": "Email address field should be visible and marked as a required field." },
+        { "content": "Verify the Password field is present and marked as mandatory.", "expected": "Password field should be visible and marked as a required field." },
+        { "content": "Verify the show/hide toggle (eye icon) is present on the Password field.", "expected": "Eye icon should be visible on the Password field." },
+        { "content": "Verify the \"Log In\" button is present.", "expected": "\"Log In\" button should be visible and interactive." },
+        { "content": "Verify the \"Forgot your password?\" link is present.", "expected": "\"Forgot your password?\" link should be visible and interactive." },
+        { "content": "Verify the \"Sign Up\" link is present for users without an account.", "expected": "\"Sign Up\" link should be visible and interactive." }
+      ],
+      "source_case_ids": [19],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Replaced pure layout/copy case with per-element presence checks following page top-to-bottom structure. Dropped title/subtitle alignment, placeholder copy text, and logo display checks."
+    },
+    {
+      "title": "[Login] Verify that valid credentials log the user in and redirect to the Dashboard",
+      "preconditions": "User has a registered account.",
+      "steps": [
+        { "content": "Navigate to the Login page.", "expected": "Login page should be displayed." },
+        { "content": "Enter valid credentials in the email and password fields.", "expected": "Credentials should be accepted in the fields." },
+        { "content": "Click \"Log In\".", "expected": "Dashboard page should be displayed." }
+      ],
+      "source_case_ids": [20],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped \"user allowed to enter\" filler expected results; kept only the navigation outcome."
+    },
+    {
+      "title": "[Login] Verify that submitting login with an empty email field shows a validation error",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        { "content": "Enter a valid password in the password field, leaving the email field empty.", "expected": "Password should be entered." },
+        { "content": "Click \"Log In\".", "expected": "\"Email is required\" error message should be displayed." }
+      ],
+      "source_case_ids": [83],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped field-display check step (\"verify email/password fields displayed under Good to see you again! text\")."
+    },
+    {
+      "title": "[Login] Verify that submitting login with an invalid email format shows a validation error",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        { "content": "Enter an invalid email address in the email field.", "expected": "Invalid email should be entered." },
+        { "content": "Enter a password in the password field.", "expected": "Password should be entered." },
+        { "content": "Click \"Log In\".", "expected": "\"Valid email required\" error message should be displayed." }
+      ],
+      "source_case_ids": [84],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Login] Verify that submitting login with a non-existing email shows an authentication error",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        { "content": "Enter an email address that has no registered account.", "expected": "Email should be entered." },
+        { "content": "Enter a password.", "expected": "Password should be entered." },
+        { "content": "Click \"Log In\".", "expected": "\"Invalid email/password. Please try again\" error message should be displayed." }
+      ],
+      "source_case_ids": [85],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Login] Verify that the password visibility toggle reveals and hides the entered password",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        { "content": "Enter a password in the password field.", "expected": "The entered characters should be masked (displayed as dots)." },
+        { "content": "Click the eye icon on the password field.", "expected": "The entered password should be displayed in plain text." }
+      ],
+      "source_case_ids": [81],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Split the two outcomes (masked vs. revealed) into distinct step/expected pairs."
+    },
+    {
+      "title": "[Login] Verify that submitting login with an empty password field shows a validation error",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        { "content": "Enter a valid email address in the email field, leaving the password field empty.", "expected": "Email should be entered." },
+        { "content": "Click \"Log In\".", "expected": "\"Password is required\" error message should be displayed." }
+      ],
+      "source_case_ids": [86],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results."
+    },
+    {
+      "title": "[Login] Verify that submitting login with an incorrect password shows an authentication error",
+      "preconditions": "User is on the Login page. A registered account exists for the email being used.",
+      "steps": [
+        { "content": "Enter a registered email address in the email field.", "expected": "Email should be entered." },
+        { "content": "Enter an incorrect password in the password field.", "expected": "Incorrect password should be entered." },
+        { "content": "Click \"Log In\".", "expected": "\"Invalid email/password. Please try again\" error message should be displayed." }
+      ],
+      "source_case_ids": [87],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped filler expected results; added precondition that account exists for that email."
+    },
+    {
+      "title": "[Login] Verify that the \"Sign Up\" link on the login page navigates to the signup page",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        { "content": "Click the \"Sign Up\" link.", "expected": "Sign Up page should be displayed." }
+      ],
+      "source_case_ids": [82],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped display-verify step for the \"Don't have an account?\" text; kept only the navigation assertion."
+    },
+    {
+      "title": "[Login] Verify that the \"Forgot your password?\" link on the login page navigates to the Forgot Password page",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        { "content": "Click the \"Forgot your password?\" link.", "expected": "Forgot Password page should be displayed." }
+      ],
+      "source_case_ids": [21],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped display-verify step for the link."
+    },
+    {
+      "title": "[Forgot Password] Verify that the forgot password page renders with all required fields and controls",
+      "preconditions": "User is on the Forgot Password page. [C21]",
+      "steps": [
+        { "content": "Verify the Email address field is present and marked as mandatory.", "expected": "Email address field should be visible and marked as a required field." },
+        { "content": "Verify the \"Submit\" button is present.", "expected": "\"Submit\" button should be visible and interactive." },
+        { "content": "Verify the \"Back to Login\" link is present.", "expected": "\"Back to Login\" link should be visible and interactive." }
+      ],
+      "source_case_ids": [88],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Chained step \"Go to C21\" becomes precondition. Replaced layout/copy steps with per-element presence checks for interactive controls only."
+    },
+    {
+      "title": "[Forgot Password] Verify that the \"Back to Login\" link on the forgot password page navigates to the login page",
+      "preconditions": "User is on the Forgot Password page. [C21]",
+      "steps": [
+        { "content": "Click \"Back to Login\".", "expected": "Login page should be displayed." }
+      ],
+      "source_case_ids": [89],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Chained step \"Go to C21\" becomes precondition; stripped display-verify step for the link."
+    },
+    {
+      "title": "[Forgot Password] Verify that submitting the forgot password form without an email shows a validation error",
+      "preconditions": "User is on the Forgot Password page. [C21]",
+      "steps": [
+        { "content": "Click \"Submit\" without entering an email address.", "expected": "\"Email is required\" error message should be displayed." }
+      ],
+      "source_case_ids": [90],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Chained step \"Go to C21\" becomes precondition."
+    },
+    {
+      "title": "[Forgot Password] Verify that submitting the forgot password form with an invalid email format shows a validation error",
+      "preconditions": "User is on the Forgot Password page. [C21]",
+      "steps": [
+        { "content": "Enter an invalid email address in the email field.", "expected": "Invalid email should be entered." },
+        { "content": "Click \"Submit\".", "expected": "\"Valid email required\" error message should be displayed." }
+      ],
+      "source_case_ids": [91],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Chained step \"Go to C21\" becomes precondition."
+    },
+    {
+      "title": "[Forgot Password] Verify that submitting a valid email on the forgot password page sends a password reset email",
+      "preconditions": "User is on the Forgot Password page. [C21]",
+      "steps": [
+        { "content": "Enter a valid registered email address in the email field.", "expected": "Email should be entered." },
+        { "content": "Click \"Submit\".", "expected": "The check-inbox confirmation page should be displayed." },
+        { "content": "Verify that a \"Password Reset Request\" email is received at the registered email address.", "expected": "Password reset email should be received." }
+      ],
+      "source_case_ids": [92],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed repeated navigation setup steps into precondition; stripped display-verify and filler expected results from source."
+    },
+    {
+      "title": "[Forgot Password] Verify that the check-inbox confirmation page renders correctly after submitting a reset request",
+      "preconditions": "User has submitted a valid email on the Forgot Password page. [C92]",
+      "steps": [
+        { "content": "Verify the check-inbox confirmation page is displayed.", "expected": "A confirmation page indicating the reset email has been sent should be displayed." },
+        { "content": "Verify the \"Back to Login\" link is present.", "expected": "\"Back to Login\" link should be visible and interactive." }
+      ],
+      "source_case_ids": [93],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Replaced layout/copy steps with structural presence checks. The confirmation state appearing is the key behavioral assertion; \"Back to Login\" is the only interactive control on this page."
+    },
+    {
+      "title": "[Forgot Password] Verify that the \"Back to Login\" link on the check-inbox page navigates to the login page",
+      "preconditions": "User has submitted a valid email and is on the check-inbox confirmation page. [C92]",
+      "steps": [
+        { "content": "Click \"Back to Login\".", "expected": "Login page should be displayed." }
+      ],
+      "source_case_ids": [94],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed entire navigation setup into precondition; stripped display-verify step and filler expected results."
+    },
+    {
+      "title": "[Forgot Password] Verify that clicking the \"Reset Password\" button in the reset email opens the reset password page",
+      "preconditions": "User has submitted a valid email on the Forgot Password page and has received a \"Password Reset Request\" email. [C92]",
+      "steps": [
+        { "content": "Open the \"Password Reset Request\" email in the inbox.", "expected": "Email should be accessible and opened." },
+        { "content": "Click the \"Reset Password\" button in the email.", "expected": "The Reset Password page should be displayed." }
+      ],
+      "source_case_ids": [95],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed navigation setup into precondition; stripped display-verify step for the button."
+    },
+    {
+      "title": "[Forgot Password] Verify that the reset password page renders with all required fields and controls",
+      "preconditions": "User has clicked \"Reset Password\" in the reset email and is on the Reset Password page. [C95]",
+      "steps": [
+        { "content": "Verify the Email address field is present and marked as mandatory.", "expected": "Email address field should be visible and marked as a required field." },
+        { "content": "Verify the New password field is present and marked as mandatory.", "expected": "New password field should be visible and marked as a required field." },
+        { "content": "Verify the Confirm password field is present and marked as mandatory.", "expected": "Confirm password field should be visible and marked as a required field." },
+        { "content": "Verify the \"Reset Password\" button is present.", "expected": "\"Reset Password\" button should be visible and interactive." }
+      ],
+      "source_case_ids": [96],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Replaced layout/copy steps with per-element presence checks following page structure. Dropped title/subtitle alignment, password guideline copy, and placeholder text checks."
+    },
+    {
+      "title": "[Forgot Password] Verify that submitting the reset password form without an email shows a validation error",
+      "preconditions": "User is on the Reset Password page. [C95]",
+      "steps": [
+        { "content": "Enter a new password and confirm password, leaving the email field empty.", "expected": "Password fields should be filled." },
+        { "content": "Click \"Reset Password\".", "expected": "\"Email is required\" error message should be displayed." }
+      ],
+      "source_case_ids": [97],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed navigation setup into precondition; stripped filler expected results."
+    },
+    {
+      "title": "[Forgot Password] Verify that submitting the reset password form with an invalid email format shows a validation error",
+      "preconditions": "User is on the Reset Password page. [C95]",
+      "steps": [
+        { "content": "Enter an invalid email address in the email field.", "expected": "Invalid email should be entered." },
+        { "content": "Enter a matching new and confirm password.", "expected": "Password fields should be filled." },
+        { "content": "Click \"Reset Password\".", "expected": "\"Valid email required\" error message should be displayed." }
+      ],
+      "source_case_ids": [98],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed navigation setup into precondition; stripped filler expected results."
+    },
+    {
+      "title": "[Forgot Password] Verify that submitting the reset password form with a mismatched email shows a token error",
+      "preconditions": "User is on the Reset Password page. [C95]",
+      "steps": [
+        { "content": "Enter an email address that does not match the one used in the reset request.", "expected": "Mismatched email should be entered." },
+        { "content": "Enter a matching new and confirm password.", "expected": "Password fields should be filled." },
+        { "content": "Click \"Reset Password\".", "expected": "\"This password reset token is invalid.\" error message should be displayed." }
+      ],
+      "source_case_ids": [99],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Chained reference C95 becomes precondition; stripped filler expected results. \"Incorrect email\" in source maps to token mismatch behavior."
+    },
+    {
+      "title": "[Forgot Password] Verify that submitting the reset password form without a new password shows a validation error",
+      "preconditions": "User is on the Reset Password page. [C95]",
+      "steps": [
+        { "content": "Enter the registered email address and a confirm password, leaving the new password field empty.", "expected": "Email and confirm password fields should be filled." },
+        { "content": "Click \"Reset Password\".", "expected": "\"New Password is required\" error message should be displayed." }
+      ],
+      "source_case_ids": [100],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed navigation setup into precondition; stripped filler expected results."
+    },
+    {
+      "title": "[Forgot Password] Verify that submitting the reset password form without a confirm password shows a validation error",
+      "preconditions": "User is on the Reset Password page. [C95]",
+      "steps": [
+        { "content": "Enter the registered email address and a new password, leaving the confirm password field empty.", "expected": "Email and new password fields should be filled." },
+        { "content": "Click \"Reset Password\".", "expected": "\"Confirm Password is required\" error message should be displayed." }
+      ],
+      "source_case_ids": [1261],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed navigation setup into precondition; stripped filler expected results."
+    },
+    {
+      "title": "[Forgot Password] Verify that submitting the reset password form with a new password shorter than 8 characters shows a validation error",
+      "preconditions": "User is on the Reset Password page. [C95]",
+      "steps": [
+        { "content": "Enter the registered email address and a matching confirm password.", "expected": "Email and confirm password fields should be filled." },
+        { "content": "Enter a new password with fewer than 8 characters.", "expected": "Short password should be entered." },
+        { "content": "Click \"Reset Password\".", "expected": "\"Minimum 8 characters required\" error message should be displayed. [inferred]" }
+      ],
+      "source_case_ids": [1262],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Source case C1262 is incomplete — step 11 has no expected result and the final click action is missing. Expected result inferred from analogous case C60 (signup password too short). Collapsed navigation setup into precondition."
+    },
+    {
+      "title": "[Forgot Password] Verify that submitting the reset password form with a new password longer than 64 characters shows a validation error",
+      "preconditions": "User is on the Reset Password page. [C95]",
+      "steps": [
+        { "content": "Enter the registered email address and a matching confirm password.", "expected": "Email and confirm password fields should be filled." },
+        { "content": "Enter a new password longer than 64 characters.", "expected": "Oversized password should be entered." },
+        { "content": "Click \"Reset Password\".", "expected": "\"The password is too long\" error message should be displayed." }
+      ],
+      "source_case_ids": [1263],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed navigation setup into precondition; stripped filler expected results."
+    },
+    {
+      "title": "[Forgot Password] Verify that submitting the reset password form with mismatching new and confirm passwords shows a validation error",
+      "preconditions": "User is on the Reset Password page. [C95]",
+      "steps": [
+        { "content": "Enter the registered email address.", "expected": "Email should be entered." },
+        { "content": "Enter different values in the new password and confirm new password fields.", "expected": "Mismatched passwords should be entered." },
+        { "content": "Click \"Reset Password\".", "expected": "\"New Password and Confirm Password does not match\" error message should be displayed." }
+      ],
+      "source_case_ids": [1264],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed navigation setup into precondition; stripped filler expected results."
+    },
+    {
+      "title": "[Forgot Password] Verify that the reset password form accepts valid credentials and confirms the password reset",
+      "preconditions": "User is on the Reset Password page. [C95]",
+      "steps": [
+        { "content": "Enter the registered email address.", "expected": "Email should be entered." },
+        { "content": "Enter a valid password (8–64 characters) in both the new password and confirm new password fields.", "expected": "Matching passwords should be entered." },
+        { "content": "Click \"Reset Password\".", "expected": "Reset confirmation page should be displayed." },
+        { "content": "Verify that a \"Your password has been changed\" notification email is received at the registered address.", "expected": "Password change notification email should be received." }
+      ],
+      "source_case_ids": [1265],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed navigation setup into precondition; stripped layout/copy checks (title alignment, info text listing password rules)."
+    },
+    {
+      "title": "[Forgot Password] Verify that the reset confirmation page renders with a success state and Log In button",
+      "preconditions": "User has successfully reset their password. [C1265]",
+      "steps": [
+        { "content": "Verify the reset confirmation page is displayed with a success indicator.", "expected": "A success confirmation page should be displayed with a green tick icon indicating the password was reset." },
+        { "content": "Verify the \"Log In\" button is present.", "expected": "\"Log In\" button should be visible and interactive." },
+        { "content": "Verify that a \"Your password has been changed\" notification email is received at the registered address.", "expected": "Password change notification email should be received." }
+      ],
+      "source_case_ids": [1266],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Replaced layout/copy steps with structural presence checks. Green tick icon kept as it signals a logic state (success vs. failure). Added email notification step from C1265 since it belongs here contextually."
+    },
+    {
+      "title": "[Forgot Password] Verify that the \"Log In\" button on the reset confirmation page navigates to the login page",
+      "preconditions": "User has successfully reset their password and is on the reset confirmation page. [C1265]",
+      "steps": [
+        { "content": "Click \"Log In\".", "expected": "Login page should be displayed." }
+      ],
+      "source_case_ids": [107],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed navigation setup into precondition; stripped display-verify step for the button."
+    },
+    {
+      "title": "[Forgot Password] Verify that clicking Reset Password with an expired token shows a token error",
+      "preconditions": "User initiated a password reset more than 1 hour ago and has the original \"Password Reset Request\" email in their inbox. [C92]",
+      "steps": [
+        { "content": "Open the \"Password Reset Request\" email and click \"Reset Password\".", "expected": "Reset Password page should be displayed." },
+        { "content": "Enter the registered email address and matching new/confirm passwords.", "expected": "All fields should be filled." },
+        { "content": "Click \"Reset Password\".", "expected": "\"This password reset token is invalid.\" error message should be displayed below the confirm password field." }
+      ],
+      "source_case_ids": [108],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed navigation setup into precondition; stripped filler expected results; time-expiry condition captured in precondition."
+    }
+  ]
+}
