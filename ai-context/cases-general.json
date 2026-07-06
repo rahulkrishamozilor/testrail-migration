@@ -1,0 +1,269 @@
+[
+  {
+    "id": 36710,
+    "title": "[Cookie Banner] Verify that the Customization page renders with all required controls",
+    "templateId": 2,
+    "customPreconds": "User is on the Cookie Banner tab. The Customization page is open. The sidebar contains five tabs: General, Layout, Content, Colours, Custom CSS. The banner preview is visible on the right.",
+    "customStepsSeparated": [
+      { "content": "Verify the General tab is selected in the Customization sidebar.", "expected": "The General tab should be highlighted and the General section content should be displayed." },
+      { "content": "Verify the banner preview panel is visible to the right of the sidebar.", "expected": "A live banner preview should be displayed." },
+      { "content": "Verify the Publish Changes button is visible at the bottom of the sidebar.", "expected": "The \"Publish Changes\" button should be present but disabled by default until changes are made in the Customization settings." }
+    ],
+    "customRunType": 2
+  },
+  {
+    "id": 36716,
+    "title": "[Cookie Banner] Verify that the General section renders with all required cards and controls",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Law selector is set to GDPR (default).",
+    "customStepsSeparated": [
+      { "content": "Verify the Consent Template card is visible at the top of the General section with the Law selector on its right.", "expected": "The Consent Template card should be displayed with the Law selector dropdown visible." },
+      { "content": "Verify the Geo-target banner card is visible below the Consent Template card.", "expected": "The Geo-target banner card should be displayed with Worldwide, EU Countries & UK, and Select Countries options." },
+      { "content": "Verify the Support IAB TCF v2.3 card is visible below the Geo-target banner card.", "expected": "The Support IAB TCF v2.3 toggle should be displayed." },
+      { "content": "Verify the Show advanced settings control is visible at the bottom of the General section.", "expected": "The \"Show advanced settings\" control should be displayed as the last item in the section." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36717,
+    "title": "[Cookie Banner] Verify that the Consent Template defaults to the GDPR opt-in template",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab.",
+    "customStepsSeparated": [
+      { "content": "Verify the Law selector in the Consent Template card shows \"GDPR\".", "expected": "GDPR should be selected by default in the Law selector." },
+      { "content": "Verify the banner preview displays the GDPR opt-in template.", "expected": "The opt-in banner template should be shown in the preview panel." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36718,
+    "title": "[Cookie Banner] Verify that selecting US State Laws applies the opt-out template",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Law selector is set to GDPR (default).",
+    "customStepsSeparated": [
+      { "content": "Click the Law selector dropdown in the Consent Template card.", "expected": "The dropdown should open showing GDPR, US State Laws, and GDPR & US State Laws." },
+      { "content": "Select \"US State Laws\".", "expected": "The Law selector label should update to \"US State Laws\"." },
+      { "content": "Verify the banner preview switches to the opt-out template.", "expected": "The opt-out banner template should appear in the preview panel." },
+      { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the US State Laws opt-out banner should be active on the website." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36719,
+    "title": "[Cookie Banner] Verify that the Law selector lists GDPR, US State Laws, and GDPR & US State Laws options",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab.",
+    "customStepsSeparated": [
+      { "content": "Click the Law selector dropdown in the Consent Template card.", "expected": "The dropdown should open." },
+      { "content": "Verify the dropdown shows exactly three options: GDPR, US State Laws, and GDPR & US State Laws, each with a help icon.", "expected": "All three options should be listed with their respective help icons." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36720,
+    "title": "[Cookie Banner] Verify that GDPR & US State Laws mode adds a Customize sub-dropdown switching between GDPR and US State Laws panels",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher).",
+    "customStepsSeparated": [
+      { "content": "Click the Law selector dropdown and select \"GDPR & US State Laws\".", "expected": "The Law selector label should update to \"GDPR & US State Laws\" and a \"Customize\" sub-dropdown should appear in the Consent Template card." },
+      { "content": "Click the Customize sub-dropdown.", "expected": "GDPR and US State Laws should be listed as options." },
+      { "content": "Verify GDPR is selected by default in the Customize dropdown.", "expected": "The Customize dropdown should show \"GDPR\" and the banner preview should display the opt-in template." },
+      { "content": "Select \"US State Laws\" from the Customize dropdown.", "expected": "The Customize dropdown should update to \"US State Laws\" and the banner preview should switch to the opt-out template." },
+      { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and both GDPR and US State Laws banners should be active on the website." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36721,
+    "title": "[Cookie Banner] Verify that the Geo-target banner defaults to Worldwide under GDPR",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Law selector is set to GDPR (default).",
+    "customStepsSeparated": [
+      { "content": "Verify the Geo-target banner card lists three options: Worldwide, EU Countries & UK, and Select Countries.", "expected": "All three options should be displayed with radio buttons." },
+      { "content": "Verify Worldwide is selected by default.", "expected": "The Worldwide radio button should be selected." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36722,
+    "title": "[Cookie Banner] Verify that the Geo-target banner offers Worldwide, United States, and Select Countries under US State Laws",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Law selector set to US State Laws.",
+    "customStepsSeparated": [
+      { "content": "Verify the Geo-target banner card lists three options: Worldwide, United States, and Select Countries.", "expected": "All three options should be displayed with radio buttons." },
+      { "content": "Verify Worldwide is selected by default.", "expected": "The Worldwide radio button should be selected." },
+      { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the US State Laws banner should display worldwide." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36723,
+    "title": "[Cookie Banner] Verify that selecting Select Countries restricts the banner to the chosen countries",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Law selector set to GDPR. (Select Countries behaves identically under US State Laws — same case covers both.)",
+    "customStepsSeparated": [
+      { "content": "Under the Geo-target banner card, select \"Select Countries\".", "expected": "A country selection dropdown should appear with country names and checkboxes." },
+      { "content": "Select one or more countries from the dropdown.", "expected": "The selected countries should show as checked." },
+      { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the banner should display only in the selected countries on the website." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36724,
+    "title": "[Cookie Banner] Verify that the Support IAB TCF v2.3 card displays its toggles and dependency under GDPR",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Law selector is set to GDPR (default).",
+    "customStepsSeparated": [
+      { "content": "Verify the Support IAB TCF v2.3 toggle is visible below the Geo-target banner card and is off by default.", "expected": "The IAB TCF v2.3 toggle should be displayed and disabled." },
+      { "content": "Verify the Support Google's Additional Consent Mode toggle is visible below and disabled.", "expected": "The toggle should be visible and uninteractable while IAB TCF v2.3 is off." },
+      { "content": "Verify the Enable Google's Advertiser Consent Mode toggle is visible below and disabled.", "expected": "The toggle should be visible and uninteractable while IAB TCF v2.3 is off." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36725,
+    "title": "[Cookie Banner] Verify that disabling the Show banner toggle hides the US State Laws banner",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Law selector set to US State Laws. The Show banner toggle is visible and enabled by default.",
+    "customStepsSeparated": [
+      { "content": "Disable the Show banner toggle below the Geo-target banner card.", "expected": "The US State Laws banner should be hidden and an info bar should appear above the preview panel: 'The \"US State Laws\" banner is currently hidden. To display it on your site, enable the \"Show banner\" option in General settings.'" },
+      { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the US State Laws banner should not appear on the website." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36726,
+    "title": "[Cookie Banner] Verify that the Do Not Sell link card provides the copyable DNS HTML snippet under US State Laws",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Law selector set to US State Laws. The \"Do Not Sell\" link card is visible below the Show banner toggle.",
+    "customStepsSeparated": [
+      { "content": "Verify the card displays an HTML code snippet in a text area.", "expected": "A text area containing the DNS link HTML snippet should be visible." },
+      { "content": "Click the Copy code button inside the text area (top-right corner).", "expected": "The HTML code should be copied to the clipboard and the Copy button should briefly indicate success." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36727,
+    "title": "[Cookie Banner] Verify that selecting EU Countries & UK restricts the banner to EU/UK regions",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Law selector is set to GDPR.",
+    "customStepsSeparated": [
+      { "content": "Under the Geo-target banner card, select \"EU Countries & UK\".", "expected": "The EU Countries & UK radio button should be selected." },
+      { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the banner should display only in EU Countries & UK regions on the website." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36728,
+    "title": "[Cookie Banner] Verify that selecting United States restricts the banner to the United States under US State Laws",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Law selector set to US State Laws.",
+    "customStepsSeparated": [
+      { "content": "Under the Geo-target banner card, select \"United States\".", "expected": "The United States radio button should be selected." },
+      { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the banner should display only to users in the United States." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36729,
+    "title": "[Cookie Banner] Verify that publishing with Select Countries but no countries selected shows a validation error",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Select Countries is selected under the Geo-target banner card.",
+    "customStepsSeparated": [
+      { "content": "Click \"Publish Changes\" without selecting any countries from the country dropdown.", "expected": "A validation message \"Please select countries\" should appear below the Select Countries option and changes should not be saved." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36730,
+    "title": "[Cookie Banner] Verify that enabling Support IAB TCF v2.3 activates the dependent consent-mode toggles and TCF banner",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Law selector is set to GDPR.",
+    "customStepsSeparated": [
+      { "content": "Enable the Support IAB TCF v2.3 toggle.", "expected": "The IAB TCF v2.3 banner should appear in the banner preview. The Support Google's Additional Consent Mode and Enable Google's Advertiser Consent Mode toggles should become interactable." },
+      { "content": "Enable the Support Google's Additional Consent Mode toggle.", "expected": "The partner count in the IAB TCF v2.3 banner should increase and a Google Ad Tech providers list should appear." },
+      { "content": "Enable the Enable Google's Advertiser Consent Mode toggle.", "expected": "The toggle should switch to on." },
+      { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the IAB TCF v2.3 banner should be active on the website." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36731,
+    "title": "[Cookie Banner] Verify that Show advanced settings reveals the Consent expiration and Reload page controls",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab.",
+    "customStepsSeparated": [
+      { "content": "Click \"Show advanced settings\" at the bottom of the General section.", "expected": "The Consent expiration (days) field and the Reload page on consent action toggle should appear." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36732,
+    "title": "[Cookie Banner] Verify that the Consent expiration field defaults to 365 days and persists on publish",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Show advanced settings is expanded. The Consent expiration (days) field is visible.",
+    "customStepsSeparated": [
+      { "content": "Verify the Consent expiration (days) field shows 365 by default.", "expected": "The field should contain the value 365." },
+      { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the banner should reappear to users 365 days after they give consent." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36733,
+    "title": "[Cookie Banner] Verify that enabling Reload page on consent action reloads the site on consent",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Show advanced settings is expanded. The Reload page on consent action toggle is visible and off by default.",
+    "customStepsSeparated": [
+      { "content": "Enable the Reload page on consent action toggle.", "expected": "The toggle should switch to on." },
+      { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved." },
+      { "content": "Navigate to the website and interact with the cookie banner.", "expected": "The page should reload immediately after consent is given or declined." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36734,
+    "title": "[Cookie Banner] Verify that the Consent expiration field rejects invalid values with a validation message",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Show advanced settings is expanded. The Consent expiration (days) field is visible.",
+    "customStepsSeparated": [
+      { "content": "Attempt to type letters or special characters into the Consent expiration field.", "expected": "The field should not accept non-numeric input." },
+      { "content": "Enter an out-of-range number (e.g. 0 or 10000) into the field.", "expected": "A validation message \"Please enter a value between 1 and 9999\" should appear below the field." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36821,
+    "title": "[Cookie Banner] Verify that clicking a geo-target crown icon opens the upgrade nudge",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Law selector set to GDPR. EU Countries & UK and Select Countries show crown icons.",
+    "customStepsSeparated": [
+      { "content": "Click the crown icon next to \"EU Countries & UK\" under the Geo-target banner card.", "expected": "An upgrade nudge should appear showing \"Display your banner only in select countries and regions\" with an upgrade CTA button." },
+      { "content": "Dismiss the nudge and click the crown icon next to \"Select Countries\".", "expected": "The same upgrade nudge should appear." },
+      { "content": "Set the Law selector to US State Laws.", "expected": "The Geo-target banner card should update to show Worldwide, United States, and Select Countries with crown icons on United States and Select Countries." },
+      { "content": "Click the crown icon next to \"United States\".", "expected": "An upgrade nudge should appear with an upgrade CTA button." },
+      { "content": "Dismiss the nudge and click the crown icon next to \"Select Countries\".", "expected": "The same upgrade nudge should appear." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36822,
+    "title": "[Cookie Banner] Verify that clicking the IAB TCF v2.3 crown icon opens the upgrade nudge",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. Law selector set to GDPR. The Support IAB TCF v2.3 option shows an upgrade icon.",
+    "customStepsSeparated": [
+      { "content": "Click the upgrade icon next to \"Support IAB TCF v2.3\".", "expected": "An upgrade nudge should appear showing \"Comply with IAB TCF and Google's requirements\" with an upgrade CTA button." }
+    ],
+    "customRunType": 1
+  },
+  {
+    "id": 36823,
+    "title": "[Cookie Banner] Verify that the Geo-target banner shows the correct options under GDPR & US State Laws",
+    "templateId": 2,
+    "customPreconds": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Law selector set to GDPR & US State Laws.",
+    "customStepsSeparated": [
+      { "content": "Verify the Geo-target banner card options.", "expected": "The card should display Worldwide, EU Countries & UK, United States, and Select Countries as options. [inferred — verify against live app]" },
+      { "content": "Verify Worldwide is selected by default.", "expected": "The Worldwide radio button should be selected. [inferred — verify against live app]" }
+    ],
+    "customRunType": 1
+  }
+]

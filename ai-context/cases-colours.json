@@ -1,0 +1,433 @@
+{
+  "section": "Colours",
+  "suite_id": 16,
+  "section_id": 1797,
+  "fetched_at": "2026-07-06T04:43:20Z",
+  "grilled_at": "2026-07-06T05:53:32Z",
+  "published_at": "2026-07-06T07:02:36Z",
+  "searched_section_ids": [
+    35,
+    244,
+    227,
+    169,
+    354,
+    476,
+    408,
+    444,
+    590
+  ],
+  "cases": [
+    {
+      "id": 37129,
+      "title": "[Cookie Banner] Verify that the Colours section renders with Light selected by default and shows the \"Customise light colours\" link",
+      "preconditions": "User is on Cookie Banner > Customisation sidebar > Colours tab. The Colours section shows a Consent Template card at the top (with the law selector, defaulting to GDPR), followed by three colour scheme options: Light, Dark, and Auto-generated.",
+      "steps": [
+        {
+          "content": "Observe the colour scheme options.",
+          "expected": "\"Light\", \"Dark\", and \"Auto-generated\" options should be visible. \"Light\" should be selected by default."
+        },
+        {
+          "content": "Observe the Consent Template card.",
+          "expected": "The law selector should show \"GDPR\" as the current selection by default."
+        },
+        {
+          "content": "With \"Light\" selected, observe the area below the colour options.",
+          "expected": "A \"Customise light colours\" link should be visible below the colour options."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [
+        995,
+        998,
+        1631,
+        1632,
+        1640,
+        1641,
+        5388,
+        5389,
+        4813,
+        4814,
+        2900,
+        2901,
+        8868,
+        8869
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "C995 (display) and C998 (Light functionality) merged \u2014 C995 is a subset. Navigation steps 1\u20134 moved to preconditions. Sidebar tab list verification dropped as static presence check. Consent Template card position check dropped as alignment. Role variants (Account Owner, Admin, Editor) collapsed \u2014 identical behavior.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 37130,
+      "title": "[Cookie Banner] Verify that selecting \"Dark\" updates the banner preview and shows the \"Customise dark colours\" link",
+      "preconditions": "User is on Cookie Banner > Customisation sidebar > Colours tab.",
+      "steps": [
+        {
+          "content": "Click the \"Dark\" colour option.",
+          "expected": "\"Dark\" is selected; the banner preview in the sidebar updates to display the dark colour scheme."
+        },
+        {
+          "content": "Observe the area below the colour options.",
+          "expected": "A \"Customise dark colours\" link should appear in place of the \"Customise light colours\" link."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        999,
+        1633,
+        1642,
+        5390,
+        4815,
+        2902,
+        8870
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Navigation steps dropped to preconditions. Static sidebar tab list check dropped. Role variants collapsed \u2014 identical behavior.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 37131,
+      "title": "[Cookie Banner] Verify that selecting \"Dark\" on a Free plan shows the Custom CSS upgrade nudge",
+      "preconditions": "User is on a Free plan. User is on Cookie Banner > Customisation sidebar > Colours tab.",
+      "steps": [
+        {
+          "content": "Click the \"Dark\" colour option.",
+          "expected": "\"Dark\" is selected and the banner preview updates."
+        },
+        {
+          "content": "Observe the Colours section.",
+          "expected": "An in-app upgrade nudge for Custom CSS appears with a feature illustration, headline \"Put your banner in the spotlight with custom CSS\", a note that the feature is available in all premium plans, and two action buttons: \"Try Pro for free\" and \"Dismiss\"."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9919
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Steps 9\u201311 (verifying specific nudge headline text, image description, and button labels as copy checks) dropped. Step 12 (\"Try it now\" \u2192 upgrade page) extracted \u2014 already covered by Plan Gates C36866. This case covers only the nudge appearing.",
+      "grill_status": "needs-manual-check"
+    },
+    {
+      "id": 37132,
+      "title": "[Cookie Banner] Verify that \"Dismiss\" closes the Custom CSS upgrade nudge on the Colours tab",
+      "preconditions": "User is on a Free plan. User is on Cookie Banner > Customisation sidebar > Colours tab. \"Dark\" is selected and the Custom CSS upgrade nudge is visible.",
+      "steps": [
+        {
+          "content": "Click the \"Dismiss\" button on the upgrade nudge.",
+          "expected": "The nudge closes. It should not reappear during the same browser session."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9920,
+        9922,
+        9924
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Navigation and nudge appearance steps moved to preconditions. Admin/Editor role cases differ only in \"Try it now\" being disabled \u2014 that divergence is flagged as a permission case separately. Dismiss behavior is identical across all roles.",
+      "grill_status": "needs-manual-check"
+    },
+    {
+      "id": 37133,
+      "title": "[Cookie Banner] Verify that selecting \"Auto-generated\" applies the website's colour scheme to the banner",
+      "preconditions": "User is on Cookie Banner > Customisation sidebar > Colours tab. The account's connected domain has been scanned and website colours are available (without scan data, selecting \"Auto-generated\" silently reverts to the Dark scheme).",
+      "steps": [
+        {
+          "content": "Click the \"Auto-generated\" colour option.",
+          "expected": "\"Auto-generated\" is selected; the banner preview updates to display a colour scheme derived from the connected website's colours."
+        },
+        {
+          "content": "Observe the area below the colour options.",
+          "expected": "A \"Customise auto-generated colours\" link should appear."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1000,
+        1634,
+        1643
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Help icon tooltip step dropped (static copy). C16743 (Free plan Auto-generated upgrade nudge) not included here \u2014 already covered by Plan Gates C36864. Role variants collapsed \u2014 identical behavior.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 37134,
+      "title": "[Cookie Banner] Verify that \"Customise light colours\" reveals per-component colour pickers under GDPR",
+      "preconditions": "User is on Cookie Banner > Customisation sidebar > Colours tab. Law is set to GDPR (default). \"Light\" is selected (default). The \"Customise light colours\" link is visible.",
+      "steps": [
+        {
+          "content": "Click \"Customise light colours\".",
+          "expected": "A \"Custom\" sub-option is activated. A \"Customise colours\" section appears with four accordion items: Cookie Notice, Preference Center, Revisit Consent Button, Alt Text for Blocked Content."
+        },
+        {
+          "content": "Expand the \"Cookie Notice\" accordion.",
+          "expected": "The following sub-options appear with their default light colours:\n- Banner: Background #FFFFFF, Border #F4F4F4, Title #212121, Message #212121\n- \"Accept All\" button: Background #1863DC, Border #1863DC, Text #FFFFFF\n- \"Reject All\" button: Background #1863DC, Border #1863DC, Text #FFFFFF\n- \"Customise\" button: Background TRANSPARENT, Border #1863DC, Text #1863DC"
+        },
+        {
+          "content": "Change one or more colour values under the Cookie Notice accordion.",
+          "expected": "The banner preview updates to reflect the changed colour on the corresponding element."
+        },
+        {
+          "content": "Expand the \"Preference Center\" accordion.",
+          "expected": "The following sub-options appear with their default colours:\n- Toggle switch: Enabled state #1863DC, Disabled state #D0D5D2\n- \"Save My Preferences\" button: Background #1863DC, Border #1863DC, Text #FFFFFF"
+        },
+        {
+          "content": "Change one or more colour values under the Preference Center accordion.",
+          "expected": "The banner preview updates accordingly."
+        },
+        {
+          "content": "Expand the \"Revisit Consent Button\" accordion.",
+          "expected": "\"Floating button\" sub-option appears with default colour: Background #0056A7."
+        },
+        {
+          "content": "Expand the \"Alt Text for Blocked Content\" accordion.",
+          "expected": "Sub-options appear with default colours:\n- Background #000000\n- Border #000000\n- Text #FFFFFF"
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes are saved; the customised colours are applied to the live banner."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1001,
+        1635,
+        1644
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Navigation and GDPR default verification steps moved to preconditions. Default hex colour values retained as behavioural spec (not dropped \u2014 they define product defaults). Duplicate assertions removed. Role variants collapsed \u2014 identical behavior.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 37135,
+      "title": "[Cookie Banner] Verify that \"Customise dark colours\" reveals per-component colour pickers under GDPR",
+      "preconditions": "User is on Cookie Banner > Customisation sidebar > Colours tab. Law is set to GDPR (default). \"Dark\" is selected. The \"Customise dark colours\" link is visible.",
+      "steps": [
+        {
+          "content": "Click \"Customise dark colours\".",
+          "expected": "A \"Custom\" sub-option is activated. A \"Customise colours\" section appears with four accordion items: Cookie Notice, Preference Center, Revisit Consent Button, Alt Text for Blocked Content."
+        },
+        {
+          "content": "Expand the \"Cookie Notice\" accordion.",
+          "expected": "The following sub-options appear with their default dark colours:\n- Banner: Background #121212, Border #2A2A2A, Title #D0D0D0, Message #D0D0D0\n- \"Accept All\" button: Background #1578F7, Border #1578F7, Text #FFFFFF\n- \"Reject All\" button: Background #1578F7, Border #1578F7, Text #FFFFFF\n- \"Customise\" button: Background TRANSPARENT, Border #D0D0D0, Text #D0D0D0"
+        },
+        {
+          "content": "Change one or more colour values under the Cookie Notice accordion.",
+          "expected": "The banner preview updates to reflect the change."
+        },
+        {
+          "content": "Expand the \"Preference Center\" accordion.",
+          "expected": "The following sub-options appear with their default colours:\n- Toggle switch: Enabled state #1578F7, Disabled state #D0D5D2\n- \"Save My Preferences\" button: Background #1578F7, Border #1578F7, Text #FFFFFF"
+        },
+        {
+          "content": "Change one or more colour values under the Preference Center accordion.",
+          "expected": "The banner preview updates accordingly."
+        },
+        {
+          "content": "Expand the \"Revisit Consent Button\" accordion.",
+          "expected": "\"Floating button\" sub-option appears with default colour: Background #0056A7."
+        },
+        {
+          "content": "Expand the \"Alt Text for Blocked Content\" accordion.",
+          "expected": "Sub-options appear with default colours:\n- Background #000000\n- Border #000000\n- Text #FFFFFF"
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes are saved; the customised dark colours are applied to the live banner."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1002,
+        1636,
+        1645
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Source step 9 has a typo ('when Light is selected') \u2014 corrected to 'when Dark is selected'. Duplicate step 15/16 in source (same Reject All/Customize dark colour assertion repeated) kept once. Role variants collapsed.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 37136,
+      "title": "[Cookie Banner] Verify that \"Customise light colours\" reveals per-component colour pickers under US State Laws",
+      "preconditions": "User is on Cookie Banner > Customisation sidebar > Colours tab. Law selector is set to US State Laws. \"Light\" is selected (default). The \"Customise light colours\" link is visible.",
+      "steps": [
+        {
+          "content": "Click \"Customise light colours\".",
+          "expected": "A \"Custom\" sub-option is activated. A \"Customise colours\" section appears with four accordion items: Cookie Notice, Opt-out Center, Revisit Consent Button, Alt Text for Blocked Content."
+        },
+        {
+          "content": "Expand the \"Cookie Notice\" accordion.",
+          "expected": "The following sub-options appear with their default light colours:\n- Banner: Background #FFFFFF, Border #F4F4F4, Title #212121, Message #212121\n- \"Do Not Sell\" link: Text #1863DC"
+        },
+        {
+          "content": "Change one or more colour values under the Cookie Notice accordion.",
+          "expected": "The banner preview updates to reflect the change."
+        },
+        {
+          "content": "Expand the \"Opt-out Center\" accordion.",
+          "expected": "The following sub-options appear with their default colours:\n- Checkbox: Enabled state #1863DC, Disabled state #FFFFFF\n- \"Cancel\" button: Background #FFFFFF, Border #949494, Text #595959\n- \"Save My Preferences\" button: Background #1863DC, Border #1863DC, Text #FFFFFF"
+        },
+        {
+          "content": "Change one or more colour values under the Opt-out Center accordion.",
+          "expected": "The banner preview updates accordingly."
+        },
+        {
+          "content": "Expand the \"Revisit Consent Button\" accordion.",
+          "expected": "\"Floating button\" sub-option appears with default colour: Background #0056A7."
+        },
+        {
+          "content": "Expand the \"Alt Text for Blocked Content\" accordion.",
+          "expected": "Sub-options appear with default colours:\n- Background #000000\n- Border #000000\n- Text #FFFFFF"
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes are saved; the customised colours are applied to the live banner."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1003,
+        1637,
+        1646
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Genuine variant from GDPR light case: Opt-out Center (Checkbox, Cancel, Save My Preferences) replaces Preference Center; Cookie Notice has 'Do Not Sell' link instead of 'Customise' button. Source step 17 mislabelled 'Toggle switch' but is under Opt-out Center \u2014 corrected to Checkbox. Role variants collapsed.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 37137,
+      "title": "[Cookie Banner] Verify that \"Customise dark colours\" reveals per-component colour pickers under US State Laws",
+      "preconditions": "User is on Cookie Banner > Customisation sidebar > Colours tab. Law selector is set to US State Laws. \"Dark\" is selected. The \"Customise dark colours\" link is visible.",
+      "steps": [
+        {
+          "content": "Click \"Customise dark colours\".",
+          "expected": "A \"Custom\" sub-option is activated. A \"Customise colours\" section appears with four accordion items: Cookie Notice, Opt-out Center, Revisit Consent Button, Alt Text for Blocked Content."
+        },
+        {
+          "content": "Expand the \"Cookie Notice\" accordion.",
+          "expected": "The following sub-options appear with their default dark colours:\n- Banner: Background #121212, Border #2A2A2A, Title #D0D0D0, Message #D0D0D0\n- \"Do Not Sell\" link: Text #609FFF"
+        },
+        {
+          "content": "Change one or more colour values under the Cookie Notice accordion.",
+          "expected": "The banner preview updates."
+        },
+        {
+          "content": "Expand the \"Opt-out Center\" accordion.",
+          "expected": "The following sub-options appear with their default dark colours:\n- Checkbox: Enabled state #1578F7, Disabled state #FFFFFF\n- \"Cancel\" button: Background TRANSPARENT, Border #949494, Text #A1A1A1\n- \"Save My Preferences\" button: Background #1578F7, Border #1578F7, Text #FFFFFF"
+        },
+        {
+          "content": "Change one or more colour values under the Opt-out Center accordion.",
+          "expected": "The banner preview updates accordingly."
+        },
+        {
+          "content": "Expand the \"Revisit Consent Button\" accordion.",
+          "expected": "\"Floating button\" sub-option appears with default colour: Background #0056A7."
+        },
+        {
+          "content": "Expand the \"Alt Text for Blocked Content\" accordion.",
+          "expected": "Sub-options appear with default colours:\n- Background #000000\n- Border #000000\n- Text #FFFFFF"
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes are saved; the customised dark colours are applied to the live banner."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1004,
+        1638,
+        1647
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "\"Cancel\" button dark variant differs from light (Background TRANSPARENT vs #FFFFFF). Role variants collapsed.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 37138,
+      "title": "[Cookie Banner] Verify that \"Customise auto-generated colours\" allows overriding the auto-detected colour scheme",
+      "preconditions": "User is on Cookie Banner > Customisation sidebar > Colours tab. \"Auto-generated\" is selected. The \"Customise auto-generated colours\" link is visible.",
+      "steps": [
+        {
+          "content": "Click \"Customise auto-generated colours\".",
+          "expected": "A \"Custom\" sub-option is activated. A \"Customise colours\" section appears with the auto-detected colour values pre-populated for each banner element."
+        },
+        {
+          "content": "Change one or more colour values in the Customise colours section.",
+          "expected": "The modified values are accepted; the banner preview updates to reflect the override."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes are saved; the overridden colours (not the auto-detected values) are applied to the live banner."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1005,
+        1639,
+        1648
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "No specific default hex values \u2014 colours are dynamically derived from the connected website. Role variants collapsed \u2014 identical behavior.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 37139,
+      "title": "[Cookie Banner] Verify that the Opt-out confirmation message sub-section in Opt-out Center shows correct default colours under US State Laws",
+      "preconditions": "User is on Cookie Banner > Customisation sidebar > Colours tab. Law selector is set to US State Laws. \"Customise light colours\" or \"Customise dark colours\" has been clicked and the Customise colours section is visible.",
+      "steps": [
+        {
+          "content": "Expand the \"Opt-out Center\" accordion.",
+          "expected": "The accordion expands and shows four sub-sections: Checkbox, \"Cancel\" button, \"Save My Preferences\" button, and \"Opt-out confirmation message\"."
+        },
+        {
+          "content": "Scroll to the \"Opt-out confirmation message\" sub-section and observe its default colour values.",
+          "expected": "The following default colours are shown:\n- Background: #E5F4EF\n- Icon: #00754E\n- Text: #14142A\n- Subtext: #4E4B66\nThese values are identical in both Light and Dark custom modes."
+        },
+        {
+          "content": "Change one or more values under \"Opt-out confirmation message\".",
+          "expected": "The values are accepted. The banner preview updates to reflect the changed colour on the confirmation message element."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Gap found during grill: the Opt-out Center accordion has a 4th sub-section (Opt-out confirmation message) not covered by any draft case. Colours are the same in Light and Dark custom modes.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 37140,
+      "title": "[Permissions] Verify that Admin and Editor cannot initiate the Custom CSS upgrade from the Colours tab nudge",
+      "preconditions": "User is logged in as Admin or Editor. User is on Cookie Banner > Customisation sidebar > Colours tab. \"Dark\" is selected and the Custom CSS upgrade nudge is visible.",
+      "steps": [
+        {
+          "content": "Observe the \"Try it now\" button on the upgrade nudge.",
+          "expected": "The \"Try it now\" button should be disabled (not clickable)."
+        },
+        {
+          "content": "Hover over the \"Try it now\" button.",
+          "expected": "A tooltip should appear: \"Only account owner can change plan\"."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9921,
+        9923
+      ],
+      "permission_flag": true,
+      "platform_flag": false,
+      "rewrite_notes": "Role divergence on billing-adjacent action (upgrade initiation). Account Owner can click Try it now; Admin and Editor cannot. Routes to section 14 (Permissions).",
+      "grill_status": "skipped:plan-gated"
+    }
+  ]
+}

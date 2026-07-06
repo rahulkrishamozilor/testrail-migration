@@ -1,0 +1,1473 @@
+{
+  "section": "Cookie Banner > Content",
+  "suite_id": 16,
+  "section_id": null,
+  "fetched_at": "2026-07-03T07:10:05Z",
+  "grilled_at": "2026-07-03T09:13:22Z",
+  "published_at": "2026-07-03T10:37:10Z",
+  "searched_section_ids": [
+    34,
+    243,
+    226,
+    168
+  ],
+  "cases": [
+    {
+      "id": 36831,
+      "title": "[Cookie Banner] Verify that the Content section renders the correct drop-downs when GDPR is selected",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected in the law selector (this is the default). The Content section shows a Consent Template card at the top. Below the card, five collapsible accordions are visible in collapsed state.",
+      "steps": [
+        {
+          "content": "Observe the law selector in the Consent Template card.",
+          "expected": "The law selector should show \"GDPR\" as the selected value by default."
+        },
+        {
+          "content": "Observe the list of accordion options below the Consent Template card.",
+          "expected": "The following five accordions should be visible and collapsed by default: Cookie Notice, Preference Centre, Cookie List, Revisit Consent Button, Blocked Content."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        490,
+        1575,
+        1605,
+        5261,
+        5287,
+        5313,
+        4686,
+        4712,
+        4738,
+        2773,
+        2799,
+        2825
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped [Account Owner][Admin][Editor][Content][GDPR] prefixes. Collapsed navigation steps (Go to C205, navigate to Cookie Banner, verify sidebar sections, navigate to Content) into precondition. Dropped 'Consent Template card displayed at top' position step — static layout check. Kept law selector default state and accordion list as structural presence checks. All 12 role+plan variants collapsed (3 roles × 4 plan sections).",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36832,
+      "title": "[Cookie Banner] Verify that the Cookie Notice drop-down reveals all fields and premium indicators",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). The Cookie Notice accordion is collapsed.",
+      "steps": [
+        {
+          "content": "Click the \"Cookie Notice\" accordion to expand it.",
+          "expected": "The following items should be revealed: Title text field, Message text field (rich text editor), Close [X] button toggle, \"Accept All\" button text field, \"Reject All\" button toggle with text field, \"Customise\" button toggle with text field, \"Cookie Policy\" link toggle with URL text field, Custom logo text field, Disable CookieYes branding toggle. The \"Custom logo\" and \"Disable CookieYes branding\" controls should each display an upgrade icon (orange crown)."
+        },
+        {
+          "content": "Observe the premium icons on \"Custom logo\" and \"Disable CookieYes branding\".",
+          "expected": "Both controls should be locked and display an upgrade icon (orange crown), confirming they require an Ultimate plan upgrade to use."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        491,
+        1576,
+        1606,
+        5262,
+        5288,
+        5314,
+        4687,
+        4713,
+        4739,
+        2774,
+        2800,
+        2826
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy verification step dropped (static copy). Premium icon presence is kept — it signals an access-gating logic state.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36833,
+      "title": "[Cookie Banner] Verify that Cookie Notice text fields accept edits and reflect changes in the banner preview",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). User is on an Ultimate plan (Custom logo and Disable CookieYes branding are unlocked). Cookie Notice accordion is expanded.",
+      "steps": [
+        {
+          "content": "Observe the Title field.",
+          "expected": "Pre-filled with \"We value your privacy\". The text should appear on the banner first layer preview."
+        },
+        {
+          "content": "Clear the Title field and type new text.",
+          "expected": "The updated text should appear on the banner first layer preview in real time."
+        },
+        {
+          "content": "Observe the Message field.",
+          "expected": "Pre-filled with the default privacy message (\"We use cookies to enhance your browsing experience, serve personalised ads or content, and analyse our traffic. By clicking 'Accept All', you consent to our use of cookies.\"). The text should appear on the banner first layer preview."
+        },
+        {
+          "content": "Edit the Message field.",
+          "expected": "The updated message should appear on the banner first layer preview in real time."
+        },
+        {
+          "content": "Observe the \"Accept All\" button field.",
+          "expected": "Pre-filled with \"Accept All\". The button should appear on the banner first layer preview."
+        },
+        {
+          "content": "Edit the \"Accept All\" button text.",
+          "expected": "Updated label should appear on the banner first layer preview in real time."
+        },
+        {
+          "content": "Observe the \"Reject All\" button text field (with Reject All toggle enabled).",
+          "expected": "Pre-filled with \"Reject All\". The button should appear on the banner first layer preview."
+        },
+        {
+          "content": "Edit the \"Reject All\" button text.",
+          "expected": "Updated label should appear in real time."
+        },
+        {
+          "content": "Observe the \"Customize\" button text field (with Customize toggle enabled).",
+          "expected": "Pre-filled with \"Customise\". The button should appear on the banner first layer preview."
+        },
+        {
+          "content": "Edit the \"Customize\" button text.",
+          "expected": "Updated label should appear in real time."
+        },
+        {
+          "content": "Observe the \"Cookie Policy\" link text field (with Cookie Policy toggle enabled).",
+          "expected": "Pre-filled with \"Cookie Policy\"."
+        },
+        {
+          "content": "Edit the Cookie Policy link text.",
+          "expected": "Updated label should be editable."
+        },
+        {
+          "content": "Observe the URL field.",
+          "expected": "Empty by default, with placeholder \"URL of your Cookie Policy\"."
+        },
+        {
+          "content": "Observe the Custom logo field.",
+          "expected": "Pre-filled with \"#\". Entering a valid image URL should display the custom logo on the banner first layer preview."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "All changes should be saved and reflected on the live website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        969,
+        1577,
+        1607,
+        5267,
+        5289,
+        5315,
+        4692,
+        4714,
+        4740,
+        2779,
+        2801,
+        2827
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation and sidebar verification steps collapsed into precondition. Original case begins with a full Stripe upgrade flow (multiple steps) — collapsed to 'User is on an Ultimate plan.' Tooltip copy steps dropped. Custom logo field kept here as part of the text fields group.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36834,
+      "title": "[Cookie Banner] Verify that the Message field is disabled and replaced with IAB TCF text when \"Support IAB TCF v2.3\" is enabled",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). The \"Support IAB TCF v2.3\" toggle has been enabled in the General section. Cookie Notice accordion is expanded. The Message text field is visible.",
+      "steps": [
+        {
+          "content": "Observe the Message text field with IAB TCF v2.3 enabled.",
+          "expected": "The Message field should be disabled (non-editable) and pre-filled with the IAB TCF-approved consent text (\"We and our {{count}} partners use cookies and other tracking technologies to improve your experience on our website...\"). The field is a rich text editor (Quill) rendered read-only."
+        },
+        {
+          "content": "Attempt to click inside the Message field and type.",
+          "expected": "The field should not accept input — it should remain non-editable."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        994,
+        1578,
+        1608,
+        5286,
+        5290,
+        5316,
+        4711,
+        4715,
+        4741,
+        2798,
+        2802,
+        2828
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Original begins with Stripe upgrade flow — collapsed. Tooltip copy step dropped. Core behavior (disabled state and IAB text substitution) preserved.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36835,
+      "title": "[Cookie Banner] Verify that Cookie Notice toggles control button and link visibility on the banner",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). User is on an Ultimate plan. Cookie Notice accordion is expanded.",
+      "steps": [
+        {
+          "content": "Observe the \"Close [X] button\" toggle.",
+          "expected": "The toggle should be disabled (off) by default. No close button should be visible on the banner first layer preview."
+        },
+        {
+          "content": "Enable the \"Close [X] button\" toggle.",
+          "expected": "An \"X\" close button should appear in the top-left corner of the banner first layer preview."
+        },
+        {
+          "content": "Observe the \"Reject All\" button toggle.",
+          "expected": "The toggle should be enabled (on) by default. The \"Reject All\" button should be visible on the banner first layer preview."
+        },
+        {
+          "content": "Disable the \"Reject All\" button toggle.",
+          "expected": "The \"Reject All\" button should disappear from the banner first layer preview."
+        },
+        {
+          "content": "Observe the \"Customize\" button toggle.",
+          "expected": "The toggle should be enabled (on) by default. The \"Customise\" button should be visible on the banner first layer preview."
+        },
+        {
+          "content": "Disable the \"Customize\" button toggle.",
+          "expected": "The \"Customise\" button should disappear from the banner first layer preview."
+        },
+        {
+          "content": "Observe the \"Cookie Policy\" link toggle.",
+          "expected": "The toggle should be disabled (off) by default. No Cookie Policy link should appear on the banner preview."
+        },
+        {
+          "content": "Enable the \"Cookie Policy\" link toggle and enter a valid URL in the URL field.",
+          "expected": "A \"Cookie Policy\" link should appear on the banner first layer preview. Clicking it should open the cookie policy page in a new tab."
+        },
+        {
+          "content": "Observe the \"Disable CookieYes branding\" toggle.",
+          "expected": "The toggle should be disabled (off) by default. \"Powered by CookieYes\" branding should be visible on the banner second layer."
+        },
+        {
+          "content": "Enable the \"Disable CookieYes branding\" toggle.",
+          "expected": "The \"Powered by CookieYes\" branding should be removed from the banner second layer preview."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "All toggle changes should be saved and reflected on the live website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        970,
+        1581,
+        1609,
+        5268,
+        5291,
+        5317,
+        4693,
+        4716,
+        4742,
+        2780,
+        2803,
+        2829,
+        15038
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Original starts with Stripe upgrade flow — collapsed. Tooltip copy step dropped. C15038 ('Disable CookieYes branding icon for Ultimate users' [GDPR]) folded into this case as step 10 — tests the same toggle behavior under the same precondition.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36836,
+      "title": "[Cookie Banner] Verify that the Preference Centre drop-down reveals all fields",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). The Preference Centre accordion is collapsed.",
+      "steps": [
+        {
+          "content": "Click the \"Preference Centre\" accordion to expand it.",
+          "expected": "The following items should be revealed: Title text field, Privacy overview text field, Show Google Privacy Policy toggle, \"Save My Preferences\" button text field, \"Show more\" button text field, \"Show less\" button text field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        492,
+        1583,
+        1610,
+        5263,
+        5292,
+        5318,
+        4688,
+        4717,
+        4743,
+        2775,
+        2804,
+        2830
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Position/layout steps dropped. Structural presence check describing what the Preference Center accordion contains for newcomer orientation.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36837,
+      "title": "[Cookie Banner] Verify that Preference Center text fields accept edits and reflect changes in the banner preview",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). Preference Center accordion is expanded.",
+      "steps": [
+        {
+          "content": "Observe the Title field.",
+          "expected": "Pre-filled with \"Customise Consent Preferences\". Text should appear on the banner second layer preview."
+        },
+        {
+          "content": "Edit the Title field.",
+          "expected": "Updated title should appear on the banner second layer preview in real time."
+        },
+        {
+          "content": "Observe the Privacy overview field.",
+          "expected": "Pre-filled with the default privacy overview text (\"We use cookies to help you navigate efficiently and perform certain functions...\"). Text should appear on the banner second layer preview."
+        },
+        {
+          "content": "Edit the Privacy overview field.",
+          "expected": "Updated text should appear on the banner second layer preview in real time."
+        },
+        {
+          "content": "Observe the \"Save My Preferences\" button field.",
+          "expected": "Pre-filled with \"Save My Preferences\". The button should appear on the banner second layer preview."
+        },
+        {
+          "content": "Edit the \"Save My Preferences\" button text.",
+          "expected": "Updated label should appear on the banner second layer preview in real time."
+        },
+        {
+          "content": "Observe the \"Show more\" button field.",
+          "expected": "Pre-filled with \"Show more\". Button should appear on the banner second layer."
+        },
+        {
+          "content": "Edit the \"Show more\" text.",
+          "expected": "Updated label should appear in real time."
+        },
+        {
+          "content": "Observe the \"Show less\" button field.",
+          "expected": "Pre-filled with \"Show less\"."
+        },
+        {
+          "content": "Edit the \"Show less\" text.",
+          "expected": "Updated label should appear in real time."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "All changes should be saved and reflected on the live website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        975,
+        1585,
+        1611,
+        5269,
+        5293,
+        5319,
+        4694,
+        4718,
+        4744,
+        2781,
+        2805,
+        2831
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36838,
+      "title": "[Cookie Banner] Verify that enabling the \"Show Google Privacy Policy\" toggle reveals editable link fields in the Preference Center",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). Preference Center accordion is expanded. The \"Show Google Privacy Policy\" toggle is visible and disabled by default.",
+      "steps": [
+        {
+          "content": "Observe the \"Show Google Privacy Policy\" toggle.",
+          "expected": "The toggle should be disabled (off) by default."
+        },
+        {
+          "content": "Enable the \"Show Google Privacy Policy\" toggle.",
+          "expected": "Three new fields should appear: Message text field, Link text text field, URL text field."
+        },
+        {
+          "content": "Observe the Message field.",
+          "expected": "Pre-filled with \"For more information on how Google's third-party cookies operate and handle your data, see:\". This message with the Google Privacy Policy link should appear below the privacy overview on the banner second layer preview."
+        },
+        {
+          "content": "Edit the Message field.",
+          "expected": "Updated text should appear on the banner second layer preview in real time."
+        },
+        {
+          "content": "Observe the Link text field.",
+          "expected": "Pre-filled with \"Google Privacy Policy\"."
+        },
+        {
+          "content": "Edit the Link text field.",
+          "expected": "Updated link label should appear on the banner second layer preview in real time."
+        },
+        {
+          "content": "Observe the URL field.",
+          "expected": "Pre-filled with \"https://business.safety.google/privacy\"."
+        },
+        {
+          "content": "Edit the URL field with a different URL, then click the link in the banner preview.",
+          "expected": "The updated URL should open in a new tab."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved. The Google Privacy Policy link should appear on the live website's banner second layer."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        976,
+        1586,
+        1612,
+        5270,
+        5294,
+        5320,
+        4695,
+        4719,
+        4745,
+        2782,
+        2806,
+        2832
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Original starts with Stripe upgrade flow — collapsed. Tooltip copy steps dropped.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36839,
+      "title": "[Cookie Banner] Verify that the Cookie List drop-down reveals all controls",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). The Cookie List accordion is collapsed.",
+      "steps": [
+        {
+          "content": "Click the \"Cookie List\" accordion to expand it.",
+          "expected": "The following items should be revealed: \"Show cookie list on banner\" toggle, Embed code section with a Copy button, Cookie label text field, Duration label text field, Description label text field, \"Always Active\" label text field, \"No cookies to display\" label text field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        493,
+        1587,
+        1613,
+        5264,
+        5295,
+        5321,
+        4689,
+        4720,
+        4746,
+        2776,
+        2807,
+        2833
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy step dropped. Structural presence check.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36840,
+      "title": "[Cookie Banner] Verify that the \"Show cookie list on banner\" toggle controls cookie list visibility in the Preference Center",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). Cookie List accordion is expanded.",
+      "steps": [
+        {
+          "content": "Observe the \"Show cookie list on banner\" toggle.",
+          "expected": "The toggle should be enabled (on) by default. A cookie list should be visible under each cookie category on the banner second layer preview."
+        },
+        {
+          "content": "Disable the \"Show cookie list on banner\" toggle.",
+          "expected": "The cookie list should disappear from under each cookie category on the banner second layer preview."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "The cookie list should not appear under cookie categories on the live website's banner second layer."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        978,
+        1588,
+        1614,
+        5272,
+        5296,
+        5322,
+        4697,
+        4721,
+        4747,
+        2784,
+        2808,
+        2834
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy step dropped.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36841,
+      "title": "[Cookie Banner] Verify that Cookie List label text fields accept edits and reflect changes in the cookie table headers",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). Cookie List accordion is expanded.",
+      "steps": [
+        {
+          "content": "Observe the Cookie label field.",
+          "expected": "Pre-filled with \"Cookie\". This column header should appear in the cookie table on the banner second layer preview."
+        },
+        {
+          "content": "Edit the Cookie field.",
+          "expected": "Updated column header should appear in the cookie table in real time."
+        },
+        {
+          "content": "Observe the Duration field.",
+          "expected": "Pre-filled with \"Duration\". This column header should appear in the cookie table."
+        },
+        {
+          "content": "Edit the Duration field.",
+          "expected": "Updated column header should appear in real time."
+        },
+        {
+          "content": "Observe the Description field.",
+          "expected": "Pre-filled with \"Description\". This column header should appear in the cookie table."
+        },
+        {
+          "content": "Edit the Description field.",
+          "expected": "Updated column header should appear in real time."
+        },
+        {
+          "content": "Observe the \"Always Active\" label field.",
+          "expected": "Pre-filled with \"Always Active\". This label should appear next to non-optional cookie categories on the banner second layer preview."
+        },
+        {
+          "content": "Edit the \"Always Active\" label.",
+          "expected": "Updated label should appear in real time."
+        },
+        {
+          "content": "Observe the \"No cookies to display\" label field.",
+          "expected": "Pre-filled with \"No cookies to display.\" (note: the trailing period is part of the default text)."
+        },
+        {
+          "content": "Edit the \"No cookies to display\" field.",
+          "expected": "The field should accept the new text."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "All changes should be saved and reflected on the live website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        977,
+        1589,
+        1615,
+        5271,
+        5297,
+        5323,
+        4696,
+        4722,
+        4748,
+        2783,
+        2809,
+        2835
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36842,
+      "title": "[Cookie Banner] Verify that the Embed code in Cookie List can be copied and embeds the cookie audit table on a website",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). Cookie List accordion is expanded. Tester has access to the target website's admin panel to paste HTML.",
+      "steps": [
+        {
+          "content": "Observe the Embed code section.",
+          "expected": "A text area should display the HTML snippet `<div class=\"cky-audit-table-element\"></div>` and a Copy button should appear above it."
+        },
+        {
+          "content": "Click the Copy button.",
+          "expected": "The HTML code should be copied to the clipboard. The \"Copy\" button label should change to \"Copied!\"."
+        },
+        {
+          "content": "Paste the copied code inside the `<body>` tag of the target website page and save.",
+          "expected": "The code should be saved successfully."
+        },
+        {
+          "content": "Navigate to the edited page on the live website.",
+          "expected": "A cookie audit table should be displayed on the page, listing all cookies grouped by category."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        979,
+        1599,
+        1625,
+        5273,
+        5307,
+        5333,
+        4698,
+        4732,
+        4758,
+        2785,
+        2819,
+        2845
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy step dropped. C979 has no law prefix — this case applies to both GDPR and US State Laws. Requires live website access — not fully automatable via Playwright.",
+      "grill_status": "skipped:external-url"
+    },
+    {
+      "id": 36843,
+      "title": "[Cookie Banner] Verify that the Blocked Content drop-down reveals the alt text field and allows editing",
+      "preconditions": "User is on Cookie Banner > Content tab. GDPR is selected (default). The Blocked Content accordion is collapsed.",
+      "steps": [
+        {
+          "content": "Click the \"Blocked Content\" accordion to expand it.",
+          "expected": "An \"Alt text for blocked content\" label with a help icon and a corresponding text field should be displayed."
+        },
+        {
+          "content": "Observe the alt text field.",
+          "expected": "Pre-filled with \"Please accept cookies to access this content\"."
+        },
+        {
+          "content": "Edit the alt text field.",
+          "expected": "The field should accept the new text."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "The edited alt text should be displayed on embedded content (e.g. YouTube iframes) on the live website before the user has given consent."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        495,
+        1604,
+        1630,
+        5266,
+        5312,
+        5338,
+        4691,
+        4737,
+        4763,
+        2778,
+        2824,
+        2850
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy step dropped.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36858,
+      "title": "[Cookie Banner] Verify that the upgrade tooltip on the Custom logo premium icon navigates to the Plans page",
+      "preconditions": "User is on any plan below Ultimate. User is on Cookie Banner > Content tab. Cookie Notice accordion is expanded. The Custom logo field displays an upgrade icon (orange crown).",
+      "steps": [
+        {
+          "content": "Click the upgrade icon (orange crown) on the Custom logo field.",
+          "expected": "An upgrade tooltip should appear with the headline 'Make your banner uniquely yours with a custom brand logo', body text 'Personalise your cookie banner with your brand logo for a seamless user experience.', 'Available in: Ultimate plan' label, and a single 'Upgrade now' button. (Note: 'Try Pro for Free' does not appear — this feature requires Ultimate, not Pro.)"
+        },
+        {
+          "content": "Click 'Upgrade now'.",
+          "expected": "User should be navigated to the Plans/payment page showing the upgrade path to Ultimate."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14989,
+        14991,
+        14995,
+        14997,
+        15001,
+        15003,
+        15104
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates. GRILL FIX: 'Try Pro for Free' button does not appear for Ultimate-gated features on any plan tier. Tooltip only shows 'Upgrade now'. Merged Free and Pro scenarios — behavior is identical. Original source cases (C14989, C14995, C15001) may have been written when this feature was Pro-gated.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": null,
+      "title": "[Cookie Banner] Verify that \"Upgrade now\" on the Custom logo premium icon navigates to the Plans page",
+      "preconditions": "User is on a paid plan (Pro or Business, not Ultimate). User is on Cookie Banner > Content tab. Cookie Notice accordion is expanded. The Custom logo field displays a premium icon.",
+      "steps": [
+        {
+          "content": "Click the premium icon on the Custom logo field.",
+          "expected": "An upgrade tooltip should appear."
+        },
+        {
+          "content": "Click \"Upgrade now\".",
+          "expected": "User should be navigated to the Plans page showing the upgrade path to Ultimate."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14991,
+        14997,
+        15003,
+        15104
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36859,
+      "title": "[Cookie Banner] Verify that the upgrade tooltip on the Disable CookieYes branding premium icon navigates to the Plans page",
+      "preconditions": "User is on any plan below Ultimate. User is on Cookie Banner > Content tab. Cookie Notice accordion is expanded. The Disable CookieYes branding toggle displays an upgrade icon (orange crown).",
+      "steps": [
+        {
+          "content": "Click the upgrade icon (orange crown) on the Disable CookieYes branding toggle.",
+          "expected": "An upgrade tooltip should appear with the headline 'Remove CookieYes branding for a white-labeled banner', body text 'Make your cookie banner fully white-labeled by removing the \"Powered by CookieYes\" tag.', 'Available in: Ultimate plan' label, and a single 'Upgrade now' button."
+        },
+        {
+          "content": "Click 'Upgrade now'.",
+          "expected": "User should be navigated to the Plans/payment page showing the upgrade path to Ultimate."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14990,
+        14992,
+        14996,
+        14998,
+        15002,
+        15004,
+        15105
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates. GRILL FIX: Same as Case 14 — 'Try Pro for Free' does not appear for Ultimate features. Merged with Case 17 (Upgrade now scenario); behavior is identical across all sub-Ultimate plan tiers.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": null,
+      "title": "[Cookie Banner] Verify that \"Upgrade now\" on the Disable CookieYes branding premium icon navigates to the Plans page",
+      "preconditions": "User is on a paid plan (Pro or Business, not Ultimate). User is on Cookie Banner > Content tab. Cookie Notice accordion is expanded. The Disable CookieYes branding toggle displays a premium icon.",
+      "steps": [
+        {
+          "content": "Click the premium icon on the Disable CookieYes branding toggle.",
+          "expected": "An upgrade tooltip should appear."
+        },
+        {
+          "content": "Click \"Upgrade now\".",
+          "expected": "User should be navigated to the Plans page showing the upgrade path to Ultimate."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14992,
+        14998,
+        15004,
+        15105
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36844,
+      "title": "[Cookie Banner] Verify that the Content section renders the correct drop-downs when US State Laws is selected",
+      "preconditions": "User is on Cookie Banner > Content tab. Law selector is set to US State Laws (changed in the General section or via the Consent Template card). Below the Consent Template card, five collapsible accordions should now reflect the US State Laws structure.",
+      "steps": [
+        {
+          "content": "Observe the list of accordion options below the Consent Template card.",
+          "expected": "The following five accordions should be visible and collapsed: Cookie Notice, Opt-out Center, Cookie List, Revisit Consent Button, Blocked Content. The \"Preference Center\" accordion (present under GDPR) should be replaced by \"Opt-out Center\"."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        988,
+        1590,
+        1616,
+        5280,
+        5298,
+        5324,
+        4705,
+        4723,
+        4749,
+        2792,
+        2810,
+        2836
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation and law-switching steps collapsed into precondition (per migration-conventions section 10). The structural difference from GDPR (Preference Center replaced by Opt-out Center) is explicitly noted in the expected result.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36845,
+      "title": "[Cookie Banner] Verify that the Cookie Notice drop-down reveals all fields under US State Laws",
+      "preconditions": "User is on Cookie Banner > Content tab. Law selector is set to US State Laws. The Cookie Notice accordion is collapsed.",
+      "steps": [
+        {
+          "content": "Click the \"Cookie Notice\" accordion to expand it.",
+          "expected": "The following items should be revealed: Title text field, Message text field (rich text editor), Close [X] button toggle (enabled/on by default), \"Do Not Sell\" link text field, \"Cookie Policy\" link toggle with URL text field, Custom logo text field (with upgrade icon), Disable CookieYes branding toggle (with upgrade icon). Unlike the GDPR Cookie Notice, there are no Reject All button toggle or Customise button toggle."
+        },
+        {
+          "content": "Observe the Custom logo and Disable CookieYes branding controls.",
+          "expected": "Both should display an upgrade icon (orange crown) indicating they require an Ultimate plan."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        985,
+        1591,
+        1617,
+        5277,
+        5299,
+        5325,
+        4702,
+        4724,
+        4750,
+        2789,
+        2811,
+        2837
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy steps dropped. Structural difference from GDPR Cookie Notice (Do Not Sell field present; Close/Reject All/Customize toggles absent) highlighted in expected result — genuine behavioral distinction.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36846,
+      "title": "[Cookie Banner] Verify that Cookie Notice text fields accept edits and reflect changes in the banner preview under US State Laws",
+      "preconditions": "User is on Cookie Banner > Content tab. Law selector is set to US State Laws. User is on an Ultimate plan. Cookie Notice accordion is expanded.",
+      "steps": [
+        {
+          "content": "Observe the Title field.",
+          "expected": "Pre-filled with \"We value your privacy\". Text should appear on the banner first layer preview."
+        },
+        {
+          "content": "Edit the Title field.",
+          "expected": "Updated text should appear on the banner first layer preview in real time."
+        },
+        {
+          "content": "Observe the Message field.",
+          "expected": "Pre-filled with \"This website or its third-party tools process personal data. You can opt out of the sale of your personal information by clicking on the 'Do Not Sell or Share My Personal Information' link.\" Text should appear on the banner first layer preview."
+        },
+        {
+          "content": "Edit the Message field.",
+          "expected": "Updated message should appear in real time."
+        },
+        {
+          "content": "Observe the \"Do Not Sell\" link text field.",
+          "expected": "Pre-filled with \"Do Not Sell or Share My Personal Information\". This link label should appear on the banner first layer preview."
+        },
+        {
+          "content": "Edit the \"Do Not Sell\" link text.",
+          "expected": "Updated link label should appear in real time."
+        },
+        {
+          "content": "Observe the Cookie Policy link text field (with Cookie Policy toggle enabled).",
+          "expected": "Pre-filled with \"Cookie Policy\"."
+        },
+        {
+          "content": "Edit the Cookie Policy link text.",
+          "expected": "Updated label should be editable."
+        },
+        {
+          "content": "Observe the URL field.",
+          "expected": "Empty by default, with placeholder \"URL of your Cookie Policy\"."
+        },
+        {
+          "content": "Observe the Custom logo field.",
+          "expected": "Pre-filled with \"#\". Entering a valid image URL should display the custom logo on the banner first layer preview."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "All changes should be saved and reflected on the live website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        986,
+        1592,
+        1618,
+        5278,
+        5300,
+        5326,
+        4703,
+        4725,
+        4751,
+        2790,
+        2812,
+        2838
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Original starts with Stripe upgrade flow — collapsed. US State Laws Cookie Notice has Do Not Sell link field instead of Accept All/Reject All/Customize fields — all genuinely different fields kept.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36847,
+      "title": "[Cookie Banner] Verify that Cookie Notice toggles control link and branding visibility under US State Laws",
+      "preconditions": "User is on Cookie Banner > Content tab. Law selector is set to US State Laws. User is on an Ultimate plan. Cookie Notice accordion is expanded.",
+      "steps": [
+        {
+          "content": "Observe the \"Cookie Policy\" link toggle.",
+          "expected": "The toggle should be disabled (off) by default."
+        },
+        {
+          "content": "Enable the \"Cookie Policy\" link toggle and enter a valid URL in the URL field.",
+          "expected": "A \"Cookie Policy\" link should appear on the banner first layer preview. Clicking it should open the cookie policy page in a new tab."
+        },
+        {
+          "content": "Observe the \"Disable CookieYes branding\" toggle.",
+          "expected": "The toggle should be disabled (off) by default. \"Powered by CookieYes\" branding should be visible on the banner second layer."
+        },
+        {
+          "content": "Enable the \"Disable CookieYes branding\" toggle.",
+          "expected": "The \"Powered by CookieYes\" branding should be removed from the banner second layer."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "All toggle changes should be saved and reflected on the live website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        987,
+        1593,
+        1619,
+        5279,
+        5301,
+        5327,
+        4704,
+        4726,
+        4752,
+        2791,
+        2813,
+        2839,
+        15077
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Original starts with Stripe upgrade flow — collapsed. C15077 ('Disable CookieYes branding icon for Ultimate users' [US State Laws]) folded in. Unlike GDPR Cookie Notice, US State Laws has no Close X / Reject All / Customize toggles.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36848,
+      "title": "[Cookie Banner] Verify that the Opt-out Center drop-down reveals all fields and premium indicators under US State Laws",
+      "preconditions": "User is on Cookie Banner > Content tab. Law selector is set to US State Laws. The Opt-out Center accordion is collapsed. Note: to observe the upgrade icons on the GPC fields (step 2), a Free or Basic plan account is required.",
+      "steps": [
+        {
+          "content": "Click the \"Opt-out Center\" accordion to expand it.",
+          "expected": "The following items should be revealed: Title text field, Privacy overview text field (rich text editor), \"Show more\" button text field, \"Show less\" button text field, \"Cancel\" button text field, \"Save My Preferences\" button text field, \"Respect Global Privacy Control\" toggle, Global Privacy Control notice text field (rich text editor), \"Opt out confirmation message\" text field (rich text editor)."
+        },
+        {
+          "content": "Observe the \"Respect Global Privacy Control\" toggle and notice field.",
+          "expected": "On a Free or Basic plan, both the \"Respect Global Privacy Control\" toggle and the GPC notice field should display an upgrade icon (orange crown) indicating they require a Pro or higher plan. On a Pro or higher plan, both controls are unlocked and accessible without any upgrade icon."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        989,
+        1594,
+        1620,
+        5281,
+        5302,
+        5328,
+        4706,
+        4727,
+        4753,
+        2793,
+        2814,
+        2840
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy steps dropped. Structural presence check — the Opt-out Center is structurally distinct from GDPR's Preference Center.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36849,
+      "title": "[Cookie Banner] Verify that Opt-out Center text fields accept edits and reflect changes in the banner preview",
+      "preconditions": "User is on Cookie Banner > Content tab. Law selector is set to US State Laws. User is on a Pro or higher plan. Opt-out Center accordion is expanded.",
+      "steps": [
+        {
+          "content": "Observe the Title field.",
+          "expected": "Pre-filled with \"Opt-out Preferences\". Text should appear on the banner second layer preview."
+        },
+        {
+          "content": "Edit the Title field.",
+          "expected": "Updated title should appear in real time."
+        },
+        {
+          "content": "Observe the Privacy overview field.",
+          "expected": "Pre-filled with the default opt-out privacy overview text (\"We use third-party cookies that help us analyse how you use this website...\"). Text should appear on the banner second layer preview."
+        },
+        {
+          "content": "Edit the Privacy overview field.",
+          "expected": "Updated text should appear in real time."
+        },
+        {
+          "content": "Observe the \"Show more\" button field.",
+          "expected": "Pre-filled with \"Show more\"."
+        },
+        {
+          "content": "Edit the \"Show more\" text.",
+          "expected": "Updated label should appear in real time."
+        },
+        {
+          "content": "Observe the \"Show less\" button field.",
+          "expected": "Pre-filled with \"Show less\"."
+        },
+        {
+          "content": "Edit the \"Show less\" text.",
+          "expected": "Updated label should appear in real time."
+        },
+        {
+          "content": "Observe the \"Cancel\" button field.",
+          "expected": "Pre-filled with \"Cancel\"."
+        },
+        {
+          "content": "Edit the \"Cancel\" button text.",
+          "expected": "Updated label should appear in real time."
+        },
+        {
+          "content": "Observe the \"Save My Preferences\" button field.",
+          "expected": "Pre-filled with \"Save My Preferences\". The button should appear on the banner second layer preview."
+        },
+        {
+          "content": "Edit the \"Save My Preferences\" button text.",
+          "expected": "Updated label should appear in real time."
+        },
+        {
+          "content": "Observe the \"Opt out confirmation message\" field.",
+          "expected": "Pre-filled with \"Your opt-out preference has been honored.\"."
+        },
+        {
+          "content": "Edit the \"Opt out confirmation message\" field.",
+          "expected": "The field should accept the new text."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "All changes should be saved and reflected on the live website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        990,
+        1595,
+        1621,
+        5282,
+        5303,
+        5329,
+        4707,
+        4728,
+        4754,
+        2794,
+        2815,
+        2841
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Original begins with Stripe upgrade flow — collapsed. Step count (15) is warranted by the genuine number of editable fields in the Opt-out Center.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36850,
+      "title": "[Cookie Banner] Verify that enabling the \"Respect Global Privacy Control\" toggle honors GPC browser signals and displays a notice on the banner",
+      "preconditions": "User is on Cookie Banner > Content tab. Law selector is set to US State Laws. User is on a Pro or higher plan. Opt-out Center accordion is expanded.",
+      "steps": [
+        {
+          "content": "Observe the \"Respect Global Privacy Control\" toggle.",
+          "expected": "The toggle should be disabled (off) by default. The Global Privacy Control notice text field should also be disabled."
+        },
+        {
+          "content": "Observe the Global Privacy Control notice text field.",
+          "expected": "Pre-filled with \"Your opt-out settings for this website have been respected since we detected a Global Privacy Control signal from your browser and, therefore, you cannot change this setting.\"."
+        },
+        {
+          "content": "Enable the \"Respect Global Privacy Control\" toggle.",
+          "expected": "The toggle should turn on. The Global Privacy Control notice text field should become enabled."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved. On the live website, visitors whose browser sends a GPC signal should see the \"Do Not Sell or Share My Personal Information\" checkbox pre-checked and the GPC notice text displayed below it on the banner second layer."
+        },
+        {
+          "content": "Edit the Global Privacy Control notice text field and click \"Publish Changes\".",
+          "expected": "The updated notice text should appear on the banner second layer for GPC users."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        991,
+        1596,
+        1622,
+        5283,
+        5304,
+        5330,
+        4708,
+        4729,
+        4755,
+        2795,
+        2816,
+        2842
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Original starts with Stripe upgrade flow — collapsed. Tooltip copy step dropped. Core behavior (toggle enables GPC signal honoring, notice text becomes editable) preserved.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36851,
+      "title": "[Cookie Banner] Verify that the Cookie List drop-down reveals the correct controls under US State Laws",
+      "preconditions": "User is on Cookie Banner > Content tab. Law selector is set to US State Laws. The Cookie List accordion is collapsed.",
+      "steps": [
+        {
+          "content": "Click the \"Cookie List\" accordion to expand it.",
+          "expected": "The following items should be revealed: Embed code section with a Copy button, Cookie label text field, Duration label text field, Description label text field. Unlike the GDPR Cookie List, there is no \"Show cookie list on banner\" toggle, \"Always Active\" label field, or \"No cookies to display\" label field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        992,
+        1597,
+        1623,
+        5284,
+        5305,
+        5331,
+        4709,
+        4730,
+        4756,
+        2796,
+        2817,
+        2843
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. The structural difference from GDPR Cookie List (absent toggles and label fields) is noted in the expected result — a genuine behavioral distinction.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36852,
+      "title": "[Cookie Banner] Verify that Cookie List label text fields accept edits under US State Laws",
+      "preconditions": "User is on Cookie Banner > Content tab. Law selector is set to US State Laws. Cookie List accordion is expanded.",
+      "steps": [
+        {
+          "content": "Observe the Cookie label field.",
+          "expected": "Pre-filled with \"Cookie\". This column header should appear in the cookie table display."
+        },
+        {
+          "content": "Edit the Cookie field.",
+          "expected": "Updated column header should appear in real time."
+        },
+        {
+          "content": "Observe the Duration field.",
+          "expected": "Pre-filled with \"Duration\"."
+        },
+        {
+          "content": "Edit the Duration field.",
+          "expected": "Updated column header should appear in real time."
+        },
+        {
+          "content": "Observe the Description field.",
+          "expected": "Pre-filled with \"Description\"."
+        },
+        {
+          "content": "Edit the Description field.",
+          "expected": "Updated column header should appear in real time."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "All changes should be saved and reflected on the live website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        993,
+        1598,
+        1624,
+        5285,
+        5306,
+        5332,
+        4710,
+        4731,
+        4757,
+        2797,
+        2818,
+        2844
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Duplicate Duration field steps in original C993 collapsed into one.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36853,
+      "title": "[Cookie Banner] Verify that the Revisit Consent Button drop-down reveals all controls and the Custom icon premium indicator",
+      "preconditions": "User is on Cookie Banner > Content tab. The Revisit Consent Button accordion is collapsed. Law selector state does not affect this section.",
+      "steps": [
+        {
+          "content": "Click the \"Revisit Consent Button\" accordion to expand it.",
+          "expected": "The following items should be revealed: \"Floating button\" toggle, Position options (Left / Right), \"Custom icon\" text field with a premium icon, \"Text on hover\" text field."
+        },
+        {
+          "content": "Observe the Custom icon control.",
+          "expected": "A premium/lock icon should be displayed next to the \"Custom icon\" label, indicating this feature requires an Ultimate plan."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        494,
+        1600,
+        1626,
+        5265,
+        5308,
+        5334,
+        4690,
+        4733,
+        4759,
+        2777,
+        2820,
+        2846
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy steps dropped. Law-agnostic — Revisit Consent Button behaves identically regardless of law selector.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36860,
+      "title": "[Cookie Banner] Verify that the upgrade tooltip on the Custom icon premium indicator navigates to the Plans page",
+      "preconditions": "User is on any plan below Ultimate. User is on Cookie Banner > Content tab. Revisit Consent Button accordion is expanded. The Custom icon field displays an upgrade icon (orange crown).",
+      "steps": [
+        {
+          "content": "Click the upgrade icon (orange crown) on the Custom icon field.",
+          "expected": "An upgrade tooltip should appear with the headline 'Use a custom icon for your consent revisit widget', body text 'Replace the default icon with a custom one that matches your website's design.', 'Available in: Ultimate plan' label, and a single 'Upgrade now' button."
+        },
+        {
+          "content": "Click 'Upgrade now'.",
+          "expected": "User should be navigated to the Plans/payment page showing the upgrade path to Ultimate."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14993,
+        14994,
+        14999,
+        15000,
+        15005,
+        15006,
+        15107
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates. GRILL FIX: Same pattern — 'Try Pro for Free' does not appear for Ultimate features. Merged with Case 29 (Upgrade now scenario).",
+      "grill_status": "fixed"
+    },
+    {
+      "id": null,
+      "title": "[Cookie Banner] Verify that \"Upgrade now\" on the Custom icon premium indicator navigates to the Plans page",
+      "preconditions": "User is on a paid plan (Pro or Business, not Ultimate). User is on Cookie Banner > Content tab. Revisit Consent Button accordion is expanded. The Custom icon field displays a premium icon.",
+      "steps": [
+        {
+          "content": "Click the premium icon on the Custom icon field.",
+          "expected": "An upgrade tooltip should appear."
+        },
+        {
+          "content": "Click \"Upgrade now\".",
+          "expected": "User should be navigated to the Plans page showing the upgrade path to Ultimate."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14994,
+        15000,
+        15006,
+        15107
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36854,
+      "title": "[Cookie Banner] Verify that the \"Floating button\" toggle controls whether the revisit consent widget appears on the website",
+      "preconditions": "User is on Cookie Banner > Content tab. Revisit Consent Button accordion is expanded. The Floating button toggle is enabled by default.",
+      "steps": [
+        {
+          "content": "Observe the \"Floating button\" toggle.",
+          "expected": "The toggle should be enabled (on) by default."
+        },
+        {
+          "content": "Navigate to the live website and accept cookie consent on the banner.",
+          "expected": "A floating consent revisit button should appear in the bottom-left corner of the website."
+        },
+        {
+          "content": "Click the floating button on the website.",
+          "expected": "The banner second layer (Preference Center or Opt-out Center, depending on law setting) should be displayed, allowing the user to update consent preferences."
+        },
+        {
+          "content": "Return to Cookie Banner > Content > Revisit Consent Button in the app. Disable the \"Floating button\" toggle.",
+          "expected": "The toggle should turn off."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "The floating consent revisit button should no longer appear on the website after consent is granted."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        982,
+        1601,
+        1627,
+        5274,
+        5309,
+        5335,
+        4699,
+        4734,
+        4760,
+        2786,
+        2821,
+        2847
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Original expected result on the disable step was 'toggle should be displayed' — this is a copy error in the source; rewritten to 'toggle should turn off.'",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36855,
+      "title": "[Cookie Banner] Verify that the Position option controls the placement of the floating revisit consent button",
+      "preconditions": "User is on Cookie Banner > Content tab. Revisit Consent Button accordion is expanded. The Floating button toggle is enabled.",
+      "steps": [
+        {
+          "content": "Observe the Position option.",
+          "expected": "Two options should be available: \"Left\" and \"Right\". \"Left\" should be selected by default."
+        },
+        {
+          "content": "Navigate to the live website and accept cookie consent.",
+          "expected": "The floating button should appear in the bottom-left corner."
+        },
+        {
+          "content": "Return to Cookie Banner > Content > Revisit Consent Button. Select \"Right\" under Position.",
+          "expected": "\"Right\" should become the selected position option."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "The floating button should now appear in the bottom-right corner on the website when consent is granted."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        983,
+        1602,
+        1628,
+        5275,
+        5310,
+        5336,
+        4700,
+        4735,
+        4761,
+        2787,
+        2822,
+        2848
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36856,
+      "title": "[Cookie Banner] Verify that Revisit Consent Button text fields accept edits and reflect changes on the website",
+      "preconditions": "User is on Cookie Banner > Content tab. User is on an Ultimate plan (Custom icon is unlocked). Revisit Consent Button accordion is expanded.",
+      "steps": [
+        {
+          "content": "Observe the Custom icon text field.",
+          "expected": "Pre-filled with \"#\" (placeholder)."
+        },
+        {
+          "content": "Enter a valid image URL in the Custom icon field.",
+          "expected": "The custom image should replace the default revisit consent button icon on the website after publishing."
+        },
+        {
+          "content": "Observe the \"Text on hover\" text field.",
+          "expected": "Pre-filled with \"Consent Preferences\". This text appears as a tooltip on hover over the floating button on the website."
+        },
+        {
+          "content": "Edit the \"Text on hover\" field.",
+          "expected": "The new text should be accepted."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "The custom icon and updated hover text should appear on the floating button on the live website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        984,
+        1603,
+        1629,
+        5276,
+        5311,
+        5337,
+        4701,
+        4736,
+        4762,
+        2788,
+        2823,
+        2849
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Stripped prefixes. Original begins with Stripe upgrade flow — collapsed to precondition 'User is on an Ultimate plan.'",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36861,
+      "title": "[Cookie Banner] Verify that the 'GDPR & US State Laws' consent template option is Pro-gated",
+      "preconditions": "User is logged in on any plan below Pro (Free or Basic). User is on Cookie Banner > Content tab. The Consent Template dropdown is accessible.",
+      "steps": [
+        {
+          "content": "Click the Consent Template dropdown to open it.",
+          "expected": "The dropdown opens showing three options: 'GDPR', 'US State Laws', and 'GDPR & US State Laws'. The 'GDPR & US State Laws' option is visually dimmed (opacity-60) and has an orange crown badge next to its label."
+        },
+        {
+          "content": "Hover over the orange crown badge next to 'GDPR & US State Laws'.",
+          "expected": "A dark tooltip appears with the text: \"Upgrade to Pro or a higher plan to unlock this feature.\" This is a simple informational tooltip — not the full upgrade dialog with headline, body text, and 'Upgrade now' button used for field-level premium features."
+        },
+        {
+          "content": "Click the 'GDPR & US State Laws' option.",
+          "expected": "The template does not switch. The Consent Template dropdown closes and the active template remains unchanged (no accordion change occurs)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "New case — gap found during grill. The combined template uses a simple Radix tooltip on the crown badge rather than a full upgrade dialog. Requires a Basic or Free account to verify (Pro+ can select the template freely). Discovered on Basic(Trial) account in QA2 — mcp3 account (rahulkrishna+mcp3@mozilor.com) is Basic(Trial) in QA2, not Pro.",
+      "grill_status": "suggested"
+    },
+    {
+      "id": 36857,
+      "title": "[Cookie Banner] Verify that the 'GDPR & US State Laws' combined template shows a Customise sub-selector with GDPR and US State Laws accordion views",
+      "preconditions": "User is on Pro or higher plan (required to access 'GDPR & US State Laws' template). User is on Cookie Banner > Content tab.",
+      "steps": [
+        {
+          "content": "Open the Consent Template dropdown and click 'GDPR & US State Laws'.",
+          "expected": "The template switches to 'GDPR & US State Laws'. A 'Customise' sub-selector appears below the Consent Template row, defaulting to 'GDPR'. The following accordions are visible: Cookie Notice, Preference Centre, Cookie List, Revisit Consent Button, Blocked Content."
+        },
+        {
+          "content": "Click the 'Customise' sub-selector and choose 'US State Laws'.",
+          "expected": "The accordion set switches to the US State Laws view: Cookie Notice, Opt-out Center, Cookie List, Revisit Consent Button, Blocked Content. The description text updates to reference CCPA/CPRA and related US state laws."
+        },
+        {
+          "content": "Click the 'Customise' sub-selector and switch back to 'GDPR'.",
+          "expected": "The accordion set returns to the GDPR view: Cookie Notice, Preference Centre, Cookie List, Revisit Consent Button, Blocked Content."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "New case — gap found during grill. The combined template introduces a unique 'Customise' sub-selector not present in standalone GDPR or US State Laws templates. Verified on Ultimate account (jacksnickel+ultimatetest@gmail.com) in QA2. Pro plan is also expected to have access (tooltip says 'Pro or higher').",
+      "grill_status": "suggested"
+    }
+  ]
+}

@@ -14,7 +14,9 @@ Subcommands:
   get-case-types
   get-case-fields
   get-priorities
-  batch-add-cases  <section_id> --json-file <path>
+  batch-add-cases  <section_id> --json-file <path> [--from-draft] [--only-new] [--write-back]
+  update-case      <case_id> <json_payload>
+  batch-update-cases --json-file <path> [--from-draft]
   add-section      <project_id> <suite_id> <name> <parent_id>
   add-case         <section_id> <json_payload>
   add-run          <project_id> <suite_id> <name> <case_ids_csv>
@@ -293,6 +295,7 @@ def parse_json(raw: str, context: str) -> Any:
 # ── Field translation ──────────────────────────────────────────────────────────
 
 CASE_FIELD_MAP: dict[str, str] = {
+    # camelCase API aliases (legacy payload format)
     "typeId":               "type_id",
     "priorityId":           "priority_id",
     "templateId":           "template_id",
@@ -302,7 +305,25 @@ CASE_FIELD_MAP: dict[str, str] = {
     "customStepsSeparated": "custom_steps_separated",
     "customSteps":          "custom_steps",
     "customExpected":       "custom_expected",
+    "customRunType":        "custom_case_test_run_type",
+    "customAutomationType": "custom_automation_type",
+    # draft format field names
+    "preconditions":        "custom_preconds",
+    "steps":                "custom_steps_separated",
+    "run_type":             "custom_case_test_run_type",
 }
+
+# Maps draft run_type strings to TestRail integer values
+RUN_TYPE_MAP: dict[str, int] = {
+    "regression": 1,
+    "smoke":      2,
+}
+
+# Draft-only fields that must be stripped before POSTing to TestRail
+DRAFT_STRIP_FIELDS = frozenset({
+    "grill_status", "source_case_ids", "rewrite_notes",
+    "permission_flag", "platform_flag",
+})
 
 RESULT_FIELD_MAP: dict[str, str] = {
     "caseId":       "case_id",
@@ -317,6 +338,22 @@ def translate_case_fields(payload: dict[str, Any]) -> dict[str, Any]:
 
 def translate_result_fields(result: dict[str, Any]) -> dict[str, Any]:
     return {RESULT_FIELD_MAP.get(k, k): v for k, v in result.items()}
+
+
+def prepare_draft_case(c: dict[str, Any]) -> dict[str, Any]:
+    """Translate a draft-format case into a clean API payload.
+
+    Strips internal-only fields, maps draft field names to API names,
+    and converts run_type strings ("regression", "smoke") to integers.
+    Safe to call on both draft-format and legacy camelCase payloads.
+    """
+    cleaned    = {k: v for k, v in c.items() if k not in DRAFT_STRIP_FIELDS and k != "id"}
+    translated = translate_case_fields(cleaned)
+    rt = translated.get("custom_case_test_run_type")
+    if isinstance(rt, str):
+        translated["custom_case_test_run_type"] = RUN_TYPE_MAP.get(rt, rt)
+    translated.setdefault("template_id", 2)
+    return translated
 
 
 # ── Subcommand handlers ────────────────────────────────────────────────────────
@@ -673,22 +710,72 @@ def get_priorities(as_map: bool, base: str, auth: str) -> None:
     stderr(f"✓ get-priorities: {count} priority(s)")
 
 
-def batch_add_cases(section_id: int, json_file_path: str, base: str, auth: str) -> None:
-    if not os.path.exists(json_file_path):
-        stderr(f"Error: file not found: {json_file_path}")
-        sys.exit(EXIT_LOCAL)
+def batch_add_cases(
+    section_id: int, json_file_path: str,
+    from_draft: bool, only_new: bool, write_back: bool,
+    base: str, auth: str,
+) -> None:
     assert_file_size_ok(json_file_path, "--json-file")
-    raw      = open(json_file_path).read()
-    payloads = parse_json(raw, "batch-add-cases")
-    if not isinstance(payloads, list):
-        stderr("Error: JSON file must contain an array of case payload objects")
+    raw  = open(json_file_path).read()
+    data = parse_json(raw, "batch-add-cases")
+
+    if isinstance(data, dict) and "cases" in data:
+        envelope: dict[str, Any] | None = data
+        cases: list[dict[str, Any]]     = data["cases"]
+    elif isinstance(data, list):
+        envelope = None
+        cases    = data
+    else:
+        stderr("Error: JSON must be an array of cases or a draft envelope with a 'cases' key")
         sys.exit(EXIT_LOCAL)
+
+    if only_new:
+        to_post = [c for c in cases if not c.get("id")]
+        skipped = len(cases) - len(to_post)
+        if skipped:
+            stderr(f"✓ --only-new: skipping {skipped} already-published case(s)")
+    else:
+        to_post = list(cases)
+
+    if not to_post:
+        stderr("✓ batch-add-cases: nothing to post (all cases already have IDs)")
+        out([])
+        return
+
     results = []
-    for payload in payloads:
-        body = translate_case_fields(payload)
-        data = api_request("POST", build_url(base, f"add_case/{section_id}"), auth, body)
-        results.append(data)
-        stderr(f"✓ add-case: id={data.get('id')}")
+    for case in to_post:
+        body   = prepare_draft_case(case) if from_draft else translate_case_fields(case)
+        result = api_request("POST", build_url(base, f"add_case/{section_id}"), auth, body)
+        results.append(result)
+        stderr(f"✓ add-case: id={result.get('id')}")
+
+    if write_back:
+        if envelope is None:
+            stderr("Warning: --write-back requires a draft envelope file (JSON with a 'cases' key); skipped")
+        else:
+            title_to_result = {r.get("title"): r for r in results}
+            for case in cases:
+                matched = title_to_result.get(case.get("title"))
+                if matched and matched.get("id"):
+                    case["id"] = matched["id"]
+            from datetime import datetime, timezone
+            envelope["published_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            tmp = json_file_path + ".tmp"
+            with open(tmp, "w") as f:
+                f.write(json.dumps(envelope, indent=2) + "\n")
+            os.replace(tmp, json_file_path)
+            stderr(f"✓ --write-back: IDs patched in {os.path.basename(json_file_path)}")
+
+            if all(c.get("id") for c in envelope.get("cases", [])):
+                dirname      = os.path.dirname(json_file_path)
+                basename     = os.path.basename(json_file_path)
+                if basename.startswith("draft-"):
+                    new_basename = "cases-" + basename[len("draft-"):]
+                    new_path     = os.path.join(dirname, new_basename)
+                    if not os.path.exists(new_path):
+                        os.rename(json_file_path, new_path)
+                        stderr(f"✓ renamed → {new_basename} (all cases published)")
+
     out(results)
     stderr(f"✓ batch-add-cases: {len(results)} case(s) created")
 
@@ -705,6 +792,49 @@ def add_case(section_id: int, payload: dict[str, Any], base: str, auth: str) -> 
     data = api_request("POST", build_url(base, f"add_case/{section_id}"), auth, body)
     out(data)
     stderr(f"✓ add-case: id={data.get('id')}")
+
+
+def update_case(case_id: int, payload: dict[str, Any], base: str, auth: str) -> None:
+    body = {k: v for k, v in translate_case_fields(payload).items() if k != "id"}
+    data = api_request("POST", build_url(base, f"update_case/{case_id}"), auth, body)
+    out(data)
+    stderr(f"✓ update-case: id={data.get('id')}")
+
+
+def batch_update_cases(json_file_path: str, from_draft: bool, base: str, auth: str) -> None:
+    raw  = open(json_file_path).read()
+    data = parse_json(raw, "batch-update-cases")
+
+    if from_draft:
+        if isinstance(data, dict) and "cases" in data:
+            all_cases = data["cases"]
+        elif isinstance(data, list):
+            all_cases = data
+        else:
+            stderr("Error: --from-draft requires a draft envelope with a 'cases' key or an array")
+            sys.exit(EXIT_USAGE)
+        payloads = [c for c in all_cases if c.get("id")]
+        skipped  = len(all_cases) - len(payloads)
+        if skipped:
+            stderr(f"✓ --from-draft: skipping {skipped} case(s) without IDs")
+    else:
+        if not isinstance(data, list):
+            stderr("Error: batch-update-cases JSON file must be a list of case objects")
+            sys.exit(EXIT_USAGE)
+        payloads = data
+
+    results = []
+    for payload in payloads:
+        case_id = payload.get("id")
+        if not case_id:
+            stderr("Error: each case object must have an 'id' field")
+            sys.exit(EXIT_USAGE)
+        body = prepare_draft_case(payload) if from_draft else {k: v for k, v in translate_case_fields(payload).items() if k != "id"}
+        result = api_request("POST", build_url(base, f"update_case/{case_id}"), auth, body)
+        results.append(result)
+        stderr(f"✓ update-case: id={result.get('id')}")
+    out(results)
+    stderr(f"✓ batch-update-cases: {len(results)} case(s) updated")
 
 
 def add_run(project_id: int, suite_id: int, name: str, case_ids: list[int], base: str, auth: str) -> None:
@@ -757,7 +887,9 @@ Subcommands:
   get-case-types                             [--map]
   get-case-fields                            [--required-only]
   get-priorities                             [--map]
-  batch-add-cases  <section_id> --json-file <path>
+  batch-add-cases  <section_id> --json-file <path> [--from-draft] [--only-new] [--write-back]
+  update-case      <case_id> <json_payload>
+  batch-update-cases --json-file <path> [--from-draft]
   add-section      <project_id> <suite_id> <name> <parent_id>
   add-case         <section_id> <json_payload>
   add-run          <project_id> <suite_id> <name> <case_ids_csv>
@@ -786,7 +918,18 @@ Notes:
   - get-case-types --map / get-priorities --map emit a {{name: id}} object for direct name→id lookup.
   - get-case-fields --required-only emits {{requiredFields:[{{system_name,label,type_id}}],count}}.
   - log-gap records a missing query/capability as a markdown capability-gap entry appended to
-    ai-context/<ticket-id>/qa/run-log.md. Requires --ticket; local-only — no TestRail credentials needed.""")
+    ai-context/<ticket-id>/qa/run-log.md. Requires --ticket; local-only — no TestRail credentials needed.
+  - batch-add-cases --from-draft accepts the canonical draft envelope format (a JSON object with a
+    "cases" key) in addition to raw arrays. Strips internal-only fields (grill_status, source_case_ids,
+    rewrite_notes, permission_flag, platform_flag) and maps run_type strings to API integers
+    ("regression"→1, "smoke"→2). Also accepts plain arrays when --from-draft is set.
+  - batch-add-cases --only-new skips cases that already carry a non-null "id" — safe to re-run
+    after a partial publish.
+  - batch-add-cases --write-back patches returned IDs back into the source file and sets
+    "published_at". When every case in the file has an ID and the file is named draft-*, it is
+    automatically renamed to cases-* (the publication signal). Requires a draft envelope file.
+  - batch-update-cases --from-draft accepts a draft envelope or array; skips cases without IDs;
+    strips internal fields and maps run_type strings before updating.""")
 
 
 # ── Entry point ────────────────────────────────────────────────────────────────
@@ -891,11 +1034,18 @@ def main() -> None:
         get_priorities(flags.get("map") == "true", base, auth)
 
     elif subcmd == "batch-add-cases":
-        require_positional(pos, 1, "batch-add-cases <section_id> --json-file <path>")
+        require_positional(pos, 1, "batch-add-cases <section_id> --json-file <path> [--from-draft] [--only-new] [--write-back]")
         if "json-file" not in flags:
             stderr("Error: --json-file <path> is required for batch-add-cases")
             sys.exit(EXIT_USAGE)
-        batch_add_cases(to_int(pos[0], "section_id"), confine_to_artifact_root(flags["json-file"], "--json-file", True), base, auth)
+        batch_add_cases(
+            to_int(pos[0], "section_id"),
+            confine_to_artifact_root(flags["json-file"], "--json-file", True),
+            flags.get("from-draft") == "true",
+            flags.get("only-new")   == "true",
+            flags.get("write-back") == "true",
+            base, auth,
+        )
 
     elif subcmd == "add-section":
         require_positional(pos, 4, "add-section <project_id> <suite_id> <name> <parent_id>")
@@ -905,6 +1055,21 @@ def main() -> None:
         require_positional(pos, 2, "add-case <section_id> <json_payload>")
         payload = parse_json(pos[1], "add-case")
         add_case(to_int(pos[0], "section_id"), payload, base, auth)
+
+    elif subcmd == "update-case":
+        require_positional(pos, 2, "update-case <case_id> <json_payload>")
+        payload = parse_json(pos[1], "update-case")
+        update_case(to_int(pos[0], "case_id"), payload, base, auth)
+
+    elif subcmd == "batch-update-cases":
+        if "json-file" not in flags:
+            stderr("Error: --json-file <path> is required for batch-update-cases")
+            sys.exit(EXIT_USAGE)
+        batch_update_cases(
+            confine_to_artifact_root(flags["json-file"], "--json-file", True),
+            flags.get("from-draft") == "true",
+            base, auth,
+        )
 
     elif subcmd == "add-run":
         require_positional(pos, 4, "add-run <project_id> <suite_id> <name> <case_ids_csv>")

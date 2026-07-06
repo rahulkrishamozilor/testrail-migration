@@ -1,0 +1,40 @@
+{
+  "section": "Cookie Banner > Customization Sidebar > General",
+  "fetched_at": null,
+  "grilled_at": "2026-07-03T05:30:47Z",
+  "searched_section_ids": [],
+  "cases": [
+    {
+      "id": 36828,
+      "title": "[Cookie Banner] Verify that clicking the GDPR & US State Laws consent template option opens an upgrade nudge on free or basic plans",
+      "preconditions": "User is on Cookie Banner > Layout tab (or General tab where the Consent Template selector is visible). Account is on a free or basic plan. Consent Template is currently set to GDPR or US State Laws.",
+      "steps": [
+        { "content": "Click the Consent Template dropdown to open the template switcher.", "expected": "A dropdown appears with GDPR, US State Laws, and GDPR & US State Laws options listed." },
+        { "content": "Click the GDPR & US State Laws option.", "expected": "An upgrade nudge appears. The active consent template does not change — it remains at its previous value. No banner preview update occurs." },
+        { "content": "Verify the upgrade nudge content and CTA.", "expected": "The nudge indicates that GDPR & US State Laws requires a higher-tier plan. An upgrade CTA button is visible." }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "smoke",
+      "rewrite_notes": "Gap found during Layout grill (Pro account): On Pro plan the template switches directly — no nudge. Free/Basic nudge behavior is a Plan Gate. Published to 11. Billing & Upgrade > Plan Gates (section 1793) — not General.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36827,
+      "title": "[Cookie Banner] Verify that switching the law context in GDPR & US State Laws mode updates the available layout options",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR & US State Laws. The Customize sub-dropdown is visible in the Consent Template card, set to GDPR.",
+      "steps": [
+        { "content": "Verify the Cookie Notice section while the Customize sub-dropdown is set to GDPR.", "expected": "Box, Banner, and Popup layout options should be available. The Preference Centre section should be visible below the position options." },
+        { "content": "Click the Customize sub-dropdown and select US State Laws.", "expected": "The Cookie Notice section should update to show only Box and Banner — Popup should not appear. The Preference Centre section should be replaced by an Opt-out center section." },
+        { "content": "Click the Customize sub-dropdown and select GDPR.", "expected": "The layout options should revert to GDPR state: Box, Banner, and Popup should be available and the Preference Centre section should be restored." }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Gap found during Layout grill (Pro account). Initially staged here but rerouted: layout option changes belong in Layout section. Published to Cookie Banner > Layout (section 1781) as C36827.",
+      "grill_status": "confirmed"
+    }
+  ]
+}

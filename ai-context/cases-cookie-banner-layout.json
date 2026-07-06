@@ -1,0 +1,401 @@
+{
+  "section": "Cookie Banner > Layout",
+  "fetched_at": "2026-07-02T09:41:06Z",
+  "migrated_at": "2026-07-02T09:41:06Z",
+  "grilled_at": "2026-07-03T05:30:47Z",
+  "searched_section_ids": [33, 242, 154, 167],
+  "cases": [
+    {
+      "id": 36735,
+      "title": "[Cookie Banner] Verify that the Layout tab renders all required layout controls under GDPR",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR (default).",
+      "steps": [
+        { "content": "Verify the Cookie Notice sub-section lists Box, Banner, and Popup layout options with preview icons.", "expected": "Box, Banner, and Popup should be displayed with preview icons. Popup should show a crown icon indicating it requires a paid plan upgrade." },
+        { "content": "Verify Box is selected by default.", "expected": "Box layout should be selected by default." },
+        { "content": "Verify the position options displayed below the layout icons when Box is selected.", "expected": "Bottom left, Bottom right, Top left, and Top right should be listed. Bottom left should be selected by default." },
+        { "content": "Verify the Preference Centre sub-section appears below the position options.", "expected": "Center, Sidebar, and Pushdown preference centre styles should be listed with preview icons. Center should be selected by default. Pushdown should be disabled (supported for Banner layout only)." },
+        { "content": "Verify the Categories on first layer toggle is visible below the Preference Centre styles.", "expected": "The toggle should be visible and disabled. It becomes active only when Banner + Pushdown is selected." }
+      ],
+      "source_case_ids": [319, 1447, 1540, 5198, 5221, 5240, 4629, 4648, 4667, 2710, 2733, 2752],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed AO/Admin/Editor × Webapp/Agency/Trial variants (identical steps). Dropped navigation (precondition), tooltip copy, static icon references.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36736,
+      "title": "[Cookie Banner] Verify that selecting the Box layout applies it to the banner",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR (default). Box layout is selected by default.",
+      "steps": [
+        { "content": "Verify Box is selected by default and the banner preview shows the Box layout.", "expected": "The Box layout should be selected. The preview should display the Box-style cookie banner at the bottom-left corner." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Box layout should be active on the website." }
+      ],
+      "source_case_ids": [462, 1522, 1541, 5199, 5222, 5241, 4630, 4649, 4668, 2711, 2734, 2753],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "smoke",
+      "rewrite_notes": "Collapsed role/plan variants. Navigation to precondition. Dropped 'Navigate to user website' step and position-option listing (covered in 36735 overview and 36739 positions case).",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36737,
+      "title": "[Cookie Banner] Verify that selecting the Banner layout applies it to the banner",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR (default). Box layout is selected by default.",
+      "steps": [
+        { "content": "Click the Banner layout option in the Cookie Notice sub-section.", "expected": "Banner layout should be selected. Bottom and Top position options should appear. The Pushdown preference centre style (previously disabled under Box layout) should become available." },
+        { "content": "Verify Bottom is selected by default.", "expected": "The Bottom position option should be selected by default. The banner preview should show the Banner layout at the bottom." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Banner layout should display at the Bottom position on the website." }
+      ],
+      "source_case_ids": [463, 1524, 1543, 5200, 5224, 5243, 4632, 4651, 4670, 2712, 2736, 2755],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed role/plan variants. Navigation to precondition. Key behavior: Pushdown unlocks when Banner is selected. Dropped 'Navigate to user website'.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36738,
+      "title": "[Cookie Banner] Verify that selecting the Popup layout applies it to the banner",
+      "preconditions": "User is on Cookie Banner > Layout tab. User is on a paid plan (Pro or higher). Law selector is set to GDPR (default).",
+      "steps": [
+        { "content": "Click the Popup layout option in the Cookie Notice sub-section.", "expected": "The Popup layout should be selected. A Center position indicator should appear below the layout icons (Popup supports Center position only). The banner preview should show the Popup layout." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Popup layout should be active on the website." }
+      ],
+      "source_case_ids": [464, 1526, 1545, 5201, 5226, 5245, 4634, 4653, 4672, 2713, 2738, 2757],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed role/plan variants. Stripe upgrade flow (C476 steps 1–7) collapsed to paid-plan precondition.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36739,
+      "title": "[Cookie Banner] Verify that each Box layout position option repositions the banner",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR (default). Box layout is selected (default). Bottom left position is selected by default.",
+      "steps": [
+        { "content": "Verify Bottom left is selected by default and the banner preview shows the Box banner at the bottom-left.", "expected": "The Bottom left position option should be selected. The banner preview should show the cookie banner in the bottom-left corner." },
+        { "content": "Select \"Bottom right\".", "expected": "Bottom right should be selected and the banner preview should show the banner in the bottom-right corner." },
+        { "content": "Select \"Top left\".", "expected": "Top left should be selected and the banner preview should show the banner in the top-left corner." },
+        { "content": "Select \"Top right\".", "expected": "Top right should be selected and the banner preview should show the banner in the top-right corner." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the banner should display in the Top right position on the website." }
+      ],
+      "source_case_ids": [465, 1523, 1542, 5202, 5223, 5242, 4631, 4650, 4669, 2714, 2735, 2754],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed role/plan variants. Navigation to precondition.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36740,
+      "title": "[Cookie Banner] Verify that each Banner layout position option repositions the banner",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR (default). Banner layout is selected. Bottom position is active.",
+      "steps": [
+        { "content": "Verify Bottom is selected by default and the preview shows the Banner layout at the bottom.", "expected": "The Bottom position should be selected. The banner preview should show the Banner layout spanning the bottom of the preview." },
+        { "content": "Select \"Top\".", "expected": "Top position should be selected and the banner preview should show the Banner layout at the top." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Banner layout should display at the Top position on the website." }
+      ],
+      "source_case_ids": [466, 1525, 1544, 5203, 5225, 5244, 4633, 4652, 4671, 2715, 2737, 2756],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed role/plan variants. Navigation and Banner-selection to precondition.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36741,
+      "title": "[Cookie Banner] Verify that the Box + Center layout displays the preference centre in the center",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR (default). Box layout is selected (default). Center is selected in the Preference Centre sub-section (default).",
+      "steps": [
+        { "content": "Verify Center is selected by default in the Preference Centre sub-section.", "expected": "The Center preference centre style should be selected by default." },
+        { "content": "Click \"Customise\" in the cookie banner in the website preview.", "expected": "The Preference Centre should open in Center style, overlaying the website preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Box + Center preference centre should be active on the website." }
+      ],
+      "source_case_ids": [471, 1527, 1546, 5208, 5227, 5246, 4635, 4654, 4673, 2720, 2739, 2758],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed role/plan variants. Navigation to precondition. Default state verification merged from C462.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36742,
+      "title": "[Cookie Banner] Verify that the Box + Sidebar layout displays the preference centre in the selected sidebar position",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR (default). Box layout is selected (default).",
+      "steps": [
+        { "content": "Under the Preference Centre sub-section, click \"Sidebar\".", "expected": "Sidebar preference centre style should be selected and Left and Right position options should appear." },
+        { "content": "Verify Left is selected by default.", "expected": "The Left position option should be selected by default." },
+        { "content": "Click \"Customise\" in the cookie banner in the website preview.", "expected": "The preference centre sidebar should open on the left side of the website preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved." },
+        { "content": "Select \"Right\" under the Sidebar position options.", "expected": "The Right position option should be selected." },
+        { "content": "Click \"Customise\" in the cookie banner in the website preview.", "expected": "The preference centre sidebar should open on the right side of the website preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Box + Sidebar preference centre should display on the right side of the website." }
+      ],
+      "source_case_ids": [472, 1528, 1547, 5209, 5228, 5247, 4636, 4655, 4674, 2721, 2740, 2759],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": null,
+      "rewrite_notes": "Collapsed role/plan variants. Navigation to precondition. Covers Left and Right positions in one case.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36743,
+      "title": "[Cookie Banner] Verify that the Banner + Center layout displays the preference centre in the center",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR (default). Banner layout is selected. Bottom position is active (default).",
+      "steps": [
+        { "content": "Verify Center is selected by default in the Preference Centre sub-section.", "expected": "Center preference centre style should be selected by default." },
+        { "content": "Click \"Customise\" in the cookie banner in the website preview.", "expected": "The Preference Centre should open in Center style, overlaying the preview panel." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Banner + Center preference centre should be active on the website." }
+      ],
+      "source_case_ids": [473, 1529, 1548, 1557, 5210, 5229, 5248, 5257, 4637, 4656, 4675, 4684, 2722, 2741, 2760, 2769],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed role/plan variants. Navigation and Banner-selection to precondition. C1557/C5257/C4684/C2769 are mislabeled [GDPR] Banner+Center Editor cases (appear in USL group in Suite 6 — content is identical).",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36744,
+      "title": "[Cookie Banner] Verify that the Banner + Sidebar layout displays the preference centre in the selected sidebar position",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR (default). Banner layout is selected. Bottom position is active (default).",
+      "steps": [
+        { "content": "Under the Preference Centre sub-section, click \"Sidebar\".", "expected": "Sidebar preference centre style should be selected and Left and Right position options should appear." },
+        { "content": "Verify Left is selected by default.", "expected": "Left position should be selected by default." },
+        { "content": "Click \"Customise\" in the cookie banner in the website preview.", "expected": "The preference centre sidebar should open on the left side of the preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved." },
+        { "content": "Select \"Right\" under the Sidebar position options.", "expected": "Right position should be selected." },
+        { "content": "Click \"Customise\" in the cookie banner in the website preview.", "expected": "The preference centre sidebar should open on the right side of the preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Banner + Sidebar preference centre should display on the right side of the website." }
+      ],
+      "source_case_ids": [474, 1530, 1549, 5211, 5230, 5249, 4638, 4657, 4676, 2723, 2742, 2761],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": null,
+      "rewrite_notes": "Collapsed role/plan variants. Navigation and Banner-selection to precondition. Covers Left and Right positions in one case.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36745,
+      "title": "[Cookie Banner] Verify that the Banner + Pushdown layout enables the pushdown preference centre and Categories on first layer toggle",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR (default). Banner layout is selected. The Preference Centre sub-section shows Center (default), Sidebar, and Pushdown styles.",
+      "steps": [
+        { "content": "Click \"Pushdown\" in the Preference Centre sub-section.", "expected": "Pushdown preference centre style should be selected. The \"Customise\" button in the banner preview should update to show a dropdown chevron (the preference centre content does not expand until \"Customise\" is clicked). The \"Categories on first layer\" toggle should become enabled." },
+        { "content": "Click \"Customise\" in the banner in the website preview.", "expected": "The Pushdown preference centre should expand below the banner in the preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Banner + Pushdown layout should be active on the website." }
+      ],
+      "source_case_ids": [475, 1531, 1550, 5212, 5231, 5250, 4639, 4658, 4677, 2724, 2743, 2762],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed role/plan variants. Navigation and Banner-selection to precondition. Tests Pushdown selection + Categories toggle becoming enabled (state change). Actual toggle activation covered in 36748.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 36746,
+      "title": "[Cookie Banner] Verify that the Popup + Center layout displays the preference centre in the center",
+      "preconditions": "User is on Cookie Banner > Layout tab. User is on a paid plan (Pro or higher). Law selector is set to GDPR (default). Popup layout is selected.",
+      "steps": [
+        { "content": "Verify Center is selected by default in the Preference Centre sub-section.", "expected": "Center preference centre style should be selected by default." },
+        { "content": "Click \"Customise\" in the cookie banner in the website preview.", "expected": "The Preference Centre should open in Center style, overlaying the preview panel." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Popup + Center preference centre should be active on the website." }
+      ],
+      "source_case_ids": [476, 1533, 1552, 5213, 5233, 5252, 4641, 4660, 4679, 2725, 2745, 2764],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed role/plan variants. Stripe upgrade flow collapsed to paid-plan precondition. Navigation and Popup-selection to precondition (covered in 36738).",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36747,
+      "title": "[Cookie Banner] Verify that the Popup + Sidebar layout displays the preference centre in the selected sidebar position",
+      "preconditions": "User is on Cookie Banner > Layout tab. User is on a paid plan (Pro or higher). Law selector is set to GDPR (default). Popup layout is selected.",
+      "steps": [
+        { "content": "Under the Preference Centre sub-section, click \"Sidebar\".", "expected": "Sidebar preference centre style should be selected and Left and Right position options should appear." },
+        { "content": "Verify Left is selected by default.", "expected": "Left position should be selected by default." },
+        { "content": "Click \"Customise\" in the cookie banner in the website preview.", "expected": "The preference centre sidebar should open on the left side of the preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved." },
+        { "content": "Select \"Right\" under the Sidebar position options.", "expected": "Right position should be selected." },
+        { "content": "Click \"Customise\" in the cookie banner in the website preview.", "expected": "The preference centre sidebar should open on the right side of the preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Popup + Sidebar preference centre should display on the right side of the website." }
+      ],
+      "source_case_ids": [477, 1534, 1553, 5214, 5234, 5253, 4642, 4661, 4680, 2726, 2746, 2765],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": null,
+      "rewrite_notes": "Collapsed role/plan variants. Stripe upgrade flow collapsed to paid-plan precondition. Navigation and Popup-selection to precondition.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36748,
+      "title": "[Cookie Banner] Verify that enabling Categories on first layer displays cookie categories on the banner first layer",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR (default). Banner layout is selected. Pushdown preference centre style is selected. The Categories on first layer toggle is visible and enabled.",
+      "steps": [
+        { "content": "Enable the \"Categories on first layer\" toggle.", "expected": "The toggle should switch to on. Cookie categories should appear on the first layer of the cookie banner in the website preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Banner + Pushdown layout should display cookie categories on the first layer of the banner on the website." }
+      ],
+      "source_case_ids": [478, 1532, 1551, 5215, 5232, 5251, 4640, 4659, 4678, 2727, 2744, 2763],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": null,
+      "rewrite_notes": "Collapsed role/plan variants. Full Banner+Pushdown setup moved to precondition (covered in 36745). Tests the toggle-on behavior only.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36749,
+      "title": "[Cookie Banner] Verify that the Layout tab renders all required layout controls under US State Laws",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector set to US State Laws.",
+      "steps": [
+        { "content": "Verify the Cookie Notice sub-section lists only Box and Banner layout options (no Popup).", "expected": "Box and Banner should be displayed with preview icons. Popup should not appear under US State Laws." },
+        { "content": "Verify Box is selected by default.", "expected": "Box layout should be selected by default." },
+        { "content": "Verify the position options for Box.", "expected": "Bottom left, Bottom right, Top left, and Top right should be listed. Bottom left should be selected by default." },
+        { "content": "Verify the Opt-out Center sub-section below the position options.", "expected": "Center and Sidebar Opt-out Center styles should be listed with preview icons. Center should be selected by default. Pushdown is not available under US State Laws." }
+      ],
+      "source_case_ids": [482, 1535, 1554, 5216, 5235, 5254, 4643, 4662, 4681, 2728, 2747, 2766],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed role/plan variants. Navigation and Law-selector switch to precondition. Key structural differences from GDPR: no Popup, 'Opt-out Center' replaces 'Preference Centre', no Pushdown.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36750,
+      "title": "[Cookie Banner] Verify that the Box + Center layout displays the opt-out center in the center under US State Laws",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector set to US State Laws. Box layout is selected (default). Center is selected in the Opt-out Center sub-section (default).",
+      "steps": [
+        { "content": "Verify Center is selected by default in the Opt-out Center sub-section.", "expected": "Center Opt-out Center style should be selected by default." },
+        { "content": "Click the \"Do Not Sell or Share My Personal Information\" link on the banner in the website preview.", "expected": "The Center Opt-out Center should appear overlaying the website preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Box + Center Opt-out Center should be active on the website." }
+      ],
+      "source_case_ids": [483, 1536, 1555, 5217, 5236, 5255, 4644, 4663, 4682, 2729, 2748, 2767],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed role/plan variants. Opt-out Center trigger is the DNS link (not 'Customise' button as in GDPR).",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36751,
+      "title": "[Cookie Banner] Verify that the Box + Sidebar layout displays the opt-out center in the selected sidebar position under US State Laws",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector set to US State Laws. Box layout is selected (default).",
+      "steps": [
+        { "content": "Under the Opt-out Center sub-section, click \"Sidebar\".", "expected": "Sidebar Opt-out Center style should be selected and Left and Right position options should appear." },
+        { "content": "Verify Left is selected by default.", "expected": "Left position should be selected by default." },
+        { "content": "Click the \"Do Not Sell or Share My Personal Information\" link on the banner in the website preview.", "expected": "The Opt-out Center sidebar should open on the left side of the preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved." },
+        { "content": "Select \"Right\" under the Sidebar position options.", "expected": "Right position should be selected." },
+        { "content": "Click the \"Do Not Sell or Share My Personal Information\" link on the banner in the website preview.", "expected": "The Opt-out Center sidebar should open on the right side of the preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Box + Sidebar Opt-out Center should display on the right side of the website." }
+      ],
+      "source_case_ids": [484, 1537, 1556, 5218, 5237, 5256, 4645, 4664, 4683, 2730, 2749, 2768],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": null,
+      "rewrite_notes": "Collapsed role/plan variants. DNS link trigger. Covers Left and Right in one case.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36752,
+      "title": "[Cookie Banner] Verify that the Banner + Center layout displays the opt-out center in the center under US State Laws",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector set to US State Laws.",
+      "steps": [
+        { "content": "Click the Banner layout option in the Cookie Notice sub-section.", "expected": "Banner layout should be selected. Bottom and Top position options should appear. The Opt-out Center sub-section should show Center and Sidebar styles (Pushdown is not available under US State Laws)." },
+        { "content": "Verify Bottom is selected by default.", "expected": "Bottom position should be selected by default." },
+        { "content": "Verify Center is selected by default in the Opt-out Center sub-section.", "expected": "Center Opt-out Center style should be selected by default." },
+        { "content": "Click the \"Do Not Sell or Share My Personal Information\" link on the banner in the website preview.", "expected": "The Center Opt-out Center should appear overlaying the preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Banner + Center Opt-out Center should be active on the website." }
+      ],
+      "source_case_ids": [485, 1538, 5219, 5238, 4646, 4665, 2731, 2750],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed role/plan variants. Editor USL Banner+Center case is missing from Suite 6 (C1557 etc. are mislabeled GDPR — included with 36743). DNS link trigger.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36753,
+      "title": "[Cookie Banner] Verify that the Banner + Sidebar layout displays the opt-out center in the selected sidebar position under US State Laws",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector set to US State Laws. Banner layout is selected. Bottom position is active (default).",
+      "steps": [
+        { "content": "Under the Opt-out Center sub-section, click \"Sidebar\".", "expected": "Sidebar Opt-out Center style should be selected and Left and Right position options should appear." },
+        { "content": "Verify Left is selected by default.", "expected": "Left position should be selected by default." },
+        { "content": "Click the \"Do Not Sell or Share My Personal Information\" link on the banner in the website preview.", "expected": "The Opt-out Center sidebar should open on the left side of the preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved." },
+        { "content": "Select \"Right\" under the Sidebar position options.", "expected": "Right position should be selected." },
+        { "content": "Click the \"Do Not Sell or Share My Personal Information\" link on the banner in the website preview.", "expected": "The Opt-out Center sidebar should open on the right side of the preview." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved and the Banner + Sidebar Opt-out Center should display on the right side of the website." }
+      ],
+      "source_case_ids": [486, 1539, 1558, 5220, 5239, 5258, 4647, 4666, 4685, 2732, 2751, 2770],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": null,
+      "rewrite_notes": "Collapsed role/plan variants. Navigation, USL setup, and Banner-selection to precondition. DNS link trigger. Covers Left and Right in one case.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36824,
+      "title": "[Cookie Banner] Verify that clicking the Popup crown icon opens the upgrade nudge",
+      "preconditions": "User is on Cookie Banner > Layout tab. The Popup option in the Cookie Notice sub-section displays a crown icon indicating it requires a paid plan upgrade.",
+      "steps": [
+        { "content": "Click the Popup layout option (which shows a crown icon).", "expected": "An in-app upgrade nudge should appear." },
+        { "content": "Verify the nudge headline and plan availability.", "expected": "The nudge should display \"Use a popup layout to boost opt-in rates\" and indicate availability in Pro and Ultimate plans." },
+        { "content": "Verify an upgrade CTA button is present in the nudge.", "expected": "An upgrade CTA button should be visible (the button label is \"Try Pro for Free\" on Free plan or \"Upgrade now\" on Basic plan)." }
+      ],
+      "source_case_ids": [14961, 14964, 15103],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Collapsed C14961 (Free plan) and C14964 (Basic plan) — same nudge, same headline, CTA label differs by plan. Button destination (section 11 concern) noted in expected result only. C15596/C15597 (Wix) are platform equivalents excluded from this draft.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36825,
+      "title": "[Cookie Banner] Verify that disabling the Categories on first layer toggle removes cookie categories from the banner first layer",
+      "preconditions": "User is on Cookie Banner > Layout tab. Banner layout is selected in the Cookie Notice section. Pushdown is selected in the Preference Centre section. The Categories on first layer toggle is visible and enabled (on).",
+      "steps": [
+        { "content": "Verify the Categories on first layer toggle is on and cookie categories appear on the first layer in the banner preview.", "expected": "The toggle should be in the on state. Cookie category names (e.g. Necessary) should be visible on the first layer of the cookie banner in the preview panel." },
+        { "content": "Click the Categories on first layer toggle to disable it.", "expected": "The toggle should switch to off. Cookie categories should disappear from the first layer of the banner preview. Only the standard consent buttons (Accept All, Customise, Reject All) should remain visible on the first layer." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved. The cookie banner on the website should show no categories on the first layer." }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Gap found during grill: case 36748 covers enabling the toggle only. This case covers the complementary OFF path. Confirmed in live app: toggling OFF immediately removes category names from the first layer in the preview.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36826,
+      "title": "[Cookie Banner] Verify that switching from Banner + Pushdown back to Box layout disables Pushdown and the Categories on first layer toggle",
+      "preconditions": "User is on Cookie Banner > Layout tab. Banner layout is selected in the Cookie Notice section. Pushdown is selected in the Preference Centre section. The Categories on first layer toggle is visible and in an enabled (interactive) state.",
+      "steps": [
+        { "content": "Verify Pushdown is selected in the Preference Centre section and the Categories on first layer toggle is interactive.", "expected": "Pushdown should be selected. The Categories on first layer toggle should not be greyed out." },
+        { "content": "Click the Box layout option in the Cookie Notice section.", "expected": "Box layout should be selected. Position options should change to Bottom left, Bottom right, Top left, and Top right. In the Preference Centre section, Pushdown should become unavailable (greyed out) and the selection should reset to Center. The Categories on first layer toggle should become disabled (greyed out and non-interactive)." },
+        { "content": "Click \"Publish Changes\".", "expected": "Changes should be saved. The Box layout with Center preference centre should be active on the website." }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Gap found during grill: existing cases test switching INTO Banner+Pushdown but not switching back to Box. Confirmed in live app: switching to Box resets Preference Centre to Center and disables both Pushdown and the Categories toggle.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 36827,
+      "title": "[Cookie Banner] Verify that switching the law context in GDPR & US State Laws mode updates the available layout options",
+      "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR & US State Laws. The Customize sub-dropdown is visible in the Consent Template card, set to GDPR.",
+      "steps": [
+        { "content": "Verify the Cookie Notice section while the Customize sub-dropdown is set to GDPR.", "expected": "Box, Banner, and Popup layout options should be available. The Preference Centre section should be visible below the position options." },
+        { "content": "Click the Customize sub-dropdown and select US State Laws.", "expected": "The Cookie Notice section should update to show only Box and Banner — Popup should not appear. The Preference Centre section should be replaced by an Opt-out center section." },
+        { "content": "Click the Customize sub-dropdown and select GDPR.", "expected": "The layout options should revert to GDPR state: Box, Banner, and Popup should be available and the Preference Centre section should be restored." }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "regression",
+      "rewrite_notes": "Gap found during grill (Pro account): The GDPR & US State Laws combined template introduces per-law layout option differences. Routed to Layout (not General) because it tests Layout option changes. Complements C36720 which tests sub-dropdown existence and preview switching in General.",
+      "grill_status": "confirmed"
+    }
+  ]
+}
