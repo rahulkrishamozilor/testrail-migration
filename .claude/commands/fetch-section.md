@@ -129,14 +129,23 @@ list, and wait again. Do not proceed to Step 5 until the user explicitly replies
 
 **Only reachable after the user replies `save`.**
 
-Before writing, check whether `ai-context/draft-<section-slug>.json` already exists. If it
-does, stop and warn the user:
+Overwrite `ai-context/draft-<section-slug>.json` with the final approved cases. If a file
+already exists from a previous run, replace it silently — git history is the safety net.
 
-> ⚠️ A draft already exists at `ai-context/draft-<section-slug>.json` from a previous run.
-> Reply `overwrite` to replace it, or `cancel` to keep the existing draft and stop.
+If cases for this section already exist in the v2 suite, include their v2 case `id` in each
+matching draft case object. During `/migrate-section`, publish with:
 
-Wait for the reply. Only proceed if the user replies `overwrite`. On `cancel`, confirm the
-existing draft is preserved and suggest running `/migrate-section $ARGUMENTS`.
+```bash
+# New cases (id: null) — posts, writes IDs back, renames draft-* → cases-* when complete
+uv run .claude/scripts/fetch_testrail.py batch-add-cases <section_id> \
+  --json-file ai-context/draft-<slug>.json --from-draft --only-new --write-back
+
+# Existing cases (id already set) — updates changed fields only
+uv run .claude/scripts/fetch_testrail.py batch-update-cases \
+  --json-file ai-context/cases-<slug>.json --from-draft
+```
+
+The draft file is the source of truth — do not create separate update/add payload files.
 
 **Canonical slug rule** (migrate-section uses this same rule — defined here once):
 1. Strip any leading numeric prefix: `^\d+\.\s*`  
@@ -158,15 +167,21 @@ date -u +"%Y-%m-%dT%H:%M:%SZ"
 ```json
 {
   "section": "<$ARGUMENTS>",
+  "suite_id": 16,
+  "section_id": null,
   "fetched_at": "<UTC timestamp from above>",
+  "grilled_at": null,
+  "published_at": null,
   "searched_section_ids": [<Suite 6 section IDs recorded in Step 1>],
   "cases": [
     {
+      "id": null,
       "title": "...",
       "preconditions": "...",
       "steps": [
         { "content": "...", "expected": "..." }
       ],
+      "run_type": "regression",
       "source_case_ids": [12345, 12346],
       "permission_flag": false,
       "platform_flag": false,

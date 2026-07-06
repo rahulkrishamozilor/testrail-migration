@@ -3,10 +3,68 @@
 > Migration playbook for transforming Suite 6 cases into v2. Read alongside
 > `testrail-suite-v2.md` (the v2 end-state spec). When the two conflict, the v2 spec wins.
 >
-> Cases in v2 serve two consumers equally: a QA agent reading the case to formulate a
-> Playwright test plan, and a human tester executing it manually. Every case must give both
-> consumers a complete picture — navigation path, app state, user actions, and specific
-> observable outcomes.
+> Cases in v2 serve three consumers equally: a newcomer who has never used CookieYes, a QA
+> agent formulating a Playwright test plan, and a RAG retrieval system that reads each case
+> in isolation. **Completeness takes priority over brevity.** A case that is short but
+> ambiguous fails all three consumers. A case that is longer but self-contained serves all
+> three.
+
+---
+
+## 0. Completeness standard
+
+Every case must pass the following three checks before it is published. These checks override
+all brevity rules in later sections.
+
+### 0a — The newcomer test
+
+Read the case as if you have never used CookieYes. Ask:
+- Do the Preconditions tell me enough about the page I am starting on to find my way?
+- Does each step tell me exactly what to interact with and where it is on the page?
+- Does each expected result tell me exactly what I should see, not just that "something changed"?
+
+If the answer to any of these is no, the case is incomplete. Add the missing context.
+
+### 0b — The isolation test
+
+Remove the case from its section and read it standalone. Ask:
+- Does this case make sense without reading any surrounding cases?
+- Does the Precondition describe the page state and structure well enough that the tester
+  does not need to look at the app first?
+
+Cases that depend on implicit knowledge ("you know the Dashboard, so you know where the card
+is") fail the isolation test. Make the context explicit.
+
+### 0c — The RAG accuracy test
+
+This suite will be indexed for semantic search. Each case is a retrieval unit. Ask:
+- Is the title specific enough to distinguish this case from similar cases in the section?
+- Do the expected results name specific UI elements, exact labels, and exact states — not
+  generic outcomes?
+- Would an AI reading only this case understand what feature is being tested, what the page
+  looks like, and what the correct outcome is?
+
+Generic expected results ("the page should update", "changes should reflect") fail this test.
+Name the element, the label, and the state.
+
+### Structural context is not the same as alignment
+
+Section 4 says to drop layout and position steps. That rule targets pixel-level alignment
+checks ("the button is left-aligned", "the card is at the top of the sidebar"). It does **not**
+mean dropping structural context that helps a reader orient themselves on the page.
+
+**Drop — pure alignment:**
+- "The Submit button should be displayed as centre-aligned."
+- "The Consent Template card should be displayed at the top of the sidebar."
+
+**Keep — structural context:**
+- "The card should display the website URL at the top, with a banner status sub-section on
+  the left and Regulation and Targeted location fields on the right."
+- "The modal should contain two tabs: Install manually on website and Install with Google
+  Tag Manager."
+
+The distinction: alignment describes *where* something sits in pixels. Structural context
+describes *what the page is made of* so the tester knows what they are looking at.
 
 ---
 
@@ -27,11 +85,24 @@
 | Prefix | Why |
 |---|---|
 | `[Account Owner]` | Default role in v2 — implied |
-| `[Admin]`, `[Editor]` | Permission-divergent cases go to section 14 |
+| `[Admin]`, `[Editor]` | Strip and collapse — most feature areas are identical across all roles (see role routing rule below) |
 | `[General]`, `[Layout]`, `[Content]`, `[Colours]` | Sidebar tab names — become v2 sub-section names, not title prefixes |
 | `[Webapp Free]`, `[Agency]`, `[Trial with card/without card]` | Plan state — goes in Preconditions |
 | `[Plugin]`, `[Shopify]`, `[Wix]` | Platform cases go to section 13 |
 | `[GDPR]`, `[US State Laws]`, `[GDPR & US State Laws]` | Law context — see section 10 for placement rules |
+
+### Role routing rule
+
+Suite 6 prefixed every case with `[Account Owner]`, `[Admin]`, or `[Editor]` even when all three roles behave identically. **Do not route a role-prefixed case to section 14 unless the role's access genuinely diverges.**
+
+The divergence points are narrow. For every feature area, ask: does the role have different access according to the table in `testrail-suite-v2.md`?
+
+| Suite 6 prefix | Feature area | Action |
+|---|---|---|
+| `[Admin]` or `[Editor]` | Cookie Banner, Cookie Manager, Consent Log, Languages, Advanced Settings, Reports, Dashboard | Collapse into canonical Account Owner case — **do not** create a section 14 case |
+| `[Editor]` | Team management (add/invite/remove members, change roles) | Route to `14. Permissions > Editor` |
+| `[Editor]` | Organisation name / Site name & URL editing | Route to `14. Permissions > Editor` |
+| `[Admin]` or `[Editor]` | Billing, subscription, org creation/deletion, site add/transfer/delete, ownership transfer | Route to `14. Permissions > Admin` |
 
 ### Examples
 
@@ -47,6 +118,9 @@
 ## 2. Preconditions
 
 Preconditions define everything the tester must set up before step 1. They are not steps.
+They must be written to pass the newcomer test (section 0a) and the isolation test (section
+0b) — a tester reading only the Preconditions should know exactly where they are in the app
+and what the page looks like before they begin.
 
 ### 2a — Navigation is a precondition, not a step
 
@@ -64,6 +138,30 @@ User is on Cookie Banner > General tab.
 
 The first step of the case should begin at the feature under test, not at the login screen
 or the dashboard.
+
+### 2d — Page structure context in Preconditions
+
+For cases that test a specific card, modal, or section, add one sentence describing the
+relevant structure of the page. This is the structural context a newcomer needs to orient
+themselves before step 1.
+
+**Minimal (fails isolation test):**
+```
+User is on the Dashboard.
+```
+
+**Complete (passes isolation and newcomer tests):**
+```
+User is on the Dashboard. The Cookie Banner Status card is visible in the main content area.
+The card shows the website URL at the top, a banner status sub-section on the left (showing
+Active/Inactive, a status message, and a contextual action link), and Regulation and
+Targeted location fields on the right. A "Customise banner" link sits at the bottom of the card.
+```
+
+The amount of structural context needed scales with the complexity of the component:
+- Simple page (login form): one sentence naming the fields is enough
+- Complex card with multiple sub-sections: describe each sub-section and what it contains
+- Modal: name the tabs, the primary content, and the action buttons
 
 ### 2b — Chained case references
 
@@ -125,10 +223,20 @@ of what was being asserted.
 
 ### Step count
 
-Target **4–8 steps** per case. This range covers the full navigation journey and core
-interaction without padding. Cases shorter than 4 steps usually lack navigation context;
-cases longer than 8 usually contain layout checks or repeated assertions that should be
-dropped.
+Target **4–8 steps** per case — but this is a smell indicator, not a hard limit. Cases
+shorter than 4 steps usually lack a verification step or still have navigation sitting in
+step 1 instead of Preconditions. Cases longer than 8 steps usually contain repeated
+assertions or redundant confirmation steps (verifying the previous step worked) that should
+be dropped.
+
+Extra steps are legitimate when the scenario genuinely requires them. Multi-phase flows
+often exceed 8 — a full password reset walks through submitting the form, checking the
+inbox, clicking the link, landing on the reset page, submitting a new password, landing on
+confirmation, and verifying the notification email. Each phase is a distinct, observable
+outcome and must not be compressed.
+
+The test: *does removing this step hide a real failure point?* If yes, keep it. If the
+step only confirms the previous step worked, drop it.
 
 ### One behaviour per step
 
@@ -163,6 +271,11 @@ UI element whose location never changes based on application logic.
 
 **Keep a display step when** the presence or absence of an element signals a logic state
 — e.g. the Customize sub-dropdown that appears only after selecting GDPR & US State Laws.
+
+**Do not confuse alignment drops with structural context.** Structural context (what the
+page is made of, what sections exist, what each section contains) belongs in Preconditions
+per section 2d — not as steps, but it must appear somewhere in the case. See section 0 for
+the distinction.
 
 ### Copy and tooltip text
 

@@ -3,6 +3,15 @@
     "testrail-search": {
       "command": "uv",
       "args": ["run", ".claude/mcp-servers/testrail-search/server.py"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp", "--browser", "chrome"],
+      "env": {
+        "QA2_BASE_URL": "${QA2_BASE_URL}",
+        "QA2_TEST_EMAIL": "${QA2_TEST_EMAIL}",
+        "QA2_TEST_PASSWORD": "${QA2_TEST_PASSWORD}"
+      }
     }
   }
 }

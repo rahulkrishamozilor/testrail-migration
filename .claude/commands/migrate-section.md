@@ -41,6 +41,43 @@ in the draft, acknowledge any `permission_flag` or `platform_flag` entries, and 
 > ⚠️ Draft was fetched on `<fetched_at>`. Suite 6 may have changed since then. Consider
 > re-running `/fetch-section $ARGUMENTS` to refresh it.
 
+### Step 2a — Review suggested cases (if any)
+
+Before proceeding, check whether any cases in the draft have `"grill_status": "suggested"`.
+These were identified during `/grill-section` as missing scenarios and have not yet been
+approved for migration.
+
+If suggested cases exist, list each one in this format and then **stop**:
+
+---
+**Suggested cases from grill — approve or reject each before migrating**
+
+**S1: [Title]**
+- **Gap:** [why this scenario was flagged as missing]
+- **Preconditions:** [precondition text]
+- **Steps:**
+  1. [step] → [expected result]
+- **run_type:** [value]
+
+*(repeat for each suggested case)*
+
+---
+- Reply `approve N` to include case N in the migration.
+- Reply `reject N` to drop case N from the draft.
+- Reply `approve-all` to include all suggested cases.
+- Reply `reject-all` to drop all suggested cases.
+- Reply `done` when finished — migration will proceed with only approved cases.
+
+Wait for the user's replies. Process each instruction and re-show the updated list after
+each one. Do not proceed to Step 3 until the user replies `done`.
+
+On `done`:
+- Remove all remaining `"suggested"` cases (any not explicitly approved) from the working
+  case list. Do not write them to TestRail.
+- Approved cases have their `grill_status` treated as `"confirmed"` for the rest of the flow.
+
+If no suggested cases exist in the draft, skip this step silently and continue to Step 3.
+
 **If no draft exists:** stop and tell the user:
 
 > No style-rewrite draft found for this section. Running `/fetch-section $ARGUMENTS` first
@@ -169,39 +206,32 @@ Using the section map built in Step 3, create only the sections marked `🆕 wil
 create each ancestor before its children. Re-use the IDs of existing sections recorded in
 Step 3 as parent IDs where applicable.
 
-### 5c — Write the JSON payload file
+### 5c — Publish cases from the draft
 
-Write the case payloads to `ai-context/cases-<section-slug>.json` (the file must be inside
-`ai-context/` — paths outside it are rejected by `batch-add-cases`).
+Run one `batch-add-cases` call per target section. Pass the draft file directly — no
+separate payload file is needed. The `--from-draft` flag handles field translation
+(`preconditions` → `custom_preconds`, `steps` → `custom_steps_separated`,
+`run_type` string → integer) and strips internal-only fields automatically.
+`--only-new` skips any case that already has an `id` (safe to re-run).
+`--write-back` patches the returned IDs back into the draft file and renames it from
+`draft-<slug>.json` to `cases-<slug>.json` once every case has an ID.
 
-Each element in the array must use these exact field names:
-
-```json
-[
-  {
-    "title": "...",
-    "customPreconds": "...",
-    "customStepsSeparated": [
-      { "content": "step text", "expected": "expected result" }
-    ],
-    "custom_run_type": <run_type_id>
-  }
-]
-```
-
-- `customPreconds` maps to `custom_preconds` (the TestRail preconditions field).
-- `customStepsSeparated` maps to `custom_steps_separated` (step-by-step format).
-- `custom_run_type` is the numeric ID for the run_type custom field.
-  Run `uv run .claude/scripts/fetch_testrail.py get-case-fields` to look up the field ID and
-  its allowed values before writing the payload if they are not already known.
-- Do not include `custom_automation_type` or `refs` — these fields do not exist in the v2 suite.
-
-### 5d — Create the cases
+**Primary section (most common — all cases go to one section):**
 
 ```bash
-uv run .claude/scripts/fetch_testrail.py batch-add-cases <section_id> --json-file ai-context/cases-<section-slug>.json
+uv run .claude/scripts/fetch_testrail.py batch-add-cases <section_id> \
+  --json-file ai-context/draft-<section-slug>.json \
+  --from-draft --only-new --write-back
 ```
 
-Report the created case IDs from the response.
+**Multi-section routing (some cases go to Plan Gates, Permissions, etc.):**
+
+When cases land in different v2 sections, run one call per section. For sections other
+than the primary (e.g. Plan Gates), pass only the cases for that section — write a small
+named temp file like `ai-context/draft-<slug>-plan-gates.json` containing only those
+cases, run `batch-add-cases` on it with `--from-draft --write-back`, then manually merge
+the returned IDs back into the primary draft. Delete the temp file after merging.
+
+After all calls complete, report every created case ID.
 
 Never create cases without explicit approval.

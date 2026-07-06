@@ -175,6 +175,30 @@ assign it to cases.
 - Default role for all cases outside section 14: **Account Owner**. Do not add a role prefix to the case title.
 - Role prefix (`[Admin]`, `[Editor]`) is used only in section 14 (Permissions) where the role's specific access or restriction is what is being tested.
 
+#### Permission hierarchy
+
+CookieYes has three roles. The hierarchy is Editor ⊂ Admin ⊂ Account Owner.
+
+| Feature area | Account Owner | Admin | Editor |
+|---|---|---|---|
+| Cookie Banner, Cookie Manager, Consent Log, Languages, Advanced Settings, Reports | ✓ | ✓ | ✓ |
+| Dashboard, Onboarding | ✓ | ✓ | ✓ |
+| Team management (add/remove members, invite, modify roles) | ✓ | ✓ | ✗ |
+| Organisation name / Site name & URL editing | ✓ | ✓ | ✗ |
+| Organisation creation/deletion | ✓ | ✗ | ✗ |
+| Site add / transfer / delete | ✓ | ✗ | ✗ |
+| Account ownership transfer | ✓ | ✗ | ✗ |
+| Billing & subscription management | ✓ | ✗ | ✗ |
+
+**Consequence for migration:** Suite 6 cases prefixed `[Admin]` or `[Editor]` that fall in a shared feature area (Cookie Banner, Cookie Manager, Consent Log, etc.) are **identical** to Account Owner cases. Collapse them into the canonical case — do not route to section 14.
+
+Only route to section 14 when the role's access genuinely diverges from the table above.
+
+#### Section 14 sub-section meanings
+
+- **14. Permissions > Editor** — cases where **Editor is blocked** from something that Admin and Account Owner can do (team management, org/site name editing).
+- **14. Permissions > Admin** — cases where **Admin (and Editor) are blocked** from something only Account Owner can do (billing, org/site creation/deletion, ownership transfer).
+
 ### Platform
 
 - Default platform: **Webapp**. Do not add a platform prefix.
@@ -253,7 +277,8 @@ Do not prefix titles with `[Account Owner]` unless inside section 14.
 | "Ends in N days" trial display | 11. Billing & Upgrade > Trial — with card |
 | "Buy Pro" / "Switch to Pro trial?" | 11. Billing & Upgrade > Trial — with card |
 | Agency license purchase | 12. Agency > Agency Dashboard |
-| Admin cannot access a feature | 14. Permissions > Admin > Permission gates |
+| Editor cannot access a feature that Admin and AO can | 14. Permissions > Editor |
+| Admin (and Editor) cannot access an Account Owner-only feature | 14. Permissions > Admin |
 | Shopify native app installation | 13. Platforms > Shopify (Native App) |
 | Cookie Banner behavior | 04. Cookie Banner — tested once for Webapp |
 | Cookie Manager behavior | 05. Cookie Manager — tested once for Webapp |
