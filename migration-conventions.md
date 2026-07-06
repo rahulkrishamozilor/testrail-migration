@@ -238,6 +238,31 @@ outcome and must not be compressed.
 The test: *does removing this step hide a real failure point?* If yes, keep it. If the
 step only confirms the previous step worked, drop it.
 
+### Multi-element expected results
+
+When an expected result describes **three or more distinct UI elements**, write it as a short
+intro sentence followed by a bullet list — not as a single run-on sentence.
+
+**Before (hard to scan):**
+```
+An in-app upgrade nudge for Custom CSS appears with a feature illustration, headline
+"Put your banner in the spotlight with custom CSS", a note that the feature is available
+in all premium plans, and two action buttons: "Try Pro for free" and "Dismiss".
+```
+
+**After (scannable):**
+```
+The Custom CSS upgrade nudge should be displayed with:
+- A feature illustration
+- Headline: "Put your banner in the spotlight with custom CSS"
+- A note that the feature is available in all premium plans
+- Action buttons: "Try Pro for free" and "Dismiss"
+```
+
+The rule: if reading the expected result aloud requires "and … and … and …", convert it to
+a list. The intro line should name the component; each bullet should name one element, its
+label, and its state.
+
 ### One behaviour per step
 
 If a step produces multiple independent outcomes, split it.
