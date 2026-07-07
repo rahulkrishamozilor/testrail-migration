@@ -76,4 +76,4 @@ Full rules are in `testrail-suite-v2.md`. Key points:
 - **Nudge entry points** — feature section owns "nudge opens". Button destination owned by section 11
 - **Plan Gates** — one case per plan in `11. Billing & Upgrade > Plan Gates`, tagged `smoke`
 - **run_type default** — `regression`. Use `smoke` only for the single most critical happy-path check per feature area
-- **automation_type** — set `Playwright` when the case is behavior-testable and automation will cover it
+- **automation_type** — not used in v2 (not a TestRail field). Do not set it. See `testrail-suite-v2.md` open issue M4

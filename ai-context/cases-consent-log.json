@@ -1,0 +1,770 @@
+{
+  "section": "consent logs",
+  "suite_id": 16,
+  "section_id": null,
+  "fetched_at": "2026-07-07T09:53:58Z",
+  "grilled_at": "2026-07-07T10:52:32Z",
+  "published_at": "2026-07-07T11:29:12Z",
+  "searched_section_ids": [
+    14,
+    72,
+    189,
+    282,
+    308,
+    410,
+    610
+  ],
+  "cases": [
+    {
+      "id": 37145,
+      "title": "[Consent Log] Verify that the Consent Log page shows an empty state when no consents have been recorded",
+      "preconditions": "No visitor has interacted with the cookie banner on the website. Consent logging is enabled in Advanced Settings. User is on the Consent Log page (accessible via the \"Consent Log\" tab in the top navigation bar). The page shows a \"Your visitor consents\" card in the center.",
+      "steps": [
+        {
+          "content": "Observe the \"Your visitor consents\" card on the Consent Log page.",
+          "expected": "The card should display an empty-state icon with the message: \"No consent log found! Visitor consents may not have been recorded yet. Make sure you've enabled consent logging\" The words \"consent logging\" should be rendered as a clickable link."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1039,
+        1338,
+        1356,
+        3371,
+        6315,
+        6336,
+        6354,
+        7224,
+        7245,
+        7263
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed Account Owner / Admin / Editor across Free, Trial, Agency plan variants \u2014 all identical after prefix removal. Navigation steps moved to Preconditions. Dropped static page title text (S4), subtitle copy (S5), card position check (S6), and heading check (S7). Link presence merged into S1.",
+      "grill_status": "fixed",
+      "grill_note": "Removed trailing period from message text: actual UI shows 'Make sure you've enabled consent logging' with no period after the 'consent logging' link."
+    },
+    {
+      "id": 37146,
+      "title": "[Consent Log] Verify that the \"consent logging\" link in the empty state navigates to Advanced Settings",
+      "preconditions": "Same as the empty state case \u2014 Consent Log page with no consent entries recorded. The \"consent logging\" link is visible in the empty-state message on the \"Your visitor consents\" card.",
+      "steps": [
+        {
+          "content": "Locate the \"consent logging\" link in the empty-state message.",
+          "expected": "\"consent logging\" should be displayed as a clickable link."
+        },
+        {
+          "content": "Click the \"consent logging\" link.",
+          "expected": "The Advanced Settings page should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1059,
+        1342,
+        1360,
+        3382,
+        6326,
+        6340,
+        6358,
+        7235,
+        7249,
+        7267
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed 10 role/plan variants. Navigation and repeated empty-state presence checks removed to Preconditions.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 37147,
+      "title": "[Consent Log] Verify that the Consent Log card displays an accepted consent entry correctly on the Free plan",
+      "preconditions": "User is on the Free plan. A visitor has accepted all cookies on the connected website by clicking \"Accept All\" on the cookie banner. User is on the Consent Log page. The \"Your visitor consents\" card is visible with: an \"Export as CSV\" link button to the right of the heading, a search field in the top right, and a four-column table: Consent ID, Consent Status, Date/Time (UTC \u00b1 00:00), Proof of Consent. The Consent ID and Proof of Consent column headers each have a tooltip icon.",
+      "steps": [
+        {
+          "content": "Observe the consent table in the \"Your visitor consents\" card.",
+          "expected": "The accepted consent entry should appear in the list."
+        },
+        {
+          "content": "Verify the Consent ID column for the entry.",
+          "expected": "A truncated consent ID should be displayed under the Consent ID column."
+        },
+        {
+          "content": "Hover over the consent ID.",
+          "expected": "The complete consent ID should appear as tooltip text."
+        },
+        {
+          "content": "Verify the Consent Status column for the entry.",
+          "expected": "\"Accepted\" should be displayed under the Consent Status column."
+        },
+        {
+          "content": "Verify the Date/Time column for the entry.",
+          "expected": "The date and time should be displayed in the format: [Month] [Date], [Year] [hh:mm:ss]."
+        },
+        {
+          "content": "Verify the Proof of Consent column for the entry.",
+          "expected": "A download button should be visible under the Proof of Consent column."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1046,
+        1339,
+        1357,
+        3372,
+        6316,
+        6337,
+        6355,
+        7225,
+        7246,
+        7264
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed 10+ role/plan variants. Navigation (website visit, banner click, Dashboard, Consent Log tab) moved to Preconditions. Card structure (column list, tooltip icon positions) moved to Preconditions. Dropped layout/position checks. Hover tooltip kept \u2014 functional behavior, not static copy.",
+      "grill_status": "skipped:plan-gated",
+      "grill_note": "No Free plan account with consent log entries available. The QA2 free account (rahulkrishna+freeplansite@mozilor.com) is a clean account with no consent data. 4-column table structure (no Country column) requires Free plan populated state to verify."
+    },
+    {
+      "id": 37148,
+      "title": "[Consent Log] Verify that the Consent Log card displays a rejected consent entry correctly on the Free plan",
+      "preconditions": "User is on the Free plan. A visitor has rejected all cookies by clicking \"Reject All\" on the cookie banner. User is on the Consent Log page. The \"Your visitor consents\" card shows the four-column table (Consent ID, Consent Status, Date/Time, Proof of Consent).",
+      "steps": [
+        {
+          "content": "Observe the consent entry in the table.",
+          "expected": "The rejected consent entry should appear in the list."
+        },
+        {
+          "content": "Verify the Consent Status column for the entry.",
+          "expected": "\"Rejected\" should be displayed under the Consent Status column."
+        },
+        {
+          "content": "Verify the Date/Time column.",
+          "expected": "Date and time should be in the format: [Month] [Date], [Year] [hh:mm:ss]."
+        },
+        {
+          "content": "Verify the Proof of Consent column.",
+          "expected": "A download button should be visible for the entry."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1051,
+        1340,
+        1358,
+        3374,
+        6318,
+        6338,
+        6356,
+        7227,
+        7247,
+        7265
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Column structure covered in Preconditions (same as accepted case). Only status-specific assertion differs.",
+      "grill_status": "skipped:plan-gated",
+      "grill_note": "No Free plan account with consent entries available."
+    },
+    {
+      "id": 37149,
+      "title": "[Consent Log] Verify that the Consent Log card displays a partially accepted consent entry correctly on the Free plan",
+      "preconditions": "User is on the Free plan. A visitor has partially accepted cookies by clicking \"Customize\" on the banner, enabling at least one optional cookie category, and clicking \"Save My Preferences\". User is on the Consent Log page. The \"Your visitor consents\" card shows the four-column table (Consent ID, Consent Status, Date/Time, Proof of Consent).",
+      "steps": [
+        {
+          "content": "Observe the consent entry in the table.",
+          "expected": "The partially accepted consent entry should appear in the list."
+        },
+        {
+          "content": "Verify the Consent Status column for the entry.",
+          "expected": "\"Partially accepted\" should be displayed under the Consent Status column."
+        },
+        {
+          "content": "Verify the Date/Time column.",
+          "expected": "Date and time should be in the format: [Month] [Date], [Year] [hh:mm:ss]."
+        },
+        {
+          "content": "Verify the Proof of Consent column.",
+          "expected": "A download button should be visible for the entry."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1052,
+        1341,
+        1359,
+        3375,
+        6319,
+        6339,
+        6357,
+        7228,
+        7248,
+        7266
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Setup steps (Customize, enable toggle, Save My Preferences) moved to Preconditions.",
+      "grill_status": "skipped:plan-gated",
+      "grill_note": "No Free plan account with consent entries available."
+    },
+    {
+      "id": 37150,
+      "title": "[Consent Log] Verify that the Consent Log card on paid plans shows an accepted consent entry with a Country column",
+      "preconditions": "User is on a paid plan (Basic, Pro, or Ultimate). A visitor has accepted all cookies on the website. User is on the Consent Log page. The \"Your visitor consents\" card shows a five-column table: Consent ID, Country, Consent Status, Date/Time (UTC \u00b1 00:00), Proof of Consent. The Consent ID and Proof of Consent headers each have a tooltip icon.",
+      "steps": [
+        {
+          "content": "Observe the consent entry in the table.",
+          "expected": "The accepted consent entry should appear in the list."
+        },
+        {
+          "content": "Verify the Consent ID column.",
+          "expected": "A truncated consent ID should be visible. Hovering over it should reveal the complete consent ID as tooltip text."
+        },
+        {
+          "content": "Verify the Country column for the entry.",
+          "expected": "The country from which the visitor accepted the cookies should be displayed."
+        },
+        {
+          "content": "Verify the Consent Status column.",
+          "expected": "\"Accepted\" should be displayed."
+        },
+        {
+          "content": "Verify the Date/Time column.",
+          "expected": "Date and time should be in the format: [Month] [Date], [Year] [hh:mm:ss]."
+        },
+        {
+          "content": "Observe the text below the consent card.",
+          "expected": "\"You can view up to 100 visitor consents logged here. Use the export option if you want to download the historical log data.\" should be displayed."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [
+        13260,
+        13283
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Genuinely different behavior from free plan: Country column present, 100-entry cap note displayed. Collapsed paid plan variants (Basic/Pro/Ultimate identical). Wix equivalent C16362 has the same behavior and is not flagged as platform-specific since Consent Log is a dashboard feature common to all platforms.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 37151,
+      "title": "[Consent Log] Verify that the Consent Log card on paid plans shows a rejected consent entry with a Country column",
+      "preconditions": "User is on a paid plan (Basic, Pro, or Ultimate). A visitor has rejected all cookies on the website. User is on the Consent Log page. The \"Your visitor consents\" card shows the five-column table including Country.",
+      "steps": [
+        {
+          "content": "Observe the consent entry in the table.",
+          "expected": "The rejected consent entry should appear."
+        },
+        {
+          "content": "Verify the Country column.",
+          "expected": "The country from which the visitor rejected the cookies should be displayed."
+        },
+        {
+          "content": "Verify the Consent Status column.",
+          "expected": "\"Rejected\" should be displayed."
+        },
+        {
+          "content": "Verify the Date/Time column.",
+          "expected": "Date and time in [Month] [Date], [Year] [hh:mm:ss] format."
+        },
+        {
+          "content": "Observe the text below the card.",
+          "expected": "\"You can view up to 100 visitor consents logged here. Use the export option if you want to download the historical log data.\" should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        13262,
+        13284
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed paid plan variants. Country column is the key behavioral difference from the free plan.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 37152,
+      "title": "[Consent Log] Verify that the Consent Log card on paid plans shows a partially accepted consent entry with a Country column",
+      "preconditions": "User is on a paid plan (Basic, Pro, or Ultimate). A visitor has partially accepted cookies by clicking \"Customize\", enabling at least one optional category, and clicking \"Save My Preferences\". User is on the Consent Log page with the five-column table including Country.",
+      "steps": [
+        {
+          "content": "Observe the consent entry in the table.",
+          "expected": "The partially accepted consent entry should appear."
+        },
+        {
+          "content": "Verify the Country column.",
+          "expected": "The country from which the visitor partially accepted cookies should be displayed."
+        },
+        {
+          "content": "Verify the Consent Status column.",
+          "expected": "\"Partially accepted\" should be displayed."
+        },
+        {
+          "content": "Verify the Date/Time column.",
+          "expected": "Date and time in [Month] [Date], [Year] [hh:mm:ss] format."
+        },
+        {
+          "content": "Observe the text below the card.",
+          "expected": "\"You can view up to 100 visitor consents logged here. Use the export option if you want to download the historical log data.\" should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        13263,
+        13285
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Same structure as rejected paid case with Partially accepted status.",
+      "grill_status": "needs-manual-check",
+      "grill_note": "Test account has no 'Partially accepted' entries \u2014 table structure and Country column confirmed by Cases 6/7, but 'Partially accepted' status label text and capitalization could not be verified directly. Also flag: Dashboard shows 'Partially Accepted' (capital A); check whether consent log table uses same capitalisation."
+    },
+    {
+      "id": 37153,
+      "title": "[Consent Log] Verify that Export as CSV is disabled when the account email is not verified",
+      "preconditions": "The user's account email has not been verified (the email verification alert banner is visible on the Dashboard). At least one consent entry exists in the Consent Log. User is on the Consent Log page. The \"Export as CSV\" link button is visible to the right of the \"Your visitor consents\" heading.",
+      "steps": [
+        {
+          "content": "Click the \"Export as CSV\" link button.",
+          "expected": "The button should not trigger any action \u2014 the export should be blocked."
+        },
+        {
+          "content": "Hover over the \"Export as CSV\" button.",
+          "expected": "A tooltip should appear with the message: \"Please verify your email address to export your visitor consent log.\""
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1053,
+        1343,
+        1361,
+        3376,
+        6320,
+        6342,
+        6361,
+        7229,
+        7250,
+        7268
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed 10+ role/plan variants. Navigation and consent-generation steps moved to Preconditions. Tooltip text kept \u2014 it is a validation message (blocked-state signal), not informational copy.",
+      "grill_status": "skipped:destructive-precondition",
+      "grill_note": "No test account with unverified email in qa-accounts.json. Would require creating or resetting an account to pre-verification state."
+    },
+    {
+      "id": 37154,
+      "title": "[Consent Log] Verify that the Export consent logs modal shows the Free plan retention message and upgrade link",
+      "preconditions": "User is on the Free plan with a verified email address. At least one consent entry exists. User is on the Consent Log page.",
+      "steps": [
+        {
+          "content": "Click the \"Export as CSV\" link button in the Consent Log card.",
+          "expected": "The \"Export consent logs\" modal should appear."
+        },
+        {
+          "content": "Observe the plan message in the modal.",
+          "expected": "The following message should be displayed below the modal title: \"With the Free plan, you can export consent logs from the past 1 year. To retain logs for up to 5 years, upgrade to a paid plan.\" The text \"upgrade to a paid plan\" should be a clickable link."
+        },
+        {
+          "content": "Click the \"upgrade to a paid plan\" link.",
+          "expected": "The Plans page should be displayed."
+        },
+        {
+          "content": "Navigate back to the Consent Log page and click \"Export as CSV\" again.",
+          "expected": "The \"Export consent logs\" modal should reappear."
+        },
+        {
+          "content": "Verify the date range controls in the modal.",
+          "expected": "A \"Select a date range to export data\" label and a date picker should be visible, with the default range in DD/MM/YYYY format. \"Cancel\" and \"Export as CSV\" buttons should be present at the bottom."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14911,
+        1054,
+        1060
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Based on newer C14911 UI (plan-specific export modal, supersedes older \"Export Options\" modal style from C1060). Email verification flow from C1054 collapsed into Preconditions. Dropped static subtitle and email copy checks. Upgrade link navigation kept as a functional step.",
+      "grill_status": "skipped:plan-gated",
+      "grill_note": "No Free plan account with consent entries available to open the Export modal and verify the Free plan retention message and upgrade link. QA2 free account (rahulkrishna+freeplansite@mozilor.com) has no consent data."
+    },
+    {
+      "id": 37155,
+      "title": "[Consent Log] Verify that the Export consent logs modal shows the paid plan retention message without an upgrade prompt",
+      "preconditions": "User is on a paid plan (Basic, Pro, or Ultimate) with a verified email address. At least one consent entry exists. User is on the Consent Log page.",
+      "steps": [
+        {
+          "content": "Click the \"Export as CSV\" link button in the Consent Log card.",
+          "expected": "The \"Export consent logs\" modal should appear."
+        },
+        {
+          "content": "Observe the plan message in the modal.",
+          "expected": "\"You can export consent logs from the past 5 years. Logs beyond this period are not retained.\" should be displayed. No upgrade link should be present."
+        },
+        {
+          "content": "Verify the action buttons.",
+          "expected": "\"Cancel\" and \"Export as CSV\" buttons should be visible at the bottom."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14912
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Genuinely different from Free plan case: different retention message, no upgrade nudge. Collapsed Basic/Pro/Ultimate \u2014 all show the same 5-year message.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 37156,
+      "title": "[Consent Log] Verify that the date range selector in the Export consent logs modal provides the correct options including a custom range",
+      "preconditions": "User has a verified email address and at least one consent entry in the Consent Log. The \"Export consent logs\" modal is open (accessed via \"Export as CSV\" in the Consent Log card).",
+      "steps": [
+        {
+          "content": "Locate the date range control in the modal.",
+          "expected": "A \"Select a date range to export data\" label and a date picker should be visible. The default selection should be \"Last 30 days\"."
+        },
+        {
+          "content": "Click the date range dropdown.",
+          "expected": "A dropdown should open with the following options:\n- Last 30 days (selected by default)\n- Last 3 months\n- Last 6 months\n- Last 12 months\n- All time\n- Custom"
+        },
+        {
+          "content": "Select each preset option in sequence (Last 3 months, Last 6 months, Last 12 months, All time).",
+          "expected": "Each selection should update the date picker to show the corresponding start and end dates."
+        },
+        {
+          "content": "Select \"Custom\" from the dropdown.",
+          "expected": "A calendar should appear for selecting a custom start and end date."
+        },
+        {
+          "content": "Select a valid custom date range from the calendar.",
+          "expected": "The selected range should be reflected in the date picker field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1061,
+        1346,
+        1364
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed 9+ role/plan variants. Email verification and navigation moved to Preconditions. Steps 1\u201315 in C1061 (navigation and modal opening) collapsed to Preconditions. Six range options verified; Custom range kept as separate step since it reveals a calendar.",
+      "grill_status": "confirmed",
+      "grill_note": "Verified: 6 dropdown options confirmed (Last 30 days default, Last 3 months, Last 6 months, Last 12 months, All time, Custom). Preset selection updates date picker in DD/MM/YYYY format. Custom triggers two-month calendar picker with future dates disabled. Selected range reflects in picker field."
+    },
+    {
+      "id": 37157,
+      "title": "[Consent Log] Verify that clicking Export as CSV triggers a confirmation pop-up and delivers a downloadable CSV file via email",
+      "preconditions": "User has a verified email address. At least one consent entry exists. The \"Export consent logs\" modal is open with a date range selected. User is on the Consent Log page.",
+      "steps": [
+        {
+          "content": "Click the \"Export as CSV\" button in the \"Export consent logs\" modal.",
+          "expected": "A confirmation pop-up should appear with:\n- Title: \"Creating a CSV file...\"\n- Message: \"We will send your export to [email] when it is ready for download.\"\n- An \"Okay\" button at the bottom."
+        },
+        {
+          "content": "Click \"Okay\".",
+          "expected": "The confirmation pop-up should close."
+        },
+        {
+          "content": "Open the email inbox for the registered email address.",
+          "expected": "A \"Download consent log\" email should be received."
+        },
+        {
+          "content": "Open the email and click the \"Download Consent Log\" button.",
+          "expected": "A CSV file should be downloaded."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1063,
+        1064,
+        1065,
+        1066,
+        1347,
+        1348,
+        1349,
+        1350,
+        1365,
+        1366,
+        1367,
+        1368
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed 12+ role/plan variants into one linear flow. Steps 1\u201314 (navigation and modal opening) moved to Preconditions. Email body copy (logo, text paragraphs) dropped per conventions. Download button \u2192 CSV download kept as functional outcome. Merged C1063 (trigger), C1064 (confirmation pop-up), C1065 (email), C1066 (download) into a single end-to-end case.",
+      "grill_status": "skipped:email-required",
+      "grill_note": "Case requires verifying a received CSV export email in a real inbox \u2014 cannot automate."
+    },
+    {
+      "id": 37158,
+      "title": "[Consent Log] Verify that clicking the Proof of Consent download button opens the Proof of Consent modal",
+      "preconditions": "At least one consent entry is present in the Consent Log. User is on the Consent Log page.",
+      "steps": [
+        {
+          "content": "Locate the download button under the Proof of Consent column for a consent entry.",
+          "expected": "A download button should be visible in the Proof of Consent column."
+        },
+        {
+          "content": "Click the download button.",
+          "expected": "The \"Proof of consent\" modal should appear."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1381,
+        1351,
+        1369,
+        3424,
+        6368,
+        7277
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Admin (C1351) and Editor (C1369) source cases had no steps; steps inferred from Account Owner variant. Repeated table structure checks removed.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 37159,
+      "title": "[Consent Log] Verify that the Proof of Consent modal displays the correct consent details and action buttons",
+      "preconditions": "The \"Proof of consent\" modal is open for a consent entry (opened via the download button in the Proof of Consent column on the Consent Log page).",
+      "steps": [
+        {
+          "content": "Observe the modal content.",
+          "expected": "The modal should display:\n- Title: \"Proof of consent\" in the top left.\n- Consent details: \"Consent ID: [consent id]\" and \"Consent date: [Mmm DD, YYYY HH:MM:SS] UTC\" in the center.\n- Action buttons: \"Cancel\" and \"Generate PDF\" in the bottom right."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1382,
+        3425,
+        6369,
+        7278
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Single display step using multi-element list format per conventions.",
+      "grill_status": "fixed",
+      "grill_note": "Date format updated: draft used '[Month dd, yyyy hh:mm:ss] UTC' but the modal uses abbreviated 3-letter month \u2014 actual: 'Jul 07, 2026 11:51:15 UTC'. Updated template to '[Mmm DD, YYYY HH:MM:SS] UTC'."
+    },
+    {
+      "id": 37160,
+      "title": "[Consent Log] Verify that clicking Cancel in the Proof of Consent modal closes it without generating a file",
+      "preconditions": "The \"Proof of consent\" modal is open for a consent entry.",
+      "steps": [
+        {
+          "content": "Click the \"Cancel\" button in the \"Proof of consent\" modal.",
+          "expected": "The modal should close. No file should be downloaded."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1384,
+        3426,
+        6370,
+        7279
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. \"No file downloaded\" expected result added [inferred] \u2014 cancel implies no side effect.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 37161,
+      "title": "[Consent Log] Verify that clicking Generate PDF in the Proof of Consent modal triggers a PDF generation confirmation",
+      "preconditions": "The \"Proof of consent\" modal is open for a consent entry.",
+      "steps": [
+        {
+          "content": "Click the \"Generate PDF\" button in the \"Proof of consent\" modal.",
+          "expected": "A \"Generating PDF...\" confirmation dialog should appear with the message: \"We will send the proof of consent report to [email] when it is ready for download.\" An \"Okay\" button should be visible."
+        },
+        {
+          "content": "Click \"Okay\".",
+          "expected": "The confirmation dialog should close."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1386,
+        3427,
+        6371,
+        7280
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants.",
+      "grill_status": "fixed",
+      "grill_note": "Source cases expected a direct PDF download. Actual behavior: clicking Generate PDF shows a 'Generating PDF...' email-notification dialog (same pattern as CSV export \u2014 PDF is sent to the account email). Title also updated to reflect confirmation-trigger rather than download. The PDF receipt via email is not automatable (email-required)."
+    },
+    {
+      "id": 37162,
+      "title": "[Consent Log] Verify that searching with a valid consent ID filters the consent list to matching entries",
+      "preconditions": "At least one consent entry exists and its consent ID is known. User is on the Consent Log page. A search field with a search button is visible in the top right of the \"Your visitor consents\" card.",
+      "steps": [
+        {
+          "content": "Enter a valid consent ID into the search field.",
+          "expected": "The entered text should appear in the search field."
+        },
+        {
+          "content": "Click the search button (magnifying glass icon) or press Enter.",
+          "expected": "Only the consent entry or entries matching the searched consent ID should be displayed in the list."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1387,
+        1352,
+        3428,
+        6372,
+        7281
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Admin source case C1352 had no steps; inferred from Account Owner. Navigation removed to Preconditions.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 37163,
+      "title": "[Consent Log] Verify that searching with an invalid consent ID returns no results",
+      "preconditions": "Consent entries exist in the log. User is on the Consent Log page with the search field visible.",
+      "steps": [
+        {
+          "content": "Enter a consent ID that does not match any existing entry into the search field.",
+          "expected": "The text should appear in the search field."
+        },
+        {
+          "content": "Click the search button.",
+          "expected": "No consent entries should be returned. The message \"No data available! While older logs may not be available here, you can export the data to access them.\" should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1388,
+        3429,
+        6373,
+        7282
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Fixed source case bug \u2014 C1388 title says \"invalid consent ID\" but steps say \"Enter valid consent id\" \u2014 intent is clearly invalid/non-existent ID. Expected result for no results was missing; added [inferred].",
+      "grill_status": "fixed",
+      "grill_note": "Expected result was [inferred]. Verified actual 'no results' message: 'No data available! While older logs may not be available here, you can export the data to access them.' Removed [inferred] tag and replaced with exact text."
+    },
+    {
+      "id": 37164,
+      "title": "[Consent Log] Verify that the Free plan consent log search only returns entries within the past 1 month",
+      "preconditions": "User is on the Free plan. The consent log contains entries both within the last month and older than 1 month. User is on the Consent Log page.",
+      "steps": [
+        {
+          "content": "Enter a consent ID for an entry logged within the past 1 month into the search field and click the search button.",
+          "expected": "The matching consent entry should be displayed."
+        },
+        {
+          "content": "Clear the search field, then enter a consent ID for an entry older than 1 month and click the search button.",
+          "expected": "\"No data available! While older logs may not be available here, you can export the data to access them.\" should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14913
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Navigation and column presence checks moved to Preconditions. Core assertion: in-app search window for Free plan is 1 month.",
+      "grill_status": "skipped:time-dependent",
+      "grill_note": "Requires a Free plan account with consent entries older than 1 month AND their consent IDs known. No such test data is available. The 'No data available!' message for out-of-window entries was confirmed by Case 19 (invalid ID shows same message)."
+    },
+    {
+      "id": 37165,
+      "title": "[Consent Log] Verify that the Basic plan consent log search only returns entries within the past 3 months",
+      "preconditions": "User is on the Basic paid plan. The consent log contains entries within the last 3 months and entries older than 3 months. User is on the Consent Log page.",
+      "steps": [
+        {
+          "content": "Enter a consent ID for an entry logged within the past 3 months and click the search button.",
+          "expected": "The matching consent entry should be displayed."
+        },
+        {
+          "content": "Clear the search field, enter a consent ID for an entry older than 3 months, and click the search button.",
+          "expected": "\"No data available! While older logs may not be available here, you can export the data to access them.\" should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14914
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Same structure as Free plan search case with a 3-month window.",
+      "grill_status": "skipped:time-dependent",
+      "grill_note": "Requires a Basic plan account with consent entries older than 3 months. No such test data available in qa-accounts.json accounts."
+    },
+    {
+      "id": 37166,
+      "title": "[Consent Log] Verify that the Pro plan consent log search only returns entries within the past 6 months",
+      "preconditions": "User is on the Pro plan. The consent log contains entries within the last 6 months and entries older than 6 months. User is on the Consent Log page.",
+      "steps": [
+        {
+          "content": "Enter a consent ID for an entry logged within the past 6 months and click the search button.",
+          "expected": "The matching entry should be displayed."
+        },
+        {
+          "content": "Clear the field, enter a consent ID for an entry older than 6 months, and click search.",
+          "expected": "\"No data available! While older logs may not be available here, you can export the data to access them.\" should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14915
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Same structure with a 6-month window.",
+      "grill_status": "skipped:time-dependent",
+      "grill_note": "Requires a Pro plan account with consent entries older than 6 months. No such test data available."
+    },
+    {
+      "id": 37167,
+      "title": "[Consent Log] Verify that the Ultimate plan consent log search enforces its plan-specific retention window",
+      "preconditions": "User is on the Ultimate plan. The consent log contains entries at various ages. User is on the Consent Log page.",
+      "steps": [
+        {
+          "content": "Enter a consent ID for a recent consent entry and click the search button.",
+          "expected": "The matching consent entry should be displayed."
+        },
+        {
+          "content": "Enter a consent ID for an entry that falls outside the Ultimate plan's retention window and click search.",
+          "expected": "\"No data available! While older logs may not be available here, you can export the data to access them.\" should be displayed. [inferred]"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14916
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Source case C14916 was truncated at step 13 (only column presence checks present; steps 14+ missing). Retention window for Ultimate plan is unspecified in available data. Step 2 expected result inferred from pattern in C14913\u2013C14915. Retention window needs verification against the current product before publishing.",
+      "grill_status": "skipped:time-dependent",
+      "grill_note": "Ultimate plan retention window is still unknown (source case truncated). Test data on qa1.kilohub.com only has entries from the past 11 days \u2014 no data to test any boundary. Retention window must be confirmed from product spec before this case can be run."
+    },
+    {
+      "id": 37168,
+      "title": "[Consent Log] Verify that clicking the clear search button restores the full consent log list",
+      "preconditions": "At least one consent entry exists. User is on the Consent Log page. A consent ID search has been submitted (via Enter or the magnifying glass button) and the table is showing filtered results. The \u00d7 clear button is visible in the search field (the magnifying glass icon has been replaced by \u00d7).",
+      "steps": [
+        {
+          "content": "Click the \u00d7 (clear) button in the search field.",
+          "expected": "The search field should clear. The \u00d7 button should be replaced by the magnifying glass icon. The full consent log list should be restored."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "New case \u2014 no source case in Suite 6. Gap identified during grilling: after submitting a search, a \u00d7 button replaces the magnifying glass icon. Clicking \u00d7 clears the search and restores the full list. This button-toggle behavior was not covered by any existing draft case.",
+      "grill_status": "confirmed"
+    }
+  ]
+}

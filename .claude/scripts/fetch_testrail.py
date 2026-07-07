@@ -5,23 +5,8 @@ Each invocation performs exactly one TestRail operation and exits.
 
 Usage:  python fetch_testrail.py <subcommand> [args...]
 
-Subcommands:
-  get-projects
-  get-suites       <project_id>
-  get-sections     <project_id> <suite_id>   [--all] [--compact] [--match-keywords "kw1,kw2"] [--match "kw1,kw2"] [--limit N] [--offset N]
-  get-cases        <project_id> <suite_id>   [--section-id ID] [--limit N] [--offset N]
-  get-cases-for-sections <project_id> <suite_id> [--section-ids 1,2,3] [--match-keywords "kw1,kw2"] [--match "kw1,kw2"] [--merge-into <path>] [--max-sections N] [--max-cases N]
-  get-case-types
-  get-case-fields
-  get-priorities
-  batch-add-cases  <section_id> --json-file <path> [--from-draft] [--only-new] [--write-back]
-  update-case      <case_id> <json_payload>
-  batch-update-cases --json-file <path> [--from-draft]
-  add-section      <project_id> <suite_id> <name> <parent_id>
-  add-case         <section_id> <json_payload>
-  add-run          <project_id> <suite_id> <name> <case_ids_csv>
-  add-results      <run_id> <json_payload>
-  log-gap          <description> --ticket <ticket-id> [--context ...] [--workaround python|jq|shell|none]
+Run with no arguments for the full subcommand reference and per-command notes
+(see print_usage() — the single source of truth for subcommand syntax).
 
 All successful output → stdout (JSON).
 Progress + errors    → stderr.
@@ -320,9 +305,10 @@ RUN_TYPE_MAP: dict[str, int] = {
 }
 
 # Draft-only fields that must be stripped before POSTing to TestRail
+# (section_id is routing metadata, consumed by batch-add-cases — never sent in the body)
 DRAFT_STRIP_FIELDS = frozenset({
     "grill_status", "source_case_ids", "rewrite_notes",
-    "permission_flag", "platform_flag",
+    "permission_flag", "platform_flag", "section_id",
 })
 
 RESULT_FIELD_MAP: dict[str, str] = {
@@ -710,10 +696,22 @@ def get_priorities(as_map: bool, base: str, auth: str) -> None:
     stderr(f"✓ get-priorities: {count} priority(s)")
 
 
+def _resolve_target_section(case: dict[str, Any], default_section_id: int) -> int:
+    """Per-case section_id (if valid) overrides the positional default."""
+    target = case.get("section_id")
+    if target is None:
+        return default_section_id
+    try:
+        return int(target)
+    except (TypeError, ValueError):
+        stderr(f"Warning: case {case.get('title')!r} has invalid section_id {target!r}; using default {default_section_id}")
+        return default_section_id
+
+
 def batch_add_cases(
     section_id: int, json_file_path: str,
     from_draft: bool, only_new: bool, write_back: bool,
-    base: str, auth: str,
+    base: str, auth: str, dry_run: bool = False,
 ) -> None:
     assert_file_size_ok(json_file_path, "--json-file")
     raw  = open(json_file_path).read()
@@ -742,22 +740,39 @@ def batch_add_cases(
         out([])
         return
 
+    def build_body(case: dict[str, Any]) -> dict[str, Any]:
+        body = prepare_draft_case(case) if from_draft else translate_case_fields(case)
+        body.pop("section_id", None)  # routing metadata, not an API body field
+        return body
+
+    if dry_run:
+        preview = [
+            {"section_id": _resolve_target_section(c, section_id), "title": c.get("title"), "payload": build_body(c)}
+            for c in to_post
+        ]
+        out(preview)
+        stderr(f"✓ batch-add-cases --dry-run: {len(preview)} case(s) would be posted — nothing created")
+        return
+
     results = []
+    routed: dict[int, int] = {}
     for case in to_post:
-        body   = prepare_draft_case(case) if from_draft else translate_case_fields(case)
-        result = api_request("POST", build_url(base, f"add_case/{section_id}"), auth, body)
+        target = _resolve_target_section(case, section_id)
+        result = api_request("POST", build_url(base, f"add_case/{target}"), auth, build_body(case))
         results.append(result)
-        stderr(f"✓ add-case: id={result.get('id')}")
+        routed[target] = routed.get(target, 0) + 1
+        stderr(f"✓ add-case: id={result.get('id')} → section {target}")
 
     if write_back:
         if envelope is None:
             stderr("Warning: --write-back requires a draft envelope file (JSON with a 'cases' key); skipped")
         else:
-            title_to_result = {r.get("title"): r for r in results}
-            for case in cases:
-                matched = title_to_result.get(case.get("title"))
-                if matched and matched.get("id"):
-                    case["id"] = matched["id"]
+            # results correspond 1:1, in order, to to_post — and to_post holds the same dict
+            # references as `cases`. Match by position (not title) so duplicate titles can't
+            # cross-assign IDs.
+            for case, result in zip(to_post, results):
+                if result.get("id"):
+                    case["id"] = result["id"]
             from datetime import datetime, timezone
             envelope["published_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
             tmp = json_file_path + ".tmp"
@@ -777,11 +792,97 @@ def batch_add_cases(
                         stderr(f"✓ renamed → {new_basename} (all cases published)")
 
     out(results)
-    stderr(f"✓ batch-add-cases: {len(results)} case(s) created")
+    if len(routed) > 1:
+        breakdown = ", ".join(f"{cnt}→section {sid}" for sid, cnt in sorted(routed.items()))
+        stderr(f"✓ batch-add-cases: {len(results)} case(s) created across {len(routed)} section(s) ({breakdown})")
+    else:
+        stderr(f"✓ batch-add-cases: {len(results)} case(s) created")
 
 
-def add_section(project_id: int, suite_id: int, name: str, parent_id: int, base: str, auth: str) -> None:
-    body = {"suite_id": suite_id, "name": name, "parent_id": parent_id}
+def _dedup_signature(title: Any, steps: Any) -> tuple[str, str]:
+    """Return (normalized title, normalized step body) for similarity scoring.
+
+    Accepts steps as a list of {content, expected} dicts (both draft `steps` and
+    API `custom_steps_separated` share this shape).
+    """
+    def norm(s: Any) -> str:
+        return " ".join(str(s or "").lower().split())
+    title_norm = norm(title)
+    parts: list[str] = []
+    if isinstance(steps, list):
+        for raw in steps:
+            step = raw if isinstance(raw, dict) else {}
+            parts.append(norm(step.get("content")))
+            parts.append(norm(step.get("expected")))
+    body_norm = " ".join(p for p in parts if p)
+    return title_norm, body_norm
+
+
+def dedup_check(
+    project_id: int, suite_id: int, default_section_id: int,
+    json_file_path: str, threshold: float, base: str, auth: str,
+) -> None:
+    """Read-only: score each draft case against existing cases in its target v2 section.
+
+    Routes each case by its per-case `section_id` (falling back to default_section_id),
+    fetches that section's live cases once, and reports matches at/above `threshold`.
+    Creates nothing. Use before publishing to catch duplicate coverage.
+    """
+    from difflib import SequenceMatcher
+
+    assert_file_size_ok(json_file_path, "--json-file")
+    data = parse_json(open(json_file_path).read(), "dedup-check")
+    cases = data["cases"] if isinstance(data, dict) and "cases" in data else data
+    if not isinstance(cases, list):
+        stderr("Error: JSON must be an array of cases or a draft envelope with a 'cases' key")
+        sys.exit(EXIT_LOCAL)
+
+    section_cache: dict[int, list[dict[str, Any]]] = {}
+    report: list[dict[str, Any]] = []
+    flagged = 0
+
+    for case in cases:
+        target = case.get("section_id")
+        try:
+            target = int(target) if target is not None else default_section_id
+        except (TypeError, ValueError):
+            target = default_section_id
+
+        if target not in section_cache:
+            existing, _ = fetch_all_cases(project_id, suite_id, target, base, auth)
+            section_cache[target] = existing
+        existing = section_cache[target]
+
+        p_title, p_body = _dedup_signature(case.get("title"), case.get("steps") or case.get("custom_steps_separated"))
+        matches = []
+        for ec in existing:
+            e_title, e_body = _dedup_signature(ec.get("title"), ec.get("custom_steps_separated"))
+            title_r = SequenceMatcher(None, p_title, e_title).ratio()
+            body_r  = SequenceMatcher(None, p_body, e_body).ratio()
+            score   = round(0.6 * title_r + 0.4 * body_r, 3)
+            if score >= threshold:
+                matches.append({
+                    "id": ec.get("id"), "title": ec.get("title"),
+                    "score": score, "title_ratio": round(title_r, 3), "body_ratio": round(body_r, 3),
+                })
+        matches.sort(key=lambda m: m["score"], reverse=True)
+        if matches:
+            flagged += 1
+        report.append({
+            "title": case.get("title"),
+            "section_id": target,
+            "existing_in_section": len(existing),
+            "matches": matches[:3],
+        })
+
+    out(report)
+    stderr(f"✓ dedup-check: {flagged} of {len(cases)} proposed case(s) have a possible duplicate (threshold {threshold})")
+
+
+def add_section(project_id: int, suite_id: int, name: str, parent_id, base: str, auth: str) -> None:
+    body: dict[str, Any] = {"suite_id": suite_id, "name": name}
+    if parent_id is not None:
+        body["parent_id"] = parent_id
     data = api_request("POST", build_url(base, f"add_section/{project_id}"), auth, body)
     out(data)
     stderr(f"✓ add-section: id={data.get('id')}")
@@ -887,9 +988,10 @@ Subcommands:
   get-case-types                             [--map]
   get-case-fields                            [--required-only]
   get-priorities                             [--map]
-  batch-add-cases  <section_id> --json-file <path> [--from-draft] [--only-new] [--write-back]
+  batch-add-cases  <default_section_id> --json-file <path> [--from-draft] [--only-new] [--write-back] [--dry-run]
   update-case      <case_id> <json_payload>
   batch-update-cases --json-file <path> [--from-draft]
+  dedup-check       <project_id> <suite_id> <default_section_id> --json-file <path> [--threshold N]
   add-section      <project_id> <suite_id> <name> <parent_id>
   add-case         <section_id> <json_payload>
   add-run          <project_id> <suite_id> <name> <case_ids_csv>
@@ -925,6 +1027,20 @@ Notes:
     ("regression"→1, "smoke"→2). Also accepts plain arrays when --from-draft is set.
   - batch-add-cases --only-new skips cases that already carry a non-null "id" — safe to re-run
     after a partial publish.
+  - batch-add-cases --dry-run posts nothing and creates no IDs; it prints the exact payloads
+    that would be sent and the resolved target section for each case. Use it to confirm the
+    on-disk draft matches your intended cases (run_type, section_id, edited steps) before the
+    real publish — the draft is the single source of truth and is posted verbatim.
+  - dedup-check is read-only: for each draft case it fetches the live cases in that case's
+    target section (per-case "section_id", else <default_section_id>) and scores similarity
+    (0.6*title + 0.4*steps, via difflib) against each. Emits per-case top matches at/above
+    --threshold (default 0.5) as JSON. Run it before batch-add-cases to catch cases the v2
+    suite already covers. Creates nothing.
+  - batch-add-cases routes each case by its own "section_id" when present; the positional
+    <default_section_id> is the fallback for cases without one. This lets a single draft publish
+    to multiple sections in one call (e.g. feature cases + a Plan Gates case). The per-case
+    "section_id" is routing metadata and is never sent in the case body. When cases land in more
+    than one section, the summary prints the per-section breakdown.
   - batch-add-cases --write-back patches returned IDs back into the source file and sets
     "published_at". When every case in the file has an ID and the file is named draft-*, it is
     automatically renamed to cases-* (the publication signal). Requires a draft envelope file.
@@ -1034,7 +1150,7 @@ def main() -> None:
         get_priorities(flags.get("map") == "true", base, auth)
 
     elif subcmd == "batch-add-cases":
-        require_positional(pos, 1, "batch-add-cases <section_id> --json-file <path> [--from-draft] [--only-new] [--write-back]")
+        require_positional(pos, 1, "batch-add-cases <default_section_id> --json-file <path> [--from-draft] [--only-new] [--write-back] [--dry-run]")
         if "json-file" not in flags:
             stderr("Error: --json-file <path> is required for batch-add-cases")
             sys.exit(EXIT_USAGE)
@@ -1045,11 +1161,30 @@ def main() -> None:
             flags.get("only-new")   == "true",
             flags.get("write-back") == "true",
             base, auth,
+            dry_run=flags.get("dry-run") == "true",
+        )
+
+    elif subcmd == "dedup-check":
+        require_positional(pos, 3, "dedup-check <project_id> <suite_id> <default_section_id> --json-file <path> [--threshold N]")
+        if "json-file" not in flags:
+            stderr("Error: --json-file <path> is required for dedup-check")
+            sys.exit(EXIT_USAGE)
+        try:
+            threshold = float(flags.get("threshold", "0.5"))
+        except ValueError:
+            stderr("Error: --threshold must be a number between 0 and 1")
+            sys.exit(EXIT_USAGE)
+        dedup_check(
+            to_int(pos[0], "project_id"), to_int(pos[1], "suite_id"), to_int(pos[2], "default_section_id"),
+            confine_to_artifact_root(flags["json-file"], "--json-file", True),
+            threshold, base, auth,
         )
 
     elif subcmd == "add-section":
         require_positional(pos, 4, "add-section <project_id> <suite_id> <name> <parent_id>")
-        add_section(to_int(pos[0], "project_id"), to_int(pos[1], "suite_id"), pos[2], to_int(pos[3], "parent_id"), base, auth)
+        raw_parent = pos[3]
+        parent_id = None if raw_parent.lower() in ("null", "none", "") else to_int(raw_parent, "parent_id")
+        add_section(to_int(pos[0], "project_id"), to_int(pos[1], "suite_id"), pos[2], parent_id, base, auth)
 
     elif subcmd == "add-case":
         require_positional(pos, 2, "add-case <section_id> <json_payload>")

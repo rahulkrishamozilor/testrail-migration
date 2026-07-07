@@ -193,11 +193,45 @@ If you are not certain the user said `publish`, ask before proceeding. Never inf
 
 ### 5a — Check for existing v2 coverage
 
-Before creating anything, search the v2 suite for cases that may already cover the same
-scenarios (e.g. from a prior partial migration run). Use the testrail-search MCP
-(`search_test_cases`) scoped to the target v2 section path, and for any case with a
-high-similarity hit, surface it to the user rather than creating a duplicate. Skip creation
-for any approved case that already has equivalent coverage in v2.
+
+Before creating anything, check the v2 suite for cases that may already cover the same
+scenarios (e.g. from a prior partial migration run). The v2 suite is a growing repo, so do
+this **live and section-scoped** — not against a static index.
+
+**First, reconcile the draft to your approved proposal.** The draft file is the single
+source of truth — `batch-add-cases` posts it verbatim. So before anything else, edit the
+draft file so every case exactly matches what you proposed and the user approved in Steps
+3b/4. This includes:
+
+- `section_id` — the resolved v2 target (an existing section's ID, or one you will create
+  in 5b). Cases sharing the migration's most common section may omit it and fall back to the
+  `<default_section_id>` positional.
+- `run_type` — any promotion/demotion you decided (e.g. a case raised to `smoke`).
+- `title`, `preconditions`, `steps` — any `edit N` corrections from Step 4.
+
+Do not carry decisions only in your working context: if it isn't in the draft file, it won't
+be published. This is what prevents field drift between the draft and TestRail.
+
+Then run the read-only `dedup-check` helper, which fetches the live cases in each target
+section and scores every proposed case against them:
+
+```bash
+uv run .claude/scripts/fetch_testrail.py dedup-check 1 <v2_suite_id> <default_section_id> \
+  --json-file ai-context/draft-<section-slug>.json --threshold 0.5
+```
+
+It creates nothing. For each proposed case it reports the top matches (combined score =
+0.6·title + 0.4·steps) in its target section. Interpret the results:
+
+- **Score ≈ 1.0** — an exact/near-exact duplicate already exists. Do not create it; record
+  the existing case ID against that draft case and skip it (leave its `id` set so
+  `--only-new` skips it, or drop it from the publish set).
+- **Score ~0.5–0.8** — a related but likely distinct case (often shared title stems, low
+  `body_ratio`). Surface it to the user and let them decide before publishing.
+- **No matches at/above threshold** — safe to create.
+
+Do not rely on `testrail-search` here — that MCP indexes the legacy Suite 6 (the source),
+not the v2 target.
 
 ### 5b — Create any missing sections
 
@@ -208,30 +242,37 @@ Step 3 as parent IDs where applicable.
 
 ### 5c — Publish cases from the draft
 
-Run one `batch-add-cases` call per target section. Pass the draft file directly — no
-separate payload file is needed. The `--from-draft` flag handles field translation
+Each case's `section_id` was stamped in Step 5a (existing sections) — update any that pointed
+at a section you just created in 5b. Then publish in a **single call**. `batch-add-cases` routes each case by its own
+`section_id`; the positional `<default_section_id>` is the fallback for cases without one.
+This handles multi-section migrations (e.g. feature cases + a Plan Gates case) in one pass —
+no temp files, no manual ID merging. The `--from-draft` flag handles field translation
 (`preconditions` → `custom_preconds`, `steps` → `custom_steps_separated`,
-`run_type` string → integer) and strips internal-only fields automatically.
-`--only-new` skips any case that already has an `id` (safe to re-run).
-`--write-back` patches the returned IDs back into the draft file and renames it from
-`draft-<slug>.json` to `cases-<slug>.json` once every case has an ID.
+`run_type` string → integer) and strips internal-only fields (including the per-case
+`section_id`, which is routing metadata and never sent in the body). `--only-new` skips any
+case that already has an `id` (safe to re-run). `--write-back` patches the returned IDs back
+into the draft and renames `draft-<slug>.json` → `cases-<slug>.json` once every case has an ID.
 
-**Primary section (most common — all cases go to one section):**
+**Verify with a dry run first.** Confirm the on-disk draft matches your intended cases —
+`--dry-run` posts nothing and prints the exact payloads + resolved target section per case:
 
 ```bash
-uv run .claude/scripts/fetch_testrail.py batch-add-cases <section_id> \
+uv run .claude/scripts/fetch_testrail.py batch-add-cases <default_section_id> \
+  --json-file ai-context/draft-<section-slug>.json --from-draft --only-new --dry-run
+```
+
+Check the `run_type` integers (`smoke`→2, `regression`→1), target `section_id`s, and step
+content match your proposal. If anything is off, fix the draft (not just your context) and
+re-run the dry run. Then publish for real:
+
+```bash
+uv run .claude/scripts/fetch_testrail.py batch-add-cases <default_section_id> \
   --json-file ai-context/draft-<section-slug>.json \
   --from-draft --only-new --write-back
 ```
 
-**Multi-section routing (some cases go to Plan Gates, Permissions, etc.):**
+The summary prints a per-section breakdown when cases land in more than one section.
 
-When cases land in different v2 sections, run one call per section. For sections other
-than the primary (e.g. Plan Gates), pass only the cases for that section — write a small
-named temp file like `ai-context/draft-<slug>-plan-gates.json` containing only those
-cases, run `batch-add-cases` on it with `--from-draft --write-back`, then manually merge
-the returned IDs back into the primary draft. Delete the temp file after merging.
-
-After all calls complete, report every created case ID.
+After the call completes, report every created case ID and the section each landed in.
 
 Never create cases without explicit approval.

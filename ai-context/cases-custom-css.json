@@ -1,0 +1,156 @@
+{
+  "section": "Custom CSS",
+  "suite_id": 16,
+  "section_id": null,
+  "fetched_at": "2026-07-07T04:46:37Z",
+  "grilled_at": "2026-07-07T04:58:58Z",
+  "published_at": "2026-07-07T05:13:39Z",
+  "searched_section_ids": [
+    36,
+    355,
+    245,
+    228,
+    170,
+    478,
+    409,
+    445,
+    591
+  ],
+  "cases": [
+    {
+      "id": 37144,
+      "title": "[Cookie Banner] Verify that the Custom CSS editor is locked with an upgrade prompt on the Free plan",
+      "preconditions": "User is on a Free plan.\nUser is on Cookie Banner > Custom CSS section. The section shows a Consent Template card at the top and an \"Add your custom css here\" card containing a CSS text area below it.",
+      "steps": [
+        {
+          "content": "Locate the \"Add your custom css here\" card in the Custom CSS section.",
+          "expected": "A premium/upgrade icon should be displayed next to the \"Add your custom css here\" label, indicating the feature is gated."
+        },
+        {
+          "content": "Attempt to enter text in the custom CSS text area.",
+          "expected": "The text area should be disabled and should not accept any input on the Free plan."
+        },
+        {
+          "content": "Click the premium/upgrade icon next to the \"Add your custom css here\" label.",
+          "expected": "The Custom CSS upgrade prompt should be displayed with:\n- A description of the Custom CSS feature\n- The plans it is available in: Basic, Pro and Ultimate\n- A \"Try Pro for free\" call-to-action"
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [
+        980,
+        1443,
+        1445,
+        8899,
+        8901,
+        8903,
+        5419,
+        5421,
+        5423,
+        2931,
+        2933,
+        2935,
+        10716,
+        10718,
+        10720,
+        11844,
+        11846,
+        11848,
+        15850
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "grill_status": "fixed",
+      "rewrite_notes": "Collapsed 3 roles (Account Owner/Admin/Editor) across 7 Free-plan/platform sections. Stripped role/platform prefixes. Dropped nav steps, sidebar-list presence check, and Consent Template position checks (moved to preconditions), plus the tooltip-copy verification step. Kept premium-icon presence and disabled-textarea as the plan-gate signals. NOTE for /migrate-section: this is a plan-gate scenario (upgrade icon + locked state on a feature) and should be routed to 11. Billing & Upgrade > Plan Gates per convention section 6. Grilled on QA2 (Free account): confirmed the premium/crown icon appears next to the 'Add your custom css here' label and the CSS textarea is disabled ([disabled] in DOM). FIXED: the premium icon is interactive — clicking it opens an upgrade popover ('Style your banner with custom CSS', 'Available in: Basic, Pro and Ultimate plans', 'Try Pro for free' CTA); added a step to capture this nudge-opens behavior (feature section owns nudge-opens per section 6; the CTA destination belongs to section 11). The 'Try Pro for free' CTA was not clicked to avoid starting a trial. NOTE: the separate side upgrade-nudge panel on this page is a known bug per the user and was intentionally not captured."
+    },
+    {
+      "id": 37141,
+      "title": "[Cookie Banner] Verify that the Custom CSS editor is available and editable on a paid plan",
+      "preconditions": "User is on a paid plan (Basic or higher).\nUser is on Cookie Banner > Custom CSS section. The section shows a Consent Template card at the top and an \"Add your custom css here\" card below it.",
+      "steps": [
+        {
+          "content": "Locate the \"Add your custom css here\" card in the Custom CSS section.",
+          "expected": "The card should be displayed with a custom CSS text area and no premium/upgrade icon on the label."
+        },
+        {
+          "content": "Click into the custom CSS text area.",
+          "expected": "The text area should be enabled and accept keyboard input."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        4844,
+        4846,
+        4848
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "grill_status": "confirmed",
+      "rewrite_notes": "Rewrote the Trial-with-card \"Display of Custom CSS section\" cases (3 roles) as an element-presence/access check per convention section 4. Stripped role/platform prefixes, dropped nav/sidebar/position steps. The absence of the premium icon and the enabled textarea are the behavioral contrast to the Free-plan locked case. Grilled on QA2 (Basic trial account): Custom CSS card renders with an editable textarea and no premium icon on a paid plan; textarea accepts input."
+    },
+    {
+      "id": 37142,
+      "title": "[Cookie Banner] Verify that custom CSS entered in the editor is applied to the banner and saved on publish",
+      "preconditions": "User is on a paid plan (Basic or higher).\nUser is on Cookie Banner > Custom CSS section with the \"Add your custom css here\" text area enabled.",
+      "steps": [
+        {
+          "content": "Enter valid custom CSS into the \"Add your custom css here\" text area.",
+          "expected": "The banner preview should update to reflect the entered custom CSS (the styled property is applied to the banner in the preview canvas). The \"Publish Changes\" button should become enabled."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "The changes should be saved (the \"Publish Changes\" button becomes disabled) and the custom CSS should be applied to the banner on the live website."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [
+        981,
+        1444,
+        1446,
+        8900,
+        8902,
+        8904,
+        5420,
+        5422,
+        5424,
+        4845,
+        4847,
+        4849,
+        2932,
+        2934,
+        2936,
+        10717,
+        10719,
+        10721,
+        11845,
+        11847,
+        11849,
+        15851
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "grill_status": "fixed",
+      "rewrite_notes": "Collapsed the full Stripe upgrade sequence and the Admin/Editor team-invite setup into the paid-plan precondition per convention section 2c. Collapsed 3 roles across plan/platform variants. Stripped prefixes, dropped nav/sidebar/position steps. Inferred publish outcome: the source expected result read \"US State Laws banner should not be displayed on the user website\", a copy-paste error unrelated to Custom CSS; rewrote to the correct behavioral outcome. Grilled on QA2 (Basic trial): verified custom CSS injects into the preview iframe live (.cky-consent-container computed background-color changed to the entered value) and Publish saves (button disables; a post-publish 'Publishing Cookie Banner' dialog appears prompting script install if the site isn't installed). FIXED: corrected 'banner preview in the sidebar' to the main preview canvas (the preview is the right-hand canvas, not the sidebar), and made the publish outcome match observed behavior."
+    },
+    {
+      "id": 37143,
+      "title": "[Cookie Banner] Verify that saved custom CSS persists after reload",
+      "preconditions": "User is on a paid plan (Basic or higher).\nUser is on Cookie Banner > Custom CSS section with the \"Add your custom css here\" text area enabled.",
+      "steps": [
+        {
+          "content": "Enter valid custom CSS into the \"Add your custom css here\" text area and click \"Publish Changes\".",
+          "expected": "The changes should be saved and the \"Publish Changes\" button should become disabled."
+        },
+        {
+          "content": "Reload the Cookie Banner page (or log out and log back in) and open the Custom CSS section.",
+          "expected": "The previously saved custom CSS should still be present in the \"Add your custom css here\" text area."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "grill_status": "suggested",
+      "rewrite_notes": "Gap found during grill (QA2, Basic trial). No draft case covered persistence of saved custom CSS. Verified live: after entering '.cky-consent-container { background-color: rgb(255, 0, 0); }', publishing, then logging out and back in, the textarea still held the published value and remained enabled. Complements the apply-and-publish case."
+    }
+  ]
+}

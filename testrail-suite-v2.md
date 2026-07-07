@@ -26,6 +26,7 @@ The actual behavioral differences between most of these variants are minimal —
 
 3. **Plan-specific behavior lives in one place.**
    Billing, upgrade flows, trial state display, and plan-gated UI belong in section 11 (Billing & Upgrade) and section 12 (Agency). Nowhere else.
+   *Exception: credit-card entry that is part of **account creation** stays in `01. Authentication > Sign Up > Checkout` — the checkout page is part of the signup surface (same rationale as the Principle 1 signup exception). Card entry to change the plan on an **existing** account belongs in section 11.*
 
 4. **Role differences belong in Permissions, not everywhere.**
    The default role for all cases outside section 14 is Account Owner. Admin and Editor cases exist only where their permissions actually diverge.
@@ -34,7 +35,7 @@ The actual behavioral differences between most of these variants are minimal —
    Core features (Cookie Banner, Cookie Manager, etc.) are tested against Webapp. Platform-specific behavior (Plugin connection, Shopify native app, Wix iframe) lives in section 13.
 
 6. **Cases are automation-ready by design.**
-   Test *behavior*, not UI copy or layout. Cases that verify static text or pixel alignment are manual-only and should not receive `automation_type = Playwright`.
+   Test *behavior*, not UI copy or layout. Cases that verify static text or pixel alignment are manual-only (there is no `automation_type` field in v2 — see open issue M4; they are simply not given a Playwright test).
 
 ---
 
@@ -53,6 +54,15 @@ The actual behavioral differences between most of these variants are minimal —
 
 Maximum depth rule: **4 levels** (Suite → Section → Sub-section → Sub-sub-section). Cases always live at the leaf.
 The 4th level is used only when a sub-section has a natural grouping need (e.g. multiple variants of the same flow). Default to 3 levels — do not add a 4th level just to mirror the UI structure.
+
+**Intentionally flat sections.** `06. Consent Log`, `07. Languages`, and `08. Advanced Settings`
+are single-surface feature areas — they are deliberately flat, with cases living directly at the
+section leaf and the standard `[Feature Area] …` title format. Do **not** add sub-sections to
+them unless the section grows large enough that cases fall into natural groups.
+
+**Miscellaneous (16).** Reserved for cases that genuinely fit no other section. Prefer filing in
+a real section; reach for Miscellaneous only as a last resort. If a cluster of related cases
+accumulates in Miscellaneous, promote it into its own named section.
 
 ```
 CookieYes Functional Test Suite v2
@@ -105,7 +115,7 @@ CookieYes Functional Test Suite v2
 │
 ├── 08. Advanced Settings
 │
-├── 09. Reports
+├── 09. Legal Policies                 ← document generators (matches the app's "Legal Policies" nav)
 │   ├── Cookie Policy Generator
 │   └── Privacy Policy Generator
 │
@@ -139,8 +149,14 @@ CookieYes Functional Test Suite v2
 │   ├── Maintenance Page
 │   └── CKY-Admin
 │
-└── 16. Miscellaneous
+├── 16. Miscellaneous
+│
+└── 17. Reports                         ← analytics & reporting (distinct from Legal Policies)
 ```
+
+> Section ordering is indicative. `17. Reports` is numbered last so it does not renumber the
+> existing sections 10–16, which are referenced by number throughout this document and the
+> migration conventions.
 
 ---
 
@@ -231,6 +247,14 @@ Test the upgrade button destination once per plan state that has a distinct dest
 - Free plan → "Try Pro for Free" → trial signup page → `11. Billing & Upgrade > Free Plan`
 - Basic plan (distinct upgrade path) → pricing/plans page → `11. Billing & Upgrade > Paid Plan`
 
+### Billing: section 11 vs section 12
+
+Section 12 (Agency) owns **only** billing that is unique to agencies — agency license/seat
+purchase, agency-console billing, and client/sub-account allocation. Everything else billing
+lives in section 11 (Billing & Upgrade): Free, Trial (with/without card), Paid Plan, and Plan
+Gates. When an agency user hits a billing flow that is identical to a non-agency account, the
+case belongs in section 11, not section 12 — do not clone it per plan type.
+
 ### Title format
 
 ```
@@ -257,9 +281,10 @@ Do not prefix titles with `[Account Owner]` unless inside section 14.
 
 ### Automation
 
-- Set `automation_type = Playwright` when a Playwright test covers this case.
+- `automation_type` is **not** a v2 field and is never set (see open issue M4). Automation
+  coverage is tracked by the Playwright test itself, not by a TestRail field.
 - Reference the TestRail case ID in the Playwright test file using the `@C1234` tag in the test title.
-- Do not set `automation_type = Playwright` on layout/display verification cases — these should remain manual.
+- Layout/display-only verification cases stay manual — they are simply not given a Playwright test.
 
 ---
 
@@ -269,14 +294,16 @@ Do not prefix titles with `[Account Owner]` unless inside section 14.
 |---|---|
 | Form field validation (email, password, website URL) | 01. Authentication > Sign Up > Core |
 | Email verification flow | 01. Authentication > Sign Up > Core |
-| Credit card entry during trial signup | 01. Authentication > Sign Up > Trial with card (Checkout) |
+| Credit card entry during trial signup (account creation) | 01. Authentication > Sign Up > Trial with card (Checkout) |
+| Credit card entry to change plan on an existing account | 11. Billing & Upgrade > Paid Plan |
 | "Try Pro for free" button (Free plan) | 11. Billing & Upgrade > Free Plan |
 | Upgrade button from nudge (Basic plan) | 11. Billing & Upgrade > Paid Plan |
 | Plan-gated feature configuration (all plans) | 11. Billing & Upgrade > Plan Gates |
 | In-app nudge opens from a feature entry point | Feature section where the entry point lives (e.g. 03. Dashboard > Cookie Banner Status Card) |
 | "Ends in N days" trial display | 11. Billing & Upgrade > Trial — with card |
 | "Buy Pro" / "Switch to Pro trial?" | 11. Billing & Upgrade > Trial — with card |
-| Agency license purchase | 12. Agency > Agency Dashboard |
+| Agency license / seat purchase, agency-console billing, client allocation | 12. Agency > Agency Billing & Upgrade |
+| Standard billing for an agency user (flow identical to a non-agency account) | 11. Billing & Upgrade |
 | Editor cannot access a feature that Admin and AO can | 14. Permissions > Editor |
 | Admin (and Editor) cannot access an Account Owner-only feature | 14. Permissions > Admin |
 | Shopify native app installation | 13. Platforms > Shopify (Native App) |
@@ -301,7 +328,7 @@ When the agentic workflow writes a new case:
 1. **Check section placement first.** Use the section structure above and the "Where specific scenario types live" table to determine the correct section before creating the case.
 2. **Search for existing coverage** using the TestRail RAG search before creating. If a case already covers the scenario, extend it rather than creating a duplicate.
 3. **Set `run_type` at creation.** Default to `regression` if unsure. Use `smoke` only for the single most critical happy-path check in a feature area.
-4. **Set `automation_type = Playwright`** if the scenario is behavior-testable and a Playwright test will be written to cover it.
+4. **Do not set `automation_type`** — it is not a v2 field (see open issue M4). If the scenario is behavior-testable, cover it with a Playwright test tagged `@C<id>` instead.
 5. **Do not create role variants.** Write one case for the scenario. If the Admin or Editor permission for that feature needs testing, add it to section 13.
 6. **Do not create plan variants.** Write one case. Note the required plan state in Preconditions if needed.
 
@@ -325,16 +352,16 @@ Suite 6 ("Functional Cases") and Suite 7 ("Cookie Manager Revamp") remain in Tes
 
 - [x] **[H2] "Permission gates" sub-sub-section violates the depth rule** — Resolved: depth rule updated to 4 levels. `14. Permissions > Admin > Permission gates` is now valid. Authentication also restructured to use the 4th level for Sign Up variants.
 
-- [ ] **[M1] Credit card entry during signup belongs in Billing, not Authentication** — The scenario table places "Credit card entry during trial signup" in `01. Authentication > Sign Up — Trial with card`. Principle 3 says billing flows belong in section 11. Either move these cases to `11. Billing & Upgrade > Trial — with card` or document why signup-time card entry is an exception.
+- [x] **[M1] Credit card entry during signup belongs in Billing, not Authentication** — Resolved: documented as an exception to Principle 3. Card entry that is part of **account creation** stays in `01. Authentication > Sign Up > Checkout` (the checkout page is part of the signup surface); card entry to change the plan on an **existing** account goes to `11. Billing & Upgrade > Paid Plan`. See Principle 3 and the scenario-placement table.
 
-- [ ] **[M2] Sections 06, 07, 08, and 16 have no sub-sections defined** — `06. Consent Log`, `07. Languages`, `08. Advanced Settings`, and `16. Miscellaneous` appear as flat leaves in the tree. The document gives no guidance on whether these are intentionally flat, how to title cases without a sub-section, or what qualifies as Miscellaneous.
+- [x] **[M2] Sections 06, 07, 08, and 16 have no sub-sections defined** — Resolved: 06/07/08 are intentionally flat (cases at the section leaf, standard title format, no sub-sections unless they grow); Miscellaneous (16) is last-resort only, and a cluster there should be promoted to its own section. See "Intentionally flat sections" under Section structure.
 
 - [x] **[M3] `run_type = full` cannot be run in isolation** — Resolved. `full` is no longer a case-level value. Valid values are `smoke` and `regression` only. Edge cases and error paths use `regression`. Full run = no filter, entire suite.
 
 - [x] **[M4] `automation_type` is not listed as a required field** — Resolved. `automation_type` does not exist as a custom field in the v2 suite and is not written to TestRail. The migration workflow does not include it in case payloads.
 
-- [ ] **[L1] Billing boundary between section 11 and section 12 is undefined** — Principle 3 says billing behavior belongs in sections 11 and 12, but does not define the split. Section 12 has an `Agency Billing & Upgrade` sub-section that overlaps with section 11's scope. Define which billing cases go in 11 vs 12.
+- [x] **[L1] Billing boundary between section 11 and section 12 is undefined** — Resolved: section 12 owns only agency-unique billing (license/seat purchase, agency-console billing, client/sub-account allocation); all standard-account billing stays in section 11, even for agency users when the flow is identical. See "Billing: section 11 vs section 12".
 
 - [ ] **[L2] Suite 16 legacy entry is unexplained** — The legacy table lists `Suite 16 — CookieYes Functional Test Suite` with no context on how it relates to the new v2 suite. Add a one-line note clarifying the lineage.
 
-- [ ] **[L3] "Reports" is a misleading section name** — Section 09 contains `Cookie Policy Generator` and `Privacy Policy Generator`. These are document generators, not analytics reports. Rename the section to avoid misfiled cases from the agentic workflow.
+- [x] **[L3] "Reports" is a misleading section name** — Resolved: section 09 is renamed **Legal Policies** (matching the app's left-nav label) and holds Cookie Policy Generator + Privacy Policy Generator. A distinct **Reports** section (analytics & reporting) is added as section 17 — kept last so it does not renumber the referenced sections 10–16.

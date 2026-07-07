@@ -442,7 +442,6 @@ Applying all conventions to C308:
    → Changes should be saved and the banner should display only in the selected countries on the website.
 
 **run_type:** `regression`
-**automation_type:** `Playwright`
 
 ---
 
@@ -461,14 +460,12 @@ When in doubt, use `regression`.
 
 ---
 
-## 9. automation_type assignment
+## 9. automation_type — not used
 
-| Scenario | automation_type |
-|---|---|
-| Feature behaviour testable via user action → state change → observable result | `Playwright` |
-| Layout, alignment, or visual position verification | `None` |
-| Static copy or tooltip text verification | `None` |
-| Third-party payment or checkout flow | `None` |
+`automation_type` does **not** exist as a custom field in the v2 suite and is never written to
+TestRail (see `testrail-suite-v2.md` open issue M4). Do not set it, and do not include it in case
+payloads or drafts. Whether a case is automation-worthy is captured by `run_type` and by the
+Playwright test itself (tagged `@C<id>`), not by a TestRail field.
 
 ---
 
