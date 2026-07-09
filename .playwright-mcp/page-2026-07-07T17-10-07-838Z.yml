@@ -1,0 +1,125 @@
+- generic:
+  - generic:
+    - button:
+      - img
+  - generic:
+    - generic:
+      - generic:
+        - banner:
+          - generic:
+            - generic:
+              - button:
+                - img
+            - generic:
+              - button:
+                - img
+                - text: Refer & Earn
+              - button:
+                - generic: Become a partner
+                - img
+              - button:
+                - generic: CookieYes Documentation
+                - img
+              - generic:
+                - generic:
+                  - img
+              - button:
+                - generic:
+                  - img
+                - img
+        - navigation:
+          - generic:
+            - button:
+              - img
+              - generic: Back to Dashboard
+            - generic:
+              - list:
+                - listitem:
+                  - link:
+                    - /url: /settings/organizations-and-sites
+                    - text: Organisations & Sites
+                - listitem:
+                  - link:
+                    - /url: /settings/team
+                    - text: Team
+                - listitem:
+                  - link:
+                    - /url: /settings/billing
+                    - text: Billing & Invoices
+                - listitem:
+                  - link:
+                    - /url: /settings/mcp-access
+                    - text: MCP access
+                - listitem:
+                  - link:
+                    - /url: /settings/notifications
+                    - text: Notifications
+                - listitem:
+                  - link:
+                    - /url: /settings/account
+                    - text: My account
+        - separator
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - paragraph: Account details
+                  - paragraph: Registered email
+                  - generic:
+                    - generic:
+                      - textbox [disabled]: abhinav+chk@mozilor.com
+                    - button:
+                      - img
+                - generic:
+                  - paragraph: Email notifications
+                  - generic:
+                    - paragraph: Choose the type of emails you'd like to receive from us.
+                    - button:
+                      - generic: Manage email preferences
+                - generic:
+                  - paragraph: Security
+                  - generic:
+                    - paragraph: Password
+                    - button:
+                      - generic: Change password
+                  - generic:
+                    - generic:
+                      - paragraph: Two-factor authentication (2FA)
+                      - generic:
+                        - generic:
+                          - button: Set up 2FA
+                - generic:
+                  - generic:
+                    - paragraph: Account deletion
+                    - paragraph: Once you delete your account, all your data will be lost forever
+                  - button:
+                    - generic: Delete account
+    - region "Notifications alt+T"
+  - iframe [ref=f3e95]:
+    
+  - dialog "Update your email address" [ref=f3e398]:
+    - paragraph [ref=f3e400]: Update your email address
+    - generic [ref=f3e401]:
+      - paragraph [ref=f3e402]: Choose the email address you would like to use to log into this account and receive all emails from us
+      - generic [ref=f3e403]:
+        - img [ref=f3e404]
+        - paragraph [ref=f3e407]: A verification code will be sent to the new email address.
+      - generic [ref=f3e408]:
+        - generic [ref=f3e409]:
+          - generic [ref=f3e410]: New email address*
+          - textbox "New email address*" [active] [ref=f3e411]:
+            - /placeholder: email@address.com
+        - generic [ref=f3e412]:
+          - generic [ref=f3e413]: Confirm email address*
+          - textbox "Confirm email address*" [ref=f3e414]:
+            - /placeholder: email@address.com
+        - generic [ref=f3e415]:
+          - generic [ref=f3e416]: Current password*
+          - textbox "Current password*" [ref=f3e417]:
+            - /placeholder: "********"
+    - generic [ref=f3e418]:
+      - button "Cancel" [ref=f3e419] [cursor=pointer]:
+        - generic [ref=f3e420]: Cancel
+      - button "Update email" [ref=f3e421] [cursor=pointer]:
+        - generic [ref=f3e422]: Update email

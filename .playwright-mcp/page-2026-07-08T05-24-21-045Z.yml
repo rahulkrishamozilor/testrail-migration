@@ -1,0 +1,123 @@
+- generic:
+  - generic:
+    - button:
+      - img
+  - generic:
+    - generic:
+      - generic:
+        - banner:
+          - generic:
+            - generic:
+              - button:
+                - img
+            - generic:
+              - button:
+                - img
+                - text: Refer & Earn
+              - button:
+                - generic: Become a partner
+                - img
+              - button:
+                - generic: CookieYes Documentation
+                - img
+              - generic:
+                - generic:
+                  - img
+              - button:
+                - generic:
+                  - img
+                - img
+        - navigation:
+          - generic:
+            - button:
+              - img
+              - generic: Back to Dashboard
+            - generic:
+              - list:
+                - listitem:
+                  - link:
+                    - /url: /settings/organizations-and-sites
+                    - text: Organisations & Sites
+                - listitem:
+                  - link:
+                    - /url: /settings/team
+                    - text: Team
+                - listitem:
+                  - link:
+                    - /url: /settings/billing
+                    - text: Billing & Invoices
+                - listitem:
+                  - link:
+                    - /url: /settings/mcp-access
+                    - text: MCP access
+                - listitem:
+                  - link:
+                    - /url: /settings/notifications
+                    - text: Notifications
+                - listitem:
+                  - link:
+                    - /url: /settings/account
+                    - text: My account
+        - separator
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - paragraph: Account details
+                  - paragraph: Registered email
+                  - generic:
+                    - generic:
+                      - textbox [disabled]: abhinav+chk@mozilor.com
+                    - button:
+                      - img
+                - generic:
+                  - paragraph: Email notifications
+                  - generic:
+                    - paragraph: Choose the type of emails you'd like to receive from us.
+                    - button:
+                      - generic: Manage email preferences
+                - generic:
+                  - paragraph: Security
+                  - generic:
+                    - paragraph: Password
+                    - button:
+                      - generic: Change password
+                  - generic:
+                    - generic:
+                      - paragraph: Two-factor authentication (2FA)
+                      - generic:
+                        - generic:
+                          - button: Set up 2FA
+                - generic:
+                  - generic:
+                    - paragraph: Account deletion
+                    - paragraph: Once you delete your account, all your data will be lost forever
+                  - button:
+                    - generic: Delete account
+    - region "Notifications alt+T"
+  - iframe [ref=e92]:
+    
+  - dialog [ref=e290]:
+    - paragraph [ref=e292]: Delete account?
+    - generic [ref=e293]:
+      - paragraph [ref=e294]:
+        - strong [ref=e295]: Deleting your account is permanent, and cannot be undone.
+        - text: Once you delete your account, you will immediately lose access to any settings, customisation or data associated with it.
+      - paragraph [ref=e296]:
+        - text: If there is any issue that is making you leave, feel free to
+        - link "contact us" [ref=e297] [cursor=pointer]:
+          - /url: https://www.cookieyes.com/support
+        - text: . We will be happy to help resolve your issues and get you back on track.
+      - alert [ref=e298]:
+        - generic [ref=e299]:
+          - img [ref=e301]
+          - paragraph [ref=e304]: You will no longer be able to log in to the dashboard with your current email and password. If you wish to use CookieYes in the future, you will need to sign up again.
+      - generic [ref=e305]:
+        - checkbox "I understand and want to delete my account including all its data." [active] [ref=e306]
+        - generic [ref=e307] [cursor=pointer]: I understand and want to delete my account including all its data.
+    - generic [ref=e308]:
+      - button "Cancel" [ref=e309] [cursor=pointer]:
+        - generic [ref=e310]: Cancel
+      - button "Delete Account" [disabled] [ref=e311]:
+        - generic [ref=e312]: Delete Account

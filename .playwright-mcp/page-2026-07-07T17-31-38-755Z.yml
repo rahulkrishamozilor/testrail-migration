@@ -1,0 +1,120 @@
+- generic:
+  - generic:
+    - button:
+      - img
+  - generic:
+    - generic:
+      - generic:
+        - banner:
+          - generic:
+            - generic:
+              - button:
+                - img
+            - generic:
+              - button:
+                - img
+                - text: Refer & Earn
+              - button:
+                - generic: Become a partner
+                - img
+              - button:
+                - generic: CookieYes Documentation
+                - img
+              - generic:
+                - generic:
+                  - img
+              - button:
+                - generic:
+                  - img
+                - img
+        - navigation:
+          - generic:
+            - button:
+              - img
+              - generic: Back to Dashboard
+            - generic:
+              - list:
+                - listitem:
+                  - link:
+                    - /url: /settings/organizations-and-sites
+                    - text: Organisations & Sites
+                - listitem:
+                  - link:
+                    - /url: /settings/team
+                    - text: Team
+                - listitem:
+                  - link:
+                    - /url: /settings/billing
+                    - text: Billing & Invoices
+                - listitem:
+                  - link:
+                    - /url: /settings/mcp-access
+                    - text: MCP access
+                - listitem:
+                  - link:
+                    - /url: /settings/notifications
+                    - text: Notifications
+                - listitem:
+                  - link:
+                    - /url: /settings/account
+                    - text: My account
+        - separator
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - paragraph: Account details
+                  - paragraph: Registered email
+                  - generic:
+                    - generic:
+                      - textbox [disabled]: abhinav+chk@mozilor.com
+                    - button:
+                      - img
+                - generic:
+                  - paragraph: Email notifications
+                  - generic:
+                    - paragraph: Choose the type of emails you'd like to receive from us.
+                    - button:
+                      - generic: Manage email preferences
+                - generic:
+                  - paragraph: Security
+                  - generic:
+                    - paragraph: Password
+                    - button:
+                      - generic: Change password
+                  - generic:
+                    - generic:
+                      - paragraph: Two-factor authentication (2FA)
+                      - generic:
+                        - generic:
+                          - button: Set up 2FA
+                - generic:
+                  - generic:
+                    - paragraph: Account deletion
+                    - paragraph: Once you delete your account, all your data will be lost forever
+                  - button:
+                    - generic: Delete account
+    - region "Notifications alt+T"
+  - iframe [ref=f12e92]:
+    
+  - dialog "Change password" [ref=f12e95]:
+    - paragraph [ref=f12e97]: Change password
+    - generic [ref=f12e99]:
+      - generic [ref=f12e100]:
+        - generic [ref=f12e101]: Old password*
+        - textbox "Old password*" [active] [ref=f12e102]:
+          - /placeholder: "********"
+      - generic [ref=f12e103]:
+        - generic [ref=f12e104]: New password*
+        - textbox "New password*" [ref=f12e105]:
+          - /placeholder: "********"
+      - generic [ref=f12e106]:
+        - generic [ref=f12e107]: Confirm password*
+        - textbox "Confirm password*" [ref=f12e108]:
+          - /placeholder: "********"
+    - generic [ref=f12e109]:
+      - button "Cancel" [ref=f12e110] [cursor=pointer]:
+        - generic [ref=f12e111]: Cancel
+      - button "Change password" [ref=f12e112] [cursor=pointer]:
+        - generic [ref=f12e113]: Change password

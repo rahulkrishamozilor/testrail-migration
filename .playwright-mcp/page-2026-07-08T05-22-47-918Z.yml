@@ -1,0 +1,133 @@
+- generic:
+  - generic:
+    - button:
+      - img
+  - generic:
+    - generic:
+      - generic:
+        - banner:
+          - generic:
+            - generic:
+              - button:
+                - img
+            - generic:
+              - button:
+                - img
+                - text: Refer & Earn
+              - button:
+                - generic: Become a partner
+                - img
+              - button:
+                - generic: CookieYes Documentation
+                - img
+              - generic:
+                - generic:
+                  - img
+              - button:
+                - generic:
+                  - img
+                - img
+        - navigation:
+          - generic:
+            - button:
+              - img
+              - generic: Back to Dashboard
+            - generic:
+              - list:
+                - listitem:
+                  - link:
+                    - /url: /settings/organizations-and-sites
+                    - text: Organisations & Sites
+                - listitem:
+                  - link:
+                    - /url: /settings/team
+                    - text: Team
+                - listitem:
+                  - link:
+                    - /url: /settings/billing
+                    - text: Billing & Invoices
+                - listitem:
+                  - link:
+                    - /url: /settings/mcp-access
+                    - text: MCP access
+                - listitem:
+                  - link:
+                    - /url: /settings/notifications
+                    - text: Notifications
+                - listitem:
+                  - link:
+                    - /url: /settings/account
+                    - text: My account
+        - separator
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - paragraph: Account details
+                  - paragraph: Registered email
+                  - generic:
+                    - generic:
+                      - textbox [disabled]: abhinav+chk@mozilor.com
+                    - button:
+                      - img
+                - generic:
+                  - paragraph: Email notifications
+                  - generic:
+                    - paragraph: Choose the type of emails you'd like to receive from us.
+                    - button:
+                      - generic: Manage email preferences
+                - generic:
+                  - paragraph: Security
+                  - generic:
+                    - paragraph: Password
+                    - button:
+                      - generic: Change password
+                  - generic:
+                    - generic:
+                      - paragraph: Two-factor authentication (2FA)
+                      - generic:
+                        - generic:
+                          - button: Disable 2FA
+                    - generic:
+                      - paragraph: Re-generate your 2FA recovery codes
+                      - button: Re-generate recovery codes
+                - generic:
+                  - generic:
+                    - paragraph: Account deletion
+                    - paragraph: Once you delete your account, all your data will be lost forever
+                  - button:
+                    - generic: Delete account
+    - region "Notifications alt+T"
+  - iframe [ref=e92]:
+    
+  - dialog [ref=e216]:
+    - paragraph [ref=e218]: Your 2FA recovery codes
+    - generic [ref=e219]:
+      - alert [ref=e220]:
+        - generic [ref=e221]:
+          - img [ref=e223]
+          - paragraph [ref=e225]: Make sure you copy and save your 2FA recovery codes. If you lose access to your device, these codes can be used to log in to your account. Each code can be used only once.
+      - generic [ref=e226]:
+        - paragraph [ref=e227]: 2FA recovery codes
+        - generic [ref=e262]: Copied!
+      - generic [ref=e231]:
+        - generic [ref=e233]: "3597230638"
+        - generic [ref=e235]: "9121347375"
+        - generic [ref=e237]: "8200858068"
+        - generic [ref=e239]: "3742181058"
+        - generic [ref=e241]: "5809227941"
+        - generic [ref=e243]: "9637564222"
+        - generic [ref=e245]: "1305440912"
+        - generic [ref=e247]: "2761899273"
+        - generic [ref=e249]: "5658082720"
+        - generic [ref=e251]: "1473501879"
+        - generic [ref=e253]: "6876864318"
+        - generic [ref=e255]: "7743375249"
+      - generic [ref=e256]:
+        - checkbox "I've securely saved my 2FA recovery codes." [checked] [active] [ref=e257]:
+          - generic:
+            - img
+        - generic [ref=e258] [cursor=pointer]: I've securely saved my 2FA recovery codes.
+    - button "Okay" [ref=e260] [cursor=pointer]:
+      - generic [ref=e261]: Okay

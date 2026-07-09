@@ -1,0 +1,84 @@
+- generic [active] [ref=f3e1]:
+  - button "Consent Preferences" [ref=f3e3] [cursor=pointer]:
+    - img "Revisit consent button" [ref=f3e4]
+  - generic [ref=f3e5]:
+    - generic [ref=f3e7]:
+      - banner [ref=f3e8]:
+        - generic [ref=f3e9]:
+          - generic [ref=f3e10]:
+            - button "Navigate to dashboard" [ref=f3e11]:
+              - img "CookieYes" [ref=f3e12]
+            - generic [ref=f3e15]:
+              - log [ref=f3e17]
+              - generic [ref=f3e18]:
+                - generic [ref=f3e19]:
+                  - generic [ref=f3e20]: sqwsy.com
+                  - combobox [ref=f3e22]
+                - img [ref=f3e25]
+          - generic [ref=f3e27]:
+            - button "genius-advocate-signup Refer & Earn" [ref=f3e28] [cursor=pointer]:
+              - img "genius-advocate-signup" [ref=f3e29]
+              - text: Refer & Earn
+            - button "Become a partner" [ref=f3e30] [cursor=pointer]:
+              - generic [ref=f3e31]: Become a partner
+              - img [ref=f3e32]
+            - button "CookieYes Documentation" [ref=f3e34] [cursor=pointer]:
+              - generic [ref=f3e35]: CookieYes Documentation
+              - img [ref=f3e36]
+            - img [ref=f3e41] [cursor=pointer]
+            - button [ref=f3e43] [cursor=pointer]:
+              - img [ref=f3e45]
+              - img [ref=f3e48]
+      - navigation "Main" [ref=f3e50]:
+        - list [ref=f3e53]:
+          - listitem [ref=f3e54]:
+            - link "Dashboard" [ref=f3e55] [cursor=pointer]:
+              - /url: /dashboard
+          - listitem [ref=f3e56]:
+            - link "Cookie Banner" [ref=f3e57] [cursor=pointer]:
+              - /url: /customize
+          - listitem [ref=f3e58]:
+            - link "Cookie Manager" [ref=f3e59] [cursor=pointer]:
+              - /url: /manage-cookies
+          - listitem [ref=f3e60]:
+            - link "Consent Log" [ref=f3e61] [cursor=pointer]:
+              - /url: /consent-logs
+          - listitem [ref=f3e62]:
+            - link "Languages" [ref=f3e63] [cursor=pointer]:
+              - /url: /languages
+          - listitem [ref=f3e64]:
+            - link "Advanced Settings" [ref=f3e65] [cursor=pointer]:
+              - /url: /advanced-settings
+          - button "Legal Policies" [ref=f3e66] [cursor=pointer]
+          - listitem [ref=f3e67]:
+            - link "Reports" [ref=f3e68] [cursor=pointer]:
+              - /url: /website-reports
+        - generic [ref=f3e69]:
+          - generic [ref=f3e70]:
+            - generic [ref=f3e71]:
+              - text: "Current plan:"
+              - generic [ref=f3e72]: Pro
+            - generic [ref=f3e73]:
+              - text: "Pageviews used:"
+              - generic [ref=f3e74]: 0/300,000 (0%)
+              - button [ref=f3e75]:
+                - img [ref=f3e76]
+          - button "Crown Upgrade" [ref=f3e80] [cursor=pointer]:
+            - img "Crown" [ref=f3e81]
+            - text: Upgrade
+      - generic [ref=f3e84]:
+        - alert [ref=f3e85]:
+          - generic [ref=f3e86]:
+            - img "Install Banner Alert" [ref=f3e87]
+            - generic [ref=f3e88]:
+              - heading "You are almost there!" [level=5] [ref=f3e89]
+              - generic [ref=f3e90]: It's easy! Just copy and paste the code on your website. If you need any help, use our platform-wise guides.
+          - button "Install banner" [ref=f3e91] [cursor=pointer]:
+            - text: Install banner
+            - img
+        - generic [ref=f3e92]:
+          - status "Loading" [ref=f3e93]
+          - generic [ref=f3e94]: Loading...
+    - region "Notifications alt+T"
+  - iframe [ref=f3e95]:
+    

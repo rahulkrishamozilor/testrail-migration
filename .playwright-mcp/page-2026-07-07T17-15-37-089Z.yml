@@ -1,0 +1,7 @@
+- generic [active]:
+  - button "Consent Preferences" [ref=f3e3] [cursor=pointer]:
+    - img "Revisit consent button" [ref=f3e4]
+  - generic:
+    - region "Notifications alt+T"
+  - iframe [ref=f3e95]:
+    

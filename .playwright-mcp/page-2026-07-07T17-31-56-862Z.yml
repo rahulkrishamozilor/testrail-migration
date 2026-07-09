@@ -1,0 +1,34 @@
+- generic [ref=f15e1]:
+  - button "Consent Preferences" [ref=f15e3] [cursor=pointer]:
+    - img "Revisit consent button" [ref=f15e4]
+  - generic [ref=f15e5]:
+    - generic [ref=f15e7]:
+      - generic [ref=f15e9]:
+        - img "cookieyes logo" [ref=f15e11]
+        - generic [ref=f15e12]:
+          - heading "Welcome back" [level=5] [ref=f15e13]
+          - paragraph [ref=f15e14]: Good to see you again!
+        - generic [ref=f15e15]:
+          - generic [ref=f15e17]:
+            - generic [ref=f15e18]: Email address
+            - textbox "name@company.com" [active] [ref=f15e20]
+          - generic [ref=f15e22]:
+            - generic [ref=f15e23]: Password
+            - generic [ref=f15e24]:
+              - textbox "••••••••" [ref=f15e25]
+              - button [ref=f15e26]:
+                - img [ref=f15e27] [cursor=pointer]
+          - button "Log In" [ref=f15e33] [cursor=pointer]:
+            - generic [ref=f15e34]: Log In
+        - button "Forgot your password?" [ref=f15e35] [cursor=pointer]
+        - generic [ref=f15e36]:
+          - text: Don't have an account?
+          - button "Sign Up" [ref=f15e37] [cursor=pointer]
+      - generic [ref=f15e39]:
+        - img "iab" [ref=f15e40]
+        - img "google-cmp" [ref=f15e41]
+        - img "spring-leader" [ref=f15e42]
+        - img "summer-leader" [ref=f15e43]
+    - region "Notifications alt+T"
+  - iframe [ref=f15e44]:
+    

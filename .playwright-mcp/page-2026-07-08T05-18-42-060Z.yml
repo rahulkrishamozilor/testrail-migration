@@ -1,0 +1,5 @@
+- generic [active]:
+  - button "Consent Preferences" [ref=e2] [cursor=pointer]:
+    - img "Revisit consent button" [ref=e3]
+  - generic:
+    - region "Notifications alt+T"
