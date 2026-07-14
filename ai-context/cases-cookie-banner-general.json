@@ -1,40 +1,1012 @@
 {
   "section": "Cookie Banner > Customization Sidebar > General",
-  "fetched_at": null,
-  "grilled_at": "2026-07-03T05:30:47Z",
-  "searched_section_ids": [],
+  "suite_id": 16,
+  "section_id": 1782,
+  "fetched_at": "2026-07-13T08:00:00Z",
+  "grilled_at": null,
+  "published_at": "2026-06-25T08:59:22Z",
+  "audited_at": null,
+  "searched_section_ids": [
+    32,
+    241,
+    153,
+    166,
+    405,
+    587
+  ],
+  "note": "The 22 cases below (36716-36734, 36821-36823) were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline (created 2026-06-25 by a different account, and 2026-07-02 supplementing crown-icon nudge cases) and were never tracked locally until this backfill. grill_status/audit_status are honestly marked not-tracked-by-repo rather than assumed confirmed. The 2 stub cases (36827, 36828) are unrelated gap-cases discovered during Layout's grill that were rerouted to Layout and Plan Gates respectively per their own rewrite_notes -- kept here only because that's where they were originally filed.",
   "cases": [
+    {
+      "id": 36716,
+      "title": "[Cookie Banner] Verify that the General section renders with all required cards and controls",
+      "preconditions": "User is on Cookie Banner > General tab. Law selector is set to GDPR (default).",
+      "steps": [
+        {
+          "content": "Verify the Consent Template card is visible at the top of the General section with the Law selector on its right.",
+          "expected": "The Consent Template card should be displayed with the Law selector dropdown visible."
+        },
+        {
+          "content": "Verify the Geo-target banner card is visible below the Consent Template card.",
+          "expected": "The Geo-target banner card should be displayed with Worldwide, EU Countries & UK, and Select Countries options."
+        },
+        {
+          "content": "Verify the Support IAB TCF v2.3 card is visible below the Geo-target banner card.",
+          "expected": "The Support IAB TCF v2.3 toggle should be displayed."
+        },
+        {
+          "content": "Verify the Show advanced settings control is visible at the bottom of the General section.",
+          "expected": "The \"Show advanced settings\" control should be displayed as the last item in the section."
+        },
+        {
+          "content": "Note the plan-gating state of the Law selector, Geo-target, and IAB TCF controls.",
+          "expected": "- Free and Basic plans: the \"GDPR & US State Laws\" Law selector option, the \"EU Countries & UK\"/\"Select Countries\" Geo-target options, and the \"Support IAB TCF v2.3\" toggle are locked with an upgrade icon (Pro or higher required).\n- Pro and Ultimate plans: all three are unlocked.\n(See 11. Billing & Upgrade > Plan Gates for the locked-state verification.)"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        285,
+        1404,
+        1423,
+        5135,
+        5154,
+        5173,
+        4572,
+        4591,
+        4610,
+        2647,
+        2666,
+        2685,
+        10400,
+        10419,
+        10438,
+        15470
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence. Added a plan-gating step per the standing convention (migration-conventions.md §11 \"Plan-gated render cases\") on 2026-07-13, matching the fix already applied to Custom CSS, Colours, Cookie Manager, and Advanced Settings.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36717,
+      "title": "[Cookie Banner] Verify that the Consent Template defaults to the GDPR opt-in template",
+      "preconditions": "User is on Cookie Banner > General tab.",
+      "steps": [
+        {
+          "content": "Verify the Law selector in the Consent Template card shows \"GDPR\".",
+          "expected": "GDPR should be selected by default in the Law selector."
+        },
+        {
+          "content": "Verify the banner preview displays the GDPR opt-in template.",
+          "expected": "The opt-in banner template should be shown in the preview panel."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        295,
+        1405,
+        1424,
+        5136,
+        5155,
+        5174,
+        4574,
+        4592,
+        4611,
+        2648,
+        2667,
+        2686,
+        10401,
+        10420,
+        10439,
+        15471
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36718,
+      "title": "[Cookie Banner] Verify that selecting US State Laws applies the opt-out template",
+      "preconditions": "User is on Cookie Banner > General tab. Law selector is set to GDPR (default).",
+      "steps": [
+        {
+          "content": "Click the Law selector dropdown in the Consent Template card.",
+          "expected": "The dropdown should open showing GDPR, US State Laws, and GDPR & US State Laws."
+        },
+        {
+          "content": "Select \"US State Laws\".",
+          "expected": "The Law selector label should update to \"US State Laws\"."
+        },
+        {
+          "content": "Verify the banner preview switches to the opt-out template.",
+          "expected": "The opt-out banner template should appear in the preview panel."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved and the US State Laws opt-out banner should be active on the website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        296,
+        1407,
+        1426,
+        5137,
+        5157,
+        5176,
+        4575,
+        4594,
+        4613,
+        2649,
+        2669,
+        2688,
+        10402,
+        10422,
+        10441,
+        15472
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36719,
+      "title": "[Cookie Banner] Verify that the Law selector lists GDPR, US State Laws, and GDPR & US State Laws options",
+      "preconditions": "User is on Cookie Banner > General tab.",
+      "steps": [
+        {
+          "content": "Click the Law selector dropdown in the Consent Template card.",
+          "expected": "The dropdown should open."
+        },
+        {
+          "content": "Verify the dropdown shows exactly three options: GDPR, US State Laws, and GDPR & US State Laws, each with a help icon.",
+          "expected": "All three options should be listed with their respective help icons."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        299,
+        1406,
+        1425,
+        5138,
+        5156,
+        5175,
+        4573,
+        4593,
+        4612,
+        2650,
+        2668,
+        2687,
+        10403,
+        10421,
+        10440,
+        15473
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36720,
+      "title": "[Cookie Banner] Verify that GDPR & US State Laws mode adds a Customize sub-dropdown switching between GDPR and US State Laws panels",
+      "preconditions": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher).",
+      "steps": [
+        {
+          "content": "Click the Law selector dropdown and select \"GDPR & US State Laws\".",
+          "expected": "The Law selector label should update to \"GDPR & US State Laws\" and a \"Customize\" sub-dropdown should appear in the Consent Template card."
+        },
+        {
+          "content": "Click the Customize sub-dropdown.",
+          "expected": "GDPR and US State Laws should be listed as options."
+        },
+        {
+          "content": "Verify GDPR is selected by default in the Customize dropdown.",
+          "expected": "The Customize dropdown should show \"GDPR\" and the banner preview should display the opt-in template."
+        },
+        {
+          "content": "Select \"US State Laws\" from the Customize dropdown.",
+          "expected": "The Customize dropdown should update to \"US State Laws\" and the banner preview should switch to the opt-out template."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved and both GDPR and US State Laws banners should be active on the website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        302,
+        1408,
+        1427,
+        5139,
+        5158,
+        5177,
+        4576,
+        4595,
+        4614,
+        2651,
+        2670,
+        2689,
+        10404,
+        10423,
+        10442,
+        15474
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36721,
+      "title": "[Cookie Banner] Verify that the Geo-target banner defaults to Worldwide under GDPR",
+      "preconditions": "User is on Cookie Banner > General tab. Law selector is set to GDPR (default).",
+      "steps": [
+        {
+          "content": "Verify the Geo-target banner card lists three options: Worldwide, EU Countries & UK, and Select Countries.",
+          "expected": "All three options should be displayed with radio buttons."
+        },
+        {
+          "content": "Verify Worldwide is selected by default.",
+          "expected": "The Worldwide radio button should be selected."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        306,
+        1409,
+        1428,
+        5140,
+        5159,
+        5178,
+        4577,
+        4596,
+        4615,
+        2652,
+        2671,
+        2690,
+        10405,
+        10424,
+        10443,
+        15475
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36722,
+      "title": "[Cookie Banner] Verify that the Geo-target banner offers Worldwide, United States, and Select Countries under US State Laws",
+      "preconditions": "User is on Cookie Banner > General tab. Law selector set to US State Laws.",
+      "steps": [
+        {
+          "content": "Verify the Geo-target banner card lists three options: Worldwide, United States, and Select Countries.",
+          "expected": "All three options should be displayed with radio buttons."
+        },
+        {
+          "content": "Verify Worldwide is selected by default.",
+          "expected": "The Worldwide radio button should be selected."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved and the US State Laws banner should display worldwide."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        307,
+        1413,
+        1433,
+        5141,
+        5163,
+        5183,
+        4581,
+        4600,
+        4619,
+        2653,
+        2675,
+        2695,
+        10406,
+        10428,
+        10448,
+        15476
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36723,
+      "title": "[Cookie Banner] Verify that selecting Select Countries restricts the banner to the chosen countries",
+      "preconditions": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Law selector set to GDPR. (Select Countries behaves identically under US State Laws — same case covers both.)",
+      "steps": [
+        {
+          "content": "Under the Geo-target banner card, select \"Select Countries\".",
+          "expected": "A country selection dropdown should appear with country names and checkboxes."
+        },
+        {
+          "content": "Select one or more countries from the dropdown.",
+          "expected": "The selected countries should show as checked."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved and the banner should display only in the selected countries on the website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        308,
+        1411,
+        1431,
+        5142,
+        5161,
+        5181,
+        4579,
+        4598,
+        4617,
+        2654,
+        2673,
+        2693,
+        10407,
+        10426,
+        10446,
+        15477
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36724,
+      "title": "[Cookie Banner] Verify that the Support IAB TCF v2.3 card displays its toggles and dependency under GDPR",
+      "preconditions": "User is on Cookie Banner > General tab. Law selector is set to GDPR (default).",
+      "steps": [
+        {
+          "content": "Verify the Support IAB TCF v2.3 toggle is visible below the Geo-target banner card and is off by default.",
+          "expected": "The IAB TCF v2.3 toggle should be displayed and disabled."
+        },
+        {
+          "content": "Verify the Support Google's Additional Consent Mode toggle is visible below and disabled.",
+          "expected": "The toggle should be visible and uninteractable while IAB TCF v2.3 is off."
+        },
+        {
+          "content": "Verify the Enable Google's Advertiser Consent Mode toggle is visible below and disabled.",
+          "expected": "The toggle should be visible and uninteractable while IAB TCF v2.3 is off."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        309,
+        1415,
+        1435,
+        5143,
+        5165,
+        5185,
+        4583,
+        4602,
+        4621,
+        2655,
+        2677,
+        2697,
+        10408,
+        10430,
+        10450,
+        15478
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36725,
+      "title": "[Cookie Banner] Verify that disabling the Show banner toggle hides the US State Laws banner",
+      "preconditions": "User is on Cookie Banner > General tab. Law selector set to US State Laws. The Show banner toggle is visible and enabled by default.",
+      "steps": [
+        {
+          "content": "Disable the Show banner toggle below the Geo-target banner card.",
+          "expected": "The US State Laws banner should be hidden and an alert should appear on the website preview: ‘The US State Laws has been disabled. You can enable it from ‘General’, if needed.’"
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved and the US State Laws banner should not appear on the website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        310,
+        1417,
+        1437,
+        5144,
+        5167,
+        5187,
+        4585,
+        4604,
+        4623,
+        2656,
+        2679,
+        2699,
+        10409,
+        10432,
+        10452,
+        15479
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36726,
+      "title": "[Cookie Banner] Verify that the Do Not Sell link card provides the copyable DNS HTML snippet under US State Laws",
+      "preconditions": "User is on Cookie Banner > General tab. Law selector set to US State Laws. The \"Do Not Sell\" link card is visible below the Show banner toggle.",
+      "steps": [
+        {
+          "content": "Verify the card displays an HTML code snippet in a text area.",
+          "expected": "A text area containing the DNS link HTML snippet should be visible."
+        },
+        {
+          "content": "Click the \"Copy\" button at the top-right of the code text area.",
+          "expected": "The HTML code should be copied to the clipboard. No \"Copied!\" or other success text appears anywhere on the page."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        311,
+        1418,
+        1438,
+        5145,
+        5168,
+        5188,
+        4586,
+        4605,
+        4624,
+        2657,
+        2680,
+        2700,
+        10410,
+        10433,
+        10453,
+        15480
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36727,
+      "title": "[Cookie Banner] Verify that selecting EU Countries & UK restricts the banner to EU/UK regions",
+      "preconditions": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Law selector is set to GDPR.",
+      "steps": [
+        {
+          "content": "Under the Geo-target banner card, select \"EU Countries & UK\".",
+          "expected": "The EU Countries & UK radio button should be selected."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved and the banner should display only in EU Countries & UK regions on the website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        312,
+        1410,
+        1429,
+        5146,
+        5160,
+        5179,
+        4578,
+        4597,
+        4616,
+        2658,
+        2672,
+        2691,
+        10411,
+        10425,
+        10444,
+        15481
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36728,
+      "title": "[Cookie Banner] Verify that selecting United States restricts the banner to the United States under US State Laws",
+      "preconditions": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Law selector set to US State Laws.",
+      "steps": [
+        {
+          "content": "Under the Geo-target banner card, select \"United States\".",
+          "expected": "The United States radio button should be selected."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved and the banner should display only to users in the United States."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        313,
+        1414,
+        1434,
+        5147,
+        5164,
+        5184,
+        4582,
+        4601,
+        4620,
+        2659,
+        2676,
+        2696,
+        10412,
+        10429,
+        10449,
+        15482
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36729,
+      "title": "[Cookie Banner] Verify that publishing with Select Countries but no countries selected shows a validation error",
+      "preconditions": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Select Countries is selected under the Geo-target banner card.",
+      "steps": [
+        {
+          "content": "Click \"Publish Changes\" without selecting any countries from the country dropdown.",
+          "expected": "A validation message \"Please select countries\" should appear below the Select Countries option and changes should not be saved."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        314,
+        1412,
+        1432,
+        5148,
+        5162,
+        5182,
+        4580,
+        4599,
+        4618,
+        2660,
+        2674,
+        2694,
+        10413,
+        10427,
+        10447,
+        15483
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36730,
+      "title": "[Cookie Banner] Verify that enabling Support IAB TCF v2.3 activates the dependent consent-mode toggles and TCF banner",
+      "preconditions": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Law selector is set to GDPR.",
+      "steps": [
+        {
+          "content": "Enable the Support IAB TCF v2.3 toggle.",
+          "expected": "The IAB TCF v2.3 banner should appear in the banner preview. The Support Google's Additional Consent Mode and Enable Google's Advertiser Consent Mode toggles should become interactable."
+        },
+        {
+          "content": "Enable the Support Google's Additional Consent Mode toggle.",
+          "expected": "The partner count in the IAB TCF v2.3 banner should increase and a Google Ad Tech providers list should appear."
+        },
+        {
+          "content": "Enable the Enable Google's Advertiser Consent Mode toggle.",
+          "expected": "The toggle should switch to on."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved and the IAB TCF v2.3 banner should be active on the website."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        315,
+        1416,
+        1436,
+        5149,
+        5166,
+        5186,
+        4584,
+        4603,
+        4622,
+        2661,
+        2678,
+        2698,
+        10414,
+        10431,
+        10451,
+        15484
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36731,
+      "title": "[Cookie Banner] Verify that Show advanced settings reveals the Consent expiration and Reload page controls",
+      "preconditions": "User is on Cookie Banner > General tab.",
+      "steps": [
+        {
+          "content": "Click \"Show advanced settings\" at the bottom of the General section.",
+          "expected": "The Consent expiration (days) field and the Reload page on consent action toggle should appear."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        316,
+        1419,
+        1439,
+        5150,
+        5169,
+        5189,
+        4587,
+        4606,
+        4625,
+        2662,
+        2681,
+        2701,
+        10415,
+        10434,
+        10454,
+        15485
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36732,
+      "title": "[Cookie Banner] Verify that the Consent expiration field defaults to 365 days and persists on publish",
+      "preconditions": "User is on Cookie Banner > General tab. Show advanced settings is expanded. The Consent expiration (days) field is visible.",
+      "steps": [
+        {
+          "content": "Verify the Consent expiration (days) field shows 365 by default.",
+          "expected": "The field should contain the value 365."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved and the banner should reappear to users 365 days after they give consent."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        317,
+        1420,
+        1440,
+        5151,
+        5170,
+        5190,
+        4588,
+        4607,
+        4626,
+        2663,
+        2682,
+        2702,
+        10416,
+        10435,
+        10455,
+        15486
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36733,
+      "title": "[Cookie Banner] Verify that enabling Reload page on consent action reloads the site on consent",
+      "preconditions": "User is on Cookie Banner > General tab. Show advanced settings is expanded. The Reload page on consent action toggle is visible and off by default.",
+      "steps": [
+        {
+          "content": "Enable the Reload page on consent action toggle.",
+          "expected": "The toggle should switch to on."
+        },
+        {
+          "content": "Click \"Publish Changes\".",
+          "expected": "Changes should be saved."
+        },
+        {
+          "content": "Navigate to the website and interact with the cookie banner.",
+          "expected": "The page should reload immediately after consent is given or declined."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        318,
+        1422,
+        1442,
+        5152,
+        5172,
+        5192,
+        4590,
+        4609,
+        4628,
+        2664,
+        2684,
+        2704,
+        10417,
+        10437,
+        10457,
+        15487
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36734,
+      "title": "[Cookie Banner] Verify that the Consent expiration field rejects invalid values with a validation message",
+      "preconditions": "User is on Cookie Banner > General tab. Show advanced settings is expanded. The Consent expiration (days) field is visible.",
+      "steps": [
+        {
+          "content": "Attempt to type letters or special characters into the Consent expiration field.",
+          "expected": "The field should not accept non-numeric input."
+        },
+        {
+          "content": "Enter an out-of-range number (e.g. 0 or 10000) into the field.",
+          "expected": "A validation message \"Please enter a value between 1 and 9999\" should appear below the field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        320,
+        1421,
+        1441,
+        5153,
+        5171,
+        5191,
+        4589,
+        4608,
+        4627,
+        2665,
+        2683,
+        2703,
+        10418,
+        10436,
+        10456,
+        15488
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36821,
+      "title": "[Cookie Banner] Verify that clicking a geo-target crown icon opens the upgrade nudge",
+      "preconditions": "User is on Cookie Banner > General tab. Law selector set to GDPR. EU Countries & UK and Select Countries show crown icons.",
+      "steps": [
+        {
+          "content": "Click the crown icon next to \"EU Countries & UK\" under the Geo-target banner card.",
+          "expected": "An upgrade nudge should appear showing \"Display your banner only in select countries and regions\" with an upgrade CTA button."
+        },
+        {
+          "content": "Dismiss the nudge and click the crown icon next to \"Select Countries\".",
+          "expected": "The same upgrade nudge should appear."
+        },
+        {
+          "content": "Set the Law selector to US State Laws.",
+          "expected": "The Geo-target banner card should update to show Worldwide, United States, and Select Countries with crown icons on United States and Select Countries."
+        },
+        {
+          "content": "Click the crown icon next to \"United States\".",
+          "expected": "An upgrade nudge should appear with an upgrade CTA button."
+        },
+        {
+          "content": "Dismiss the nudge and click the crown icon next to \"Select Countries\".",
+          "expected": "The same upgrade nudge should appear."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14957,
+        15528
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36822,
+      "title": "[Cookie Banner] Verify that clicking the IAB TCF v2.3 crown icon opens the upgrade nudge",
+      "preconditions": "User is on Cookie Banner > General tab. Law selector set to GDPR. The Support IAB TCF v2.3 option shows an upgrade icon.",
+      "steps": [
+        {
+          "content": "Click the upgrade icon next to \"Support IAB TCF v2.3\".",
+          "expected": "An upgrade nudge should appear showing \"Comply with IAB TCF and Google's requirements\" with an upgrade CTA button."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        14959,
+        15530
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-25 or 2026-07-02, before this repo's local tracking existed for this section). Content taken verbatim from the live case; source_case_ids matched against a fresh Suite 6 fetch of Cookie Banner > General done during this session's audit, based on title correspondence.",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36823,
+      "title": "[Cookie Banner] Verify that the Geo-target banner shows the correct options under GDPR & US State Laws",
+      "preconditions": "User is on Cookie Banner > General tab. User is on a paid plan (Pro or higher). Law selector set to GDPR & US State Laws. The Customize sub-dropdown in the Consent Template card is visible, defaulting to GDPR.",
+      "steps": [
+        {
+          "content": "Verify the Geo-target banner card options while the Customize sub-dropdown is set to GDPR.",
+          "expected": "The card should display Worldwide, EU Countries & UK, and Select countries as options (no United States). Worldwide is selected by default."
+        },
+        {
+          "content": "Click the Customize sub-dropdown and select US State Laws.",
+          "expected": "The Geo-target banner card should update to display Worldwide, United States, and Select countries as options (no EU Countries & UK). Worldwide remains selected by default."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — created 2026-07-02. No corresponding Suite 6 case identified in this session's fetch; likely authored directly as a v2-only case (GDPR & US State Laws combined with Geo-target is a v2-specific interaction not present as a distinct Suite 6 scenario).",
+      "grill_status": "not-tracked-by-repo",
+      "audit_status": "not-tracked-by-repo"
+    },
     {
       "id": 36828,
       "title": "[Cookie Banner] Verify that clicking the GDPR & US State Laws consent template option opens an upgrade nudge on free or basic plans",
       "preconditions": "User is on Cookie Banner > Layout tab (or General tab where the Consent Template selector is visible). Account is on a free or basic plan. Consent Template is currently set to GDPR or US State Laws.",
       "steps": [
-        { "content": "Click the Consent Template dropdown to open the template switcher.", "expected": "A dropdown appears with GDPR, US State Laws, and GDPR & US State Laws options listed." },
-        { "content": "Click the GDPR & US State Laws option.", "expected": "An upgrade nudge appears. The active consent template does not change — it remains at its previous value. No banner preview update occurs." },
-        { "content": "Verify the upgrade nudge content and CTA.", "expected": "The nudge indicates that GDPR & US State Laws requires a higher-tier plan. An upgrade CTA button is visible." }
+        {
+          "content": "Click the Consent Template dropdown to open the template switcher.",
+          "expected": "A dropdown appears with GDPR, US State Laws, and GDPR & US State Laws options listed."
+        },
+        {
+          "content": "Click the GDPR & US State Laws option.",
+          "expected": "An upgrade nudge appears. The active consent template does not change — it remains at its previous value. No banner preview update occurs."
+        },
+        {
+          "content": "Verify the upgrade nudge content and CTA.",
+          "expected": "The nudge indicates that GDPR & US State Laws requires a higher-tier plan. An upgrade CTA button is visible."
+        }
       ],
       "source_case_ids": [],
       "permission_flag": false,
       "platform_flag": false,
+      "plan_gate_flag": true,
+      "section_id": 1793,
       "run_type": "smoke",
       "rewrite_notes": "Gap found during Layout grill (Pro account): On Pro plan the template switches directly — no nudge. Free/Basic nudge behavior is a Plan Gate. Published to 11. Billing & Upgrade > Plan Gates (section 1793) — not General.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "no-source-case",
+      "audit_note": "Gap case, no source_case_ids — quotes dropdown option labels (GDPR, US State Laws, GDPR & US State Laws) and nudge/CTA wording. Already verified against the live app during grilling (grilled_at 2026-07-03); no separate live spot-check performed for this audit."
     },
     {
       "id": 36827,
       "title": "[Cookie Banner] Verify that switching the law context in GDPR & US State Laws mode updates the available layout options",
       "preconditions": "User is on Cookie Banner > Layout tab. Law selector is set to GDPR & US State Laws. The Customize sub-dropdown is visible in the Consent Template card, set to GDPR.",
       "steps": [
-        { "content": "Verify the Cookie Notice section while the Customize sub-dropdown is set to GDPR.", "expected": "Box, Banner, and Popup layout options should be available. The Preference Centre section should be visible below the position options." },
-        { "content": "Click the Customize sub-dropdown and select US State Laws.", "expected": "The Cookie Notice section should update to show only Box and Banner — Popup should not appear. The Preference Centre section should be replaced by an Opt-out center section." },
-        { "content": "Click the Customize sub-dropdown and select GDPR.", "expected": "The layout options should revert to GDPR state: Box, Banner, and Popup should be available and the Preference Centre section should be restored." }
+        {
+          "content": "Verify the Cookie Notice section while the Customize sub-dropdown is set to GDPR.",
+          "expected": "Box, Banner, and Popup layout options should be available. The Preference Centre section should be visible below the position options."
+        },
+        {
+          "content": "Click the Customize sub-dropdown and select US State Laws.",
+          "expected": "The Cookie Notice section should update to show only Box and Banner — Popup should not appear. The Preference Centre section should be replaced by an Opt-out center section."
+        },
+        {
+          "content": "Click the Customize sub-dropdown and select GDPR.",
+          "expected": "The layout options should revert to GDPR state: Box, Banner, and Popup should be available and the Preference Centre section should be restored."
+        }
       ],
       "source_case_ids": [],
       "permission_flag": false,
       "platform_flag": false,
+      "section_id": 1781,
       "run_type": "regression",
       "rewrite_notes": "Gap found during Layout grill (Pro account). Initially staged here but rerouted: layout option changes belong in Layout section. Published to Cookie Banner > Layout (section 1781) as C36827.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "no-source-case",
+      "audit_note": "Gap case, no source_case_ids — quotes section/option labels (Box, Banner, Popup, Preference Centre, Opt-out center, GDPR, US State Laws). Already verified against the live app during grilling (grilled_at 2026-07-03); no separate live spot-check performed for this audit."
+    },
+    {
+      "id": 39408,
+      "title": "Geo-target banner upgrade icon opens tooltip with 'Upgrade now' CTA on Basic plan",
+      "preconditions": "User is logged in on a Basic plan account. User is on Cookie Banner > Customisation sidebar > General.",
+      "steps": [
+        {
+          "content": "Click the crown/upgrade icon next to 'EU Countries & UK' or 'Select Countries' under Geo-target banner.",
+          "expected": "An upgrade tooltip appears showing:\n- Headline: \"Display your banner only in select countries and regions\"\n- Available in: \"Pro and Ultimate plans\"\n- CTA button: \"Upgrade now\""
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [14958, 15102, 15529],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": true,
+      "section_id": 1793,
+      "rewrite_notes": "Closes a Plan Gates gap found while auditing General: the existing published case (C36862) only covers the Free-plan 'Try Pro for free' CTA variant. Suite 6 has a distinct Basic-plan variant ('Upgrade now' CTA, same headline/availability text) that was never migrated. Mirrors C36862's shape/run_type exactly.",
+      "grill_status": "not-grilled",
+      "audit_status": "not-audited"
+    },
+    {
+      "id": 39409,
+      "title": "IAB TCF v2.3 upgrade icon opens tooltip with 'Upgrade now' CTA on Basic plan",
+      "preconditions": "User is logged in on a Basic plan account. User is on Cookie Banner > Customisation sidebar > General.",
+      "steps": [
+        {
+          "content": "Click the 'Upgrade now' button next to 'Support IAB TCF v2.3'.",
+          "expected": "An upgrade tooltip appears with:\n- Headline: \"Comply with IAB TCF and Google's requirements\"\n- Body: \"Communicate user consent status to IAB vendors to enable Google ad personalization in EEA and the UK.\"\n- Available in: \"Pro and Ultimate plans\"\n- CTA button: \"Upgrade now\""
+        },
+        {
+          "content": "Click 'Upgrade now'.",
+          "expected": "User is navigated to the Plans page showing all available subscription tiers (Free, Basic, Pro, Ultimate) with options to start a trial for each paid plan."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [14960, 15101, 15531],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": true,
+      "section_id": 1793,
+      "rewrite_notes": "Closes a Plan Gates gap found while auditing General: the existing published case (C36863) only covers the Free-plan 'Try Pro for free' CTA variant. Suite 6 has a distinct Basic-plan variant ('Upgrade now' CTA, same headline/body/availability text) that was never migrated. Mirrors C36863's shape/run_type exactly.",
+      "grill_status": "not-grilled",
+      "audit_status": "not-audited"
     }
   ]
 }

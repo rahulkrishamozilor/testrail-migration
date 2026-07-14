@@ -1,0 +1,1105 @@
+{
+  "section": "Cookie Manager",
+  "suite_id": 16,
+  "section_id": null,
+  "fetched_at": "2026-07-09T06:31:34Z",
+  "grilled_at": "2026-07-09T07:21:54Z",
+  "published_at": "2026-07-09T08:59:50Z",
+  "searched_section_ids": [
+    29,
+    118,
+    171,
+    246,
+    264,
+    356,
+    446,
+    534,
+    592,
+    632
+  ],
+  "cases": [
+    {
+      "id": 37261,
+      "title": "[Cookie Manager] Verify that the Cookie Manager page renders with all required sections",
+      "preconditions": "User is on the Cookie Manager page (accessible via the top navigation bar). The page contains a title, three scan cards, and a tabbed area below.",
+      "steps": [
+        {
+          "content": "Navigate to Cookie Manager from the top navigation bar.",
+          "expected": "The page should display the title \"Cookie Manager\" with subtitle \"Manage your cookie list, scan schedule and more\"."
+        },
+        {
+          "content": "Observe the three cards below the title.",
+          "expected": "The following cards should be visible: a Last Successful Scan card with a \"Scan now\" button; a Next Scan card with a \"Schedule scan\" button; an AI Cookie Classifier card with a \"New\" badge, \"Enable AI classifier\" button, and \"Learn more\" link."
+        },
+        {
+          "content": "Note the plan-gating state of the \"Schedule scan\" button on the Next Scan card.",
+          "expected": "- On plans without scan scheduling: clicking \"Schedule scan\" shows an upgrade prompt reading \"Available in: Pro and Ultimate plans\" (see 11. Billing & Upgrade > Plan Gates for the locked-state verification).\n- On Pro and Ultimate plans: clicking \"Schedule scan\" opens the schedule popup."
+        },
+        {
+          "content": "Observe the tabs below the scan cards.",
+          "expected": "Two tabs should be visible: \"Cookie List\" (active by default, underlined) and \"Scan History\"."
+        },
+        {
+          "content": "Observe the Cookie List tab content.",
+          "expected": "The tab should show: a language selector set to \"English [Default]\" on the left, a \"Publish changes\" button on the right, and a category sidebar listing Necessary, Functional, Analytics, Performance, and Advertisement \u2014 with Necessary selected by default."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1811,
+      "source_case_ids": [
+        2937,
+        2938,
+        2939,
+        724,
+        1561,
+        1562,
+        5425,
+        5426,
+        5427,
+        5881,
+        5882,
+        5883,
+        8906,
+        8907,
+        8908,
+        12956,
+        15857,
+        15858,
+        15859
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Converted to structural presence check per \u00a74. Navigation moved to preconditions. Title/copy alignment steps dropped. AI Cookie Classifier card added from C2937 (absent in older variants). Plugin/Wix/staging source IDs folded in \u2014 behavior identical to Webapp, no separate platform case created. Role and plan variants collapsed.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Re-audited under the corrected (no-category-filter) rule. Title \"Cookie Manager\" / subtitle \"Manage your cookie list, scan schedule and more\" and card/tab names match source C2937 exactly. AI Cookie Classifier card text (\"New\" badge, \"Enable AI classifier\", \"Learn more\") and the \"Publish changes\" button were directly observed live on qa1.kilohub.com during this session's earlier browsing, matching this case exactly."
+    },
+    {
+      "id": 37262,
+      "title": "[Cookie Manager] Verify that a failed scan displays an alert banner and a Failed status in Scan History",
+      "preconditions": "The site's initial cookie scan has failed (e.g., website URL is unreachable). User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Navigate to Cookie Manager from the top navigation bar.",
+          "expected": "An error alert banner should appear below the page title reading \"The last cookie scan has failed. Check out the common issues causing scan failure and try applying the suggested solutions to resolve them. After resolving the issues, try re-scanning your site, and if the issue persists, contact us.\" The phrases \"common issues causing scan failure\" and \"contact us\" should be hyperlinks."
+        },
+        {
+          "content": "Click the \"common issues causing scan failure\" link in the banner.",
+          "expected": "The CookieYes documentation page \"Why does the cookie scan for my website fail?\" should open."
+        },
+        {
+          "content": "Return to Cookie Manager and click the \"contact us\" link in the banner.",
+          "expected": "The CookieYes support page should open."
+        },
+        {
+          "content": "Click the \"Scan History\" tab.",
+          "expected": "The Scan History table should show the failed scan row with: a date in [DD Month YYYY HH:MM:SS] (UTC) format under Scan Date, a \"Failed\" badge with an info tooltip icon under Scan Status, and empty values for Urls Scanned, Categories, Cookies, and Scripts."
+        },
+        {
+          "content": "Hover over the info tooltip icon on the Failed row.",
+          "expected": "A tooltip should appear explaining that the scan failed and providing links to troubleshooting resources and support."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        3338,
+        17277,
+        6282,
+        9826,
+        9827,
+        17316,
+        15860
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Full signup/onboarding setup from Suite 6 collapsed to precondition. Role variants (Admin, Editor) collapsed. Wix source ID (C15860) folded in \u2014 behavior identical. Step 5 tooltip copy dropped per \u00a74; retained as functional verification that the tooltip exists and links work.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "LIVE-CHECKED 2026-07-10 (user-provided screenshot, Free plan account): the failed-scan alert banner reads \"The last cookie scan has failed. Check out the common issues causing scan failure and try applying the suggested solutions to resolve them. After resolving the issues, try re-scanning your site, and if the issue persists, contact us.\" \u2014 matches this case word-for-word, including \"last\". Resolves the earlier discrepancy: source C3338 (\"The cookie scan has failed\", no \"last\") was the stale one, predating a copy update."
+    },
+    {
+      "id": 37263,
+      "title": "[Cookie Manager] Verify that the Scan now button is blocked with a tooltip when the account email is not verified",
+      "preconditions": "User account email has not been verified. User is on the Cookie Manager page. The Last Successful Scan card is visible with a \"Scan now\" button on its right.",
+      "steps": [
+        {
+          "content": "Click the \"Scan now\" button on the Last Successful Scan card.",
+          "expected": "No scan should be initiated. A tooltip should appear on the button reading \"Please verify your email address to rescan your website for cookies.\""
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17278,
+        16980
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Structural card-presence steps moved to preconditions and dropped. Single behavioral assertion kept.",
+      "grill_status": "skipped:manual-only",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Tooltip \"Please verify your email address to rescan your website for cookies.\" matches source C17278 step 5 word-for-word."
+    },
+    {
+      "id": 37264,
+      "title": "[Cookie Manager] Verify that entering multiple URLs on the same line in the Custom Scan field shows a validation error",
+      "preconditions": "User's email is verified. User is on the Cookie Manager page. The Last Successful Scan card shows a \"Scan now\" button.",
+      "steps": [
+        {
+          "content": "Click the \"Scan now\" button on the Last Successful Scan card.",
+          "expected": "A Scan popup should appear with \"Full Scan\" selected by default and a \"Custom Scan\" radio button option."
+        },
+        {
+          "content": "Select the \"Custom Scan\" radio button.",
+          "expected": "A text field should expand with the placeholder \"List standard URL(s), one per line\"."
+        },
+        {
+          "content": "Type a valid URL in the text field, then type a second URL on the same line (without pressing Enter).",
+          "expected": "An error message \"Invalid URL(s)\" should appear below the Custom Scan text field."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17279,
+        16981
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Placeholder copy verification dropped per \u00a74. Core behavioral assertion (validation error on same-line input) preserved.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Error message \"Invalid URL(s)\" matches source C17279 step 13 word-for-word."
+    },
+    {
+      "id": 37265,
+      "title": "[Cookie Manager] Verify that a Full Scan initiates and completes, adding discovered cookies to the cookie list",
+      "preconditions": "User's email is verified. A website is added and reachable. User is on the Cookie Manager page. The Last Successful Scan card shows a \"Scan now\" button.",
+      "steps": [
+        {
+          "content": "Click \"Scan now\" on the Last Successful Scan card.",
+          "expected": "The Scan pop-up should appear with \"Full Scan\" selected by default and a \"Scan now\" button in the bottom right."
+        },
+        {
+          "content": "Click \"Scan now\" in the pop-up, then dismiss the \"Scanning initiated successfully\" confirmation with \"Ok\".",
+          "expected": "The confirmation (green tick) should appear and close, and the scan should start."
+        },
+        {
+          "content": "Open the Scan History tab.",
+          "expected": "The new scan should appear with an in-progress status."
+        },
+        {
+          "content": "Wait for the scan to complete.",
+          "expected": "The scan status should update to completed, and newly discovered cookies should be added to the cookie list under their categories."
+        }
+      ],
+      "run_type": "smoke",
+      "section_id": 1813,
+      "source_case_ids": [
+        17280,
+        16982
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Static popup text dropped per \u00a74. Green tick retained as success-state indicator. Condensed from 12 steps.",
+      "grill_status": "fixed",
+      "audit_status": "not-applicable",
+      "audit_note": "Popup body text was intentionally dropped and the case rewritten as a behavioral scan-completion check per conventions \u00a74's popup rule (see rewrite_notes and the merged draft-cookie-manager-fixes.json history) \u2014 a deliberate structural rewrite, not a legal/consent disclosure. The dropped pop-up text (scan duration expectations) is informational, not in the load-bearing category list."
+    },
+    {
+      "id": 37266,
+      "title": "[Cookie Manager] Verify that Scan now with an Include URL initiates a scan on the specified pages",
+      "preconditions": "User's email is verified. User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click \"Scan now\" on the Last Successful Scan card, then click \"Show advanced options\" in the Scan popup.",
+          "expected": "Include URL and Exclude URL text fields should appear."
+        },
+        {
+          "content": "Enter one or more valid URLs in the Include URL field (one per line) and click \"Scan Now\".",
+          "expected": "A \"Scan initiated successfully\" popup should appear."
+        },
+        {
+          "content": "Dismiss the popup and wait for the scan to complete.",
+          "expected": "The user should receive a \"Cookie scanning completed\" email. The Scan History tab should show the completed scan."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17281,
+        16983
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 18 steps. Label/placeholder copy dropped. Scan completion email retained as the end-to-end verification of the include URL flow.",
+      "grill_status": "skipped:email-required",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "\"Cookie scanning completed\" email referenced by name only, matching source C17281 step 17's own level of detail (source doesn't quote the full body in this case either \u2014 that's covered separately by C6287/case 37287)."
+    },
+    {
+      "id": 37267,
+      "title": "[Cookie Manager] Verify that Scan now with an Exclude URL excludes the specified pages from the scan",
+      "preconditions": "User's email is verified. User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click \"Scan now\" and then \"Show advanced options\" in the Scan popup.",
+          "expected": "Include URL and Exclude URL text fields should appear."
+        },
+        {
+          "content": "Enter one or more URLs (or wildcards) in the Exclude URL field (one per line) and click \"Scan Now\".",
+          "expected": "A \"Scan initiated successfully\" popup should appear."
+        },
+        {
+          "content": "Dismiss the popup and wait for the scan to complete.",
+          "expected": "The user should receive a \"Cookie scanning completed\" email. The excluded pages should not appear in the Urls Scanned column for this scan in Scan History. [inferred]"
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17282,
+        16984
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 18 steps. Exclude URL exclusion outcome [inferred].",
+      "grill_status": "skipped:email-required",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Same pattern as case 37266 \u2014 email referenced by name only, consistent with source family (C17282 not fetched individually but same structure as C17281)."
+    },
+    {
+      "id": 37268,
+      "title": "[Cookie Manager] Verify that Scan now with a Custom Scan URL scans only the specified page",
+      "preconditions": "User's email is verified. User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click \"Scan now\", then select \"Custom Scan\" in the Scan popup.",
+          "expected": "The Custom Scan text field should expand."
+        },
+        {
+          "content": "Enter a valid URL (one per line) and click \"Scan Now\".",
+          "expected": "A \"Scan initiated successfully\" popup should appear."
+        },
+        {
+          "content": "Dismiss the popup and wait for the scan to complete.",
+          "expected": "The user should receive a \"Cookie scanning completed\" email. The Scan History tab should show only the custom URL under Urls Scanned for this scan. [inferred]"
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17283,
+        16985
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 16 steps. Custom scan scoped-to-URL outcome [inferred].",
+      "grill_status": "skipped:email-required",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Same pattern as case 37266 \u2014 email referenced by name only, consistent with source family (C17283 not fetched individually but same structure as C17281)."
+    },
+    {
+      "id": 37269,
+      "title": "[Cookie Manager] Verify that the Schedule Scan button is blocked with a tooltip when the account email is not verified",
+      "preconditions": "User account email has not been verified. User is on the Cookie Manager page. The Next Scan card shows a \"Schedule scan\" button.",
+      "steps": [
+        {
+          "content": "Click the \"Schedule scan\" button on the Next Scan card.",
+          "expected": "No popup should open. A tooltip should appear reading \"Please verify your email address to rescan your website for cookies.\""
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17287,
+        16986
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Structural presence steps moved to preconditions. Single behavioral assertion kept.",
+      "grill_status": "skipped:manual-only",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Tooltip \"Please verify your email address to rescan your website for cookies.\" is the same shared UI string verified verbatim for case 37263 (source C17278) \u2014 case 37269 is the Schedule Scan variant of the identical tooltip."
+    },
+    {
+      "id": 37270,
+      "title": "[Cookie Manager] Verify that the Schedule Scan card shows an upgrade prompt on plans without scan scheduling",
+      "preconditions": "User is on a plan below Pro (Basic or Free) with a verified email. User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click the \"Schedule scan\" button on the Next Scan card.",
+          "expected": "A promotion modal should appear with the heading \"Run automated scans and get an up-to-date cookie list every time\", the text \"Available in: Pro and Ultimate plans\", and a \"Try Pro for free\" button."
+        },
+        {
+          "content": "Click \"Upgrade now\" in the promotion modal.",
+          "expected": "The upgrade/pricing page should open."
+        }
+      ],
+      "run_type": "smoke",
+      "section_id": 1793,
+      "source_case_ids": [
+        17288
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": true,
+      "rewrite_notes": "Removed structural display steps. Behavioral assertion: locked feature shows upgrade path.",
+      "grill_status": "fixed",
+      "grill_notes": "Step 1 confirmed on Basic trial (QA2): clicking Schedule scan shows the promotion modal with 'Available in: Pro and Ultimate plans'. On Free account the button was disabled due to unverified email \u2014 free account precondition updated to 'below Pro with verified email'. Step 2 not verifiable: 'Upgrade now' button was disabled on the QA2 trial account (likely test-account restriction). Verify step 2 on a real non-trial Basic account.",
+      "audit_status": "reworded-fixed",
+      "audit_note": "LIVE-CHECKED 2026-07-10 on qa2.kilohub.com (basic-account session, Free plan, site jud.dsf): the promo modal heading and \"Available in: Pro and Ultimate plans\" text both match exactly. However the CTA button reads \"Try Pro for free\", not \"Upgrade now\" as the case stated \u2014 corrected. Source C17288 (older Suite 6 case) also said \"Upgrade now\", so this looks like a genuine copy change since that source was written, not a migration paraphrase."
+    },
+    {
+      "id": 37271,
+      "title": "[Cookie Manager] Verify that selecting Never in Schedule Scan disables the existing scan schedule",
+      "preconditions": "User is on a paid plan. A scan has been previously scheduled (Next Scan card shows a scheduled date). User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click the \"Reschedule scan\" button on the Next Scan card.",
+          "expected": "The \"Schedule cookie scan\" popup should appear pre-filled with the currently saved schedule frequency and a Save button."
+        },
+        {
+          "content": "Select \"Never\" from the Scan frequency dropdown and click \"Save\".",
+          "expected": "The popup should close. The Next Scan card should show \"Not scheduled\" under the Next scan label and the button should revert to \"Schedule scan\"."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17300,
+        16987
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 11 steps. Frequency dropdown options display step dropped; the key assertion is the outcome after saving Never.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Re-audited under the corrected rule. \"Schedule cookie scan\" popup name, \"Never\" default, \"Save\" button confirmed via source C17300. \"Not scheduled\" / \"Schedule scan\" revert-state labels were directly observed live on qa1.kilohub.com during this session's earlier browsing."
+    },
+    {
+      "id": 37272,
+      "title": "[Cookie Manager] Verify that scheduling a one-time scan with an Include URL runs the scan and clears the schedule",
+      "preconditions": "User is on a paid plan with scan scheduling. User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click \"Schedule scan\" on the Next Scan card.",
+          "expected": "The \"Schedule cookie scan\" popup should appear."
+        },
+        {
+          "content": "Select \"Only Once\" from the Scan frequency dropdown.",
+          "expected": "A date picker and time picker should appear."
+        },
+        {
+          "content": "Select a valid future date and time, then expand \"Show advanced options\" and enter one or more valid URLs in the Include URL field. Click \"Save\".",
+          "expected": "The popup should close. The Next Scan card should display the scheduled date and time in [Month DD, YYYY HH:MM:SS] (UTC) format."
+        },
+        {
+          "content": "Wait for the scheduled time to arrive.",
+          "expected": "The scan should run at the specified time. The user should receive a \"Cookie scanning completed\" email. The Next Scan card should revert to \"Not scheduled\"."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17301,
+        16988
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 29 steps. Label/placeholder copy dropped. Full end-to-end verification (scheduled \u2192 ran \u2192 cleared) retained.",
+      "grill_status": "skipped:time-dependent",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "\"Cookie scanning completed\" email referenced by name only, matching source C17301's own level of detail (same family as C17281)."
+    },
+    {
+      "id": 37273,
+      "title": "[Cookie Manager] Verify that scheduling a monthly scan with an Exclude URL saves the recurring schedule",
+      "preconditions": "User is on a paid plan with scan scheduling. User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click \"Schedule scan\" on the Next Scan card and select \"Monthly\" from the Scan frequency dropdown.",
+          "expected": "A date picker and time picker should appear."
+        },
+        {
+          "content": "Select a valid future date and time, expand \"Show advanced options\", and enter one or more URLs in the Exclude URL field. Click \"Save\".",
+          "expected": "The popup should close. The Next Scan card should display the scheduled start date and time. The scan should recur monthly from that date. [inferred]"
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17302,
+        16989
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 29 steps. Monthly recurrence outcome [inferred].",
+      "grill_status": "skipped:time-dependent",
+      "audit_status": "not-applicable",
+      "audit_note": "No quoted disclosure or email reference in this case's expected results \u2014 inferred scheduling outcome only."
+    },
+    {
+      "id": 37274,
+      "title": "[Cookie Manager] Verify that scheduling a monthly scan with a Custom Scan URL restricts recurring scans to that URL",
+      "preconditions": "User is on a paid plan with scan scheduling. User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click \"Schedule scan\" on the Next Scan card, select \"Monthly\" from the Scan frequency dropdown, and choose a valid future date and time.",
+          "expected": "The selected values should appear in the date and time pickers."
+        },
+        {
+          "content": "Select \"Custom Scan\" under Scan options, enter a valid URL, and click \"Save\".",
+          "expected": "The popup should close. The Next Scan card should display the scheduled date and time. The monthly scans should target only the custom URL. [inferred]"
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17303,
+        16990
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 27 steps. Custom scan monthly outcome [inferred].",
+      "grill_status": "skipped:time-dependent",
+      "audit_status": "not-applicable",
+      "audit_note": "No quoted disclosure or email reference in this case's expected results \u2014 inferred scheduling outcome only."
+    },
+    {
+      "id": 37275,
+      "title": "[Cookie Manager] Verify that adding a cookie with a Script URL pattern saves it under the selected category",
+      "preconditions": "An initial cookie scan has completed. User is on the Cookie Manager page with the Cookie List tab active.",
+      "steps": [
+        {
+          "content": "Click a cookie category tab (e.g., Necessary) in the category sidebar, then click the \"+ Add Cookie\" button in the top-right of the panel.",
+          "expected": "An \"Add Cookie\" popup should appear with required fields: Cookie ID, Domain, Duration, and Description. The Script URL Pattern field should also be present but is optional."
+        },
+        {
+          "content": "Fill in Cookie ID, Domain, Duration, and Description with valid values. Enter a value in the Script URL pattern field (e.g., \"analytics.com\").",
+          "expected": "All fields should accept the entered text."
+        },
+        {
+          "content": "Click \"Save draft\".",
+          "expected": "The popup should close. The new cookie should appear in the selected category's cookie list under a \"Manually Added Cookies\" section."
+        }
+      ],
+      "run_type": "smoke",
+      "section_id": 1814,
+      "source_case_ids": [
+        17304,
+        16996
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 27 steps. Placeholder text for each field dropped per \u00a74. Core flow \u2014 fill all fields including Script URL, save, cookie appears \u2014 preserved.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Re-audited under the corrected rule. \"Add Cookie\" popup, \"Save draft\" button, and \"Manually Added Cookies\" section name all match source C17304 exactly."
+    },
+    {
+      "id": 37276,
+      "title": "[Cookie Manager] Verify that adding a cookie without a Script URL pattern shows a warning icon on the category",
+      "preconditions": "An initial cookie scan has completed. User is on the Cookie Manager page with the Cookie List tab active.",
+      "steps": [
+        {
+          "content": "Click a cookie category tab in the category sidebar and click \"+ Add Cookie\".",
+          "expected": "An \"Add Cookie\" popup should appear."
+        },
+        {
+          "content": "Fill in Cookie ID, Domain, and Duration. Leave the Script URL pattern field empty. Enter a Description. Click \"Save draft\".",
+          "expected": "The popup should close. The new cookie should appear in the category's cookie list under \"Manually Added Cookies\". A \u26a0\ufe0f warning icon should appear next to the category name in the category sidebar."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1814,
+      "source_case_ids": [
+        17305,
+        16997,
+        14950,
+        14951,
+        14952,
+        14953,
+        14954,
+        15861,
+        15862,
+        15863,
+        15864,
+        15865
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 28 steps. C14950-C14954 and Wix variants C15861-C15865 are per-category repetitions of the same manually-added-without-Script-URL scenario. Warning icon on category is the key behavioral outcome.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Re-audited under the corrected rule. \"Add Cookie\" popup, \"Save draft\" button, and \"Manually Added Cookies\" section name all match source C17305 exactly."
+    },
+    {
+      "id": 37277,
+      "title": "[Cookie Manager] Verify that enabling \"Sells or shares personal data\" on a category marks its cookies as opted-out of data sales",
+      "preconditions": "Law selector is set to US State Laws. A scan has completed and cookies are present in a non-Necessary category. User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click a non-Necessary category tab (e.g., Functional) and click the edit (pencil) icon next to the category name.",
+          "expected": "An \"Edit Category\" popup should appear containing three toggles: \"Sells or shares personal data\" (on by default), \"Load cookies prior to consent\", and \"Hide category from banner\"."
+        },
+        {
+          "content": "Confirm \"Sells or shares personal data\" is enabled and click \"Save draft\".",
+          "expected": "The popup should close."
+        },
+        {
+          "content": "Click \"Publish changes\".",
+          "expected": "Changes should be saved."
+        },
+        {
+          "content": "Visit the website and click the \"Do Not Sell or Share My Personal Information\" link.",
+          "expected": "The opt-out preference panel should appear listing the affected category."
+        },
+        {
+          "content": "Toggle off the category's consent and click \"Save My Preferences\".",
+          "expected": "The consent preference should be saved. In the Consent Log, the proof of consent should show the category's cookies as rejected."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1812,
+      "source_case_ids": [
+        17306,
+        16998
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 29 steps. Full signup setup and tooltip copy dropped. The Consent Log verification kept as the behavioral outcome.",
+      "grill_status": "needs-manual-check",
+      "grill_notes": "In-app steps confirmed on QA1 generaltest: Edit Category popup appears with all three toggles. 'Sells or shares personal data' is on by default. Steps 4\u20135 (visit website, check opt-out panel, Consent Log) require manual verification on the actual site.",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "LIVE-CHECKED 2026-07-10 on qa1.kilohub.com (generaltest), live banner on splendorous-beignet-594d1d.netlify.app: the opt-out link reads \"Do Not Sell or Share My Personal Information\" with capital \"Not\", matching this case exactly. Resolves the capitalization discrepancy in favor of the v2 case being correct \u2014 source C17306's lowercase \"Do not Sell\" instances (steps 21-22) were themselves the stale/inconsistent ones."
+    },
+    {
+      "id": 37278,
+      "title": "[Cookie Manager] Verify that enabling \"Load cookies prior to consent\" in a category loads those cookies before the user consents",
+      "preconditions": "A scan has completed. User is on the Cookie Manager page with the Cookie List tab active.",
+      "steps": [
+        {
+          "content": "Click a non-Necessary category tab and click the edit (pencil) icon next to the category name.",
+          "expected": "The \"Edit Category\" popup should appear. The \"Load cookies prior to consent\" toggle should be off by default."
+        },
+        {
+          "content": "Toggle \"Load cookies prior to consent\" on and click \"Save draft\".",
+          "expected": "The popup should close."
+        },
+        {
+          "content": "Click \"Publish changes\".",
+          "expected": "Changes should be saved."
+        },
+        {
+          "content": "Visit the website without giving any consent.",
+          "expected": "The cookies from the affected category should already be present in the browser's storage before any consent action (verifiable via browser DevTools > Application > Cookies)."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1812,
+      "source_case_ids": [
+        17307,
+        16999
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 18 steps. DevTools verification kept as the functional outcome.",
+      "grill_status": "needs-manual-check",
+      "grill_notes": "In-app steps confirmed on QA1 generaltest: 'Load cookies prior to consent' toggle is off by default. Step 4 (visit website, check DevTools before consent) requires manual verification on the actual site.",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Re-audited under the corrected rule. \"Edit Category\" popup and \"Load cookies prior to consent\" toggle (off by default) match source C17307 exactly."
+    },
+    {
+      "id": 37279,
+      "title": "[Cookie Manager] Verify that enabling \"Hide category from banner\" removes the category from the banner's preference panel",
+      "preconditions": "A scan has completed. User is on the Cookie Manager page with the Cookie List tab active.",
+      "steps": [
+        {
+          "content": "Click a non-Necessary category tab and click the edit (pencil) icon.",
+          "expected": "The \"Edit Category\" popup should appear. The \"Hide category from banner\" toggle should be off by default."
+        },
+        {
+          "content": "Toggle \"Hide category from banner\" on, click \"Save draft\", then click \"Publish changes\".",
+          "expected": "Changes should be saved."
+        },
+        {
+          "content": "Visit the website and open the cookie preference panel (e.g., click \"Customise\" on the banner).",
+          "expected": "The hidden category should not appear in the preference panel."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1812,
+      "source_case_ids": [
+        17308,
+        17000
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 18 steps. \"Save draft + Publish changes\" kept as both are required to activate the change.",
+      "grill_status": "needs-manual-check",
+      "grill_notes": "In-app steps confirmed on QA1 generaltest: 'Hide category from banner' toggle is off by default. Step 3 (visit website, open preference panel, verify category is hidden) requires manual verification on the actual site.",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Re-audited under the corrected rule. \"Edit Category\" popup and \"Hide category from banner\" toggle match source C17308. Source capitalizes the publish button \"Publish Changes\" but this case's lowercase \"Publish changes\" is the one confirmed live (observed directly in this session's Cookie Manager snapshot) \u2014 same stale-source capitalization pattern as the earlier \"Do Not Sell\" case."
+    },
+    {
+      "id": 37280,
+      "title": "[Cookie Manager] Verify that a cookie card without a Script URL pattern shows the warning state and an Add now link",
+      "preconditions": "The site has cookies discovered without a Script URL pattern. User is on the Cookie Manager page with the Cookie List tab active. The Uncategorised category shows a \u26a0\ufe0f warning icon in the sidebar.",
+      "steps": [
+        {
+          "content": "Click the \"Uncategorised\" category tab in the sidebar.",
+          "expected": "The Uncategorised panel should open with an Edit (pencil) icon next to the title and a \"+ Add Cookie\" button."
+        },
+        {
+          "content": "Observe a cookie card in the list that has no Script URL pattern.",
+          "expected": "The Script URL pattern section for that cookie should show a \u26a0\ufe0f icon in the column header and the text \"Not available\". A warning row should appear below reading \"This cookie does not have a script URL pattern. It is required for blocking the cookie prior to obtaining user consent\" with an \"Add now\" button."
+        },
+        {
+          "content": "Click the \"Add now\" button on the warning row. Enter a valid Script URL pattern in the Edit Cookie popup and click \"Save draft\".",
+          "expected": "The Edit Cookie popup should open for that cookie with the Script URL pattern field editable (Cookie ID, Domain, and Duration are disabled for discovered cookies). After saving, the warning row should disappear from that cookie card. The \u26a0\ufe0f icon on the category in the sidebar is removed only when all cookies in the category have a Script URL pattern."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1812,
+      "source_case_ids": [
+        17309,
+        17001
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 30 steps. Layout/position steps dropped per \u00a74. Red indicator bar retained as a logic-state indicator. Step 3 updated to include the resolution outcome (warning removes after adding Script URL) per user clarification. C14965/C14982/C14983 moved to Draft 29 (different scenario). Wix cases C15866-C15868 also moved to Draft 29.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Warning text \"This cookie does not have a script URL pattern. It is required for blocking the cookie prior to obtaining user consent\" matches source C17309 step 28 word-for-word; v2 correctly separates \"Add now\" as its own button rather than trailing sentence text (source's own transcription glues them together without punctuation).",
+      "section_change_note": "2026-07-13: moved from section 1820 (Uncategorised) to 1812 (Cookie List & Categories) — flattened the per-category child sections (1815 Necessary, 1816 Functional, 1817 Analytics, 1818 Performance, 1819 Advertisement, 1820 Uncategorised) since this was the only case using any of them; the other 6 category-related cases (37277-37279, 37281, 37282) already lived at the 1812 parent. All 6 child sections deleted in TestRail."
+    },
+    {
+      "id": 37281,
+      "title": "[Cookie Manager] Verify that a warning icon appears on categories that contain cookies missing a Script URL pattern",
+      "preconditions": "A scan has completed. At least one non-Necessary category contains a discovered cookie without a Script URL pattern. User is on the Cookie Manager page with the Cookie List tab active.",
+      "steps": [
+        {
+          "content": "Observe the category sidebar.",
+          "expected": "A \u26a0\ufe0f warning icon should appear next to each category (excluding Necessary) that has at least one cookie without a Script URL pattern. The Necessary category should not show a warning icon even if its cookies lack a Script URL pattern."
+        },
+        {
+          "content": "Hover over a \u26a0\ufe0f warning icon on an affected category.",
+          "expected": "A tooltip should appear reading: \"The 'Script URL Pattern' is missing for some cookies. Add them now as it's required for cookie compliance. Our auto-blocking mechanism uses this pattern to identify third-party scripts that set cookies and to block them prior to obtaining user consent.\" The tooltip should include a \"Learn more about adding script URL pattern\" link."
+        },
+        {
+          "content": "Click the \"Learn more about adding script URL pattern\" link in the tooltip.",
+          "expected": "The CookieYes documentation page about implementing prior consent and cookie auto-blocking should open."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1812,
+      "source_case_ids": [
+        17310,
+        17002
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 19 steps. Language dropdown and Export button presence moved to display case. Tooltip copy dropped per \u00a74; functional link navigation kept. Necessary category exception (no warning icon) captured in step 1 based on live app verification.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "LIVE-CHECKED 2026-07-10 on qa1.kilohub.com (generaltest, Uncategorised category warning icon): tooltip body text matches word-for-word. The help-link label is confirmed live as \"Learn more about adding script URL pattern\" \u2014 matching this case's wording and the newer source C14965, NOT the older C17310 label (\"Adding script URL\"). The cross-source discrepancy is resolved: C17310 was simply stale."
+    },
+    {
+      "id": 37282,
+      "title": "[Cookie Manager] Verify that the language dropdown in the Cookie List tab switches cookie descriptions to the selected language",
+      "preconditions": "At least one additional language has been added via the Languages page. A scan has completed. User is on the Cookie Manager page with the Cookie List tab active showing content in English.",
+      "steps": [
+        {
+          "content": "Click the language selector dropdown at the top left of the Cookie List tab.",
+          "expected": "The dropdown should open listing the available languages (e.g., English, Arabic, Spanish). The currently selected language appears in the trigger with \"[Default]\" appended if it is the default language."
+        },
+        {
+          "content": "Select a non-English language.",
+          "expected": "The dropdown should close. The category names, category descriptions, and duration labels in the panel should update to display in the selected language."
+        }
+      ],
+      "run_type": "smoke",
+      "section_id": 1812,
+      "source_case_ids": [
+        17311,
+        17003
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Language setup steps collapsed to preconditions. Navigation steps dropped. Core behavioral test (language switch updates content) retained.",
+      "grill_status": "fixed",
+      "audit_status": "not-applicable",
+      "audit_note": "Language-switch behavior only \u2014 no quoted disclosure text."
+    },
+    {
+      "id": 37283,
+      "title": "[Cookie Manager] Verify that an in-progress scan shows the correct Scan History status with an Abort option",
+      "preconditions": "User is on the Cookie Manager page. A previous scan has completed.",
+      "steps": [
+        {
+          "content": "Click \"Scan now\" on the Last Successful Scan card, click \"Scan now\" in the popup, then click \"Ok\" on the success popup.",
+          "expected": "The scan should be initiated."
+        },
+        {
+          "content": "Click the \"Scan History\" tab while the scan is running.",
+          "expected": "The Scan History table should show the in-progress scan row with: an \"In Progress\" badge (blue) under Scan Status, empty values for Urls Scanned, Categories, Cookies, and Scripts, and an \"Abort scan\" icon button on the right of the row."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17312,
+        17004
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 17 steps. Repeated scan initiation steps already covered by case 5. \"In Progress\" blue badge retained as a logic-state indicator.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Re-audited under the corrected rule. \"In Progress\" badge (blue), empty Urls Scanned/Categories/Cookies/Scripts columns, and \"Abort scan\" button all match source C17312 exactly, and \"In Progress\" was also directly observed live this session."
+    },
+    {
+      "id": 37284,
+      "title": "[Cookie Manager] Verify that clicking Abort scan stops the scan and updates the status to Aborted",
+      "preconditions": "A scan is currently in progress on a working website. User is on the Cookie Manager page with the Scan History tab open showing the in-progress scan row with an \"Abort scan\" icon button.",
+      "steps": [
+        {
+          "content": "Click the \"Abort scan\" icon button on the in-progress scan row.",
+          "expected": "A confirmation popup should appear with the message \"Are you sure you want to abort the scan?\" and \"Cancel\" and \"Abort\" buttons."
+        },
+        {
+          "content": "Click \"Abort\".",
+          "expected": "The popup should close. The scan row should update to show an \"Aborted\" status (red). The Urls Scanned, Categories, Cookies, and Scripts columns should remain empty."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17313,
+        17315,
+        17005,
+        17007
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Admin variant (C17315/C17007) used as base for fuller flow; role collapsed \u2014 Cookie Manager is a shared feature area. Tooltip copy on Abort button dropped per \u00a74. Confirmation popup text condensed to behavioral assertion.",
+      "grill_status": "needs-manual-check",
+      "grill_notes": "Tested on QA2 (jf.com \u2014 unreachable site). Confirmation dialog ('Are you sure...') confirmed. However the aborted scan shows 'Failed' status, not 'Abort' \u2014 likely because the site is unreachable so the scan fails on abort. Verify on QA1 generaltest with a working website that the aborted row shows a distinct Abort/Aborted status.",
+      "audit_status": "reworded-fixed",
+      "audit_note": "LIVE-CHECKED 2026-07-10 on qa1.kilohub.com (generaltest): initiated and aborted a real scan. Confirmation dialog text \"Are you sure you want to abort the scan?\" with Cancel/Abort buttons matched exactly. However the resulting scan-history badge reads \"Aborted\", not \"Abort\" as the case stated \u2014 corrected. Also resolves the uncertainty in the original grill_notes (which saw \"Failed\" on an unreachable test site) \u2014 on a real working site the status is unambiguously \"Aborted\"."
+    },
+    {
+      "id": 37285,
+      "title": "[Cookie Manager] Verify that the More info link navigates to the Detailed Scan History page for that scan",
+      "preconditions": "At least one completed scan exists. User is on the Cookie Manager page with the Scan History tab active.",
+      "steps": [
+        {
+          "content": "Locate a completed scan row in the Scan History table and click the \"More info\" link at the right end of the row.",
+          "expected": "The Detailed Scan History page (/manage-cookies/scan-history/{id}) should open for the selected scan."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17314,
+        17006
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped to single behavioral assertion. Detailed page content verified in case 26.",
+      "grill_status": "confirmed",
+      "audit_status": "not-applicable",
+      "audit_note": "Simple navigation link \u2014 no disclosure text."
+    },
+    {
+      "id": 37286,
+      "title": "[Cookie Manager] Verify that the Detailed Scan History page shows the full scan breakdown by category and scanned pages",
+      "preconditions": "User is on the Detailed Scan History page for a completed scan (navigated via \"More info\" in Scan History). The page is at /manage-cookies/scan-history/{id}.",
+      "steps": [
+        {
+          "content": "Observe the page header.",
+          "expected": "A \"Back to Scan History\" button should be visible. A summary section should display: Scan Date in [Month DD, YYYY HH:MM:SS] (UTC) format with a green tick, Total Cookies count, Total Categories count, and Pages Scanned count."
+        },
+        {
+          "content": "Observe the \"Discovered cookies\" section below the summary.",
+          "expected": "Cookies should be grouped by category with each category's name shown as a label above its table. Each cookie row should display: Id, First found URL (as a clickable link), Duration, and Description."
+        },
+        {
+          "content": "Click a URL in the \"First found URL\" column.",
+          "expected": "The corresponding website page should open."
+        },
+        {
+          "content": "Observe the \"Pages scanned\" section at the bottom.",
+          "expected": "A table should display Urls and Cookies columns listing each scanned page and its total cookie count."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        17317,
+        17009
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Condensed from 38 steps. Column position and text alignment steps dropped per \u00a74. URL as clickable link retained as functional verification.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Re-audited under the corrected rule. \"Back to Scan History\" button and column names (Id, First found URL, Duration, Description) match source C17317 exactly. Total Cookies/Categories/Pages Scanned counts are referenced by the same words as source, just without quote marks in this case's prose \u2014 not a wording distortion."
+    },
+    {
+      "id": 37287,
+      "title": "[Cookie Manager] Verify that a \"Cookie scanning completed\" email is received after a successful scan",
+      "preconditions": "User's email is verified. A scan has been initiated and completed successfully.",
+      "steps": [
+        {
+          "content": "Check the account email inbox after the scan completes.",
+          "expected": "A \"Cookie scanning completed\" email should be received."
+        },
+        {
+          "content": "Open the email and locate the functional links.",
+          "expected": "The \"Cookie scanning completed\" email should be displayed with:\n- The CookieYes logo at the top\n- Body text: \"Hi there, We have completed the cookie scan of [website]. Please check your account to get the full report. Best Regards, The CookieYes Team\"\n- A link on [website] to open the scanned site\n- [unconfirmed] a separate call-to-action link to access the scan results is also claimed here but is not evidenced in source C6287 \u2014 verify against the live email before treating as confirmed"
+        },
+        {
+          "content": "Click the website link in the email.",
+          "expected": "The corresponding website should open."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        6287
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Full scan initiation flow collapsed to precondition. Static logo position, email body copy, and branding steps dropped per \u00a74. Functional link navigation retained.",
+      "grill_status": "skipped:email-required",
+      "audit_status": "reworded-flagged",
+      "audit_note": "Attempted live check 2026-07-10 but could not verify \u2014 this requires reading an actual received email, and no email-inbox tool was available in this session (same constraint /grill-section operates under for email-required cases). The confirmed body-text restoration from source C6287 (previous audit pass) stands; the claimed second 'call-to-action link to access the scan results' remains unconfirmed and needs an email-inbox check to resolve."
+    },
+    {
+      "id": 37288,
+      "title": "[Cookie Manager] Verify that a \"Cookie scan failed\" email is received and contains functional troubleshooting links",
+      "preconditions": "The site's initial cookie scan has failed (website URL is unreachable). User's email is verified.",
+      "steps": [
+        {
+          "content": "Check the account email inbox.",
+          "expected": "A \"Cookie scan failed\" email should be received."
+        },
+        {
+          "content": "Open the email.",
+          "expected": "The \"Cookie scan failed\" email should be displayed with:\n- The CookieYes logo at the top\n- Body text: \"Hi there, We regret to inform you that the recent cookie scan for [website] has failed. Check out the common issues causing scan failure and try applying the suggested solutions to resolve them. After resolving the issues, try re-scanning the site, and if the issue persists, contact us.\"\n- Links: [website], \"common issues causing scan failure\", \"contact us\"\n- Sign-off: \"Best Regards, The CookieYes Team\""
+        },
+        {
+          "content": "Click the \"common issues causing scan failure\" link.",
+          "expected": "The CookieYes documentation page for scan failure troubleshooting should open."
+        },
+        {
+          "content": "Click the \"contact us\" link.",
+          "expected": "The CookieYes support page should open."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [
+        6289
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Logo position and full email body copy dropped per \u00a74. Functional link navigation retained.",
+      "grill_status": "skipped:email-required",
+      "audit_status": "reworded-fixed",
+      "audit_note": "Restored the email body verbatim from source C6289: \"Hi there, We regret to inform you that the recent cookie scan for [website] has failed. Check out the common issues causing scan failure and try applying the suggested solutions to resolve them. After resolving the issues, try re-scanning the site, and if the issue persists, contact us. Best Regards, The CookieYes Team\" \u2014 this had been dropped entirely per the old \u00a74 rule (rewrite_notes: 'full email body copy dropped'). Source is unambiguous (single clean version, matches the link list already in the v2 case exactly), so restored with confidence."
+    },
+    {
+      "id": 39427,
+      "title": "[Cookie Manager] Verify that editing a cookie's fields via the Edit cookie option saves the changes",
+      "preconditions": "A scan has completed. At least one cookie is present in a category. User is on the Cookie Manager page with the Cookie List tab active.",
+      "steps": [
+        {
+          "content": "Click a cookie category tab, click the \"...\" menu at the top-right of a cookie's table, and select \"Edit cookie\".",
+          "expected": "The \"Edit Cookie\" popup should open pre-filled with the cookie's Cookie ID, Domain, Duration, Category, Script URL Pattern, and Description. For a discovered cookie, the Cookie ID, Domain, and Duration fields are disabled; Category, Script URL Pattern, and Description remain editable."
+        },
+        {
+          "content": "Update the Description field and click \"Save draft\".",
+          "expected": "The popup should close, the updated Description should appear on the cookie's card, and the \"Publish changes\" button should become active."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1814,
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Gap found while investigating why the Cookie List & Categories child sections were empty: Delete cookie (C37292) and the Script-URL-pattern-focus warning (C37289) were both covered, but the plain edit-a-field-and-save flow via '...' > Edit cookie was not.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "LIVE-CHECKED 2026-07-13 on qa2.kilohub.com (hd.com, Free plan): opened Edit cookie for a discovered Analytics cookie (_ga_*) via the '...' menu at the top-right of its table; confirmed Cookie ID/Domain/Duration are disabled while Category/Script URL Pattern/Description are editable; edited the Description, clicked Save draft, popup closed, card updated, Publish changes button activated. Reverted the edit back to the original description afterward so no live data was changed. Published to TestRail as C39427 via /migrate-section, originally drafted in draft-cookie-manager-fixes.json (now cases-cookie-manager-fixes.json)."
+    },
+    {
+      "id": 37289,
+      "title": "[Cookie Manager] Verify that the Edit Cookie popup warns against modifying a CookieYes-provided Script URL pattern",
+      "preconditions": "A scan has completed. At least one category contains a discovered cookie with a CookieYes-provided Script URL pattern. User is on the Cookie Manager page with the Cookie List tab active.",
+      "steps": [
+        {
+          "content": "Click a category tab, then click the \"...\" menu on a discovered cookie that has a Script URL pattern and select \"Edit cookie\".",
+          "expected": "The Edit Cookie popup should open with the Script URL Pattern field pre-filled. No warning should be visible yet."
+        },
+        {
+          "content": "Click into (focus) the Script URL Pattern field.",
+          "expected": "A warning alert should appear below the field containing two items: \"Changing the URL pattern provided by us may affect the blocking behavior of all cookies set by this script. Hence, we recommend that you do not change this unless you are fully aware of the consequences.\" with a \"Learn more about adding script URL pattern\" link; and \"Adding your website URL as the script URL pattern may disrupt your website's functionality.\""
+        },
+        {
+          "content": "Click the \"Learn more about adding script URL pattern\" link.",
+          "expected": "The CookieYes documentation page for implementing prior consent and adding script URL patterns should open."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1814,
+      "source_case_ids": [
+        14965,
+        14982,
+        14983,
+        15866,
+        15867,
+        15868
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Trigger is field focus, not popup open \u2014 confirmed via live app on qa1.kilohub.com. Both warning bullets appear simultaneously in one alert, not conditionally on input value. Suite 6 title 'Display of Script URL pattern banner for editing discovered cookies with script URL pattern' refers to this focus-triggered alert. Per-category variants (C14965 Necessary, C14982 Functional, C14983 Analytics) and Wix equivalents (C15866-C15868) collapsed \u2014 popup is identical across all categories.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Both warning bullets match source C14965 step 25 word-for-word (line breaks normalized; 'Learn more about adding script URL pattern' correctly separated out as its own link, matching the source's own step 26)."
+    },
+    {
+      "id": 37290,
+      "title": "[Cookie Manager] Verify that the Scan History tab shows an advisory alert with a manual-check link",
+      "preconditions": "User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click the \"Scan History\" tab.",
+          "expected": "An advisory alert banner should appear reading \"We continuously monitor our scanning software to ensure its ongoing effectiveness, security, and accuracy. However, we advise you to run a quick manual check to determine if there are any cookies on your site that our scanner couldn't detect. Instructions on how to check cookies on your website manually.\" The phrase \"how to check cookies on your website manually\" should be a hyperlink."
+        },
+        {
+          "content": "Click the \"how to check cookies on your website manually\" link in the alert.",
+          "expected": "The CookieYes documentation page about manually checking cookies on a website should open."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Gap found during grill. Advisory alert is always present on the Scan History tab. Not covered by any existing case.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "No Suite 6 source (gap case) \u2014 but the quoted alert text was directly verified against the live app when the gap was found during grilling (per rewrite_notes / grill_status: confirmed), which satisfies fidelity via the live-app route rather than a v1 source comparison."
+    },
+    {
+      "id": 37291,
+      "title": "[Cookie Manager] Verify that selecting Custom Scan or showing advanced options displays a cookie list replacement alert",
+      "preconditions": "User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click \"Scan now\" on the Last Successful Scan card, then select the \"Custom Scan\" radio button.",
+          "expected": "An alert should appear below the Custom Scan option reading \"Your existing cookie list (cookies discovered in the previous scan) will be replaced with the cookies discovered in this scan. Therefore, make sure you include all the pages that sets cookies.\""
+        },
+        {
+          "content": "Select \"Full Scan\" and click \"Show advanced options\".",
+          "expected": "The Include URL and Exclude URL fields should appear. The same replacement alert should appear with slightly different wording: \"Your existing cookie list (cookies discovered in the previous scan) will be replaced with the cookies discovered in this scan. Therefore, make sure you don't exclude the pages that sets cookies.\""
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Gap found during grill. The replacement alert appears in two places in the Scan popup: on Custom Scan selection, and when Advanced Options are expanded in Full Scan. The wording differs slightly between the two. Not covered by any existing case.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "No Suite 6 source (gap case) \u2014 same as 37290, the quoted alert text (both wording variants) was verified live during grilling."
+    },
+    {
+      "id": 37292,
+      "title": "[Cookie Manager] Verify that deleting a cookie shows a confirmation dialog and removes it from the cookie list",
+      "preconditions": "User is on the Cookie Manager page with the Cookie List tab active. At least one cookie is present in any category.",
+      "steps": [
+        {
+          "content": "Click a cookie category tab, hover over a cookie row to reveal the \"...\" menu, and select \"Delete cookie\".",
+          "expected": "The \"Delete cookie?\" confirmation dialog should appear with:\n- Heading: \"Delete cookie?\"\n- Message: \"The cookie [cookie ID] will be permanently deleted. This cookie will no longer be displayed on your cookie list nor be blocked prior to receiving user consent.\"\n- Action buttons: \"Cancel\" and \"Delete cookie\""
+        },
+        {
+          "content": "Click \"Delete cookie\" in the confirmation dialog.",
+          "expected": "The dialog should close. The cookie should no longer appear in the category's cookie list, and the \"Publish changes\" button should become active."
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1814,
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Gap found during grill. The delete flow (confirmation dialog + removal from list) is not covered by any existing case. Both discovered and manually-added cookies have a Delete option in the '...' menu.",
+      "grill_status": "confirmed",
+      "audit_status": "reworded-fixed",
+      "audit_note": "LIVE-CHECKED 2026-07-10 on qa1.kilohub.com (generaltest): triggered the real \"Delete cookie?\" dialog on the csrf_token cookie (cancelled before confirming, no data changed). Exact live message: \"The cookie csrf_token will be permanently deleted. This cookie will no longer be displayed on your cookie list nor be blocked prior to receiving user consent.\" Restored verbatim, replacing the prior paraphrase (\"warns that the cookie will be permanently deleted...\") that had been written under the old, now-superseded \u00a74 drop-copy rule with no Suite 6 source to fall back on."
+    },
+    {
+      "id": 37293,
+      "title": "[Cookie Manager] Verify that scheduling a weekly scan saves the recurring schedule with the selected day and time",
+      "preconditions": "User is on a paid plan with scan scheduling enabled. User is on the Cookie Manager page.",
+      "steps": [
+        {
+          "content": "Click \"Schedule scan\" on the Next Scan card and select \"Weekly\" from the Scan frequency dropdown.",
+          "expected": "A day-of-week picker (\"Select Day\" dropdown) and a time picker should appear."
+        },
+        {
+          "content": "Select a day of the week, set a time, and click \"Save\".",
+          "expected": "The popup should close. The Next Scan card should display the scheduled date and time. The button should change to \"Reschedule scan\". The scan should recur weekly on the selected day and time. [inferred]"
+        }
+      ],
+      "run_type": "regression",
+      "section_id": 1813,
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Gap found during grill. Weekly frequency shows a day-of-week picker instead of a date picker (unlike Monthly/Once). Not covered by any existing case. Full schedule verification (scan actually runs) is time-dependent.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Re-audited under the corrected rule. This case has no own source_case_ids, but its quoted \"Reschedule scan\" button label is independently corroborated by source C17300 (fetched for case 37271, same UI element)."
+    }
+  ],
+  "audited_at": "2026-07-10T12:40:17Z"
+}

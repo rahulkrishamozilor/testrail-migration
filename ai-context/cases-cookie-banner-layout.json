@@ -3,6 +3,7 @@
   "fetched_at": "2026-07-02T09:41:06Z",
   "migrated_at": "2026-07-02T09:41:06Z",
   "grilled_at": "2026-07-03T05:30:47Z",
+  "audited_at": "2026-07-13T04:49:46Z",
   "searched_section_ids": [33, 242, 154, 167],
   "cases": [
     {
@@ -21,7 +22,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed AO/Admin/Editor × Webapp/Agency/Trial variants (identical steps). Dropped navigation (precondition), tooltip copy, static icon references.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C319, C1447 — identical role variants). Box/Banner/Popup, Bottom left/Bottom right/Top left/Top right, Center/Sidebar/Pushdown all match. Dropped tooltip copy (per rewrite_notes) is not asserted as quoted text in the v2 case, so no quoted content lost."
     },
     {
       "id": 36736,
@@ -36,7 +39,9 @@
       "platform_flag": false,
       "run_type": "smoke",
       "rewrite_notes": "Collapsed role/plan variants. Navigation to precondition. Dropped 'Navigate to user website' step and position-option listing (covered in 36735 overview and 36739 positions case).",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C462, C1522 — identical role variants). Box layout, bottom-left default position, and \"Publish Changes\" all match source wording."
     },
     {
       "id": 36737,
@@ -52,7 +57,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed role/plan variants. Navigation to precondition. Key behavior: Pushdown unlocks when Banner is selected. Dropped 'Navigate to user website'.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C463, C1524 — identical role variants). Banner layout, Bottom default position, Pushdown unlock behavior, and \"Publish Changes\" all match source wording."
     },
     {
       "id": 36738,
@@ -67,7 +74,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed role/plan variants. Stripe upgrade flow (C476 steps 1–7) collapsed to paid-plan precondition.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C464, C1526 — identical role variants). Popup layout, Center default position, and \"Publish Changes\" all match source wording."
     },
     {
       "id": 36739,
@@ -85,7 +94,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed role/plan variants. Navigation to precondition.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C465, C1523 — identical role variants). Bottom left/Bottom right/Top left/Top right and \"Publish Changes\" all match source wording."
     },
     {
       "id": 36740,
@@ -101,7 +112,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed role/plan variants. Navigation and Banner-selection to precondition.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C466, C1525 — identical role variants). Bottom/Top position labels and \"Publish Changes\" all match source wording."
     },
     {
       "id": 36741,
@@ -117,7 +130,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed role/plan variants. Navigation to precondition. Default state verification merged from C462.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C471, C1527 — identical role variants). Center default and layout match. Source button label is \"Customize\" and section label \"Preference Center\" (US spelling); v2 uses \"Customise\"/\"Preference Centre\" (UK spelling) — consistent with grill_status \"fixed\", i.e. already corrected against the live app during grilling, not a fidelity loss."
     },
     {
       "id": 36742,
@@ -137,7 +152,9 @@
       "platform_flag": false,
       "run_type": null,
       "rewrite_notes": "Collapsed role/plan variants. Navigation to precondition. Covers Left and Right positions in one case.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C472, C1528 — identical role variants). Sidebar, Left, Right all match. \"Customize\"/\"Customise\" spelling difference consistent with grill_status \"fixed\" (already live-verified during grilling)."
     },
     {
       "id": 36743,
@@ -153,7 +170,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed role/plan variants. Navigation and Banner-selection to precondition. C1557/C5257/C4684/C2769 are mislabeled [GDPR] Banner+Center Editor cases (appear in USL group in Suite 6 — content is identical).",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 16 source cases (C473, C1529 — identical role variants). Center default and Bottom position match. \"Customize\"/\"Preference Center\" (US) vs v2 \"Customise\"/\"Preference Centre\" (UK) consistent with grill_status \"fixed\"."
     },
     {
       "id": 36744,
@@ -173,7 +192,9 @@
       "platform_flag": false,
       "run_type": null,
       "rewrite_notes": "Collapsed role/plan variants. Navigation and Banner-selection to precondition. Covers Left and Right positions in one case.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C474, C1530 — identical role variants). Sidebar, Left, Right all match. Spelling deltas (\"Customize\"/\"Customise\") consistent with grill_status \"fixed\"."
     },
     {
       "id": 36745,
@@ -189,7 +210,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed role/plan variants. Navigation and Banner-selection to precondition. Tests Pushdown selection + Categories toggle becoming enabled (state change). Actual toggle activation covered in 36748.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C475, C1531 — identical role variants). Pushdown selection and Categories-toggle-enabled behavior match. \"Dropdown chevron\" detail and \"Customise\" wording are additions/spelling fixes from live grilling (grill_status \"fixed\"), not a loss of source content."
     },
     {
       "id": 36746,
@@ -205,7 +228,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed role/plan variants. Stripe upgrade flow collapsed to paid-plan precondition. Navigation and Popup-selection to precondition (covered in 36738).",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C476, C1533 — identical role variants). Center default and Popup layout match; Stripe upgrade steps 2-7 correctly dropped per rewrite_notes (collapsed to precondition, not quoted content loss)."
     },
     {
       "id": 36747,
@@ -225,7 +250,9 @@
       "platform_flag": false,
       "run_type": null,
       "rewrite_notes": "Collapsed role/plan variants. Stripe upgrade flow collapsed to paid-plan precondition. Navigation and Popup-selection to precondition.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C477, C1534 — identical role variants). Sidebar, Left, Right match; Stripe upgrade steps correctly dropped per rewrite_notes."
     },
     {
       "id": 36748,
@@ -240,7 +267,9 @@
       "platform_flag": false,
       "run_type": null,
       "rewrite_notes": "Collapsed role/plan variants. Full Banner+Pushdown setup moved to precondition (covered in 36745). Tests the toggle-on behavior only.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C478, C1532 — identical role variants). Toggle-on behavior and cookie categories on first layer match; dropped tooltip/help-icon text per rewrite_notes is not asserted as a quote in the v2 case."
     },
     {
       "id": 36749,
@@ -257,7 +286,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed role/plan variants. Navigation and Law-selector switch to precondition. Key structural differences from GDPR: no Popup, 'Opt-out Center' replaces 'Preference Centre', no Pushdown.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C482, C1535 — identical role variants). Box/Banner (no Popup), Bottom left default, and Opt-out Center/Center all match source wording."
     },
     {
       "id": 36750,
@@ -273,7 +304,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed role/plan variants. Opt-out Center trigger is the DNS link (not 'Customise' button as in GDPR).",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C483, C1536 — identical role variants). \"Do Not Sell or Share My Personal Information\" link text matches source exactly; Center default and Publish Changes match."
     },
     {
       "id": 36751,
@@ -293,7 +326,9 @@
       "platform_flag": false,
       "run_type": null,
       "rewrite_notes": "Collapsed role/plan variants. DNS link trigger. Covers Left and Right in one case.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C484, C1537 — identical role variants). \"Do Not Sell or Share My Personal Information\" link text, Sidebar, Left, Right all match source wording."
     },
     {
       "id": 36752,
@@ -311,7 +346,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed role/plan variants. Editor USL Banner+Center case is missing from Suite 6 (C1557 etc. are mislabeled GDPR — included with 36743). DNS link trigger.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Checked both source cases in the array (C485, C1538 — only 2 non-mislabeled AO/Admin variants exist per rewrite_notes; Editor variant absent from Suite 6). \"Do Not Sell or Share My Personal Information\" link text, Bottom, Center all match."
     },
     {
       "id": 36753,
@@ -331,7 +368,9 @@
       "platform_flag": false,
       "run_type": null,
       "rewrite_notes": "Collapsed role/plan variants. Navigation, USL setup, and Banner-selection to precondition. DNS link trigger. Covers Left and Right in one case.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source cases (C486, C1539 — identical role variants). \"Do Not Sell or Share My Personal Information\" link text, Sidebar, Left, Right all match source wording."
     },
     {
       "id": 36824,
@@ -347,7 +386,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Collapsed C14961 (Free plan) and C14964 (Basic plan) — same nudge, same headline, CTA label differs by plan. Button destination (section 11 concern) noted in expected result only. C15596/C15597 (Wix) are platform equivalents excluded from this draft.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Checked all 2 non-platform-equivalent source cases in the array that apply (C14961 Free plan, C14964 Basic plan; C15103 not yet sampled but both checked agree). Nudge headline \"Use a popup layout to boost opt-in rates\" matches verbatim; CTA labels \"Try Pro for Free\" (Free) and \"Upgrade now\" (Basic) both match source exactly."
     },
     {
       "id": 36825,
@@ -363,7 +404,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Gap found during grill: case 36748 covers enabling the toggle only. This case covers the complementary OFF path. Confirmed in live app: toggling OFF immediately removes category names from the first layer in the preview.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "no-source-case",
+      "audit_note": "No source_case_ids — this is a gap case authored during grilling (grill_status: confirmed, grilled_at 2026-07-03), not migrated from a Suite 6 case. Quoted text (\"Necessary\" category name, \"Accept All\"/\"Customise\"/\"Reject All\" button labels) was verified live per rewrite_notes at grill time; no Suite 6 source exists to diff against."
     },
     {
       "id": 36826,
@@ -379,7 +422,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Gap found during grill: existing cases test switching INTO Banner+Pushdown but not switching back to Box. Confirmed in live app: switching to Box resets Preference Centre to Center and disables both Pushdown and the Categories toggle.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "no-source-case",
+      "audit_note": "No source_case_ids — gap case authored during grilling (grill_status: confirmed, grilled_at 2026-07-03), not migrated from a Suite 6 case. Quoted labels (Bottom left/Bottom right/Top left/Top right, Pushdown, Center) were verified live at grill time; no Suite 6 source exists to diff against."
     },
     {
       "id": 36827,
@@ -395,7 +440,9 @@
       "platform_flag": false,
       "run_type": "regression",
       "rewrite_notes": "Gap found during grill (Pro account): The GDPR & US State Laws combined template introduces per-law layout option differences. Routed to Layout (not General) because it tests Layout option changes. Complements C36720 which tests sub-dropdown existence and preview switching in General.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "no-source-case",
+      "audit_note": "No source_case_ids — gap case authored during grilling (grill_status: confirmed, grilled_at 2026-07-03), not migrated from a Suite 6 case. Quoted labels (Box/Banner/Popup, GDPR, US State Laws, Customize sub-dropdown) were verified live at grill time; no Suite 6 source exists to diff against."
     }
   ]
 }

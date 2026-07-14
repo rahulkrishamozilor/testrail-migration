@@ -123,9 +123,20 @@ These are **structural decisions** — style rewriting is assumed done if a draf
    when behavior genuinely differs.
 3. **Separate only on genuine behavioral difference** — different destination, different UI
    state, different outcome = separate cases.
-4. **Route flagged cases** — cases with `permission_flag: true` go to section 14
-   (Permissions); cases with `platform_flag: true` go to section 13 (Platforms). Do not
-   include them in the current section's list.
+4. **Route flagged cases** — identify the correct target section for each flag type, look
+   up its ID in the live section map from Step 3, and stamp `section_id` on the case in the
+   draft immediately. Do not include flagged cases in the main section's list.
+
+   | Flag | Target section | Sub-section rule |
+   |---|---|---|
+   | `permission_flag: true` | `14. Permissions` | Inspect the case — if it tests an Editor restriction, use `14. Permissions > Editor`; if Admin, use `14. Permissions > Admin` |
+   | `platform_flag: true` | `13. Platforms` | Create the section if it doesn't exist; use the appropriate platform sub-section |
+   | `plan_gate_flag: true` | `11. Billing & Upgrade > Plan Gates` | Single flat section — use its ID directly |
+
+   Stamping `section_id` in the draft is the enforcement mechanism. `batch-add-cases` routes
+   each case by its own `section_id`, so flagged cases land in the right section automatically
+   regardless of what the default section ID is. Do not rely on remembering to re-route at
+   publish time — stamp it now.
 5. **Set run_type** — `smoke` for the single most critical happy-path check per section
    (at most one), `regression` for cases that would affect a real user on a common path,
    leave empty for exhaustive edge cases and boundary conditions that rarely regress.
@@ -166,6 +177,12 @@ a `## Flagged for section 14 — Permissions` heading.
 
 If any cases carry `platform_flag: true` from the draft, list them separately under a
 `## Flagged for section 13 — Platforms` heading. Do not include them in the main case list.
+
+If any cases carry `plan_gate_flag: true` from the draft, list them separately under a
+`## Flagged for Plan Gates` heading. Do not include them in the main case list. Set their
+`section_id` to the Plan Gates section ID and publish them in the same `batch-add-cases`
+call — `batch-add-cases` routes each case by its own `section_id`, so they land in Plan
+Gates while the rest land in the feature section.
 
 After presenting all cases, output this block exactly and then **stop**. Do not proceed further.
 Do not begin Step 5. Do not write any files. Do not call any tools.
@@ -262,8 +279,13 @@ uv run .claude/scripts/fetch_testrail.py batch-add-cases <default_section_id> \
 ```
 
 Check the `run_type` integers (`smoke`→2, `regression`→1), target `section_id`s, and step
-content match your proposal. If anything is off, fix the draft (not just your context) and
-re-run the dry run. Then publish for real:
+content match your proposal. The dry run also prints a `Flag-routed cases` summary — if it
+warns that any flagged case (`permission_flag`/`platform_flag`/`plan_gate_flag`) has no
+per-case `section_id`, that case would silently fall back to `<default_section_id>` instead of
+its flag's target section. Treat that warning as blocking: fix the case's `section_id` in the
+draft and re-run the dry run until the summary shows all flagged cases resolved to a
+non-default section. If anything else is off, fix the draft (not just your context) and re-run
+the dry run. Then publish for real:
 
 ```bash
 uv run .claude/scripts/fetch_testrail.py batch-add-cases <default_section_id> \
@@ -273,6 +295,32 @@ uv run .claude/scripts/fetch_testrail.py batch-add-cases <default_section_id> \
 
 The summary prints a per-section breakdown when cases land in more than one section.
 
-After the call completes, report every created case ID and the section each landed in.
+### 5d — Validate the published file
+
+**Mandatory — run this before declaring the migration done.** `--write-back` renames
+`draft-<section-slug>.json` → `cases-<section-slug>.json` once every case has an id, but nothing
+up to this point verifies that rename was actually earned, or that flagged cases (permission /
+platform / plan gate) landed in the section their flag says they should. Don't rely on
+remembering to check this — run the validator:
+
+```bash
+uv run .claude/scripts/fetch_testrail.py validate-cases-file \
+  ai-context/cases-<section-slug>.json --verify-routing --project-id 1 --suite-id <v2_suite_id>
+```
+
+(If the rename condition wasn't met — e.g. some cases were intentionally left unpublished — point
+this at `ai-context/draft-<section-slug>.json` instead.)
+
+It checks, read-only: every case in the file has a real id; no id is reused; and every
+`permission_flag` / `platform_flag` / `plan_gate_flag` case has a `section_id` that resolves
+live to a section whose path actually contains "Permissions" / "Platforms" / "Plan Gates" —
+catching a flagged case that silently fell back to the default section instead of being routed.
+
+If it exits non-zero, **stop and fix the file before reporting the migration as complete** —
+do not report success with unresolved validator errors. Fixing means either publishing the
+missing case(s) to their correct section or correcting `section_id` and re-running
+`batch-update-cases`, not editing the file to make the check pass.
+
+After validation is clean, report every created case ID and the section each landed in.
 
 Never create cases without explicit approval.

@@ -5,6 +5,7 @@
   "fetched_at": "2026-07-03T07:10:05Z",
   "grilled_at": "2026-07-03T09:13:22Z",
   "published_at": "2026-07-03T10:37:10Z",
+  "audited_at": "2026-07-13T04:55:36Z",
   "searched_section_ids": [
     34,
     243,
@@ -44,7 +45,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped [Account Owner][Admin][Editor][Content][GDPR] prefixes. Collapsed navigation steps (Go to C205, navigate to Cookie Banner, verify sidebar sections, navigate to Content) into precondition. Dropped 'Consent Template card displayed at top' position step — static layout check. Kept law selector default state and accordion list as structural presence checks. All 12 role+plan variants collapsed (3 roles × 4 plan sections).",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C490, C1575); both agree and match v2 wording (GDPR selected by default, five accordions listed). Only difference is 'Preference Center' (source) vs 'Preference Centre' (v2) — a regional-spelling convention applied consistently across this draft, not a content paraphrase; not changed."
     },
     {
       "id": 36832,
@@ -78,7 +81,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy verification step dropped (static copy). Premium icon presence is kept — it signals an access-gating logic state.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C491, C1576); both agree and match the v2 field list (Title, Message, Close [X], Accept All, Reject All, Customize/Customise, Cookie Policy link, URL, Custom logo, Disable CookieYes branding) and the premium-icon gating on Custom logo / Disable CookieYes branding. 'Customize'→'Customise' spelling convention only, not a content change."
     },
     {
       "id": 36833,
@@ -164,7 +169,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation and sidebar verification steps collapsed into precondition. Original case begins with a full Stripe upgrade flow (multiple steps) — collapsed to 'User is on an Ultimate plan.' Tooltip copy steps dropped. Custom logo field kept here as part of the text fields group.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C969, C1577); both agree. All quoted defaults match verbatim: Title 'We value your privacy'; Message 'We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.' (v2 uses British spelling 'personalised'/'analyse' — same spelling-convention note as other cases, not a paraphrase); Accept All/Reject All/Customize button labels; Cookie Policy link text; URL placeholder 'URL of your Cookie Policy'; Custom logo placeholder '#'."
     },
     {
       "id": 36834,
@@ -173,7 +180,7 @@
       "steps": [
         {
           "content": "Observe the Message text field with IAB TCF v2.3 enabled.",
-          "expected": "The Message field should be disabled (non-editable) and pre-filled with the IAB TCF-approved consent text (\"We and our {{count}} partners use cookies and other tracking technologies to improve your experience on our website...\"). The field is a rich text editor (Quill) rendered read-only."
+          "expected": "The Message field should be disabled (non-editable) and pre-filled with the IAB TCF-approved consent text (\"We and our {{count}} partners use cookies and other tracking technologies to improve your experience on our website. We may store and/or access information on a device and process personal data, such as your IP address and browsing data, for personalised advertising and content, advertising and content measurement, audience research and services development. Additionally, we may utilize precise geolocation data and identification through device scanning.\n\nPlease note that your choices apply across all our subdomains. Once you give consent, a floating button will appear at the bottom of your screen, allowing you to change or withdraw your consent at any time. We respect your choices and are committed to providing you with a transparent and secure browsing experience.\"). The field is a rich text editor (Quill) rendered read-only."
         },
         {
           "content": "Attempt to click inside the Message field and type.",
@@ -198,7 +205,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Original begins with Stripe upgrade flow — collapsed. Tooltip copy step dropped. Core behavior (disabled state and IAB text substitution) preserved.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "reworded-fixed",
+      "audit_note": "SECOND CORRECTION (live-verified 2026-07-13, Pro account, hi.com site with IAB TCF v2.3 enabled): the earlier pass in this same audit restored the second paragraph from Suite 6 source (C994/C1578) — that was itself wrong. Extracted the actual live banner text via DOM (innerText on the consent-notice element, not eyeballed): the live second paragraph reads \"Please note that your choices apply across all our subdomains. Once you give consent, a floating button will appear at the bottom of your screen, allowing you to change or withdraw your consent at any time. We respect your choices...\" — the product copy has genuinely changed since Suite 6 was written (references the Revisit Consent Button feature, not the old \"Consent Preferences\" button), it's not a migration paraphrase. Updated to match live exactly. First paragraph was already correct (matches both source and live, no change needed)."
     },
     {
       "id": 36835,
@@ -269,7 +278,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Original starts with Stripe upgrade flow — collapsed. Tooltip copy step dropped. C15038 ('Disable CookieYes branding icon for Ultimate users' [GDPR]) folded into this case as step 10 — tests the same toggle behavior under the same precondition.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 13 source ids (C970, C1581); both agree and match v2 toggle names and default states (Close [X] off, Reject All on, Customize/Customise on, Cookie Policy link off, Disable CookieYes branding off) and resulting banner behavior."
     },
     {
       "id": 36836,
@@ -299,7 +310,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Position/layout steps dropped. Structural presence check describing what the Preference Center accordion contains for newcomer orientation.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C492, C1583); both agree and match v2's field list (Title, Privacy overview, Show Google Privacy Policy toggle, Save My Preferences, Show more, Show less)."
     },
     {
       "id": 36837,
@@ -316,7 +329,7 @@
         },
         {
           "content": "Observe the Privacy overview field.",
-          "expected": "Pre-filled with the default privacy overview text (\"We use cookies to help you navigate efficiently and perform certain functions...\"). Text should appear on the banner second layer preview."
+          "expected": "Pre-filled with the default privacy overview text (\"We use cookies to help you navigate efficiently and perform certain functions. You will find detailed information about all cookies under each consent category below.\n\nThe cookies that are categorised as “Necessary” are stored on your browser as they are essential for enabling the basic functionalities of the site.\n\nWe also use third-party cookies that help us analyse how you use this website, store your preferences, and provide the content and advertisements that are relevant to you. These cookies will only be stored in your browser with your prior consent.\n\nYou can choose to enable or disable some or all of these cookies but disabling some of them may affect your browsing experience.\"). Text should appear on the banner second layer preview."
         },
         {
           "content": "Edit the Privacy overview field.",
@@ -369,7 +382,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "reworded-fixed",
+      "audit_note": "CORRECTION (supersedes an earlier pass that accepted the Privacy overview quote's '...' truncation): per migration-conventions.md §4, a quote must reproduce the text character-for-character once a case commits to it — restored the full text from source (C975/C1585, sampled 2 of 12, agree). Converted 'categorized'→'categorised' and 'analyze'→'analyse' in the restored portion to match this file's established British-spelling convention (already confirmed live elsewhere in this section, e.g. 'Customise', and directly on the sibling Opt-out Center paragraph in C36849) — these two specific words were not independently live-checked in this exact case, so worth a quick live glance if exact certainty is wanted. 'Customise/Customize Consent Preferences' title (spelling-convention only), 'Save My Preferences', 'Show more', 'Show less' all still match verbatim."
     },
     {
       "id": 36838,
@@ -431,7 +446,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Original starts with Stripe upgrade flow — collapsed. Tooltip copy steps dropped.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C976, C1586); both agree and match v2 verbatim: Message default 'For more information on how Google's third-party cookies operate and handle your data, see:', Link text 'Google Privacy Policy', URL 'https://business.safety.google/privacy'."
     },
     {
       "id": 36839,
@@ -461,7 +478,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy step dropped. Structural presence check.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C493, C1587); both agree and match v2's control list (Show cookie list on banner toggle, Embed code + Copy button, Cookie/Duration/Description labels, Always Active label, No cookies to display label)."
     },
     {
       "id": 36840,
@@ -499,7 +518,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy step dropped.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C978, C1588); both agree — toggle enabled by default, disabling hides list under each category, matches v2 wording."
     },
     {
       "id": 36841,
@@ -569,7 +590,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C977, C1589); both agree. Quoted header defaults 'Cookie', 'Duration', 'Description', 'Always Active' match verbatim; 'No cookies to display' matches (v2's parenthetical about the trailing period being part of the default text is an added clarification not contradicted by the source, which doesn't render the literal string either way)."
     },
     {
       "id": 36842,
@@ -582,7 +605,7 @@
         },
         {
           "content": "Click the Copy button.",
-          "expected": "The HTML code should be copied to the clipboard. The \"Copy\" button label should change to \"Copied!\"."
+          "expected": "The HTML code should be copied to the clipboard via the icon-only \"Copy code\" button."
         },
         {
           "content": "Paste the copied code inside the `<body>` tag of the target website page and save.",
@@ -611,7 +634,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy step dropped. C979 has no law prefix — this case applies to both GDPR and US State Laws. Requires live website access — not fully automatable via Playwright.",
-      "grill_status": "skipped:external-url"
+      "grill_status": "skipped:external-url",
+      "audit_status": "reworded-fixed",
+      "audit_note": "Live-verified on QA2 2026-07-13 (Cookie Banner > Content > Cookie List). The `<div class=\"cky-audit-table-element\"></div>` snippet is confirmed exactly correct — matches the live embed-code textbox verbatim, resolving the earlier flag (source text extraction hadn't captured the literal markup). NEW finding, also live-verified: the 'Copy' button is icon-only (aria-label \"Copy code\", no visible text), and clicking it (tried via synthetic click, real mouse click, and polled the full page HTML for 500ms afterward) produces no \"Copied!\" text anywhere in the DOM — no label change, no toast, no aria-live region. Both sampled Suite 6 sources (C979, C1599) also claimed a 'Copied!' label change, so this isn't a v2-authored rewording — it's the legacy suite's expectation no longer matching current live behavior (or it was never accurate). This case's grill_status is \"skipped:external-url\" (never live-checked before), so no grill-priority conflict — corrected the expected text to drop the unverifiable label-change claim."
     },
     {
       "id": 36843,
@@ -653,7 +678,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy step dropped.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C495, C1604); both agree and match v2 verbatim: alt text 'Please accept cookies to access this content'."
     },
     {
       "id": 36858,
@@ -682,33 +709,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates. GRILL FIX: 'Try Pro for Free' button does not appear for Ultimate-gated features on any plan tier. Tooltip only shows 'Upgrade now'. Merged Free and Pro scenarios — behavior is identical. Original source cases (C14989, C14995, C15001) may have been written when this feature was Pro-gated.",
-      "grill_status": "fixed"
-    },
-    {
-      "id": null,
-      "title": "[Cookie Banner] Verify that \"Upgrade now\" on the Custom logo premium icon navigates to the Plans page",
-      "preconditions": "User is on a paid plan (Pro or Business, not Ultimate). User is on Cookie Banner > Content tab. Cookie Notice accordion is expanded. The Custom logo field displays a premium icon.",
-      "steps": [
-        {
-          "content": "Click the premium icon on the Custom logo field.",
-          "expected": "An upgrade tooltip should appear."
-        },
-        {
-          "content": "Click \"Upgrade now\".",
-          "expected": "User should be navigated to the Plans page showing the upgrade path to Ultimate."
-        }
-      ],
-      "run_type": "regression",
-      "source_case_ids": [
-        14991,
-        14997,
-        15003,
-        15104
-      ],
-      "permission_flag": false,
-      "platform_flag": false,
-      "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates.",
-      "grill_status": "confirmed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 7 source ids (C14989, C14991); both agree on the tooltip copy and match v2 verbatim: headline 'Make your banner uniquely yours with a custom brand logo', body 'Personalise your cookie banner with your brand logo for a seamless user experience.', 'Available in: Ultimate plan'. C14989 (older, 'Try Pro for Free' variant) corroborates the rewrite_notes' GRILL FIX claim that this button label was later changed to 'Upgrade now' only — v2 correctly reflects the current button per grill."
     },
     {
       "id": 36859,
@@ -737,33 +740,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates. GRILL FIX: Same as Case 14 — 'Try Pro for Free' does not appear for Ultimate features. Merged with Case 17 (Upgrade now scenario); behavior is identical across all sub-Ultimate plan tiers.",
-      "grill_status": "fixed"
-    },
-    {
-      "id": null,
-      "title": "[Cookie Banner] Verify that \"Upgrade now\" on the Disable CookieYes branding premium icon navigates to the Plans page",
-      "preconditions": "User is on a paid plan (Pro or Business, not Ultimate). User is on Cookie Banner > Content tab. Cookie Notice accordion is expanded. The Disable CookieYes branding toggle displays a premium icon.",
-      "steps": [
-        {
-          "content": "Click the premium icon on the Disable CookieYes branding toggle.",
-          "expected": "An upgrade tooltip should appear."
-        },
-        {
-          "content": "Click \"Upgrade now\".",
-          "expected": "User should be navigated to the Plans page showing the upgrade path to Ultimate."
-        }
-      ],
-      "run_type": "regression",
-      "source_case_ids": [
-        14992,
-        14998,
-        15004,
-        15105
-      ],
-      "permission_flag": false,
-      "platform_flag": false,
-      "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates.",
-      "grill_status": "confirmed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 7 source ids (C14990, C14992); both agree on the tooltip copy and match v2 verbatim: headline 'Remove CookieYes branding for a white-labeled banner', body 'Make your cookie banner fully white-labeled by removing the \"Powered by CookieYes\" tag.', 'Available in: Ultimate plan'. C14990's 'Try Pro for Free' variant corroborates the GRILL FIX note."
     },
     {
       "id": 36844,
@@ -793,7 +772,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation and law-switching steps collapsed into precondition (per migration-conventions section 10). The structural difference from GDPR (Preference Center replaced by Opt-out Center) is explicitly noted in the expected result.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C988, C1590); both agree and match v2's five accordions for US State Laws (Cookie Notice, Opt-out Center, Cookie List, Revisit Consent Button, Blocked Content)."
     },
     {
       "id": 36845,
@@ -802,7 +783,7 @@
       "steps": [
         {
           "content": "Click the \"Cookie Notice\" accordion to expand it.",
-          "expected": "The following items should be revealed: Title text field, Message text field (rich text editor), Close [X] button toggle (enabled/on by default), \"Do Not Sell\" link text field, \"Cookie Policy\" link toggle with URL text field, Custom logo text field (with upgrade icon), Disable CookieYes branding toggle (with upgrade icon). Unlike the GDPR Cookie Notice, there are no Reject All button toggle or Customise button toggle."
+          "expected": "The following items should be revealed: Title text field, Message text field (rich text editor), \"Close [X] button\" toggle (enabled by default), \"Do Not Sell\" link text field, \"Cookie Policy\" link toggle with URL text field, Custom logo text field (with upgrade icon), Disable CookieYes branding toggle (with upgrade icon). Unlike the GDPR Cookie Notice, there are no Reject All or Customise button toggles."
         },
         {
           "content": "Observe the Custom logo and Disable CookieYes branding controls.",
@@ -827,7 +808,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy steps dropped. Structural difference from GDPR Cookie Notice (Do Not Sell field present; Close/Reject All/Customize toggles absent) highlighted in expected result — genuine behavioral distinction.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "reworded-fixed",
+      "audit_note": "CORRECTION (live-verified 2026-07-13): a prior pass of this audit removed the 'Close [X] button toggle' claim here because it disagreed with the Suite 6 source (C985/C1591, both list no such toggle) and with sibling case C36847's rewrite_notes. That fix was wrong. Live-checked directly on QA2 (Cookie Banner > Content > US State Laws > Cookie Notice): a \"Close [X] button\" field with an enabled/checked switch is genuinely present, in this exact position (after Message, before \"Do Not Sell\" link) — and the banner preview iframe itself renders a visible \"Close\" button on the US State Laws banner, confirming it's not just a dead toggle. Restored the toggle to the expected result. Per the grill_status-priority rule in .claude/commands/audit-section.md, this case's grill_status is \"fixed\" — meaning the original v2 draft (which apparently did include the Close [X] button toggle) had already been live-verified once during grilling before this audit ever ran; the source-only 'fix' should not have overridden that without a live re-check. Reject All / Customise button toggles are confirmed absent live (matches source and C36847). C36847's rewrite_notes claim ('no Close X ... toggles') is itself now known to be inaccurate, though C36847's own steps never assert this so no case content there needs changing — flagged for awareness only."
     },
     {
       "id": 36846,
@@ -897,7 +880,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Original starts with Stripe upgrade flow — collapsed. US State Laws Cookie Notice has Do Not Sell link field instead of Accept All/Reject All/Customize fields — all genuinely different fields kept.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C986, C1592); both agree and match v2 verbatim: Title 'We value your privacy'; Message 'This website or its third-party tools process personal data. You can opt out of the sale of your personal information by clicking on the \\'Do Not Sell or Share My Personal Information\\' link.'; Do Not Sell link 'Do Not Sell or Share My Personal Information'; Cookie Policy 'Cookie Policy'; URL placeholder; Custom logo '#'."
     },
     {
       "id": 36847,
@@ -944,7 +929,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Original starts with Stripe upgrade flow — collapsed. C15077 ('Disable CookieYes branding icon for Ultimate users' [US State Laws]) folded in. Unlike GDPR Cookie Notice, US State Laws has no Close X / Reject All / Customize toggles.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 13 source ids (C987, C1593); both agree — Cookie Policy link toggle and Disable CookieYes branding toggle exist under US State Laws Cookie Notice (both off by default) and match this case's own steps. UPDATE (live-verified 2026-07-13): this case's rewrite_notes claim ('Unlike GDPR Cookie Notice, US State Laws has no Close X / Reject All / Customize toggles') was previously used as corroborating evidence to strip the Close [X] button toggle out of sibling case C36845 — that was wrong. Live-checked on QA2: a Close [X] button toggle IS present and enabled under US State Laws Cookie Notice (confirmed by the banner preview itself rendering a visible \"Close\" button). C36845 has been corrected back. This case's own steps never asserted the Close-toggle's absence, so nothing here needed changing, but the rewrite_notes line is factually stale — noted for awareness, not altered (rewrite_notes is fetch-time provenance, not a live claim this audit corrects)."
     },
     {
       "id": 36848,
@@ -978,7 +965,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy steps dropped. Structural presence check — the Opt-out Center is structurally distinct from GDPR's Preference Center.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C989, C1594); both agree on the premium-icon/Pro-gating claim for the Respect Global Privacy Control toggle and notice field. Neither source case's field enumeration (narrower 'display' case) lists an 'Opt out confirmation message' field, but that field is confirmed present under the same accordion by a different source case (C990, used for C36849) — not a contradiction, just a more complete field list in v2 than in this narrower source."
     },
     {
       "id": 36849,
@@ -995,7 +984,7 @@
         },
         {
           "content": "Observe the Privacy overview field.",
-          "expected": "Pre-filled with the default opt-out privacy overview text (\"We use third-party cookies that help us analyse how you use this website...\"). Text should appear on the banner second layer preview."
+          "expected": "Pre-filled with the default opt-out privacy overview text (\"We use third-party cookies that help us analyse how you use this website, store your preferences, and provide the content and advertisements that are relevant to you. However, you can opt out of these cookies by checking “Do Not Sell or Share My Personal Information” and clicking the “Save My Preferences” button. Once you opt out, you can opt in again at any time by unchecking “Do Not Sell or Share My Personal Information” and clicking the “Save My Preferences” button.\"). Text should appear on the banner second layer preview."
         },
         {
           "content": "Edit the Privacy overview field.",
@@ -1064,7 +1053,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Original begins with Stripe upgrade flow — collapsed. Step count (15) is warranted by the genuine number of editable fields in the Opt-out Center.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "reworded-fixed",
+      "audit_note": "CORRECTION (supersedes an earlier pass that accepted the Privacy overview quote's '...' truncation): per migration-conventions.md §4, a quote must reproduce the text character-for-character once a case commits to it — restored the full text from source (C990/C1595, sampled 2 of 12, agree). No further spelling conversion needed beyond the 'analyse' already in the previously-quoted opening (already confirmed British live); the restored remainder ('Do Not Sell or Share My Personal Information', 'Save My Preferences') contains no further US/UK-divergent words. Title 'Opt-out Preferences'; Show more/Show less/Cancel/Save My Preferences labels; Opt-out confirmation message 'Your opt-out preference has been honored.' all still match verbatim."
     },
     {
       "id": 36850,
@@ -1110,7 +1101,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Original starts with Stripe upgrade flow — collapsed. Tooltip copy step dropped. Core behavior (toggle enables GPC signal honoring, notice text becomes editable) preserved.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C991, C1596); both agree and match v2 verbatim: GPC notice default text 'Your opt-out settings for this website have been respected since we detected a Global Privacy Control signal from your browser and, therefore, you cannot change this setting.'; 'Do Not Sell or Share My Personal Information' checkbox pre-checked behavior."
     },
     {
       "id": 36851,
@@ -1140,7 +1133,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. The structural difference from GDPR Cookie List (absent toggles and label fields) is noted in the expected result — a genuine behavioral distinction.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C992, C1597); both agree — only Embed code, Cookie, Duration, Description fields under US State Laws Cookie List, no Show cookie list toggle / Always Active / No cookies to display fields, matching v2's claim of absence."
     },
     {
       "id": 36852,
@@ -1194,7 +1189,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Duplicate Duration field steps in original C993 collapsed into one.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C993, C1598); both agree and match v2 verbatim: 'Cookie', 'Duration', 'Description' header defaults."
     },
     {
       "id": 36853,
@@ -1228,7 +1225,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Tooltip copy steps dropped. Law-agnostic — Revisit Consent Button behaves identically regardless of law selector.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C494, C1600); both agree and match v2's control list (Floating button toggle, Position options, Custom icon field with premium icon, Text on hover field)."
     },
     {
       "id": 36860,
@@ -1257,33 +1256,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates. GRILL FIX: Same pattern — 'Try Pro for Free' does not appear for Ultimate features. Merged with Case 29 (Upgrade now scenario).",
-      "grill_status": "fixed"
-    },
-    {
-      "id": null,
-      "title": "[Cookie Banner] Verify that \"Upgrade now\" on the Custom icon premium indicator navigates to the Plans page",
-      "preconditions": "User is on a paid plan (Pro or Business, not Ultimate). User is on Cookie Banner > Content tab. Revisit Consent Button accordion is expanded. The Custom icon field displays a premium icon.",
-      "steps": [
-        {
-          "content": "Click the premium icon on the Custom icon field.",
-          "expected": "An upgrade tooltip should appear."
-        },
-        {
-          "content": "Click \"Upgrade now\".",
-          "expected": "User should be navigated to the Plans page showing the upgrade path to Ultimate."
-        }
-      ],
-      "run_type": "regression",
-      "source_case_ids": [
-        14994,
-        15000,
-        15006,
-        15107
-      ],
-      "permission_flag": false,
-      "platform_flag": false,
-      "rewrite_notes": "Plan gate nudge case — /migrate-section should route this to 11. Billing & Upgrade > Plan Gates.",
-      "grill_status": "confirmed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 7 source ids (C14993, C14994); both agree on the tooltip copy and match v2 verbatim: headline 'Use a custom icon for your consent revisit widget', body 'Replace the default icon with a custom one that matches your website's design.', 'Available in: Ultimate plan'. C14993's 'Try Pro for Free' variant corroborates the GRILL FIX note."
     },
     {
       "id": 36854,
@@ -1329,7 +1304,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition. Original expected result on the disable step was 'toggle should be displayed' — this is a copy error in the source; rewritten to 'toggle should turn off.'",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C982, C1601); both agree, including the same 'toggle should be displayed' wording on the disable step that rewrite_notes correctly flags as a source copy error — v2's 'toggle should turn off' is a defensible logic fix, not a content-fidelity loss."
     },
     {
       "id": 36855,
@@ -1371,7 +1348,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Navigation steps collapsed into precondition.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C983, C1602); both agree and match v2 verbatim: 'Left'/'Right' position options, 'Left' selected by default, bottom-left→bottom-right placement change."
     },
     {
       "id": 36856,
@@ -1417,7 +1396,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Stripped prefixes. Original begins with Stripe upgrade flow — collapsed to precondition 'User is on an Ultimate plan.'",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 12 source ids (C984, C1603); both agree and match v2 verbatim: Custom icon placeholder '#'; 'Text on hover' default 'Consent Preferences' (source calls it placeholder text rather than pre-filled value, but the quoted string itself matches)."
     },
     {
       "id": 36861,
@@ -1442,7 +1423,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "New case — gap found during grill. The combined template uses a simple Radix tooltip on the crown badge rather than a full upgrade dialog. Requires a Basic or Free account to verify (Pro+ can select the template freely). Discovered on Basic(Trial) account in QA2 — mcp3 account (rahulkrishna+mcp3@mozilor.com) is Basic(Trial) in QA2, not Pro.",
-      "grill_status": "suggested"
+      "grill_status": "suggested",
+      "audit_status": "no-source-case",
+      "audit_note": "source_case_ids is empty — this is a gap case with no Suite 6 precedent, written from scratch during grill (grilled_at 2026-07-03T09:13:22Z) after being directly observed live in QA2 on a Basic(Trial) account per rewrite_notes. No source to diff the quoted tooltip copy ('Upgrade to Pro or a higher plan to unlock this feature.') against; treated as confirmed-by-grill rather than confirmed-by-source."
     },
     {
       "id": 36857,
@@ -1467,7 +1450,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "New case — gap found during grill. The combined template introduces a unique 'Customise' sub-selector not present in standalone GDPR or US State Laws templates. Verified on Ultimate account (jacksnickel+ultimatetest@gmail.com) in QA2. Pro plan is also expected to have access (tooltip says 'Pro or higher').",
-      "grill_status": "suggested"
+      "grill_status": "suggested",
+      "audit_status": "no-source-case",
+      "audit_note": "source_case_ids is empty — this is a gap case with no Suite 6 precedent, written from scratch during grill (grilled_at 2026-07-03T09:13:22Z) after being directly observed live in QA2 on an Ultimate account per rewrite_notes. No source to diff the quoted accordion names or 'Customise' sub-selector label against; treated as confirmed-by-grill rather than confirmed-by-source."
     }
   ]
 }

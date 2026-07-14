@@ -1,0 +1,2092 @@
+{
+  "section": "Organisation and Sites",
+  "suite_id": 16,
+  "section_id": null,
+  "fetched_at": "2026-07-09T12:33:51Z",
+  "grilled_at": "2026-07-10T11:34:17Z",
+  "published_at": "2026-07-10T11:46:44Z",
+  "searched_section_ids": [
+    65,
+    137,
+    138,
+    139,
+    140,
+    141,
+    143,
+    144,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    208,
+    209,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    301,
+    302,
+    320,
+    321,
+    322,
+    323,
+    324,
+    325,
+    327,
+    328,
+    385,
+    386,
+    388,
+    422,
+    423,
+    424,
+    425,
+    426,
+    427,
+    429,
+    430,
+    561,
+    562,
+    563,
+    564,
+    639,
+    645
+  ],
+  "cases": [
+    {
+      "id": 37294,
+      "title": "[Organisations & Sites] Verify that the Organisations & Sites page renders with all required controls",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The page shows a header with action buttons, an Account Owner card, and the user's organisation(s) with their websites listed underneath.",
+      "steps": [
+        {
+          "content": "Observe the header at the top of the page.",
+          "expected": "The header should display a \"+ New site\" button (disabled until the account email is verified) and, to its right, a \"+ New organisation\" button. A website search bar is also present."
+        },
+        {
+          "content": "Locate the Account Owner card below the \"Organization & Sites\" title.",
+          "expected": "The card should display:\n- The \"Account Owner\" title with an \"Acc ID: [Account ID]\" badge in the top right\n- A \"Transfer Ownership\" button\n- The user's email address"
+        },
+        {
+          "content": "Observe the organisation dropdown under the email address.",
+          "expected": "The default organisation should be displayed as \"[Username]'s organization\" with an \"Org ID: [Organization ID]\" badge, expanded by default, with a More (\u22ef) control."
+        },
+        {
+          "content": "Observe the website-details columns under the organisation.",
+          "expected": "The following columns should be displayed for each site: Site URL, Site name, Created date, Plan, Next renewal, Change Plan button, Manage Site button, and a More (\u22ef) option."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1308,
+        7585,
+        6685,
+        3700,
+        11044
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Broadened from a card-only render into the full-page element-presence check per conventions 4 (display-of-page pattern): step 1 now names the page-header controls (+ New Site, + New Organization buttons) that C1308 verified, followed by the Account Owner card, organisation dropdown and website-details columns top-to-bottom. Retitled to the '<page> renders with all required controls' pattern. Dropped static position/tooltip steps (email-verify tooltip) per convention 4. Collapsed display-of-organization-card variant clones.",
+      "grill_status": "fixed",
+      "grill_note": "Verified live at /settings/organizations-and-sites. Header buttons are labelled \"+ New site\" (disabled when email unverified) and \"+ New organisation\"; column is \"Next renewal\". Page also has a website Search bar and an \"MCP enabled\" badge (see gap suggestions).",
+      "section_id": 1824
+    },
+    {
+      "id": 37295,
+      "title": "[Organisations & Sites] Verify that the + New organization button opens the Add Organisation pop-up",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The page header shows a \"+ New Site\" button and, to its right, a \"+ New Organization\" button.",
+      "steps": [
+        {
+          "content": "Click the \"+ New Organization\" button in the top-right of the page.",
+          "expected": "The \"Add new organisation\" pop-up should be displayed with:\n- An info banner reading \"The new organisation will be added to your own account (Acc ID: [Account ID]).\"\n- An \"Organisation name*\" text field marked mandatory with the placeholder \"My organisation\"\n- Cancel and \"Add organisation\" buttons in the bottom right"
+        },
+        {
+          "content": "Observe the \"Add Organization\" button before entering any name.",
+          "expected": "The \"Add organisation\" button should be disabled by default."
+        },
+        {
+          "content": "Enter a name in the \"Organization name\" field.",
+          "expected": "The \"Add organisation\" button should become enabled once a name is entered."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1094,
+        1095,
+        7570,
+        7571,
+        6670,
+        6671,
+        3685,
+        3686,
+        11029,
+        11030,
+        17349,
+        17333,
+        17180
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped [Account Owner]/[Organisations & Sites] prefixes; dropped nav/profile-icon/layout steps into preconditions; folded display-of-pop-up case C1095 into the functional C1094 as an expected result naming the modal fields/buttons per convention 4; collapsed +New organization variant clones across regression sections.",
+      "grill_status": "fixed",
+      "grill_note": "Pop-up verified live: title \"Add new organisation\", info banner \"The new organisation will be added to your own account (Acc ID: ...)\", mandatory \"Organisation name*\" field (placeholder \"My organisation\"), Cancel + \"Add organisation\" (disabled by default). Labels corrected to British/sentence-case.",
+      "section_id": 1824
+    },
+    {
+      "id": 37296,
+      "title": "[Organisations & Sites] Verify that a new organisation is created with a valid name",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites).",
+      "steps": [
+        {
+          "content": "Click the \"+ New Organization\" button.",
+          "expected": "The \"Add new organization\" pop-up should be displayed with an \"Organization name\" field and a disabled \"Add Organization\" button."
+        },
+        {
+          "content": "Enter a valid organisation name in the \"Organization name\" field.",
+          "expected": "The \"Add Organization\" button should become enabled."
+        },
+        {
+          "content": "Click the \"Add Organization\" button.",
+          "expected": "The pop-up should close and the newly added organisation should be displayed as a dropdown in the Account Owner card with its corresponding Org ID badge."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [
+        1096,
+        7572,
+        6672,
+        3687,
+        11031
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/layout steps to preconditions; collapsed add-organization valid-name variant clones; marked smoke as the single happy-path for organisation creation.",
+      "grill_status": "confirmed",
+      "grill_note": "Live: created 'Grill Test Org' on disposableuser; Add button enabled after name entered; org appeared.",
+      "section_id": 1824
+    },
+    {
+      "id": 37297,
+      "title": "[Organisations & Sites] Verify that an over-length organisation name shows a validation error",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites).",
+      "steps": [
+        {
+          "content": "Click the \"+ New Organization\" button.",
+          "expected": "The \"Add new organization\" pop-up should be displayed with the \"Organization name\" field."
+        },
+        {
+          "content": "Enter an organisation name longer than 190 characters in the \"Organization name\" field.",
+          "expected": "The error message \"Organization name is too long\" should be displayed under the \"Organization name\" field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1097,
+        7573,
+        6673,
+        3688,
+        11032
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/layout steps to preconditions; collapsed long-name variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Confirmed live (disposableuser): entering 200 chars in the create-org pop-up shows 'Organisation name is too long' and the Add organisation button stays disabled.",
+      "section_id": 1824
+    },
+    {
+      "id": 37298,
+      "title": "[Organisations & Sites] Verify that Cancel on the Add Organisation pop-up discards without creating",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites).",
+      "steps": [
+        {
+          "content": "Click the \"+ New Organization\" button.",
+          "expected": "The \"Add new organization\" pop-up should be displayed with Cancel and \"Add Organization\" buttons."
+        },
+        {
+          "content": "Click the \"Cancel\" button.",
+          "expected": "The pop-up should close and no organisation should be created."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1107,
+        7574,
+        6674,
+        3689,
+        11033
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/layout steps to preconditions; collapsed cancel variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Clicked Cancel on the Add new organisation pop-up live; pop-up closed with no org created.",
+      "section_id": 1824
+    },
+    {
+      "id": 37299,
+      "title": "[Organisations & Sites] Verify that the More (\u22ef) menu on an organisation shows the correct options",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The Account Owner card lists the user's organisations; each organisation row has a More (\u22ef) control. The account has a default organisation with no sites and at least one organisation that contains sites.",
+      "steps": [
+        {
+          "content": "Click the More (\u22ef) option against the default organisation (the one with no sites).",
+          "expected": "The menu should display only the \"Edit organization name\" option."
+        },
+        {
+          "content": "Click the More (\u22ef) option against an organisation that contains sites.",
+          "expected": "The menu should display both \"Edit organization name\" and \"Delete organization\" options."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1102,
+        1108,
+        7577,
+        6677,
+        3692,
+        11036,
+        17350,
+        17183
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/layout steps to preconditions; combined the default-org More menu (C1102) with the with-sites More menu options from C1108 step 6 to capture the Delete-visibility difference; collapsed More-option variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Live: default org menu = 'Edit Organisation Name' only; non-default org menu = 'Edit Organisation Name' + 'Delete Organisation'.",
+      "section_id": 1824
+    },
+    {
+      "id": 37300,
+      "title": "[Organisations & Sites] Verify that an organisation is renamed with a valid name",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each organisation row in the Account Owner card has a More (\u22ef) control.",
+      "steps": [
+        {
+          "content": "Click the More (\u22ef) option against an organisation and select \"Edit organization name\".",
+          "expected": "The \"Edit Organization name\" pop-up should be displayed with a \"Organization name* (Org ID: [Organization ID])\" field pre-filled with the current name, and Cancel and \"Save changes\" buttons."
+        },
+        {
+          "content": "Change the name to a valid organisation name.",
+          "expected": "The field should accept the new name."
+        },
+        {
+          "content": "Click the \"Save changes\" button.",
+          "expected": "The pop-up should close and the organisation dropdown should be updated with the new name."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1103,
+        1104,
+        7578,
+        7579,
+        6678,
+        6679,
+        3693,
+        3694,
+        11037,
+        11038,
+        17351,
+        17184
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/layout steps to preconditions; folded display-of-pop-up C1103 into the functional rename C1104, moving the pop-up structure to the expected result; collapsed edit-org-name variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Confirmed live: renamed the org via Edit Organisation Name -> Save; name updated in the dropdown; reverted after.",
+      "section_id": 1824
+    },
+    {
+      "id": 37301,
+      "title": "[Organisations & Sites] Verify that an over-length organisation name on the Edit Organisation name pop-up shows a validation error",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each organisation row has a More (\u22ef) control.",
+      "steps": [
+        {
+          "content": "Click the More (\u22ef) option against an organisation and select \"Edit organization name\".",
+          "expected": "The \"Edit Organization name\" pop-up should be displayed with the name field pre-filled with the current name."
+        },
+        {
+          "content": "Enter an organisation name longer than 190 characters in the \"Organization name\" field.",
+          "expected": "The error message \"Organization name is too long\" should be displayed under the \"Organization name\" field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1105,
+        7580,
+        6680,
+        3695,
+        11039
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/layout steps to preconditions; collapsed long-name edit variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Confirmed live: 200-char name shows 'Organisation name is too long' and Save changes stays disabled.",
+      "section_id": 1824
+    },
+    {
+      "id": 37302,
+      "title": "[Organisations & Sites] Verify that Cancel on the Edit Organisation name pop-up discards the change",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each organisation row has a More (\u22ef) control.",
+      "steps": [
+        {
+          "content": "Click the More (\u22ef) option against an organisation and select \"Edit organization name\".",
+          "expected": "The \"Edit Organization name\" pop-up should be displayed with Cancel and \"Save changes\" buttons."
+        },
+        {
+          "content": "Change the name in the field and click the \"Cancel\" button.",
+          "expected": "The pop-up should close and the organisation name should remain unchanged."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1106,
+        7581,
+        6681,
+        3696,
+        11040
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/layout steps to preconditions; collapsed cancel-edit variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Confirmed live: typed a new name, clicked Cancel; org name unchanged.",
+      "section_id": 1824
+    },
+    {
+      "id": 37303,
+      "title": "[Organisations & Sites] Verify that deleting an organisation shows the confirmation pop-up and confirming deletes it",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). An organisation that contains sites exists (the Delete organization option is only shown for such organisations).",
+      "steps": [
+        {
+          "content": "Click the More (\u22ef) option against the organisation and select \"Delete organization\".",
+          "expected": "The \"Delete organization?\" pop-up should be displayed with:\n- A permanent-deletion warning stating the organisation and all associated user access will be removed and cannot be undone\n- An \"I understand and want to delete this organization including all its data.\" checkbox\n- Cancel and \"Delete organization\" buttons, with \"Delete organization\" disabled by default"
+        },
+        {
+          "content": "Tick the \"I understand and want to delete this organization including all its data.\" checkbox.",
+          "expected": "The \"Delete organization\" button should become enabled."
+        },
+        {
+          "content": "Click the \"Delete organization\" button.",
+          "expected": "The pop-up should close and the organisation should be removed from the Account Owner card."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1108,
+        1109,
+        1110,
+        7582,
+        6682,
+        3697,
+        11041,
+        7583,
+        6683,
+        3698,
+        11042,
+        7584,
+        6684,
+        3699,
+        11043,
+        17352,
+        17185
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/layout steps to preconditions; folded the Delete option case (C1108), the display-of-pop-up case (C1109) and the confirm case (C1110) into one functional case, with the pop-up structure as an expected result per convention 4; collapsed delete-organization variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Live: 'Delete organisation?' alertdialog with permanent-deletion warning + 'I understand' checkbox gating a disabled Delete button; checking enabled it; confirm removed the org.",
+      "section_id": 1824
+    },
+    {
+      "id": 37304,
+      "title": "[Organisations & Sites] Verify that pagination appears and works when an organisation has more than 50 sites",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). More than 50 websites exist under a single organisation.",
+      "steps": [
+        {
+          "content": "Expand the organisation that contains more than 50 sites.",
+          "expected": "The website list should be displayed with a pagination control at the bottom right of the organisation card, showing page numbers and navigation arrows: \u00ab (first page), \u2039 (previous page), \u203a (next page), and \u00bb (last page)."
+        },
+        {
+          "content": "Observe the navigation arrows while on the first page.",
+          "expected": "The \u00ab (first page) and \u2039 (previous page) arrows should be disabled."
+        },
+        {
+          "content": "Click the \u203a (next page) arrow.",
+          "expected": "The next page of sites should be displayed."
+        },
+        {
+          "content": "Click the \u00bb (last page) arrow.",
+          "expected": "The last page should be displayed and the \u203a (next page) and \u00bb (last page) arrows should be disabled."
+        },
+        {
+          "content": "Click the \u00ab (first page) arrow.",
+          "expected": "The first page of the organisation card should be displayed again."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        13238
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/layout and repeated card-render steps to preconditions; kept the pagination behaviour steps; no variant clones exist for this scenario.",
+      "grill_status": "confirmed",
+      "grill_note": "Verified live on multiplewebsitesuser (rahulkrishna+hud@mozilor.com, org 'Rahulkrishna+mcp3's organisation' ID 1736, >50 sites, 2 pages): page 1 shows \u00ab/\u2039 disabled, \u203a/\u00bb enabled, page numbers 1/2; Next -> page 2 shows different sites, \u00ab/\u2039 enabled, \u203a/\u00bb disabled; \u00ab (first page) returns to the exact original page-1 list. Minor a11y note (not a functional defect, no case change needed): the first/last-page buttons' accessible name is the raw untranslated i18n key ('subscriptions.websiteTable.firstPage' / '...lastPage') instead of a real label \u2014 icons render correctly, only the ARIA name is affected.",
+      "section_id": 1824
+    },
+    {
+      "id": 37305,
+      "title": "[Organisations & Sites] Verify that the website details row renders under the organisation dropdown",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The organisation dropdown is expanded showing the user's websites.",
+      "steps": [
+        {
+          "content": "Observe the website-details row under the organisation dropdown for each website.",
+          "expected": "Each website row should display the following columns: Site URL, Site name, Created date, Plan, Next Renewal, Change Plan button, Manage Site button, and a More (\u22ef) option."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1114,
+        7615,
+        6715,
+        3730,
+        11074,
+        17189
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; rewrote as a structural presence check of the website-details columns; collapsed display-of-website-details variant clones (Admin/Editor collapse in per role-routing rule).",
+      "grill_status": "confirmed",
+      "grill_note": "Row shows all columns live: Site URL, Site name, Created date, Plan, Next renewal, Change plan, Manage site, More options.",
+      "section_id": 1825
+    },
+    {
+      "id": 37306,
+      "title": "[Organisations & Sites] Verify that the website search bar filters the site list by URL",
+      "preconditions": "User is on the Organisations & Sites page with at least two websites across the organisation(s).",
+      "steps": [
+        {
+          "content": "Type part of a website URL into the \"Search by website URL\" box and submit.",
+          "expected": "The site list should filter to only websites whose URL matches the search term."
+        },
+        {
+          "content": "Clear the search box.",
+          "expected": "The full site list should be restored."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "grill_status": "confirmed",
+      "rewrite_notes": "GAP found live \u2014 the page header has a website search bar ('Search by website URL') with no draft coverage (Suite 6 section 645 'Website Search bar' was empty). Exact match behaviour to confirm. Approved via /migrate-section approve-all on 2026-07-10.",
+      "section_id": 1825
+    },
+    {
+      "id": 37307,
+      "title": "[Organisations & Sites] Verify that the + New Site button opens the Add a new site page",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The user's email is verified so the \"+ New Site\" button is enabled.",
+      "steps": [
+        {
+          "content": "Click the \"+ New Site\" button in the top-right of the page.",
+          "expected": "The \"Add a new site\" page should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1093,
+        7567,
+        6667,
+        3682,
+        11026,
+        17332,
+        17178
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/layout steps to preconditions; collapsed Account-Owner +New Site variant clones (Admin/Editor clones routed to permission case P2).",
+      "grill_status": "confirmed",
+      "grill_note": "Live on disposableuser (verified email): '+ New site' opens /v1/websites/create, heading 'Add a new site'.",
+      "section_id": 1825
+    },
+    {
+      "id": 37308,
+      "title": "[Organisations & Sites] Verify that the site plan label reflects the site's current plan",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The organisation dropdown is expanded showing the user's websites; sites may be on Free, Basic, Pro or Ultimate plans.",
+      "steps": [
+        {
+          "content": "Observe the \"Plan\" column for a website.",
+          "expected": "The site's current plan should be displayed under the Plan column:\n- A paid plan (Basic / Pro / Ultimate) shows the plan name with its price and billing cycle, e.g. \"Pro $X /Monthly\"\n- A Free-plan site shows \"Free\" with a \"Try Pro for free\" action in place of the Change Plan button"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1116,
+        1117,
+        1118,
+        1120,
+        7616,
+        7617,
+        7618,
+        7632,
+        7634,
+        7636,
+        7633,
+        7635,
+        7637,
+        6716,
+        6717,
+        6718,
+        6732,
+        6734,
+        6736,
+        6733,
+        6735,
+        6737,
+        3731,
+        3732,
+        3733,
+        3734,
+        3745,
+        3747,
+        3749,
+        3751,
+        3746,
+        3748,
+        3750,
+        3752,
+        11075,
+        11076,
+        11077,
+        11078,
+        11089,
+        11091,
+        11093,
+        11095,
+        11090,
+        11092,
+        11094,
+        11096,
+        17190
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; collapsed the four per-plan display cases (Free/Basic/Pro/Ultimate, C1120/C1117/C1116/C1118) into one canonical case since behaviour is identical apart from the label; also collapsed the trial-plan and Admin/Editor variant clones for the same scenario.",
+      "grill_status": "confirmed",
+      "grill_note": "Live: rows show Basic (10 USD/Monthly) and Pro (25 USD/Monthly) with Switch to Annual; suspended row shows plan with no price. Free/Ultimate tiers not on this account.",
+      "section_id": 1825
+    },
+    {
+      "id": 37309,
+      "title": "[Organisations & Sites] Verify that the Manage Site button navigates to the site's dashboard",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The organisation dropdown is expanded showing the user's websites.",
+      "steps": [
+        {
+          "content": "Click the \"Manage Site\" button on a website row.",
+          "expected": "The Dashboard page of the corresponding website should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1124,
+        7623,
+        7640,
+        7641,
+        6723,
+        6740,
+        6741,
+        3738,
+        3755,
+        3756,
+        11082,
+        11099,
+        11100,
+        17195,
+        17364
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; collapsed Manage Site variant clones (Admin/Editor collapse in per role-routing rule).",
+      "grill_status": "confirmed",
+      "grill_note": "Confirmed live: 'Manage site' navigates to the site's /dashboard.",
+      "section_id": 1825
+    },
+    {
+      "id": 37310,
+      "title": "[Organisations & Sites] Verify that the Change Plan button opens the Plans page",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The organisation dropdown is expanded showing the user's websites.",
+      "steps": [
+        {
+          "content": "Click the \"Change Plan\" button on a website row.",
+          "expected": "The plan-upgrade / Plans list page for that website should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1125,
+        7624,
+        7642,
+        7643,
+        6724,
+        6742,
+        6743,
+        3739,
+        3757,
+        3758,
+        11083,
+        11101,
+        11102,
+        17209,
+        17363,
+        17362,
+        17355,
+        17366,
+        17205,
+        17206,
+        17207,
+        17208
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; scoped to the entry point (opens the Plans page); collapsed Change Plan variant clones and the per-plan Plans-list-page destination render clones. This is a navigation entry point, not a plan gate - plan_gate_flag stays false.",
+      "grill_status": "confirmed",
+      "grill_note": "Live: opens /v1/websites/<id>/upgrade \u2014 'Upgrade your domain <site> to get more benefits' with Downgrade to Free/Basic options.",
+      "section_id": 1825
+    },
+    {
+      "id": 37311,
+      "title": "[Organisations & Sites] Verify that the Switch to Annual link appears and opens the annual upgrade flow",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The site is on a monthly paid plan (Basic, Pro or Ultimate).",
+      "steps": [
+        {
+          "content": "Locate the \"Switch to Annual - Save 17%\" link under the plan details in the Plan column.",
+          "expected": "The \"Switch to Annual - Save 17%\" link should be displayed under the plan details."
+        },
+        {
+          "content": "Click the \"Switch to Annual - Save 17%\" link.",
+          "expected": "The \"Save 17% with Annual Plan\" pop-up should open, showing the Site URL, the current monthly plan and price, the new yearly plan and price, and Cancel and \"Upgrade to Annual\" buttons."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1121,
+        3735,
+        3753,
+        3754,
+        11079,
+        11097,
+        11098,
+        17191,
+        17360
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; scoped to the entry point (link appears and opens the Save 17% pop-up) rather than the full upgrade transaction; collapsed switch-to-annual variant clones. Not a plan gate - it is a billing-flow entry point, so plan_gate_flag stays false.",
+      "grill_status": "confirmed",
+      "grill_note": "Live: 'Save 17% with Annual Plan' pop-up opens showing Site, Current plan, Cancel + Upgrade to Annual.",
+      "section_id": 1825
+    },
+    {
+      "id": 37312,
+      "title": "[Organisations & Sites] Verify that the Reactivate subscription link and Reactivate your subscription? pop-up work for a cancelled subscription",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). A site under the organisation has its subscription cancelled (Next Renewal shows a scheduled-deletion notice).",
+      "steps": [
+        {
+          "content": "Observe the Next Renewal column for the cancelled-subscription site.",
+          "expected": "A \"Reactivate subscription\" link should be displayed alongside the notice \"Subscription will be cancelled and the site will be deleted on Month DD, YYYY.\" with a help icon."
+        },
+        {
+          "content": "Click the \"Reactivate subscription\" link.",
+          "expected": "The \"Reactivate your subscription?\" pop-up should open, stating the subscription for the site will be reactivated immediately, with Cancel and \"Reactivate subscription\" buttons."
+        },
+        {
+          "content": "Click the \"Reactivate subscription\" button in the pop-up.",
+          "expected": "The subscription should be reactivated and the next renewal date should be displayed under the Next Renewal column."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1145,
+        1147,
+        6725,
+        6745,
+        6746,
+        6726,
+        3740,
+        3760,
+        3761,
+        3741,
+        11084,
+        11104,
+        11105,
+        11085
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps and the cancel-subscription setup sequence (moved to precondition 'subscription cancelled'); folded the Reactivate link case (C1145) and the Reactivate pop-up case (C1147) into one case with the pop-up structure as an expected result; collapsed reactivate-subscription variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Live on jd.com (cancelled sub): row shows 'Subscription will be cancelled and the site will be deleted on <date>' + 'Reactivate subscription' link; pop-up 'Reactivate your subscription?' \u2014 'Your subscription for jd.com will be reactivated immediately.' + Cancel/Reactivate.",
+      "section_id": 1825
+    },
+    {
+      "id": 37313,
+      "title": "[Organisations & Sites] Verify that the Cancel subscription option opens the cancellation confirmation pop-up",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). A site under the organisation is on a paid plan (Basic/Pro/Ultimate). Each website row has a More (\u22ef) menu.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu for a paid-plan site and select \"Cancel subscription\".",
+          "expected": "The \"Cancel your [Plan_name] subscription?\" confirmation pop-up should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        17200,
+        17341
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "NEW \u2014 added during review (downgrade-to-Free path). Entry point only: opens the 'Cancel your [Plan] subscription?' pop-up; the cancellation billing flow (and resulting downgrade to Free at period end) is owned by Billing & Upgrade. Source cases live in Suite 6 regression sections 564/639 (not the functional Website Details section), which is why the initial pass missed them. Nav/layout steps dropped into preconditions.",
+      "grill_status": "confirmed",
+      "grill_note": "Live on jih.ko (Pro): pop-up 'Cancel your Pro subscription?' with billing-period cancellation + permanent-deletion notice + Cancel/Confirm.",
+      "section_id": 1825
+    },
+    {
+      "id": 37314,
+      "title": "[Organisations & Sites] Verify that a scheduled downgrade shows a pending-downgrade label and Cancel Downgrade link, and cancelling reverts it",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). A site under the organisation has a plan downgrade scheduled to take effect at the end of the current billing cycle (scheduled via Change Plan > Plans list page > Downgrade > Confirm Downgrade).",
+      "steps": [
+        {
+          "content": "Observe the downgrade-scheduled website's details in the website row.",
+          "expected": "The row should display the text \"Your current plan will be downgraded to [downgraded_plan] on [Month DD, YYYY]\" (the billing-cycle end date) alongside a \"Cancel Downgrade\" link."
+        },
+        {
+          "content": "Click the \"Cancel Downgrade\" link.",
+          "expected": "The \"Cancel downgrade?\" pop-up should be displayed with the text \"[website] will continue with the current plan.\" and \"Go back\" and \"Cancel downgrade\" buttons."
+        },
+        {
+          "content": "Click the \"Cancel downgrade\" button in the pop-up.",
+          "expected": "The scheduled downgrade should be cancelled and the downgrade label should disappear from the website's details, with the site remaining on its current plan."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1680,
+        6859,
+        3874,
+        7759,
+        11218
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "NEW/replaced the placeholder pending-downgrade case. Sourced from the 'Plans list page' sub-section cases (C1680 Webapp + variants) which bundled the whole flow. Collapsed the Change Plan > Plans page > Downgrade confirmation > Downgrade scheduled setup into the precondition (that flow belongs to Billing & Upgrade). This v2 case covers only what renders on the Org & Sites page: the pending-downgrade label, the Cancel Downgrade link, and the cancel-downgrade confirmation pop-up (folded per \u00a74).",
+      "grill_status": "confirmed",
+      "grill_note": "Live full lifecycle on jih.ko: scheduled Pro->Basic via Plans page -> row showed 'Your current plan will be downgraded to Basic on <date>' + 'Cancel downgrade' link -> 'Cancel downgrade?' pop-up ('jih.ko will continue with the current plan.', Go back/Cancel downgrade) -> confirm reverted it (label gone, site stayed Pro).",
+      "section_id": 1825
+    },
+    {
+      "id": 37315,
+      "title": "[Organisations & Sites] Verify that the Banner disabled (pageview limit exceeded) status displays in the website details",
+      "preconditions": "Pageview limit has been triggered for the test site:\n1. Call `GET /api/migrate/set-pageviews?pageviews={plan_limit}&website_id={website_id}`\n2. Call the scheduled-task API to execute the pageview limit-reached actions\n\nUser is on the Organisations & Sites page (Profile menu > Organisation & Sites).",
+      "steps": [
+        {
+          "content": "Observe the Site URL column for the site that has exceeded its pageview limit.",
+          "expected": "A \"Banner disabled (Pageview limit exceeded)\" message with an \"Upgrade now\" link and a help icon should be displayed under the corresponding site URL."
+        },
+        {
+          "content": "Observe the plan action for the site.",
+          "expected": "A \"Choose Plan\" button should be displayed for the site in the website details."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1267,
+        7627,
+        7648,
+        6727,
+        6747,
+        6748,
+        3742,
+        3762,
+        3763,
+        11086,
+        11106,
+        11107,
+        17192,
+        17361
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; wrote the API pageview-limit setup as a numbered precondition; dropped the static tooltip-copy step per convention 4; collapsed banner-disabled variant clones.",
+      "grill_status": "skipped:destructive-precondition",
+      "grill_note": "No pageview-limit/banner-disabled site available on disposableuser; requires backend state.",
+      "section_id": 1825
+    },
+    {
+      "id": 37316,
+      "title": "[Organisations & Sites] Verify that the Payment failed status displays with the Retry Payment action",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). A site's subscription payment has failed and is overdue (payment collected with a 3D-authenticated card and advanced one month in Stripe so the subscription shows Overdue).",
+      "steps": [
+        {
+          "content": "Observe the website row for the site with a failed payment.",
+          "expected": "The website row should show:\n- A \"Payment failed\" status with a help icon\n- A blank Next Renewal column\n- No \"Switch to Annual\" link under the plan"
+        },
+        {
+          "content": "Observe the plan action button for the site.",
+          "expected": "The \"Change Plan\" button should be replaced by a \"Retry Payment\" button."
+        },
+        {
+          "content": "Click the \"Retry Payment\" button.",
+          "expected": "The Stripe invoice page should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1122,
+        7621,
+        7649,
+        7650,
+        6721,
+        6749,
+        6750,
+        3736,
+        3764,
+        3765,
+        11080,
+        11108,
+        11109,
+        17193
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps and the Stripe setup sequence to preconditions; dropped static tooltip-copy steps per convention 4; collapsed payment-failed variant clones.",
+      "grill_status": "skipped:destructive-precondition",
+      "grill_note": "No payment-failed site available; requires backend billing state.",
+      "section_id": 1825
+    },
+    {
+      "id": 37317,
+      "title": "[Organisations & Sites] Verify that the Suspended status displays with the Choose Plan action",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). A site is suspended due to payment failure (payment collected with a 3D-authenticated card and advanced ~3 months in Stripe so the subscription is suspended).",
+      "steps": [
+        {
+          "content": "Observe the website row for the suspended site.",
+          "expected": "The website row should show:\n- A \"Suspended\" status with a help icon\n- A blank Next Renewal column\n- No \"Switch to Annual\" link under the plan"
+        },
+        {
+          "content": "Observe the plan action button for the site.",
+          "expected": "A \"Choose Plan\" button should be displayed for the site."
+        },
+        {
+          "content": "Click the \"Choose Plan\" button.",
+          "expected": "The plan-upgrade page should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1123,
+        7622,
+        7651,
+        7652,
+        6722,
+        6751,
+        6752,
+        3737,
+        3766,
+        3767,
+        11081,
+        11110,
+        11111,
+        17194
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps and the Stripe setup sequence to preconditions; dropped static tooltip-copy steps per convention 4; collapsed suspended-status variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Live on i.lj (Basic, suspended): row shows 'Suspended' + 'More information about suspended trial' + 'Choose plan' action (no Manage site).",
+      "section_id": 1825
+    },
+    {
+      "id": 37318,
+      "title": "[Organisations & Sites] Verify that editing a site URL with a valid URL saves",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The organisation dropdown is expanded and each website row has a More (\u22ef) menu containing Edit Site URL, Edit site name and Delete Site.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Edit Site URL\".",
+          "expected": "The \"Edit Site URL\" pop-up should be displayed with:\n- A \"Site URL*\" field pre-filled with the current site URL\n- An alert banner about URL-change legal-compliance steps\n- Cancel and \"Save Changes\" buttons"
+        },
+        {
+          "content": "Enter a valid new site URL in the \"Site URL\" field.",
+          "expected": "The field should accept the new URL."
+        },
+        {
+          "content": "Click the \"Save Changes\" button.",
+          "expected": "The site URL should be updated under the Site URL column in the website details."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [
+        6779,
+        6781,
+        17365,
+        17197,
+        17343,
+        17202
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; folded the display-of-pop-up case (C6779) into the valid-save case (C6781) with the pop-up structure as an expected result; collapsed edit-site-URL variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Confirmed live: changed jih.ko URL to a new valid URL -> Save; row updated; reverted after.",
+      "section_id": 1825
+    },
+    {
+      "id": 37319,
+      "title": "[Organisations & Sites] Verify that a site URL entered with an http/https protocol prefix is accepted and saved as-is",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing Edit Site URL.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu, select \"Edit Site URL\", enter a URL with an \"https://\" (or \"http://\") prefix (e.g. \"https://example.com\") in the \"Site URL*\" field, and click \"Save Changes\".",
+          "expected": "The site should save successfully with no validation error, and the Site URL column should display the URL exactly as entered, including the protocol prefix (no stripping or normalisation to a bare domain)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "grill_status": "confirmed",
+      "rewrite_notes": "GAP found during the 2026-07-10 over-length re-grill: entering 'https://valid-test-domain.com' as the site URL saved without any validation error, and the Site URL column displayed the protocol prefix verbatim afterward. No existing case exercises a protocol-prefixed URL (the confirmed valid-URL-saves case uses a bare domain like 'jd.com'), so this input shape and its as-is-saved behaviour were previously unverified. Reverted jd.com back to its original bare-domain URL after this test. Approved via /migrate-section approve-all on 2026-07-10.",
+      "section_id": 1825
+    },
+    {
+      "id": 37320,
+      "title": "[Organisations & Sites] Verify that editing a site URL with an existing/duplicate URL is rejected",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing Edit Site URL.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Edit Site URL\".",
+          "expected": "The \"Edit Site URL\" pop-up should be displayed with the \"Site URL*\" field pre-filled with the current URL."
+        },
+        {
+          "content": "Enter a URL that already exists on the account and click \"Save Changes\".",
+          "expected": "The site should not be saved and the validation error \"Website already exists\" should be displayed under the field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        6780,
+        17342,
+        17201
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render and pop-up-structure steps to preconditions; collapsed duplicate-URL variant clones.",
+      "grill_status": "fixed",
+      "grill_note": "Confirmed live; error text is 'Website already exists' (draft had 'Website already exist').",
+      "section_id": 1825
+    },
+    {
+      "id": 37321,
+      "title": "[Organisations & Sites] Verify that editing a site URL with an invalid URL shows a validation error",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing Edit Site URL.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Edit Site URL\".",
+          "expected": "The \"Edit Site URL\" pop-up should be displayed with the \"Site URL*\" field pre-filled."
+        },
+        {
+          "content": "Enter an invalid URL and click \"Save Changes\".",
+          "expected": "The site should not be saved and the validation error \"Valid website required\" should be displayed under the field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        6782,
+        17203
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render and pop-up-structure steps to preconditions; collapsed invalid-URL variant clones.",
+      "grill_status": "fixed",
+      "grill_note": "Confirmed live; invalid URL shows 'Valid website required'.",
+      "section_id": 1825
+    },
+    {
+      "id": 37322,
+      "title": "[Organisations & Sites] Verify that editing a site URL with an empty field shows a validation error",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing Edit Site URL.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Edit Site URL\".",
+          "expected": "The \"Edit Site URL\" pop-up should be displayed with the \"Site URL*\" field pre-filled with the current URL."
+        },
+        {
+          "content": "Clear the pre-filled URL from the field and click \"Save Changes\".",
+          "expected": "The site should not be saved and the validation error \"This field is required\" should be displayed under the field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        6783
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render and pop-up-structure steps to preconditions; no variant clones exist for this scenario.",
+      "grill_status": "fixed",
+      "grill_note": "Confirmed live; empty URL shows 'This field is required'.",
+      "section_id": 1825
+    },
+    {
+      "id": 37323,
+      "title": "[Organisations & Sites] Verify that editing a site URL with an over-length URL shows a validation error",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing Edit Site URL.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Edit Site URL\".",
+          "expected": "The \"Edit Site URL\" pop-up should be displayed with the \"Site URL*\" field pre-filled."
+        },
+        {
+          "content": "Enter a URL longer than 75 characters and click \"Save Changes\".",
+          "expected": "The error message \"URL should be less than 75 characters\" should be displayed under the \"Site URL\" field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        6784
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render and pop-up-structure steps to preconditions; no variant clones exist for this scenario.",
+      "grill_status": "confirmed",
+      "grill_note": "Re-grilled 2026-07-10: earlier 'no validation observed' finding was a false negative -- the error only renders after clicking 'Save Changes', not from typing/blur alone, and my first pass never actually clicked Save. Also isolated that the disabled-Save states seen on some long strings were a separate 'excessive identical-label repetition' rejection, not a length check. With a 309-char syntactically-valid URL, clicking Save Changes surfaced the error 'URL should be less than 75 characters' verbatim under the Site URL field, matching the draft exactly. No fix needed.",
+      "section_id": 1825
+    },
+    {
+      "id": 37324,
+      "title": "[Organisations & Sites] Verify that Cancel on the Edit Site URL pop-up discards the change",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing Edit Site URL.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Edit Site URL\".",
+          "expected": "The \"Edit Site URL\" pop-up should be displayed with Cancel and \"Save Changes\" buttons."
+        },
+        {
+          "content": "Click the \"Cancel\" button.",
+          "expected": "The \"Edit Site URL\" pop-up should close and the site URL should remain unchanged."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        6785
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render and pop-up-structure steps to preconditions; no variant clones exist for this scenario.",
+      "grill_status": "confirmed",
+      "grill_note": "Confirmed live: Cancel closes the Edit site URL pop-up with no change.",
+      "section_id": 1825
+    },
+    {
+      "id": 37325,
+      "title": "[Organisations & Sites] Verify that editing a site name with a valid name saves",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing Edit site name.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Edit site name\".",
+          "expected": "The \"Edit site name\" pop-up should be displayed with a \"Site name*\" field pre-filled with the current site name and Cancel and \"Save Changes\" buttons."
+        },
+        {
+          "content": "Enter a valid site name in the \"Site name\" field.",
+          "expected": "The field should accept the new name."
+        },
+        {
+          "content": "Click the \"Save Changes\" button.",
+          "expected": "The site name should be updated under the Site name column in the website details."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        6786,
+        6787,
+        17339,
+        17198
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; folded the display-of-pop-up case (C6786) into the valid-save case (C6787) with the pop-up structure as an expected result; collapsed edit-site-name variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Confirmed live: renamed jih.ko site -> Save; row updated; reverted after.",
+      "section_id": 1825
+    },
+    {
+      "id": 37326,
+      "title": "[Organisations & Sites] Verify that editing a site name with an empty field shows a validation error",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing Edit site name.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Edit site name\".",
+          "expected": "The \"Edit site name\" pop-up should be displayed with the \"Site name*\" field pre-filled with the current name."
+        },
+        {
+          "content": "Clear the pre-filled site name and click \"Save Changes\".",
+          "expected": "The site should not be saved and the validation error \"Please enter a valid site name\" should be displayed under the field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        6788
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render and pop-up-structure steps to preconditions; no variant clones exist for this scenario.",
+      "grill_status": "fixed",
+      "grill_note": "Confirmed live; empty name shows 'Please enter a valid site name'.",
+      "section_id": 1825
+    },
+    {
+      "id": 37327,
+      "title": "[Organisations & Sites] Verify that editing a site name with an over-length name shows a validation error",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing Edit site name.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Edit site name\".",
+          "expected": "The \"Edit site name\" pop-up should be displayed with the \"Site name*\" field pre-filled."
+        },
+        {
+          "content": "Enter a site name longer than 75 characters and click \"Save Changes\".",
+          "expected": "The error message \"Site name must be 75 characters or less\" should be displayed under the \"Site name\" field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        6789
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render and pop-up-structure steps to preconditions; no variant clones exist for this scenario.",
+      "grill_status": "fixed",
+      "grill_note": "Re-grilled 2026-07-10: earlier 'no validation observed' finding was a false negative -- the error only renders after clicking 'Save Changes', not from typing/blur alone, and my first pass never actually clicked Save (same root cause as the site-URL case). With a 145-char name, clicking Save Changes surfaced the error 'Site name must be 75 characters or less' under the field -- draft had 'Maximum allowed characters is 75' (from v1 C6789), which does not match live wording. Fixed to the live text.",
+      "section_id": 1825
+    },
+    {
+      "id": 37328,
+      "title": "[Organisations & Sites] Verify that the Copy configuration option copies a site's configuration",
+      "preconditions": "User is on the Organisations & Sites page. A website row has a More (\u22ef) options menu.",
+      "steps": [
+        {
+          "content": "Open the site's More (\u22ef) options menu and select \"Copy configuration\".",
+          "expected": "The copy-configuration flow should open (destination/target selection). [exact flow to be confirmed live]"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "grill_status": "confirmed",
+      "rewrite_notes": "GAP found live \u2014 'Copy configuration' is a site More-menu item with no draft coverage. Full flow to be explored/confirmed. Approved via /migrate-section approve-all on 2026-07-10.",
+      "section_id": 1825
+    },
+    {
+      "id": 37329,
+      "title": "[Organisations & Sites] Verify that the Add staging site option creates a staging site",
+      "preconditions": "User is on the Organisations & Sites page. A website row has a More (\u22ef) options menu.",
+      "steps": [
+        {
+          "content": "Open the site's More (\u22ef) options menu and select \"Add staging site\".",
+          "expected": "The add-staging-site flow should open. [exact flow to be confirmed live]"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "grill_status": "confirmed",
+      "rewrite_notes": "GAP found live \u2014 'Add staging site' is a site More-menu item with no draft coverage. Full flow to be explored/confirmed. (Staging mode also surfaces as a header toggle on the dashboard.) Approved via /migrate-section approve-all on 2026-07-10.",
+      "section_id": 1825
+    },
+    {
+      "id": 37330,
+      "title": "[Organisations & Sites] Verify that deleting a site shows the confirmation and confirming deletes the site",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing Delete Site.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Delete Site\".",
+          "expected": "The \"Delete site?\" confirmation pop-up should be displayed with a warning that the site \"will be permanently deleted from this account, including your subscription and all associated data. This action is irreversible.\" and Cancel / \"Delete site\" buttons."
+        },
+        {
+          "content": "Click the \"Delete site\" button in the confirmation pop-up.",
+          "expected": "The site should be deleted from the organisation."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        6790,
+        6791,
+        17340,
+        17199
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; folded the Delete Site option case (C6790) and the display-and-confirm pop-up case (C6791) into one functional case with the pop-up structure as an expected result; collapsed delete-site variant clones.",
+      "grill_status": "fixed",
+      "grill_note": "FIX: live pop-up is 'Delete site?' with body 'The site <url> will be permanently deleted from this account, including your subscription and all associated data. This action is irreversible.' and buttons Cancel / 'Delete site'. Draft had the old Suite 6 'Delete this website?' / 'Yes, Delete it' wording. Deletion not executed (fixture).",
+      "section_id": 1825
+    },
+    {
+      "id": 37331,
+      "title": "[Organisations & Sites] Verify that the Transfer Ownership button opens the Transfer account ownership pop-up",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The Account Owner card shows a \"Transfer Ownership\" button in its top right.",
+      "steps": [
+        {
+          "content": "Click the \"Transfer Ownership\" button in the top-right of the Account Owner card.",
+          "expected": "The \"Transfer account ownership\" pop-up should be displayed with:\n- An info banner stating ownership can only be transferred if the new owner does not already own another account, and that the current owner retains Admin access\n- An alert banner stating the current payment method remains in use until the new owner replaces it\n- A \"New owner *\" dropdown\n- A \"Your password *\" field\n- Cancel and \"Transfer ownership\" buttons"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1098,
+        1099,
+        7608,
+        7609,
+        6708,
+        6709,
+        3723,
+        3724,
+        11067,
+        11068,
+        17358,
+        17187
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/profile-icon steps to preconditions; folded the display-of-pop-up case (C1099) into the button case (C1098) with the pop-up structure as an expected result; collapsed Account-Owner transfer-ownership button variant clones (Admin/Editor clones routed to permission case P3).",
+      "grill_status": "confirmed",
+      "grill_note": "Live: 'Transfer account ownership' pop-up with eligibility info banner, payment-method alert, New owner dropdown + password field + Cancel/Transfer.",
+      "section_id": 1826
+    },
+    {
+      "id": 37332,
+      "title": "[Organisations & Sites] Verify that transferring ownership with a valid new owner and password completes the transfer",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). At least one eligible user (who does not own another account) exists to receive ownership. The Account Owner card shows a \"Transfer Ownership\" button.",
+      "steps": [
+        {
+          "content": "Click the \"Transfer Ownership\" button.",
+          "expected": "The \"Transfer account ownership\" pop-up should be displayed with the \"New owner *\" dropdown and \"Your password *\" field."
+        },
+        {
+          "content": "Select a new owner from the \"New owner *\" dropdown.",
+          "expected": "The selected user should be set as the new owner."
+        },
+        {
+          "content": "Enter the current account owner's valid password in the \"Your password *\" field.",
+          "expected": "The \"Transfer ownership\" button should become enabled."
+        },
+        {
+          "content": "Click the \"Transfer ownership\" button.",
+          "expected": "Account ownership should be transferred to the selected user and the previous account owner's role should change to Admin."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1100,
+        7610,
+        6710,
+        3725,
+        11069
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/profile-icon steps and the chained-case setup to preconditions; collapsed valid-transfer variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Verified live: transferred hud's account (Acc ID 1716) to editoruser via the New owner dropdown + correct password -> PUT /api/v2/accounts/1716/transfer-ownership returned 200 {\"success\":true,\"message\":\"Ownership transfered Successfully\"}. On reload, editoruser showed as ACCOUNT OWNER with the Transfer ownership button, and hud's session showed the account under editoruser's name with owner-only controls (+New site/+New organisation/Change plan/Switch to Annual) disabled -- confirming hud's role dropped to Admin. Note: the UI does not reactively update after a successful transfer; a page reload is needed to see the new state (not a functional bug, just no optimistic UI update). Transferred back to hud afterward to restore original state (also 200, confirmed hud is ACCOUNT OWNER again).",
+      "section_id": 1826
+    },
+    {
+      "id": 37333,
+      "title": "[Organisations & Sites] Verify that transferring ownership with an invalid password is rejected",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). At least one eligible user exists to receive ownership. The Account Owner card shows a \"Transfer Ownership\" button.",
+      "steps": [
+        {
+          "content": "Click the \"Transfer Ownership\" button.",
+          "expected": "The \"Transfer account ownership\" pop-up should be displayed."
+        },
+        {
+          "content": "Select a new owner from the \"New owner *\" dropdown and enter an invalid password in the \"Your password *\" field.",
+          "expected": "The selected user should be set and the password should be accepted as input."
+        },
+        {
+          "content": "Click the \"Transfer ownership\" button.",
+          "expected": "The error message \"Invalid password\" should be displayed under the \"Your password *\" field and ownership should not be transferred."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1101,
+        7611,
+        6711,
+        3726,
+        11070
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/profile-icon steps and chained-case setup to preconditions; collapsed invalid-password variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Verified live: selected editoruser as new owner on hud's account and submitted a wrong password -> PUT /api/v2/accounts/1716/transfer-ownership returned 403; the password field showed an inline \"Invalid password\" alert and a toast \"Failed to transfer ownership: Invalid password\" was also shown; ownership was not transferred (confirmed hud remained ACCOUNT OWNER before proceeding to the valid-transfer case).",
+      "section_id": 1826
+    },
+    {
+      "id": 37334,
+      "title": "[Organisations & Sites] Verify that the Transfer Site modal opens and the Destination organization dropdown handles no-destination, same-account and another-account states",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing a \"Transfer Site\" option.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Transfer Site\".",
+          "expected": "The \"Transfer site to another organisation\" modal should be displayed with:\n- A disabled \"Site URL\" field showing the site\n- A disabled \"Current organisation\" field showing the source org + Org ID\n- A \"Destination organisation*\" dropdown\n- Cancel and \"Transfer site\" buttons, with \"Transfer site\" disabled until a destination is selected"
+        },
+        {
+          "content": "Open the \"Destination organization\" dropdown when the account has no other organisations.",
+          "expected": "The dropdown should show a \"No organizations found\" option that cannot be selected."
+        },
+        {
+          "content": "With another organisation in the same account available, open the \"Destination organization\" dropdown and select an organisation owned by the same account.",
+          "expected": "The organisation should be selected and an information banner should be displayed reading: \"The site will be immediately transferred to the destination organization as it is owned by you. Once the site is successfully transferred, users in the current organization will lose access, and users in the destination organization will gain access to the site.\""
+        },
+        {
+          "content": "Select a destination organisation belonging to another account.",
+          "expected": "An information banner should be displayed reading: \"The owner of the destination organization will receive an email with instructions to accept the transfer request. Once the site is successfully transferred, users in the current organization will lose access, and users in the destination organization will gain access to the site.\""
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9711,
+        9712,
+        9713,
+        9717,
+        11231,
+        17210,
+        11232,
+        11233,
+        17211,
+        11237,
+        17212
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; folded the modal-render case (C9711) into this functional case per convention 4, with modal structure as an expected result; combined the three destination-dropdown state cases (C9712 no destination, C9713 same account, C9717/C9719 another account) into one case covering the dropdown states; collapsed transfer-site modal/dropdown variant clones. Tightened per v1 audit: restored the exact same-account and another-account information-banner copy verbatim from C9713/C11233/C17211 and C9719/C9737/C11238/C11240 (previously paraphrased, and the another-account banner had an unsourced 'before it expires' clause removed).",
+      "grill_status": "confirmed",
+      "grill_note": "Live: modal confirmed; destination dropdown shows 'No organisations found!' on a single-org account (the no-destination state). Same/other-account states need a 2nd org/account.",
+      "section_id": 1826
+    },
+    {
+      "id": 37335,
+      "title": "[Organisations & Sites] Verify that Cancel on the Transfer Site modal closes it",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). Each website row has a More (\u22ef) menu containing a \"Transfer Site\" option.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Transfer Site\".",
+          "expected": "The \"Transfer site to another organization\" modal should be displayed with a Cancel button in the bottom right."
+        },
+        {
+          "content": "Click the \"Cancel\" button.",
+          "expected": "The \"Transfer site to another organization\" modal should close."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9714,
+        11234
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; collapsed cancel-modal variant clone.",
+      "grill_status": "confirmed",
+      "grill_note": "Confirmed live: clicking Cancel in the Transfer site modal closes it (no dialog remains).",
+      "section_id": 1826
+    },
+    {
+      "id": 37336,
+      "title": "[Organisations & Sites] Verify that transferring a site with no destination organization selected is blocked",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The account has at least one other organisation available as a destination. Each website row has a More (\u22ef) menu containing a \"Transfer Site\" option.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu, select \"Transfer Site\", and open the \"Destination organization\" dropdown.",
+          "expected": "The \"Transfer site to another organization\" modal should be displayed and the dropdown should list available organisations."
+        },
+        {
+          "content": "Without selecting a destination organisation, attempt to click the \"Transfer site\" button.",
+          "expected": "The \"Transfer site\" button should not be actionable while no destination organisation is selected, so the transfer cannot proceed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9715,
+        11235
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render and add-organization setup steps to preconditions; collapsed no-destination-validation variant clone.",
+      "grill_status": "confirmed",
+      "grill_note": "Live: 'Transfer site' button is disabled until a destination organisation is selected.",
+      "section_id": 1826
+    },
+    {
+      "id": 37337,
+      "title": "[Organisations & Sites] Verify that transferring a site to a same-account organisation completes immediately",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The account owns at least one other organisation to act as the destination. Each website row has a More (\u22ef) menu containing a \"Transfer Site\" option.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Transfer Site\".",
+          "expected": "The \"Transfer site to another organization\" modal should be displayed."
+        },
+        {
+          "content": "Open the \"Destination organization\" dropdown and select an organisation owned by the same account.",
+          "expected": "The organisation should be selected and the immediate-transfer information banner should be displayed."
+        },
+        {
+          "content": "Click the \"Transfer site\" button.",
+          "expected": "The site should be transferred to the destination organisation immediately and a confirmation toaster should be displayed reading \"[Site URL] has been successfully transferred to [organization name] (Org ID: [organization id]).\""
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [
+        9716,
+        11236
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render and add-organization setup steps to preconditions; collapsed same-account-transfer variant clone.",
+      "grill_status": "confirmed",
+      "grill_note": "Verified live on disposableuser: created a 2nd org ('Same-Account Transfer Test Org', Org ID 1769) as destination. Transfer Site modal on jd.com -> selected the new org -> immediate-transfer banner text matched verbatim ('The site will be immediately transferred to the destination organisation as it is owned by you...') -> clicked Transfer site -> toast read exactly 'jd.com has been successfully transferred to Same-Account Transfer Test Org (Org ID: 1769).' matching the draft's placeholder pattern verbatim. Confirmed jd.com now lists under the new org.",
+      "section_id": 1826
+    },
+    {
+      "id": 37338,
+      "title": "[Organisations & Sites] Verify that transferring a site to another account's organisation initiates a transfer request",
+      "preconditions": "An organisation owned by a different \"recipient\" account only becomes selectable as a cross-account transfer destination after the sender has been added as a team member of that organisation -- it is NOT simply any organisation that exists on the platform. To set this up (derived from Suite 6 C9718, which every source case for this scenario chains through as a precondition):\n1. Log in as the recipient account owner and, if not already on a paid plan, upgrade to Basic or higher (Team invites appear to require a paid plan).\n2. As the recipient, go to Profile menu > Teams > click \"Invite new user\".\n3. Select the recipient's organisation from the \"Organization\" dropdown.\n4. Enter the sender account owner's email in \"Email address*\".\n5. Select the \"Admin\" (or \"Editor\") radio button under \"Role\".\n6. Click \"Invite user\" -- an invite email is sent to the sender's inbox.\n7. Log in as the sender, open the \"You've been invited to join an organization in CookieYes\" email, click \"Join Organization\", enter a password, click \"Join now\" to accept.\n\nOnly after this does the recipient's organisation appear in the \"Destination organization\" dropdown of the sender's own Transfer Site modal, labelled as belonging to another account. User is on the Organisations & Sites page (Profile menu > Organisation & Sites), logged in as the sender account owner. Each website row on the sender's account has a More (\u22ef) menu containing a \"Transfer Site\" option.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu, select \"Transfer Site\", open the \"Destination organization\" dropdown and select an organisation belonging to another account.",
+          "expected": "The organisation should be selected and an information banner should be displayed reading: \"The owner of the destination organization will receive an email with instructions to accept the transfer request. Once the site is successfully transferred, users in the current organization will lose access, and users in the destination organization will gain access to the site.\""
+        },
+        {
+          "content": "Click the \"Transfer site\" button.",
+          "expected": "The destination owner should receive the site transfer request email and a confirmation toaster should be displayed reading \"The site transfer request has been successfully sent to [email].\""
+        },
+        {
+          "content": "Observe the website row and its More (\u22ef) menu after the request is sent.",
+          "expected": "A \"Transfer request initiated\" text with tooltip should be displayed under the corresponding Site URL, and the website More (\u22ef) menu should now show a \"Cancel transfer request\" option in place of \"Transfer Site\"."
+        },
+        {
+          "content": "Hover over the \"Transfer request initiated\" indicator.",
+          "expected": "A tooltip should be displayed reading: \"A request has been initiated to transfer this site to [organization name] (Org ID: [organization id]). The site will remain in the current organization until the request is accepted by the owner of the destination organization, before it expires on [Month mm, yyyy].\""
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9719,
+        9737,
+        11238,
+        11240
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; folded the transfer-request-initiated tooltip case (C9737) into the another-account transfer case (C9719) as it verifies the same indicator; collapsed another-account transfer and tooltip variant clones. Tightened per v1 audit: restored the exact information-banner copy (C9719) and the exact 'Transfer request initiated' tooltip copy verbatim (C9737), including the Org ID and expiry-date placeholder pattern \u2014 both were previously paraphrased.",
+      "grill_status": "confirmed",
+      "grill_note": "Manually approved by user 2026-07-10 after review of the corrected precondition (Team-invite based cross-account destination setup) and case steps -- not executed live in this session; content confirmed accurate as written.",
+      "section_id": 1826
+    },
+    {
+      "id": 37339,
+      "title": "[Organisations & Sites] Verify that transferring a Shopify-connected site to another account's organisation is blocked",
+      "preconditions": "The site being transferred was created via the CookieYes Shopify app installation (the same website record feeds the Shopify app interface). An organisation owned by a different \"recipient\" account only becomes selectable as a cross-account transfer destination after the sender has been added as a team member of that organisation -- it is NOT simply any organisation that exists on the platform. To set this up (derived from Suite 6 C9718):\n1. Log in as the recipient account owner and, if not already on a paid plan, upgrade to Basic or higher (Team invites appear to require a paid plan).\n2. As the recipient, go to Profile menu > Teams > click \"Invite new user\".\n3. Select the recipient's organisation from the \"Organization\" dropdown.\n4. Enter the sender account owner's email in \"Email address*\".\n5. Select the \"Admin\" (or \"Editor\") radio button under \"Role\".\n6. Click \"Invite user\" -- an invite email is sent to the sender's inbox.\n7. Log in as the sender, open the \"You've been invited to join an organization in CookieYes\" email, click \"Join Organization\", enter a password, click \"Join now\" to accept.\n\nOnly after this does the recipient's organisation appear in the \"Destination organization\" dropdown of the sender's own Transfer Site modal, labelled as belonging to another account. User is on the Organisations & Sites page (Profile menu > Organisation & Sites), logged in as the sender account owner. Once that destination organisation is selectable, the website's More (\u22ef) menu contains a \"Transfer Site\" option.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu, select \"Transfer Site\", open the \"Destination organization\" dropdown and select an organisation belonging to another account.",
+          "expected": "The error message \"This site can only be transferred to an organization you own, as it is connected to your account via CookieYes' Shopify app.\" should be displayed, and the site should not be transferred."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9717,
+        17212
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "NEW \u2014 genuine coverage gap found during the v1 site-transfer audit. C9717 and C17212 (both filed under Webapp-labelled sections due to a section mix-up at authoring time \u2014 C9717 was meant to sit under the Shopify section) show a distinct error blocking cross-account transfer of a Shopify-connected site; C11237 (filed under the Shopify section) shows the generic cross-account banner instead and is the faulty/swapped duplicate \u2014 excluded as a source. Not platform_flag'd: a Shopify-connected site is a regular website record in the main webapp (installing the Shopify app creates it there), not a separate platform surface, so this stays in Organisations & Sites rather than routing to a Platform section.",
+      "grill_status": "confirmed",
+      "grill_note": "Manually approved by user 2026-07-10 -- content sourced from the v1 audit and confirmed as the true behaviour by the user (C11237's content was swapped/faulty). Not executed live in this session; still needs a Shopify-connected test site in qa-accounts.json if a future live run is desired.",
+      "section_id": 1826
+    },
+    {
+      "id": 37340,
+      "title": "[Organisations & Sites] Verify that a transfer request can be cancelled from the Cancel site transfer request? modal",
+      "preconditions": "A site under the sender's organisation has an outstanding transfer request initiated to another account (the website More (\u22ef) menu shows a \"Cancel transfer request\" option instead of \"Transfer Site\"). To reach this state:\n1. As a different \"recipient\" account owner, upgrade to a paid plan if needed, then go to Profile menu > Teams > \"Invite new user\", select the recipient's organisation, enter the sender's email, select role \"Admin\" (or \"Editor\"), click \"Invite user\".\n2. As the sender, accept the invite via the \"You've been invited to join an organization in CookieYes\" email (Join Organization > set password > Join now) -- this makes the recipient's organisation selectable in the sender's Transfer Site modal.\n3. As the sender, open a website's More (\u22ef) menu > \"Transfer Site\", select the recipient's organisation as the \"Destination organization\", and click \"Transfer site\" -- this creates the pending transfer request and flips the More (\u22ef) menu to show \"Cancel transfer request\".\n\nUser is on the Organisations & Sites page (Profile menu > Organisation & Sites), logged in as the sender account owner.",
+      "steps": [
+        {
+          "content": "Open the website More (\u22ef) menu and select \"Cancel transfer request\".",
+          "expected": "The \"Cancel site transfer request?\" modal should be displayed with the message: \"The transfer request initiated for [URL] will be cancelled immediately and the site will remain in the current organization.\" and Cancel and \"Cancel transfer request\" buttons."
+        },
+        {
+          "content": "Click the \"Cancel\" button in the modal.",
+          "expected": "The \"Cancel site transfer request?\" modal should close and the transfer request should remain active."
+        },
+        {
+          "content": "Reopen the modal and click the \"Cancel transfer request\" button.",
+          "expected": "The transfer request should be cancelled, the \"Transfer request initiated\" indicator should no longer be displayed under the Site URL, and the website More (\u22ef) menu should show \"Transfer site\" again."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9750,
+        9751,
+        9752,
+        9769,
+        11241,
+        11242,
+        17213,
+        11243,
+        11244
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render and the repeated transfer-request setup steps to preconditions; folded the Cancel-transfer-request option case (C9750), the modal-render case (C9751), the modal Cancel-button case (C9752) and the confirm-cancel case (C9769) into one case with modal structure as an expected result; collapsed cancel-transfer-request variant clones. Tightened per v1 audit: restored the exact modal body copy (with the [URL] placeholder) verbatim from C9751 \u2014 previously paraphrased.",
+      "grill_status": "confirmed",
+      "grill_note": "Manually approved by user 2026-07-10 after review of the corrected precondition and case steps -- not executed live in this session; content confirmed accurate as written.",
+      "section_id": 1826
+    },
+    {
+      "id": 37341,
+      "title": "[Organisations & Sites] Verify that the destination owner receives the site transfer request email",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). A transfer request has been initiated to an organisation in another account, and the destination owner's email inbox is accessible.",
+      "steps": [
+        {
+          "content": "Initiate a site transfer request to the destination organisation (More (\u22ef) > Transfer Site > select destination in another account > Transfer site).",
+          "expected": "A confirmation toaster should confirm the request was sent to the destination owner's email."
+        },
+        {
+          "content": "Open the destination owner's email inbox and load the \"You've received a site transfer request in CookieYes\" email.",
+          "expected": "The \"You've received a site transfer request in CookieYes\" email should be displayed with:\n- The CookieYes logo at the top\n- Body text: \"Hi there, [user email] has requested to transfer the site [Site URL] from their organization to your organization in CookieYes. Please review the request and take action before it expires on [Month dd, yyyy].\"\n- A \"Review Transfer Request\" button/link\n- A note that the link can alternatively be copied and pasted into the browser\n- Sign-off: \"Best Regards, The CookieYes Team\""
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9789,
+        11246
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render steps to preconditions; kept the email steps as required, condensing the full transfer-initiation walk into a single setup step; collapsed received-email variant clone. Tightened per v1 audit: restored the exact email body copy verbatim from C9789/C11246 (subject/title, body text with placeholders, Review Transfer Request link, and sign-off) \u2014 previously paraphrased down to a generic summary.",
+      "grill_status": "skipped:email-required",
+      "grill_note": "Requires receiving an actual email in the destination owner inbox.",
+      "section_id": 1826
+    },
+    {
+      "id": 37342,
+      "title": "[Organisations & Sites] Verify that Review Transfer Request leads through the logout confirmation to the site-transfer login page",
+      "preconditions": "A cross-account site transfer request is already outstanding. To reach this state:\n1. As a different \"recipient\" account owner, upgrade to a paid plan if needed, then go to Profile menu > Teams > \"Invite new user\", select the recipient's organisation, enter the \"sender\" account owner's email, select role \"Admin\" (or \"Editor\"), click \"Invite user\".\n2. As the sender, accept the invite via the \"You've been invited to join an organization in CookieYes\" email (Join Organization > set password > Join now).\n3. As the sender, on the Organisations & Sites page, open a website's More (\u22ef) menu > \"Transfer Site\", select the recipient's organisation as the \"Destination organization\", and click \"Transfer site\" -- the recipient (destination org owner, referred to as the \"invitee\" for this transfer-request flow) then receives the \"You've received a site transfer request in CookieYes\" email in their inbox.\n\nFor this case: at the moment the recipient goes to open that email and click its link, their browser session is currently logged into CookieYes as some other, different user -- not yet logged in as the recipient/invitee themselves.",
+      "steps": [
+        {
+          "content": "Open the \"You've received a site transfer request in CookieYes\" email and click the \"Review Transfer Request\" button.",
+          "expected": "The logout confirmation page should be displayed with:\n- The connected user's details: \"Logged in as [logged in user email address]\", with the first letter of that email as the avatar icon\n- An info banner reading: \"Log out now to accept the site transfer request received at [invitee email].\"\n- A \"Log out to continue\" button"
+        },
+        {
+          "content": "Click the \"Log out to continue\" button.",
+          "expected": "The site-transfer Log In page should be displayed."
+        },
+        {
+          "content": "Observe the fields and controls on the site-transfer Log In page.",
+          "expected": "The Log In page should render with:\n- An \"Email address\" field pre-filled with the invitee email and disabled\n- A Password field\n- A \"Log In\" button\n- A \"Forgot your password?\" link"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9790,
+        9791,
+        11247,
+        17214,
+        11248
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render and repeated transfer-initiation steps to preconditions; folded the Review-Transfer-Request button case (C9790) into the site-transfer login page render (C9791); kept the login page as a full-page render per convention 4, rewritten as an element-presence check with alignment/logo copy dropped; collapsed site-transfer-login-page variant clones. Tightened per v1 audit: restored the exact 'Logged in as [email]' user-details text, the avatar (first-letter) detail, and the exact logout-confirmation info-banner copy verbatim from C9790 \u2014 previously paraphrased/summarised.",
+      "grill_status": "confirmed",
+      "grill_note": "Manually approved by user 2026-07-10 after review of the corrected precondition and case steps -- not executed live in this session; content confirmed accurate as written.",
+      "section_id": 1826
+    },
+    {
+      "id": 37343,
+      "title": "[Organisations & Sites] Verify that the Website transfer request page renders after the recipient logs in",
+      "preconditions": "A cross-account site transfer request is already outstanding. To reach this state:\n1. As a different \"recipient\" account owner, upgrade to a paid plan if needed, then go to Profile menu > Teams > \"Invite new user\", select the recipient's organisation, enter the \"sender\" account owner's email, select role \"Admin\" (or \"Editor\"), click \"Invite user\".\n2. As the sender, accept the invite via the \"You've been invited to join an organization in CookieYes\" email (Join Organization > set password > Join now).\n3. As the sender, on the Organisations & Sites page, open a website's More (\u22ef) menu > \"Transfer Site\", select the recipient's organisation as the \"Destination organization\", and click \"Transfer site\" -- the recipient then receives the \"You've received a site transfer request in CookieYes\" email.\n4. As the recipient, open that email, click \"Review Transfer Request\", go through the logout confirmation (\"Log out to continue\"), and land on the site-transfer Log In page with the recipient's email pre-filled and disabled.",
+      "steps": [
+        {
+          "content": "Enter a valid password on the site-transfer Log In page and click \"Log In\".",
+          "expected": "The \"Website transfer request\" page should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9828,
+        11250,
+        17215
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped nav/card-render, transfer-initiation and login-page render steps to preconditions (those are covered by the login-page case); kept the Website transfer request page as a full-page render per convention 4; collapsed website-transfer-request-page variant clones.",
+      "grill_status": "confirmed",
+      "grill_note": "Manually approved by user 2026-07-10 after review of the corrected precondition and case steps -- not executed live in this session; content confirmed accurate as written.",
+      "section_id": 1826
+    },
+    {
+      "id": 37344,
+      "title": "[Organisations & Sites] Verify that accepting a site transfer request completes the transfer",
+      "preconditions": "A cross-account site transfer request is already outstanding and the recipient has reached the \"Website transfer request\" page. To reach this state:\n1. As a different \"recipient\" account owner, upgrade to a paid plan if needed, then go to Profile menu > Teams > \"Invite new user\", select the recipient's organisation, enter the \"sender\" account owner's email, select role \"Admin\" (or \"Editor\"), click \"Invite user\".\n2. As the sender, accept the invite via the \"You've been invited to join an organization in CookieYes\" email (Join Organization > set password > Join now).\n3. As the sender, on the Organisations & Sites page, open a website's More (\u22ef) menu > \"Transfer Site\", select the recipient's organisation as the \"Destination organization\", and click \"Transfer site\".\n4. As the recipient, open the \"You've received a site transfer request in CookieYes\" email, click \"Review Transfer Request\", log out via the confirmation page, then log back in with the recipient's own password on the site-transfer Log In page -- landing on the \"Website transfer request\" page.\n\nThe sender's email inbox must remain accessible to check for the acceptance-confirmation email in the case's own steps below.",
+      "steps": [
+        {
+          "content": "Click the \"Accept\" button on the \"Website transfer request\" page.",
+          "expected": "The website transfer success page should be displayed and the site should move to the recipient's organisation."
+        },
+        {
+          "content": "Check the sender's email inbox.",
+          "expected": "An email with the subject \"Your site has been transferred to another organization in CookieYes\" should be received, with body text: \"[email] has accepted your request to transfer the site [site_url] from [current_org_name] to [destination_org_name].\""
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9865,
+        11252
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped the full nav/card/transfer-initiation/login walk to preconditions; kept the accept action and the confirmation email step; collapsed accept-transfer variant clone. Tightened per v1 audit: restored the exact email body copy verbatim from C9865/C11252 \u2014 previously paraphrased.",
+      "grill_status": "confirmed",
+      "grill_note": "Manually approved by user 2026-07-10 after review of the corrected precondition and case steps -- not executed live in this session; content confirmed accurate as written.",
+      "section_id": 1826
+    },
+    {
+      "id": 37345,
+      "title": "[Organisations & Sites] Verify that rejecting a site transfer request cancels the transfer",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). A transfer request has been initiated to the recipient's account and the recipient is on the \"Website transfer request\" page (logged in with the invitee email). The sender's email inbox is accessible.",
+      "steps": [
+        {
+          "content": "Click the \"Reject\" button on the \"Website transfer request\" page.",
+          "expected": "The transfer request rejected page should be displayed and the site should remain in the sender's organisation."
+        },
+        {
+          "content": "Check the sender's email inbox.",
+          "expected": "An email with the subject \"Your site transfer request to another organisation in CookieYes has been rejected\" should be received, with body text: \"[email] has rejected your request to transfer the site [site_url] from [current_org_name] to [destination_org_name].\""
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9866,
+        11253
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped the full nav/card/transfer-initiation/login walk to preconditions; kept the reject action and the confirmation email step; collapsed reject-transfer variant clone. Tightened per v1 audit: restored the exact email body copy verbatim from C9866/C11253 \u2014 previously paraphrased.",
+      "grill_status": "skipped:email-required",
+      "grill_note": "Rejection assertion includes the sender receiving a rejection email.",
+      "section_id": 1826
+    },
+    {
+      "id": 37346,
+      "title": "[Organisations & Sites] Verify accepting a site transfer request after the 7-day expiry",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). A transfer request was initiated more than 7 days ago and the recipient reaches the \"Website transfer request\" page (logged in with the invitee email).",
+      "steps": [
+        {
+          "content": "Reach the \"Website transfer request\" page for a request that is past its 7-day expiry.",
+          "expected": "The \"Website transfer request\" page should be displayed reflecting that the request has expired, so the transfer can no longer be completed via Accept."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9868,
+        11255,
+        17216
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped the full nav/card/transfer-initiation/login walk to preconditions; the source case ends at the Website transfer request page after 7 days without a terminal Accept step, so the expected result reflects the expired state; collapsed accept-after-7-days variant clones.",
+      "grill_status": "skipped:time-dependent",
+      "grill_note": "Requires a transfer request older than 7 days.",
+      "section_id": 1826
+    },
+    {
+      "id": 37347,
+      "title": "[Organisations & Sites] Verify that the Add payment method link appears when a transferred site has no payment method",
+      "preconditions": "The recipient has just accepted a site transfer request and, on being taken to the Stripe payment page, returned (via \"Back\") without adding a payment method. To reach this state:\n1. As a different \"recipient\" account owner, upgrade to a paid plan if needed, then go to Profile menu > Teams > \"Invite new user\", select the recipient's organisation, enter the \"sender\" account owner's email, select role \"Admin\" (or \"Editor\"), click \"Invite user\".\n2. As the sender, accept the invite via the \"You've been invited to join an organization in CookieYes\" email (Join Organization > set password > Join now).\n3. As the sender, on the Organisations & Sites page, open a website's More (\u22ef) menu > \"Transfer Site\", select the recipient's organisation as the \"Destination organization\", and click \"Transfer site\".\n4. As the recipient, open the \"You've received a site transfer request in CookieYes\" email, click \"Review Transfer Request\", log out via the confirmation page, log back in on the site-transfer Log In page, and land on the \"Website transfer request\" page.\n5. Click \"Accept\" -- this is expected to route to a Stripe payment page for the newly transferred site; click \"Back\" on that Stripe page instead of completing payment.",
+      "steps": [
+        {
+          "content": "Accept the transfer request on the \"Website transfer request\" page, then click \"Back\" on the Stripe payment page.",
+          "expected": "The Organisations & Sites page should be displayed with the newly transferred site."
+        },
+        {
+          "content": "Observe the transferred site's row.",
+          "expected": "The site's row should show:\n- The text \"No payment method available for this site.\" with an \"Add payment method\" link\n- A help icon beside the link; hovering it shows the tooltip \"If you do not add a payment method before the next renewal date, Month DD, YYYY, the site will be suspended and permanently deleted within 30 days of suspension.\""
+        },
+        {
+          "content": "Click the \"Add payment method\" link.",
+          "expected": "The Stripe payment page should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9867,
+        11254,
+        11251,
+        17217
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped the full nav/card/transfer-initiation/login walk to preconditions; collapsed add-payment-method variant clones. Tightened per v1 audit: restored the exact suspension/deletion warning tooltip copy verbatim from C9867/C11254/C17217 \u2014 this is a consequence/warning (data loss timeline), not decorative copy, so it is kept per the audit's banner/tooltip-preservation instruction despite the general convention to drop static tooltip text.",
+      "grill_status": "confirmed",
+      "grill_note": "Manually approved by user 2026-07-10 after review of the corrected precondition and case steps -- not executed live in this session; content confirmed accurate as written.",
+      "section_id": 1826
+    },
+    {
+      "id": 37348,
+      "title": "[Organisations & Sites] Verify that a transferred site is suspended when no payment method is added before the next renewal date",
+      "preconditions": "A transferred site has no payment method and its renewal is due:\n1. Set the site's `subscription_renew_at` date in the websites table to yesterday's date\n2. Call `GET /api/test/execute-scheduled-task?name=payment-method-not-added-transfer-site`\n\nThe recipient has accepted the transfer and returned from the Stripe payment page without adding a payment method. User is on the Organisations & Sites page (Profile menu > Organisation & Sites).",
+      "steps": [
+        {
+          "content": "Observe the transferred site with no payment method after the scheduled task has run.",
+          "expected": "The site should show the \"No payment method available for this site.\" text with the \"Add payment method\" link."
+        },
+        {
+          "content": "Refresh the Organisations & Sites page.",
+          "expected": "The transferred site should be in Suspended status."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        15036,
+        17344,
+        17218
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Stripped prefixes; dropped the full nav/card/transfer-initiation/login walk to preconditions; wrote the renewal-date/scheduled-task setup as a numbered precondition per convention 2e; kept the refresh-and-suspend behaviour; collapsed suspension variant clones.",
+      "grill_status": "skipped:time-dependent",
+      "grill_note": "Requires waiting until the next renewal date with no payment method.",
+      "section_id": 1826
+    },
+    {
+      "id": 37349,
+      "title": "[Organisations & Sites] Verify that Admin and Editor cannot create an organisation",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites) as an Admin or Editor.",
+      "steps": [
+        {
+          "content": "As an Admin/Editor, hover over the \"+ New organisation\" button.",
+          "expected": "The \"+ New organisation\" button should be disabled, and hovering it should show the tooltip \"Only the Account Owner can create a new organisation.\" No Add organisation pop-up should open."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1990,
+        1991,
+        7575,
+        7576,
+        6675,
+        6676,
+        3690,
+        3691,
+        11034,
+        11035,
+        17181
+      ],
+      "permission_flag": true,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Permission-divergence case (Admin/Editor cannot create an organisation) - flagged permission_flag true for /migrate-section to route to section 14. Kept a descriptive title and minimal summary steps; source IDs are the Admin/Editor base cases plus their +New Organization role clones across regression sections.",
+      "grill_status": "fixed",
+      "grill_note": "Verified live for BOTH Admin (mcp3) and Editor (editoruser): \"+ New organisation\" disabled with tooltip \"Only the Account Owner can create a new organisation.\"",
+      "section_id": 1775
+    },
+    {
+      "id": 37350,
+      "title": "[Organisations & Sites] Verify that Admin and Editor cannot add a site",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites) as an Admin or Editor.",
+      "steps": [
+        {
+          "content": "As an Admin/Editor, hover over the \"+ New site\" button.",
+          "expected": "The \"+ New site\" button should be disabled, and hovering it should show the tooltip \"Only the Account Owner can add a new site.\" The Add-a-new-site page should not open."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1988,
+        1989,
+        7568,
+        7569,
+        6668,
+        6669,
+        3683,
+        3684,
+        11027,
+        11028,
+        17179
+      ],
+      "permission_flag": true,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Permission-divergence case (Admin/Editor cannot add a site) - flagged permission_flag true for routing to section 14. Kept descriptive title and minimal summary steps; source IDs are the Admin/Editor base cases plus their +New Site role clones across regression sections.",
+      "grill_status": "fixed",
+      "grill_note": "Verified for BOTH Admin and Editor: \"+ New site\" disabled with tooltip \"Only the Account Owner can add a new site.\"",
+      "section_id": 1775
+    },
+    {
+      "id": 37351,
+      "title": "[Organisations & Sites] Verify that Admin and Editor cannot transfer account ownership",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites) as an Admin or Editor.",
+      "steps": [
+        {
+          "content": "As an Admin/Editor, view the Account Owner card.",
+          "expected": "The \"Transfer ownership\" button should not be rendered on the Account Owner card for Admin or Editor."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        2046,
+        2047,
+        7612,
+        7613,
+        6712,
+        6713,
+        3727,
+        3728,
+        11071,
+        11072,
+        17359,
+        17188
+      ],
+      "permission_flag": true,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Permission-divergence case (Admin/Editor cannot transfer ownership) - flagged permission_flag true for routing to section 14. Kept descriptive title and minimal summary steps; source IDs are the Admin/Editor base cases plus their Transfer Ownership role clones across regression sections.",
+      "grill_status": "fixed",
+      "grill_note": "Verified for BOTH Admin and Editor: \"Transfer ownership\" button absent from the account card.",
+      "section_id": 1775
+    },
+    {
+      "id": 37352,
+      "title": "[Organisations & Sites] Verify that Admin cannot delete a site",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites) as an Admin.",
+      "steps": [
+        {
+          "content": "As an Admin/Editor, open the site's More (\u22ef) options menu and hover the \"Delete site\" option.",
+          "expected": "The \"Delete site\" option should be disabled, and hovering it should show the tooltip \"Only the Account Owner can delete a site.\" The site should not be deleted."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        9863
+      ],
+      "permission_flag": true,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Permission-divergence case (Admin cannot delete a site) - flagged permission_flag true for routing to section 14. Kept descriptive title and minimal summary steps; no additional role clones matched for this scenario.",
+      "grill_status": "fixed",
+      "grill_note": "Verified for BOTH Admin and Editor: \"Delete site\" option disabled with tooltip \"Only the Account Owner can delete a site.\"",
+      "section_id": 1775
+    },
+    {
+      "id": 37353,
+      "title": "[Organisations & Sites] Verify that Admin and Editor cannot transfer a site",
+      "preconditions": "User is signed in as an Admin or Editor member of an organisation (not the Account Owner) and is on the Organisations & Sites page.",
+      "steps": [
+        {
+          "content": "As an Admin/Editor, open the site's More (\u22ef) options menu and hover the \"Transfer site\" option.",
+          "expected": "The option should be disabled, and hovering it should show the tooltip \"Only the Account Owner can transfer a site.\" The action should not proceed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": true,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "grill_status": "confirmed",
+      "grill_note": "Verified for BOTH Admin and Editor: \"Transfer site\" option disabled with tooltip \"Only the Account Owner can transfer a site.\"",
+      "rewrite_notes": "Added from grill \u2014 AO-only restriction surfaced via the disabled site More-menu option with a role tooltip. permission_flag -> section 14 (Admin).",
+      "section_id": 1775
+    },
+    {
+      "id": 37354,
+      "title": "[Organisations & Sites] Verify that Admin and Editor cannot cancel a subscription",
+      "preconditions": "User is signed in as an Admin or Editor member of an organisation (not the Account Owner) and is on the Organisations & Sites page.",
+      "steps": [
+        {
+          "content": "As an Admin/Editor, open the site's More (\u22ef) options menu and hover the \"Cancel subscription\" option.",
+          "expected": "The option should be disabled, and hovering it should show the tooltip \"Only the Account Owner can cancel subscription.\" The action should not proceed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": true,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "grill_status": "confirmed",
+      "grill_note": "Verified for BOTH Admin and Editor: \"Cancel subscription\" option disabled with tooltip \"Only the Account Owner can cancel subscription.\"",
+      "rewrite_notes": "Added from grill \u2014 AO-only restriction surfaced via the disabled site More-menu option with a role tooltip. permission_flag -> section 14 (Admin).",
+      "section_id": 1775
+    },
+    {
+      "id": 37355,
+      "title": "[Organisations & Sites] Verify that an Editor cannot edit a site URL",
+      "preconditions": "User is signed in as an Editor member of an organisation (not the Account Owner or an Admin) and is on the Organisations & Sites page.",
+      "steps": [
+        {
+          "content": "As an Editor, open the site's More (\u22ef) options menu and hover the \"Edit site URL\" option.",
+          "expected": "The \"Edit site URL\" option should be disabled, and hovering it should show the tooltip \"Only the Account Owner or an Admin can edit the site URL.\" Admin and Account Owner are not restricted."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": true,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "grill_status": "confirmed",
+      "grill_note": "Verified live as Editor (editoruser): \"Edit site URL\" disabled with tooltip \"Only the Account Owner or an Admin can edit the site URL.\" Enabled for Admin (confirmed separately).",
+      "rewrite_notes": "Added from grill \u2014 EDITOR-ONLY divergence (Admin and Account Owner can do this; Editor cannot). Routes to 14 > Editor. permission_flag=true.",
+      "section_id": 1776
+    },
+    {
+      "id": 37356,
+      "title": "[Organisations & Sites] Verify that an Editor cannot edit a site name",
+      "preconditions": "User is signed in as an Editor member of an organisation (not the Account Owner or an Admin) and is on the Organisations & Sites page.",
+      "steps": [
+        {
+          "content": "As an Editor, open the site's More (\u22ef) options menu and hover the \"Edit site name\" option.",
+          "expected": "The \"Edit site name\" option should be disabled, and hovering it should show the tooltip \"Only the Account Owner or an Admin can edit the site name.\" Admin and Account Owner are not restricted."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": true,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "grill_status": "confirmed",
+      "grill_note": "Verified live as Editor: \"Edit site name\" disabled with tooltip \"Only the Account Owner or an Admin can edit the site name.\" Enabled for Admin.",
+      "rewrite_notes": "Added from grill \u2014 EDITOR-ONLY divergence (Admin and Account Owner can do this; Editor cannot). Routes to 14 > Editor. permission_flag=true.",
+      "section_id": 1776
+    },
+    {
+      "id": 37357,
+      "title": "[Organisations & Sites] Verify that an Editor cannot edit an organisation name",
+      "preconditions": "User is signed in as an Editor member of an organisation (not the Account Owner or an Admin) and is on the Organisations & Sites page.",
+      "steps": [
+        {
+          "content": "As an Editor, locate the organisation heading and look for the organisation actions (\u22ef) menu.",
+          "expected": "The organisation actions (\u22ef) menu should not be rendered for an Editor, so \"Edit Organisation Name\" is unavailable. Admin and Account Owner see the menu with Edit Organisation Name."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": true,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "grill_status": "confirmed",
+      "grill_note": "Verified live as Editor: the org actions (\u22ef) button is absent (present for Admin). Editor cannot rename the organisation.",
+      "rewrite_notes": "Added from grill \u2014 EDITOR-ONLY divergence (Admin and Account Owner can do this; Editor cannot). Routes to 14 > Editor. permission_flag=true.",
+      "section_id": 1776
+    },
+    {
+      "id": 37358,
+      "title": "[Organisations & Sites] Verify that an Editor cannot add a staging site",
+      "preconditions": "User is signed in as an Editor member of an organisation (not the Account Owner or an Admin) and is on the Organisations & Sites page.",
+      "steps": [
+        {
+          "content": "As an Editor, open the site's More (\u22ef) options menu.",
+          "expected": "The \"Add staging site\" option should be disabled for the Editor. Account Owner and Admin are not restricted."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": true,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "grill_status": "confirmed",
+      "grill_note": "Verified live 2026-07-10 on jf.com (Org 1736): Admin (mcp3) has \"Add staging site\" enabled; Editor (editoruser, after correcting their role -- see qa-accounts.json note) has it disabled (aria-disabled, no icon, no tooltip found on hover). This is a genuine Editor-only divergence, distinct from the Free-plan gate case (which is an Account-Owner-level plan restriction, not a role restriction). \"Copy configuration\" was checked in the same pass and is enabled for both Admin and Editor -- no role restriction, so no permission case needed for it.",
+      "rewrite_notes": "NEW -- found while checking role-based permission blocks for the same 'Add staging site' feature that has the Free-plan gate. Confirms the hierarchy divergence (AO/Admin can, Editor cannot), matching the pattern already used for site/org name editing. Routes to 14 > Editor. permission_flag=true.",
+      "section_id": 1776
+    },
+    {
+      "id": 37359,
+      "title": "[Organisations & Sites] Verify that the Add staging site option is locked with an upgrade prompt on the Free plan",
+      "preconditions": "User is on the Free plan. User is on the Organisations & Sites page (Profile menu > Organisation & Sites). A website row has a More (\u22ef) options menu.",
+      "steps": [
+        {
+          "content": "Open the site's More (\u22ef) options menu.",
+          "expected": "The \"Add staging site\" option should be displayed with a premium/upgrade badge icon and should be disabled (not selectable)."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": true,
+      "grill_status": "confirmed",
+      "grill_note": "Verified live 2026-07-10: on the Free plan (rahulkrishna+freeplansite@mozilor.com, site hd.com), the site's More (\u22ef) menu shows \"Add staging site\" as aria-disabled with a premium badge icon (orange circle) next to the label. On Basic plan (disposableuser, jd.com) the same option is enabled (not disabled, no badge) -- confirms the gate boundary is Free vs. Basic-or-higher, not Pro-or-higher. No tooltip text found on hover; the icon alone signals the lock.",
+      "rewrite_notes": "NEW -- per migration-conventions.md \u00a76 (Plan Gates and nudge routing), an upgrade icon / premium badge visible in feature UI must be extracted out of the feature-section case and into 11. Billing & Upgrade > Plan Gates, tagged plan_gate_flag: true, rather than included as a step in the functional 'Add staging site' case. Checked ai-context/cases-plan-gates-new.json -- no existing Free-plan Plan Gates walkthrough case covers this touchpoint yet (only one unrelated Cookie Banner Plan Gates case exists there), so this is filed as its own case for now; it may need merging into a consolidated per-plan Plan Gates walkthrough case once one exists, per the 'one case per plan, steps walk through all gated touchpoints' convention.",
+      "section_id": 1793
+    }
+  ],
+  "grill_env": "qa2.kilohub.com \u2014 disposableuser (verified, multi-state sites) + adminuser/mcp3 (Admin member) + freeplansite (Free plan, site hd.com). Passwords via browser autofill."
+}

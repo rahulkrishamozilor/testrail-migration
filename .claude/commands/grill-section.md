@@ -84,6 +84,16 @@ session switches.
 4. If it differs and no matching account exists in `qa-accounts.json` → skip with
    `skipped:plan-gated`.
 
+**Role verification** — before executing any case whose correctness depends on a specific role
+(a `permission_flag` case, or any case whose preconditions name a role such as Admin/Editor):
+verify the acting account's actual `role_slug` via the Team page or `GET /api/v2/user`
+(`organization_users[].role_slug`) before relying on it — do not assume the role recorded in
+`qa-accounts.json` still holds. Ownership-transfer round-trips silently change roles: CookieYes
+retains the previous owner at Admin access after a transfer, so an account used as an
+ownership-transfer recipient earlier in this same grill run (or a prior one) may no longer be
+the role it started as. If the role doesn't match what the case requires, correct it (Team page
+> ⋯ > Change role) before proceeding — do not record a verdict against a role-tainted account.
+
 #### 3a. Navigate to the starting state
 
 Use the case's `customPreconds` to reach the correct starting page/state. If the precondition
@@ -96,6 +106,16 @@ Walk through each step in `customStepsSeparated`:
 - Observe what the app actually does.
 - Compare against the `expected` result.
 
+**Always drive inputs the way a real user would, and always trigger the real submit action —
+never infer a verdict from DOM state alone.** Use Playwright's actual typing/`.fill()` methods,
+not `dispatchEvent` or direct `.value` assignment: those bypass the framework's input handlers
+and can silently fail to trigger validation. For any step whose expected result is a validation
+message or a submit-triggered outcome, actually click the real submit control (Save, Publish,
+etc.) before recording the verdict — many validation messages only render on submit, not on
+type/blur, so a verdict recorded without clicking submit is not evidence of anything. If a step
+produces no visible effect, treat that as inconclusive and re-check your input method before
+recording a gap or a mismatch.
+
 #### 3c. Record the verdict and write it immediately
 
 | Finding type | Meaning |
@@ -105,6 +125,30 @@ Walk through each step in `customStepsSeparated`:
 | ❌ Step broken | A step cannot be performed (UI element missing, page doesn't exist, etc.) |
 | ⏭️ Skipped | Case cannot be automated — see skip reasons below. Left untouched in the output. |
 | 🔍 Gap found | A scenario exists in the app that no draft case covers — captured in Step 4 |
+
+**Word-for-word means word-for-word.** "✅ Confirmed" already requires the expected result to
+match the live app exactly — for any expected result that quotes specific text as appearing on
+the page (per `migration-conventions.md` §4, "Quoted on-page text — always verbatim"), "exactly"
+means character-for-character, not "captures the same idea." No category filter: this applies
+whether the quote is a legal disclosure or a plain status badge — if the draft quotes it, it must
+be right. If the draft's quote is close but reworded compared to what the live app (or a
+received email) actually shows, that is a `⚠️ Mismatch`, not a pass — record the exact live
+wording as the fix, the same as any other mismatch.
+
+**Verify this by extraction, not by eye.** Do not judge a quoted-text match from a screenshot or
+an accessibility-tree summary glanced over — both are easy to skim past a wrong word, a dropped
+sentence, or a swapped label. For every step whose expected result quotes on-page text (a button
+label, tooltip, dialog/banner copy, validation message, confirmation toast — anything the case
+presents as literal copy), pull the actual rendered string for that specific element with
+`browser_snapshot` or `browser_evaluate` (reading `textContent`/`innerText` on the element, not
+a full-page dump), then compare that extracted string against the draft's quoted text
+character-by-character — punctuation, capitalization, and whitespace included. Only record
+✅ Confirmed once that literal comparison passes; a single-character difference is a ⚠️ Mismatch,
+recorded with both strings shown side by side (`expected: "..."` / `actual: "..."`) and the
+extracted live text used as the fix. This is what would have caught, at grill-time rather than
+in a later retrospective audit, a case claiming a "Copy code" button in the "top-right corner"
+when the live button is actually labeled "Copy" and left-aligned, or a banner alert paraphrased
+away from its real wording.
 
 **Skip reasons — automatically skip and record reason, do not attempt to execute:**
 
@@ -172,12 +216,29 @@ For each plan-gated gap found, write a suggested case spec with the required pla
 
 If `qa-accounts.json` is absent or contains no higher-plan accounts, skip this sub-step.
 
-#### 4d. Produce missing-case specs
+#### 4d. Cross-check suggested cases against other published sections
 
-For each gap found (across all accounts explored), write a full draft-ready case spec using
-the same JSON shape as the existing draft cases. Assign `"grill_status": "suggested"`. Do not
-add a TestRail `id` — leave it absent or `null`. Title must follow v2 naming conventions (no
-role prefixes, no plan prefixes).
+Before writing any suggested case spec, check whether the scenario is already owned by
+another v2 section. Read the list of existing `ai-context/cases-*.json` files, then for
+each suggested case ask: does any case in those files already cover this scenario?
+
+```bash
+ls ai-context/cases-*.json
+```
+
+For each file that could plausibly overlap (e.g. a "Dashboard" case file if the suggested
+case involves Dashboard navigation), read its `cases` array and scan the titles. If an
+existing case already covers the scenario, **drop the suggestion** and note in the report:
+"[title] — already covered in `cases-<slug>.json`."
+
+Only proceed to write a suggested spec if no existing case owns the scenario.
+
+#### 4e. Produce missing-case specs
+
+For each gap found (across all accounts explored) that is not already covered by another
+section, write a full draft-ready case spec using the same JSON shape as the existing draft
+cases. Assign `"grill_status": "suggested"`. Do not add a TestRail `id` — leave it absent
+or `null`. Title must follow v2 naming conventions (no role prefixes, no plan prefixes).
 
 ---
 
@@ -265,3 +326,8 @@ For reference, the full set of `grill_status` values used across the file:
 - Navigation always goes in `customPreconds`, not step 1 — apply this correction to any case
   where step 1 is a navigation action.
 - Reuse the same browser session for all cases on the same account. Only switch sessions when the required plan tier changes. Track `current_account` so you never log out and back in unnecessarily.
+- A cross-cutting fix discovered mid-grill that affects an already-published section (not the
+  one this run is grilling) gets edited directly into that section's `ai-context/cases-<slug>.json`
+  — never create a new file (e.g. `draft-<slug>-fixes.json`). The target section's `cases-*.json`
+  is the only source of truth for its cases; a side file has no downstream consumer and will sit
+  unused once the fix is applied, so there is never a reason to create one.

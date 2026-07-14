@@ -1,0 +1,622 @@
+{
+  "section": "Languages",
+  "suite_id": 16,
+  "section_id": 1809,
+  "fetched_at": "2026-07-07T12:40:19Z",
+  "grilled_at": "2026-07-08T05:13:36Z",
+  "published_at": "2026-07-08T05:32:59Z",
+  "searched_section_ids": [
+    15,
+    92,
+    93,
+    309,
+    310,
+    311,
+    284,
+    285,
+    286,
+    190,
+    191,
+    192,
+    30,
+    611,
+    612,
+    613
+  ],
+  "cases": [
+    {
+      "id": 37169,
+      "title": "[Languages] Languages page displays alert banner, required languages card, and language list",
+      "preconditions": "User is on the Languages page (navigate via app header Languages tab)",
+      "steps": [
+        {
+          "content": "Observe the Languages page layout",
+          "expected": "Page shows an info alert banner containing a 'Learn more' link, and a 'Your required languages' card with a language list below it"
+        },
+        {
+          "content": "Observe the 'Add language' button in the top right of the card",
+          "expected": "Button is visible \u2014 shown with a premium icon and disabled on Free plan; shown as enabled '+ Add Language' on paid plans"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "confirmed",
+      "source_case_ids": [
+        517,
+        7284,
+        7285,
+        7286,
+        3435,
+        3436,
+        3437,
+        6488,
+        6489,
+        6490,
+        16431
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed Account Owner/Admin/Editor role variants and Webapp Free/Agency/Trial plan variants \u2014 identical steps. Dropped static title text and alert banner copy verification steps. Wix source C16431 included in source IDs (same content). Merged display-of-page-level assertions into two behavioral steps."
+    },
+    {
+      "id": 37170,
+      "title": "[Languages] 'Learn more' link in the info alert opens multilingual banner documentation",
+      "preconditions": "User is on the Languages page",
+      "steps": [
+        {
+          "content": "Click the 'Learn more' link in the info alert banner",
+          "expected": "'How to Add a Multilingual Cookie Consent Banner?' documentation page opens"
+        }
+      ],
+      "run_type": "",
+      "grill_status": "skipped:external-url",
+      "source_case_ids": [
+        503,
+        3434,
+        3438,
+        3439,
+        6487,
+        6491,
+        6492,
+        16430
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role and plan variants. Dropped navigation steps (moved to preconditions). Dropped static text verification of the alert banner content \u2014 only the click-and-navigate behavior is tested."
+    },
+    {
+      "id": 37171,
+      "title": "[Languages] Geo-target nudge popup appears after adding a second language on a paid plan",
+      "preconditions": "Account is on a paid plan (Basic or higher); language list currently has exactly one language; user is on the Languages page",
+      "steps": [
+        {
+          "content": "Click '+ Add Language', select a language from the dropdown, and click Add",
+          "expected": "Popup closes; the new language appears in the list; a geo-target in-app nudge popup appears"
+        },
+        {
+          "content": "Inspect the geo-target nudge popup",
+          "expected": "Popup shows a feature image, title 'Geo-target your banner for specific countries', body copy mentioning 'Available in: Pro and Ultimate plans', a 'help guide' link, and two buttons: 'Get geo-targeting now' and 'Dismiss'"
+        },
+        {
+          "content": "Click 'Get geo-targeting now'",
+          "expected": "In-app nudge upgrade page is displayed"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "confirmed",
+      "source_case_ids": [
+        9953,
+        16436
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Dropped navigation and tab-click steps (moved to preconditions). Collapsed body text static verification into a single inspection step. Wix C16436 same content."
+    },
+    {
+      "id": 37172,
+      "title": "[Languages] Dismissing the geo-target nudge closes the popup",
+      "preconditions": "Geo-target nudge popup is visible (add a second language on a paid plan to trigger it)",
+      "steps": [
+        {
+          "content": "Click 'Dismiss' on the geo-target nudge popup",
+          "expected": "Popup closes and does not reappear in the current session"
+        }
+      ],
+      "run_type": "",
+      "grill_status": "confirmed",
+      "source_case_ids": [
+        9954,
+        16437
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed to one step; the precondition carries the setup. Session-persistence assertion kept from C9954."
+    },
+    {
+      "id": 37173,
+      "title": "[Languages] '+ Add Language' button opens the Add Language popup on paid plans",
+      "preconditions": "Account is on a paid plan (Basic or higher); user is on the Languages page",
+      "steps": [
+        {
+          "content": "Click '+ Add Language' in the top right of the language list",
+          "expected": "Add Language popup opens showing title 'Add Language', 'Select language(s) *' label, a language dropdown, and Cancel and Add buttons"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "confirmed",
+      "source_case_ids": [
+        505,
+        508,
+        7290,
+        7291,
+        3441,
+        3442,
+        6494,
+        6495,
+        16445,
+        16446
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Merged C505 (button click) and C508 (popup display) \u2014 C505 is a strict subset of C508. Collapsed role/plan variants. Dropped static title text verification inside popup."
+    },
+    {
+      "id": 37174,
+      "title": "[Languages] Language dropdown in Add Language popup lists all available languages with search and checkboxes",
+      "preconditions": "Add Language popup is open (paid plan)",
+      "steps": [
+        {
+          "content": "Observe the language dropdown in the popup",
+          "expected": "Dropdown shows a search text field with 'Search...' placeholder and a scrollable list of languages with checkboxes, starting alphabetically (Abkhazian, Afar, Afrikaans, ...)"
+        },
+        {
+          "content": "Select a language via its checkbox, then observe the list and the selection field",
+          "expected": "The selected language is shown as checked and its name appears in the selection field above the search box; the already-added default language is checked and disabled. List items remain in alphabetical order (selected items are not pinned to the top of the list)."
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "fixed",
+      "source_case_ids": [
+        509,
+        7291,
+        3442,
+        6495
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Dropped static list enumeration of language names."
+    },
+    {
+      "id": 37175,
+      "title": "[Languages] Dropdown selector collapses the language list; search field filters languages by text",
+      "preconditions": "Add Language popup is open",
+      "steps": [
+        {
+          "content": "Click the dropdown selector button in the top right corner of the language dropdown",
+          "expected": "Language list collapses"
+        },
+        {
+          "content": "Type a partial language name in the search text field",
+          "expected": "Language list filters to show only matching languages, listed alphabetically"
+        },
+        {
+          "content": "Scroll through the filtered list",
+          "expected": "User can scroll the list"
+        }
+      ],
+      "run_type": "",
+      "grill_status": "confirmed",
+      "source_case_ids": [
+        512,
+        7294,
+        3445,
+        6498,
+        16449
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Three steps cover the two interactive elements of this dropdown."
+    },
+    {
+      "id": 37176,
+      "title": "[Languages] Adding a language without available translations shows a note and adds it to the list",
+      "preconditions": "Add Language popup is open",
+      "steps": [
+        {
+          "content": "Select a language that has no available translation (e.g., Abkhazian) from the dropdown",
+          "expected": "Language is selected; a 'Translations not available' label appears inline next to it; a note reads 'Note: Translations are not available for some of the languages you have added, so the banner content that has not been translated will be displayed in English.'"
+        },
+        {
+          "content": "Click Add",
+          "expected": "Popup closes; the language appears in the language list on the Languages page"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "fixed",
+      "source_case_ids": [
+        513,
+        7295,
+        3446,
+        6499,
+        16450
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Kept note-banner assertion as it's a non-obvious behavioral difference from the translation-available flow."
+    },
+    {
+      "id": 37177,
+      "title": "[Languages] Adding a language with translations closes the popup and adds it to the list",
+      "preconditions": "Account is on a paid plan (Basic or higher); Add Language popup is open",
+      "steps": [
+        {
+          "content": "Select a language that has an available translation (e.g., French) from the dropdown",
+          "expected": "Language is selected and displayed above the dropdown"
+        },
+        {
+          "content": "Click Add",
+          "expected": "Popup closes; the selected language appears in the language list on the Languages page"
+        }
+      ],
+      "run_type": "smoke",
+      "grill_status": "confirmed",
+      "source_case_ids": [
+        514,
+        7296,
+        3447,
+        6500,
+        16451
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. This is the canonical happy path for the Languages feature \u2014 smoke. Dropped navigation steps."
+    },
+    {
+      "id": 37178,
+      "title": "[Languages] Add button with no new language selected closes the popup without changes",
+      "preconditions": "Add Language popup is open; no language has been selected",
+      "steps": [
+        {
+          "content": "Open the Add Language popup without selecting any new language and click Add",
+          "expected": "The Add button is enabled (the existing default language is pre-selected and locked). Clicking Add with no new language selected closes the popup without adding any language to the list."
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "fixed",
+      "source_case_ids": [
+        515,
+        7297,
+        3448,
+        6501,
+        16452
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Single-step validation case."
+    },
+    {
+      "id": 37179,
+      "title": "[Languages] Cancel button on the Add Language popup closes it without saving",
+      "preconditions": "Add Language popup is open",
+      "steps": [
+        {
+          "content": "Click Cancel",
+          "expected": "Popup closes; no language is added to the language list"
+        }
+      ],
+      "run_type": "",
+      "grill_status": "confirmed",
+      "source_case_ids": [
+        516,
+        7298,
+        3449,
+        6502,
+        16448,
+        16453
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Wix has two Cancel-related cases (C16448 title-specific, C16453 generic) \u2014 both collapse here."
+    },
+    {
+      "id": 37180,
+      "title": "[Languages] Add Language on Free plan opens an upgrade nudge",
+      "section_id": 1793,
+      "plan_gate_flag": true,
+      "preconditions": "Account is on the Free plan; user is on the Languages page",
+      "steps": [
+        {
+          "content": "Observe the 'Add Language' button in the 'Your required languages' card",
+          "expected": "Button is enabled and shows a premium icon"
+        },
+        {
+          "content": "Click the 'Add Language' button",
+          "expected": "An upgrade nudge popup appears with the heading 'Show banner in multiple languages as per your visitor\u2019s preference!', the text 'Available in: All premium plans', and a 'Try Pro for free' CTA button"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "fixed",
+      "source_case_ids": [
+        9925,
+        16491
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Plan-specific case (Free plan only). GRILL: live QA2 behavior diverges from Suite 6 source C9925 \u2014 the button is NOT disabled and there is no hover tooltip. Instead the 'Add Language' button is enabled and clicking it opens an upgrade nudge ('Show banner in multiple languages...', 'Available in: All premium plans', 'Try Pro for free'). Steps and title rewritten to match observed behavior."
+    },
+    {
+      "id": 37181,
+      "title": "[Languages] Language list shows each language's code, Default badge, and action buttons",
+      "preconditions": "User is on the Languages page; at least English is in the language list",
+      "steps": [
+        {
+          "content": "Observe the language list",
+          "expected": "List shows 'Language list' and 'Language code' columns; English is listed with code 'en'"
+        },
+        {
+          "content": "Observe the default language row",
+          "expected": "Default language has a 'Default' badge on the right side of its language code"
+        },
+        {
+          "content": "Observe the buttons on the right side of each language row",
+          "expected": "Each row has an 'Edit Content' button and a 3-dot menu button"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "confirmed",
+      "source_case_ids": [
+        502,
+        7321,
+        3472,
+        6525,
+        16476
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Dropped static column-name and button-label enumeration steps \u2014 kept structural assertions about what's visible."
+    },
+    {
+      "id": 37182,
+      "title": "[Languages] 'Default' badge tooltip describes the default language fallback behavior",
+      "preconditions": "User is on the Languages page; at least one language has a 'Default' badge",
+      "steps": [
+        {
+          "content": "Hover over the 'Default' badge on the default language",
+          "expected": "Tooltip reads: 'The default language serves as a fallback option when your site is loaded in a language that you haven\u2019t added here.'"
+        }
+      ],
+      "run_type": "",
+      "grill_status": "fixed",
+      "source_case_ids": [
+        504,
+        7322,
+        3473,
+        6526,
+        16477
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Tooltip text is the full expected string from C504 (truncated in source but reconstructed from context)."
+    },
+    {
+      "id": 37183,
+      "title": "[Languages] Edit Content button navigates to the language's Edit Content page",
+      "preconditions": "User is on the Languages page; at least one language is in the list",
+      "steps": [
+        {
+          "content": "Click the 'Edit Content' button for a language in the list",
+          "expected": "Edit Content page for that language opens"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "confirmed",
+      "source_case_ids": [
+        506,
+        7324,
+        3475,
+        6528,
+        16479
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed role/plan variants. Single-step navigation case."
+    },
+    {
+      "id": 37184,
+      "title": "[Languages] 3-dot menu for the only language shows 'Change default language'; completing the flow updates the default",
+      "preconditions": "Only one language (the default, e.g., English) is in the language list; user is on the Languages page",
+      "steps": [
+        {
+          "content": "Click the 3-dot menu button on the only language in the list",
+          "expected": "Dropdown shows 'Change default language' as the only option"
+        },
+        {
+          "content": "Click 'Change default language'",
+          "expected": "Change language popup opens with a language dropdown (current default marked), Cancel and Change buttons, and a 'Select a default language *' label"
+        },
+        {
+          "content": "Select a different language from the dropdown and click Change",
+          "expected": "Popup closes; selected language becomes the new default in the language list; toast message confirms 'Your default language was updated to [language name]'"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "confirmed",
+      "source_case_ids": [
+        507,
+        9928,
+        16480,
+        16494
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Merged C507 (3-dot menu) and C9928 (Change language popup) into one end-to-end flow case \u2014 they cover sequential steps of the same user action. Dropped static popup content inspection steps; kept functional assertions."
+    },
+    {
+      "id": 37185,
+      "title": "[Languages] 3-dot menu for a non-default language shows Set as Default and Delete; confirming Set as Default updates the default",
+      "preconditions": "At least two languages are in the language list; user is on the Languages page",
+      "steps": [
+        {
+          "content": "Click the 3-dot menu button on a non-default language",
+          "expected": "Dropdown shows 'Set as Default' and 'Delete' options"
+        },
+        {
+          "content": "Click 'Set as Default'",
+          "expected": "Confirmation popup appears: 'Set [language] as the default?' with warning text and Cancel / 'Set as default' buttons"
+        },
+        {
+          "content": "Click 'Set as default' in the confirmation popup",
+          "expected": "Popup closes; the selected language is now the default in the language list"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "confirmed",
+      "source_case_ids": [
+        9927,
+        9931,
+        12710,
+        12714,
+        16493,
+        16497
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Merged C9927 (3-dot menu options) and C9931 (confirmation popup) into one end-to-end flow. Dropped static popup content verification. Trial-with-card equivalents C12710, C12714 included in source IDs."
+    },
+    {
+      "id": 37186,
+      "title": "[Languages] Non-default languages show Inactive status and disabled Edit Content after plan downgrade to Free",
+      "preconditions": "Account was on a paid plan with multiple languages added; plan has been downgraded to Free",
+      "steps": [
+        {
+          "content": "Navigate to the Languages page",
+          "expected": "Alert banner reads 'Multi-lingual banners are not available on our free plan'; non-default languages show an 'Inactive' badge; Edit Content button is disabled for Inactive languages"
+        },
+        {
+          "content": "Click the 3-dot menu for an Inactive language",
+          "expected": "Menu shows 'Set as default' option"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "skipped:destructive-precondition",
+      "source_case_ids": [
+        9926,
+        12711,
+        12715,
+        12716,
+        16492
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO and Admin variants (C12715/C12716). Precondition requires a plan downgrade \u2014 this cannot be easily automated without account manipulation. Step 1 navigation is kept as a step (not precondition) because the assertion on the page is the primary test action."
+    },
+    {
+      "id": 37187,
+      "title": "[Languages] Setting an Inactive language as default via the 3-dot menu reactivates it",
+      "preconditions": "Account is on Free plan after a paid-plan downgrade; multiple languages are present; at least one non-default language shows 'Inactive' status; user is on the Languages page",
+      "steps": [
+        {
+          "content": "Click the 3-dot menu for an Inactive language and click 'Set as default'",
+          "expected": "Language change confirmation popup appears"
+        },
+        {
+          "content": "Click 'Set as default' in the popup",
+          "expected": "Popup closes; the language becomes the new default; its Inactive badge is removed"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "skipped:destructive-precondition",
+      "source_case_ids": [
+        9929,
+        12712,
+        12717,
+        16495
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin variants. Precondition shares state with Case 18."
+    },
+    {
+      "id": 37188,
+      "title": "[Languages] Delete language popup confirms deletion and removes the language from the list",
+      "preconditions": "At least two languages are in the language list (one non-default); user is on the Languages page",
+      "steps": [
+        {
+          "content": "Click the 3-dot menu for a non-default language and click 'Delete'",
+          "expected": "'Delete language?' popup appears with warning text 'The [language_name] language and any translations you\u2019ve added in this language will be permanently deleted.' and Cancel / 'Delete language' buttons"
+        },
+        {
+          "content": "Click 'Delete language'",
+          "expected": "Popup closes; the language is removed from the language list"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "fixed",
+      "source_case_ids": [
+        9932,
+        16498
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed what was available \u2014 C9932 (Webapp Free) and C16498 (Wix). No equivalent in Agency/Trial sections (coverage gap in Suite 6). Kept warning text assertion as it confirms the user-facing impact of a destructive action."
+    },
+    {
+      "id": 37189,
+      "title": "[Languages] Adding multiple languages at once from the Add Language popup",
+      "preconditions": "Account is on a paid plan (Basic or higher); user is on the Languages page",
+      "steps": [
+        {
+          "content": "Click '+ Add Language' to open the popup",
+          "expected": "Add Language popup opens with the language dropdown"
+        },
+        {
+          "content": "Tick the checkboxes for two or more languages (e.g., German and Spanish) in the dropdown",
+          "expected": "All selected languages are checked and shown in the selection field above the search box"
+        },
+        {
+          "content": "Click Add",
+          "expected": "Popup closes; all selected languages are added to the language list in a single action"
+        }
+      ],
+      "run_type": "regression",
+      "grill_status": "suggested",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "GAP found during grill: the dropdown uses checkboxes (multi-select), but no draft case covered adding more than one language in a single Add action. Verified live on QA2 (Basic) \u2014 German + Spanish added together."
+    },
+    {
+      "id": 37190,
+      "title": "[Languages] Default language 3-dot menu options are disabled when multiple languages exist",
+      "preconditions": "Account is on a paid plan; the language list has two or more languages (one is the default)",
+      "steps": [
+        {
+          "content": "Click the 3-dot menu on the default language row",
+          "expected": "The menu shows 'Set as Default' and 'Delete', but both options are disabled \u2014 the default language cannot be deleted or re-set as default from its own menu"
+        }
+      ],
+      "run_type": "",
+      "grill_status": "suggested",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "GAP found during grill: Case 16 covers the single-language default menu ('Change default language') and Case 17 covers the non-default menu (Set as Default + Delete). Neither covers the default language's menu when multiple languages exist. Verified live on QA2 \u2014 both menu items are disabled for the default language."
+    },
+    {
+      "id": 37191,
+      "title": "[Languages] Searching a non-existent language in the Add Language dropdown shows an empty list",
+      "preconditions": "Account is on a paid plan; Add Language popup is open",
+      "steps": [
+        {
+          "content": "Type a string that matches no language (e.g., 'zzzz') in the Search field",
+          "expected": "The language list filters down to zero items (no matching languages shown)"
+        }
+      ],
+      "run_type": "",
+      "grill_status": "suggested",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "GAP found during grill: no draft case covered the no-results search state. Verified live on QA2 \u2014 the list becomes empty; note there is no explicit 'no results' message shown."
+    }
+  ]
+}

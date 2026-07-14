@@ -1,0 +1,773 @@
+{
+  "section": "Team",
+  "suite_id": 16,
+  "section_id": 1956,
+  "fetched_at": "2026-07-13T11:53:34Z",
+  "grilled_at": "2026-07-13T13:00:38Z",
+  "published_at": "2026-07-13T13:17:33Z",
+  "searched_section_ids": [
+    136,
+    330,
+    304,
+    211,
+    416,
+    568,
+    567,
+    566,
+    565,
+    640
+  ],
+  "dropped_source_case_ids": [],
+  "cases": [
+    {
+      "id": 39410,
+      "title": "[Team] Verify that the Team page renders with the Account Owner card and team member list",
+      "preconditions": "User is logged in as Account Owner.",
+      "steps": [
+        {
+          "content": "Click the \"Profile\" icon at the top right corner, then select \"Team\" from the menu (Organisations & Sites / Team / Billing & Invoices / MCP access / Notifications / My account / Logout).",
+          "expected": "The Team page is displayed with a \"Team Members\" title at the top left and a \"+ Invite new user\" button at the top right."
+        },
+        {
+          "content": "Observe the \"Account Owner\" card below the \"Team Members\" title.",
+          "expected": "The card shows the Account Owner card title with an Account ID badge (\"Acc ID: [Account ID]\") at the top right, the Account Owner's email address below the title, and an organisation dropdown below that showing the default organisation (\"[Username]'s organisation\" with \"Org ID: [Organization ID]\" beneath it)."
+        },
+        {
+          "content": "Observe the team member table under the organisation dropdown.",
+          "expected": "The table has Email address, Role, and Status columns. The Account Owner's row shows their email and an \"Account Owner\" role badge, with no \"More\" (...) option (the Owner's own row can never be managed). Any invited Admin or Editor member appears as an additional row with their email, role badge, and status; that row has a \"More\" (...) option unless it is the viewer's own row, in which case the option is likewise absent."
+        },
+        {
+          "content": "Note the state of the \"+ Invite new user\" button when the Account Owner's email address has not yet been verified.",
+          "expected": "The button is disabled, and hovering over it shows the tooltip: \"Please verify your email to invite users.\""
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1268,
+        3887,
+        6872,
+        7772,
+        13027,
+        2048,
+        3909,
+        6894,
+        7794,
+        13048
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed 5 plan-variant duplicates and the Admin-role duplicate (identical structure, differing only in which rows are populated). Navigation moved to Preconditions. Editor's copy of this case is folded into the permission-flagged 'cannot change role or remove a member' case below.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=fixed: all quoted text (\"Team Members\" title, \"+ Invite new user\" button, Acc ID badge, organisation dropdown, \"More\" option absence rules, unverified-email tooltip) was live-verified against QA2 during grilling. Per audit priority rule, this supersedes the Suite 6 source (which used the stale \"Teams\"/\"add a new user\" wording)."
+    },
+    {
+      "id": 39411,
+      "title": "[Team] Verify that clicking \"+ Invite new user\" opens the Invite new user pop-up",
+      "preconditions": "User is on the Team page; the Account Owner's email address is verified (the \"+ Invite new user\" button is enabled).",
+      "steps": [
+        {
+          "content": "Click the \"+ Invite new user\" button.",
+          "expected": "The \"Invite new user\" pop-up is displayed."
+        },
+        {
+          "content": "Observe the pop-up.",
+          "expected": "It shows:\n- The text \"The invited user will have access to all sites in the selected organisation\" under the title\n- An info banner: \"The user will receive an email with instructions to join your team.\"\n- An \"Organisation*\" dropdown (placeholder \"Select organisation\")\n- An \"Email address*\" field (placeholder \"email@address.com\")\n- A \"Role*\" label with a \"Learn more\" link to its right\n- \"Admin\" and \"Editor\" role radio buttons, described as \"Can manage sites, users, and has all Editor permissions\" and \"Can manage cookie banner, cookie scan, consent settings, and legal policies\" respectively\n- \"Cancel\" and \"Invite user\" buttons (\"Invite user\" is disabled until an organisation, email, and role are all set)"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1269,
+        3888,
+        6873,
+        7773,
+        13028,
+        17092,
+        17159,
+        1270,
+        3889,
+        6874,
+        7774,
+        13029,
+        17067,
+        17093,
+        17160,
+        2052,
+        3911,
+        6896,
+        7796,
+        13049,
+        2054,
+        3913,
+        6898,
+        7798,
+        13050
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Folded the Suite 6 'Display of Invite new user pop-up' case in per the pop-up/modal rule \u2014 its structure is an expected result of the opening action, not a standalone case. Collapsed plan and Admin-role duplicates.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=fixed: Invite new user pop-up structure and copy (banner text, Organisation*/Role* labels, Learn more link, role descriptions, buttons) were live-verified during grilling. Supersedes Suite 6 source per priority rule."
+    },
+    {
+      "id": 39412,
+      "title": "[Team] Verify that the \"Learn More\" link on the Invite new user pop-up opens the Team Member Permission documentation",
+      "preconditions": "User is on the Team page; the \"Invite new user\" pop-up is open.",
+      "steps": [
+        {
+          "content": "Click the \"Learn More\" link next to the \"Role\" label.",
+          "expected": "The \"Team Member Permission\" documentation page is displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1309,
+        3892,
+        6877,
+        7777,
+        13030,
+        17079,
+        17094,
+        17161,
+        17294,
+        2055,
+        3914,
+        6899,
+        7799,
+        13051
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed plan and Admin-role duplicates. One-step case \u2014 below the 4-step floor, expected for a narrow functional check. NOT auto-fixed (destination is external \u2014 see skip rule) but incidentally observed live: the link's actual label is \"Learn more\" (lowercase) and it opens https://www.cookieyes.com/documentation/roles-and-permissions/, not a page titled \"Team Member Permission\" \u2014 worth a human double-check before publish.",
+      "grill_status": "skipped:external-url",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Matches Suite 6 source C1309 exactly, word-for-word (\"Learn More\" link, \"Team Member Permission\" documentation page) \u2014 no fidelity regression introduced during migration. However, grill_status is skipped:external-url (never live-verified, so it does not carry the confirmed/fixed exemption), and grilling separately observed the live app's actual label is \"Learn more\" (lowercase) opening a roles-and-permissions doc, not a page titled \"Team Member Permission\" \u2014 i.e. the SOURCE itself may be stale relative to the live app. That is a live-drift question for a human/spot-check, not a source-to-v2 fidelity regression, so it is out of this audit's scope but repeated here for visibility."
+    },
+    {
+      "id": 39413,
+      "title": "[Team] Verify that inviting an email address that already has access to the organization shows a validation error",
+      "preconditions": "- User is on the Team page\n- The \"Invite new user\" pop-up is open\n- The organization selected already has a team member with the email address being entered",
+      "steps": [
+        {
+          "content": "Select the organisation from the \"Organisation*\" dropdown.",
+          "expected": "The organisation is selected."
+        },
+        {
+          "content": "Enter the email address of a user who already has access to the selected organization.",
+          "expected": "The email address is entered."
+        },
+        {
+          "content": "Select either the \"Admin\" or \"Editor\" role radio button.",
+          "expected": "The role is selected."
+        },
+        {
+          "content": "Click the \"Invite user\" button.",
+          "expected": "A validation error is displayed under the \"Email address*\" field: \"This user already has access to the selected organisation.\""
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1305,
+        3891,
+        6876,
+        7776,
+        13031,
+        2056,
+        3915,
+        6900,
+        7800,
+        13052,
+        17104,
+        17171
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed plan and Admin-role duplicates.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=fixed: \"This user already has access to the selected organisation.\" error text was extracted from the live DOM during grilling (character-for-character). Supersedes Suite 6 source (\"organization\")."
+    },
+    {
+      "id": 39414,
+      "title": "[Team] Verify that inviting an existing user as Admin grants them access to the organization",
+      "preconditions": "- User is on the Team page\n- The \"Invite new user\" pop-up is open\n- The email address being invited belongs to an existing CookieYes user who does not already have access to the selected organization",
+      "steps": [
+        {
+          "content": "Select the organization, enter the existing user's email address, and select the \"Admin\" role radio button.",
+          "expected": "The organization, email, and role are set."
+        },
+        {
+          "content": "Click the \"Invite user\" button.",
+          "expected": "The invited user is added to the team member table with: the invited email address, an \"Admin\" role badge, a \"Pending\" status, and a \"More\" (...) option."
+        },
+        {
+          "content": "Open the invited user's mailbox.",
+          "expected": "An email titled \"You've been invited to join an organization in CookieYes\" is received, with the body: \"Hi there, [Inviter's email] has invited you to join their team. Click the button below to create a login for yourself to join the organization. If you're already a CookieYes user, you can log in using your existing credentials. [Join Organization] button Alternatively, you can copy and paste this link into your browser. [invitation link] Regards, CookieYes Team\""
+        },
+        {
+          "content": "Click the \"Join Organization\" button in the email.",
+          "expected": "The \"Join your team now!\" login page is displayed with the banner \"You've been invited to join [Destination organization name] (Organisation ID: [Destination organization ID]).\" The invitee's email is pre-filled and disabled. An \"Enter password\" field (with eye icon), a \"Join now\" button, and a \"Forgot your password?\" link are shown below."
+        },
+        {
+          "content": "Enter a valid password and click \"Join now\".",
+          "expected": "The \"You've successfully joined your team!\" page is displayed with a success icon, the heading \"You've successfully joined your team!\", the text \"You can now start collaborating with your teammates\", and a \"Go to Dashboard\" button."
+        },
+        {
+          "content": "Click \"Go to Dashboard\".",
+          "expected": "The invited Admin user's Dashboard page is displayed."
+        },
+        {
+          "content": "Navigate back to the inviter's Team page.",
+          "expected": "The invited user's status updates from \"Pending\" to \"Active\"."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [
+        1311,
+        1371,
+        1372,
+        3894,
+        3896,
+        3897,
+        6879,
+        6881,
+        6882,
+        7779,
+        7781,
+        7782,
+        13032,
+        13036,
+        13038,
+        17080,
+        17295,
+        17097,
+        17164,
+        17081,
+        17099,
+        17166,
+        17297,
+        2057,
+        3916,
+        6901,
+        7801,
+        13053
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed plan and Admin-role duplicates. Folded in the Suite 6 'Display of Join your team now! Log in page' case (its only unique element, the 'Forgot password?' link, is now in step 4) and the 'Display and functionality of You've successfully joined your team! page' case (step 5) \u2014 both were mid-flow pages of this same scenario, not standalone entry points. Marked smoke as the single most critical happy path for this section.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=fixed, smoke case: full invite\u2192email\u2192login\u2192success\u2192active flow was executed end-to-end live during grilling, including the exact invitation email body and success-page copy. Supersedes Suite 6 source (email signoff, 'Forgot your password?', Organisation ID spelling)."
+    },
+    {
+      "id": 39415,
+      "title": "[Team] Verify that inviting an existing user as Editor grants them access to the organization",
+      "preconditions": "- User is on the Team page\n- The \"Invite new user\" pop-up is open\n- The email address being invited belongs to an existing CookieYes user who does not already have access to the selected organization",
+      "steps": [
+        {
+          "content": "Select the organization, enter the existing user's email, and select the \"Editor\" role radio button.",
+          "expected": "The organization, email, and role are set."
+        },
+        {
+          "content": "Click the \"Invite user\" button.",
+          "expected": "The invited user is added to the team member table with the invited email address, an \"Editor\" role badge, a \"Pending\" status, and a \"More\" (...) option."
+        },
+        {
+          "content": "Open the invited user's mailbox and click \"Join Organization\" in the invitation email.",
+          "expected": "The \"Join your team now!\" login page is displayed with the invitee's email pre-filled and disabled."
+        },
+        {
+          "content": "Enter a valid password, click \"Join now\", then click \"Go to Dashboard\" on the success page.",
+          "expected": "The invited Editor user's Dashboard page is displayed."
+        },
+        {
+          "content": "Navigate back to the inviter's Team page.",
+          "expected": "The invited user's status updates from \"Pending\" to \"Active\"."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1370,
+        3895,
+        6880,
+        7780,
+        13033,
+        17095,
+        17162,
+        2058,
+        3917,
+        6902,
+        7802,
+        13054
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed plan and Admin-role duplicates. Condensed \u2014 login-page structure already fully detailed in the existing-user + Admin case; duplicate assertions dropped. Not directly executed this run \u2014 verified by mechanic equivalence: the existing-user login flow was end-to-end confirmed in the Admin-role sibling case, and Editor role assignment was end-to-end confirmed in the new-user + Editor sibling case; this case combines the two already-confirmed mechanics with no unique wording of its own.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed: not independently round-tripped this run, but combines two mechanics each separately confirmed live in sibling cases (existing-user login flow in the Admin-role case; Editor role assignment in the new-user+Editor case). No quoted text unique to this case beyond those."
+    },
+    {
+      "id": 39416,
+      "title": "[Team] Verify that inviting a new user as Admin creates their account and grants organization access",
+      "preconditions": "- User is on the Team page\n- The \"Invite new user\" pop-up is open\n- The email address being invited does not belong to an existing CookieYes user",
+      "steps": [
+        {
+          "content": "Select the organization, enter the new user's email address, and select the \"Admin\" role radio button.",
+          "expected": "The organization, email, and role are set."
+        },
+        {
+          "content": "Click the \"Invite user\" button.",
+          "expected": "The invited user is added to the team member table with the invited email address, an \"Admin\" role badge, a \"Pending\" status, and a \"More\" (...) option."
+        },
+        {
+          "content": "Open the invited user's mailbox and click \"Join Organization\" in the invitation email.",
+          "expected": "The \"Join your team now!\" sign-up page is displayed with the banner \"You've been invited to join [Destination organization name] (Organisation ID: [Destination organization ID]).\" and the invitee's email pre-filled and disabled."
+        },
+        {
+          "content": "Enter a valid password in the \"Create password\" field, and check the \"I agree to the Terms and acknowledge the Privacy Policy\" checkbox (\"Terms\" and \"Privacy Policy\" are separate links).",
+          "expected": "Checking the box reveals a second, unchecked checkbox: \"I agree to receive important product updates, news and insights from CookieYes.\" (optional \u2014 not required to proceed). Click \"Join now\" \u2014 the \"You've successfully joined your team!\" page is displayed with a \"Go to Dashboard\" button."
+        },
+        {
+          "content": "Click \"Go to Dashboard\".",
+          "expected": "The invited Admin user's Dashboard page is displayed."
+        },
+        {
+          "content": "Navigate back to the inviter's Team page.",
+          "expected": "The invited user's status updates from \"Pending\" to \"Active\"."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1383,
+        3906,
+        6891,
+        7791,
+        13034,
+        17096,
+        17163,
+        2059,
+        3918,
+        6903,
+        7803,
+        13055,
+        1391,
+        3908,
+        6893,
+        7793,
+        13037,
+        17098,
+        17165
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed plan and Admin-role duplicates. The Suite 6 'Display of Join your team now! Sign up page' case added no content beyond this flow \u2014 folded in as a duplicate. Grilling found the T&C checkbox wording and structure wrong (two separate links, not one combined link) and a second, previously-undocumented marketing opt-in checkbox that appears after checking the first \u2014 both corrected.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=fixed: sign-up flow executed live during grilling; corrected the T&C checkbox wording (two separate links, not one) and surfaced the marketing opt-in checkbox not present in the Suite 6 source at all. Supersedes source."
+    },
+    {
+      "id": 39417,
+      "title": "[Team] Verify that inviting a new user as Editor creates their account and grants organization access",
+      "preconditions": "- User is on the Team page\n- The \"Invite new user\" pop-up is open\n- The email address being invited does not belong to an existing CookieYes user",
+      "steps": [
+        {
+          "content": "Select the organization, enter the new user's email address, and select the \"Editor\" role radio button.",
+          "expected": "The organization, email, and role are set."
+        },
+        {
+          "content": "Click the \"Invite user\" button.",
+          "expected": "The invited user is added with the invited email address, an \"Editor\" role badge, a \"Pending\" status, and a \"More\" (...) option."
+        },
+        {
+          "content": "Open the invited user's mailbox, click \"Join Organization\", complete sign-up (enter password, check \"I agree to the Terms and acknowledge the Privacy Policy\"), and click \"Join now\".",
+          "expected": "The \"You've successfully joined your team!\" page is displayed."
+        },
+        {
+          "content": "Click \"Go to Dashboard\".",
+          "expected": "The invited Editor user's Dashboard page is displayed."
+        },
+        {
+          "content": "Navigate back to the inviter's Team page.",
+          "expected": "The invited user's status updates from \"Pending\" to \"Active\"."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1385,
+        3907,
+        6892,
+        7792,
+        13035,
+        17068,
+        17296,
+        2060,
+        3919,
+        6904,
+        7804,
+        13056
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed plan and Admin-role duplicates. Condensed \u2014 sign-up page structure already detailed in the new-user + Admin case. Corrected the T&C checkbox wording to match the live app.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=fixed: full new-user+Editor invite\u2192signup\u2192active flow executed end-to-end live during grilling. Supersedes Suite 6 source (checkbox wording)."
+    },
+    {
+      "id": 39418,
+      "title": "[Team] Verify that accepting a team invitation while a different account is logged in shows a logout confirmation",
+      "preconditions": "User is on the Team page and has sent an invitation to a new user's email address; a browser session in the same browser is already logged in as a different CookieYes user.",
+      "steps": [
+        {
+          "content": "In the invited user's mailbox, copy the invitation link.",
+          "expected": "The invitation link is copied."
+        },
+        {
+          "content": "Log in to CookieYes with a different account's credentials in the same browser.",
+          "expected": "The Dashboard page for that different account is displayed."
+        },
+        {
+          "content": "Load the copied invitation link.",
+          "expected": "A logout confirmation page is displayed with the \"CookieYes\" logo, the \"Welcome back\" title, and the connected user's details: \"Logged in as [logged in user email address]\" (plain text, not bold), with the first letter of their email shown as an avatar icon."
+        },
+        {
+          "content": "Observe the info banner on the logout confirmation page.",
+          "expected": "The banner reads: \"Log out now to accept the invite received at [invitee email address] to join [destination organization name] (Organisation ID: [organization id]) .\" (note: the live app has a stray space before the final period \u2014 likely a template bug, not a wording choice). A \"Log out to continue\" button is displayed below."
+        },
+        {
+          "content": "Click the \"Log out to continue\" button.",
+          "expected": "The \"Join your team now!\" page is displayed for the invited account."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1380,
+        3905,
+        6890,
+        7790,
+        13047
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed plan-variant duplicates. No Admin/Editor equivalent exists in Suite 6. Grilled end-to-end (this scenario occurred naturally while testing Case 5's invite flow, since the inviter's session was still active): confirmed the '**bold**' markdown from the Suite 6 source was a TestRail authoring artifact, not real on-page formatting \u2014 removed. Fixed 'Organization ID' to 'Organisation ID' and noted a stray trailing space before the period in the live banner text.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=fixed: logout-confirmation page occurred naturally during the live smoke-case round-trip and was verified via DOM extraction (confirmed the '**bold**' Suite 6 markdown was an authoring artifact, fixed 'Organisation ID' spelling and the stray trailing space). Supersedes source."
+    },
+    {
+      "id": 39419,
+      "title": "[Team] Verify that the \"More\" option on a team member row shows Change role and Remove user",
+      "preconditions": "User is on the Team page; the team member table includes an Active Admin or Editor member.",
+      "steps": [
+        {
+          "content": "Click the \"More\" (...) option on the member's row.",
+          "expected": "A menu is displayed with \"Change role\" and \"Remove user\" options."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1373,
+        3898,
+        6883,
+        7783,
+        13039,
+        17069,
+        2062,
+        3921,
+        6906,
+        7806,
+        13040,
+        17100,
+        17167,
+        2061,
+        3920,
+        6905,
+        7805,
+        13057,
+        2063,
+        3922,
+        6907,
+        7807,
+        13058
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed four Suite 6 cases (Account Owner and Admin viewing an Admin-role member vs. an Editor-role member) \u2014 the menu options are identical regardless of the target member's role, so this is a style duplicate, not a behavioral variant. Collapsed plan duplicates within each. Grilled exactly as written (menu shows 'Change role' and 'Remove user'). Note: the button's own accessible name leaks an untranslated i18n key ('team.teamsTable.values.moreActions') instead of real text \u2014 a live app bug worth a bug report, not a case content issue.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed: \"Change role\"/\"Remove user\" menu text matched the live app exactly during grilling."
+    },
+    {
+      "id": 39420,
+      "title": "[Team] Verify that \"Change role\" opens the Change user role pop-up with the member's current role pre-selected",
+      "preconditions": "User is on the Team page; the team member table includes an Active member (e.g. with the \"Admin\" role).",
+      "steps": [
+        {
+          "content": "Click the \"More\" (...) option on the member's row, then click \"Change role\".",
+          "expected": "The \"Change user role\" pop-up is displayed."
+        },
+        {
+          "content": "Observe the pop-up.",
+          "expected": "It shows:\n- A disabled \"Organisation*\" dropdown pre-selected to the organisation the member has access to\n- A disabled \"Email address*\" field pre-filled with the member's email address\n- A \"Role*\" label with a \"Learn more\" link to its right\n- \"Admin\" and \"Editor\" role radio buttons with the descriptions \"Can manage sites, users, and has all Editor permissions\" and \"Can manage cookie banner, cookie scan, consent settings, and legal policies\" respectively, with the member's current role radio button pre-selected\n- \"Cancel\" and \"Change role\" buttons"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1374,
+        3899,
+        6884,
+        7784,
+        13041,
+        17101,
+        17168,
+        1376,
+        3901,
+        6886,
+        7786,
+        13042,
+        17070,
+        2065,
+        3924,
+        6909,
+        7809,
+        13059,
+        2066,
+        3925,
+        6910,
+        7810,
+        13060,
+        17105,
+        17172
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Folded the Suite 6 'Display of Change user role pop up' case into this one per the pop-up/modal fold rule. Collapsed plan and Admin-role duplicates.",
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=fixed: Change user role pop-up structure and copy live-verified during grilling (Organisation*/Role*/Learn more spelling fixes applied). Supersedes source."
+    },
+    {
+      "id": 39421,
+      "title": "[Team] Verify that changing a member's role to Admin updates their role badge",
+      "preconditions": "- User is on the Team page\n- The team member table includes an Active member currently assigned the \"Editor\" role\n- The \"Change user role\" pop-up is open for that member, with \"Editor\" pre-selected",
+      "steps": [
+        {
+          "content": "Select the \"Admin\" role radio button.",
+          "expected": "The \"Admin\" role radio button is selected."
+        },
+        {
+          "content": "Click the \"Change role\" button.",
+          "expected": "The member's row is updated to show an \"Admin\" role badge, with the \"Active\" status and \"More\" (...) option unchanged."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1377,
+        3902,
+        6887,
+        7787,
+        13043,
+        17298,
+        2067,
+        3926,
+        6911,
+        7811,
+        13061
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed plan and Admin-role duplicates. Condensed \u2014 pop-up structure already covered by the Change user role pop-up case above. Not directly executed this run (Cancelled out of the live Change role pop-up rather than committing a role change, to avoid mutating the shared editoruser test account) \u2014 no quoted text of its own to verify beyond the pop-up structure already confirmed in the sibling case.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed: not independently executed (Cancelled to avoid mutating the shared editoruser test account), but quotes no text beyond what Cases 1/10/11 already confirmed live (role badge, Active status, More option wording)."
+    },
+    {
+      "id": 39422,
+      "title": "[Team] Verify that changing a member's role to Editor updates their role badge",
+      "preconditions": "- User is on the Team page\n- The team member table includes an Active member currently assigned the \"Admin\" role\n- The \"Change user role\" pop-up is open for that member, with \"Admin\" pre-selected",
+      "steps": [
+        {
+          "content": "Select the \"Editor\" role radio button.",
+          "expected": "The \"Editor\" role radio button is selected."
+        },
+        {
+          "content": "Click the \"Change role\" button.",
+          "expected": "The member's row is updated to show an \"Editor\" role badge, with the \"Active\" status and \"More\" (...) option unchanged."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1378,
+        3903,
+        6888,
+        7788,
+        13044,
+        17102,
+        17169,
+        2068,
+        3927,
+        6912,
+        7812,
+        13062
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed plan and Admin-role duplicates. Condensed \u2014 pop-up structure already covered by the Change user role pop-up case above. Not directly executed this run, same reason as the Admin-role sibling case \u2014 no quoted text of its own beyond the already-confirmed pop-up structure.",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed: same basis as the Admin-role sibling case \u2014 no quoted text of its own beyond what's already confirmed live elsewhere in this section."
+    },
+    {
+      "id": 39423,
+      "title": "[Team] Verify that \"Remove user\" removes a team member from the organization",
+      "preconditions": "User is on the Team page; the team member table includes an Active member.",
+      "steps": [
+        {
+          "content": "Click the \"More\" (...) option on the member's row, then click \"Remove user\".",
+          "expected": "The \"Remove user?\" pop-up is displayed."
+        },
+        {
+          "content": "Observe the pop-up.",
+          "expected": "It shows the text \"Once removed, [member's email] will no longer be able to access [Organisation_name] (Org ID: [Organisation_id]). This action cannot be undone.\" with \"Cancel\" and \"Remove\" buttons."
+        },
+        {
+          "content": "Click the \"Remove\" button.",
+          "expected": "The member's row is removed from the team member table."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1375,
+        1379,
+        3900,
+        3904,
+        6885,
+        6889,
+        7785,
+        7789,
+        13045,
+        13046,
+        17082,
+        17103,
+        17170,
+        17299,
+        2069,
+        2070,
+        3928,
+        3929,
+        6913,
+        6914,
+        7813,
+        7814,
+        13063,
+        13064,
+        17106,
+        17173,
+        17071
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Folded the Suite 6 'Display and functionality of Remove user? pop up' case into this one per the pop-up/modal fold rule. Collapsed plan and Admin-role duplicates. Destructive action \u2014 ordered last in the functional cluster. Grilled: pop-up title, warning text, and buttons all confirmed exactly (Cancelled rather than committing the removal, to avoid mutating the shared editoruser test account).",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed: \"Remove user?\" pop-up title, warning text, and buttons were observed live via DOM snapshot during grilling before Cancelling (to avoid mutating shared test data)."
+    },
+    {
+      "id": 39424,
+      "title": "[Team] Verify that an Editor cannot invite a new team member",
+      "preconditions": "User is logged in as Editor; user is on the Team page.",
+      "steps": [
+        {
+          "content": "Observe the \"+ Invite new user\" button.",
+          "expected": "The button is disabled by default."
+        },
+        {
+          "content": "Hover over the disabled \"+ Invite new user\" button.",
+          "expected": "A tooltip is displayed: \"Only the Account Owner or an Admin can manage a user.\" No pop-up opens (the button cannot be clicked)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        2053,
+        3912,
+        6897,
+        7797,
+        13066,
+        17072,
+        17107,
+        17174
+      ],
+      "permission_flag": true,
+      "platform_flag": false,
+      "rewrite_notes": "Role divergence \u2014 Editor is blocked from team management per testrail-suite-v2.md's permission table. Grilling found two real mismatches: (1) the button is genuinely disabled for an Editor, not clickable-then-blocked \u2014 so the interaction is hover, not click; (2) the tooltip is not invite-specific wording as Suite 6 claimed \u2014 it is the exact same generic 'can manage a user' tooltip used on the More button (Case 16), confirmed via double hover + DOM extraction after moving the mouse away and back to rule out a stale portal element.",
+      "grill_status": "fixed",
+      "section_id": 1776,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=fixed: this is the case's headline finding \u2014 the button is genuinely disabled (not clickable) and its tooltip is the generic \"...can manage a user\" message, not invite-specific wording. Confirmed via double-hover + DOM extraction after moving the mouse away, ruling out a stale tooltip. Supersedes the Suite 6 source, which had invite-specific wording."
+    },
+    {
+      "id": 39425,
+      "title": "[Team] Verify that an Editor cannot change a member's role or remove a member",
+      "preconditions": "- User is logged in as Editor\n- User is on the Team page\n- The team member table includes an Active Admin member",
+      "steps": [
+        {
+          "content": "Observe the \"More\" (...) option on the Admin member's row.",
+          "expected": "The \"More\" (...) option is disabled by default."
+        },
+        {
+          "content": "Click the \"More\" (...) option.",
+          "expected": "A tooltip is displayed: \"Only the Account Owner or an Admin can manage a user.\" The Change role / Remove user menu does not open."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        2064,
+        3923,
+        6908,
+        7808,
+        13067,
+        17073,
+        17108,
+        17175,
+        2049,
+        3910,
+        6895,
+        7795,
+        13065
+      ],
+      "permission_flag": true,
+      "platform_flag": false,
+      "rewrite_notes": "Role divergence, same basis as the invite-blocked case above. Folded in the Editor-specific 'More option disabled by default' fact from Suite 6's Editor render case \u2014 its structural content otherwise duplicates the canonical render case. Grilled exactly as written \u2014 tooltip text confirmed character-for-character via DOM extraction (no bold markdown in the live app).",
+      "grill_status": "confirmed",
+      "section_id": 1776,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed: tooltip text confirmed character-for-character via DOM extraction during grilling; matches Suite 6 source with no bold markdown live."
+    },
+    {
+      "title": "[Team] Verify that an invalid email format on the Invite new user pop-up shows a validation error",
+      "preconditions": "- User is on the Team page\n- The \"Invite new user\" pop-up is open\n- An organisation is selected and a role radio button is selected",
+      "steps": [
+        {
+          "content": "Enter an invalid email format (e.g. \"not-an-email\") in the \"Email address*\" field.",
+          "expected": "The text is entered. The \"Invite user\" button remains enabled (no client-side format check on input)."
+        },
+        {
+          "content": "Click the \"Invite user\" button.",
+          "expected": "A validation error is displayed under the field: \"Valid email required\". The \"Invite user\" button becomes disabled again and no invite is sent."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Gap found during grilling \u2014 no Suite 6 case or draft case covered invalid-email-format validation on this dialog. Checked against all published ai-context/cases-*.json files for overlap; none cover this scenario. Approved for migration via /migrate-section teams.",
+      "grill_status": "confirmed",
+      "id": 39426,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "No source_case_ids (gap case found during grilling, not present in Suite 6) \u2014 but the quoted text (\"Valid email required\") was itself captured directly from a live DOM extraction while authoring this case during /grill-section, which is the same evidentiary weight as a grill_status=fixed case. Treating as verbatim-confirmed rather than no-source-case since the live check has already happened, not merely pending."
+    }
+  ],
+  "audited_at": "2026-07-13T17:35:01Z"
+}

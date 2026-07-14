@@ -1,0 +1,185 @@
+- generic [active] [ref=f15e4]:
+  - button "Consent Preferences" [ref=f15e2] [cursor=pointer]:
+    - img "Revisit consent button" [ref=f15e3]
+  - generic [ref=f15e5]:
+    - generic [ref=f15e7]:
+      - banner [ref=f15e8]:
+        - generic [ref=f15e9]:
+          - button "Navigate to dashboard" [ref=f15e11]:
+            - img "CookieYes" [ref=f15e12]
+          - generic [ref=f15e13]:
+            - button "genius-advocate-signup Refer & Earn" [ref=f15e14] [cursor=pointer]:
+              - img "genius-advocate-signup" [ref=f15e15]
+              - text: Refer & Earn
+            - button "Become a partner" [ref=f15e16] [cursor=pointer]:
+              - generic [ref=f15e17]: Become a partner
+              - img [ref=f15e18]
+            - button "CookieYes Documentation" [ref=f15e20] [cursor=pointer]:
+              - generic [ref=f15e21]: CookieYes Documentation
+              - img [ref=f15e22]
+            - img [ref=f15e27] [cursor=pointer]
+            - button [ref=f15e29] [cursor=pointer]:
+              - img [ref=f15e31]
+              - img [ref=f15e34]
+      - navigation "Main" [ref=f15e36]:
+        - generic [ref=f15e37]:
+          - button "Back to Dashboard" [ref=f15e38] [cursor=pointer]:
+            - img
+            - generic [ref=f15e39]: Back to Dashboard
+          - list [ref=f15e41]:
+            - listitem [ref=f15e42]:
+              - link "Organisations & Sites" [ref=f15e43] [cursor=pointer]:
+                - /url: /settings/organizations-and-sites
+            - listitem [ref=f15e44]:
+              - link "Team" [ref=f15e45] [cursor=pointer]:
+                - /url: /settings/team
+            - listitem [ref=f15e46]:
+              - link "Billing & Invoices" [ref=f15e47] [cursor=pointer]:
+                - /url: /settings/billing
+            - listitem [ref=f15e48]:
+              - link "MCP access" [ref=f15e49] [cursor=pointer]:
+                - /url: /settings/mcp-access
+            - listitem [ref=f15e50]:
+              - link "Notifications" [ref=f15e51] [cursor=pointer]:
+                - /url: /settings/notifications
+            - listitem [ref=f15e52]:
+              - link "My account" [ref=f15e53] [cursor=pointer]:
+                - /url: /settings/account
+      - separator [ref=f15e54]
+      - main "Organizations and Sites" [ref=f15e55]:
+        - generic [ref=f15e56]:
+          - generic [ref=f15e57]:
+            - generic [ref=f15e58]:
+              - heading "Organisations & Sites" [level=1] [ref=f15e59]
+              - group "Action buttons" [ref=f15e60]:
+                - generic [ref=f15e61]: Action buttons
+                - button "+ New site" [ref=f15e62] [cursor=pointer]
+                - button "+ New organisation" [ref=f15e63] [cursor=pointer]
+            - search [ref=f15e65]:
+              - button "Submit Search" [ref=f15e66]:
+                - img [ref=f15e67]
+                - generic [ref=f15e70]: Submit Search
+              - textbox "Search websites" [ref=f15e71]:
+                - /placeholder: Search by website URL
+          - list "Accounts" [ref=f15e72]:
+            - listitem [ref=f15e73]:
+              - article "Account for rahulkrishna+disposableuser@mozilor.com" [ref=f15e74]:
+                - generic [ref=f15e75]:
+                  - generic [ref=f15e76]:
+                    - generic [ref=f15e77]: ACCOUNT OWNER
+                    - generic "Account ID 1746" [ref=f15e78]: "Acc ID: 1746"
+                  - generic [ref=f15e79]:
+                    - heading "rahulkrishna+disposableuser@mozilor.com" [level=2] [ref=f15e80]
+                    - generic [ref=f15e81]:
+                      - generic "MCP enabled" [ref=f15e82]: MCP enabled
+                      - button "Transfer ownership" [ref=f15e85] [cursor=pointer]
+                - region "Organizations for rahulkrishna+disposableuser@mozilor.com" [ref=f15e86]:
+                  - generic [ref=f15e89]:
+                    - heading "Rahulkrishna+disposableuser's organisation organization, ID 1766" [level=3] [ref=f15e90]:
+                      - button "Rahulkrishna+disposableuser's organisation organization, ID 1766" [expanded] [ref=f15e91] [cursor=pointer]:
+                        - generic [ref=f15e92]:
+                          - generic [ref=f15e93]:
+                            - img [ref=f15e94]
+                            - heading "Rahulkrishna+disposableuser's organisation" [level=4] [ref=f15e96]
+                            - generic "Organization ID 1766" [ref=f15e97]: "Org ID: 1766"
+                          - button "Organization actions" [ref=f15e98]:
+                            - button "Actions for Rahulkrishna+disposableuser's organisation" [ref=f15e99]:
+                              - img
+                              - generic [ref=f15e100]: Open organization menu
+                    - region "Rahulkrishna+disposableuser's organisation organization, ID 1766" [ref=f15e101]:
+                      - table [ref=f15e105]:
+                        - rowgroup [ref=f15e106]:
+                          - row "Site URL Site name Created date Plan Next renewal" [ref=f15e107]:
+                            - columnheader "Site URL" [ref=f15e108]
+                            - columnheader "Site name" [ref=f15e109]
+                            - columnheader "Created date" [ref=f15e110]
+                            - columnheader "Plan" [ref=f15e111]
+                            - columnheader "Next renewal" [ref=f15e112]
+                            - columnheader [ref=f15e113]
+                            - columnheader [ref=f15e114]
+                            - columnheader [ref=f15e115]
+                            - columnheader [ref=f15e116]
+                        - rowgroup [ref=f15e117]:
+                          - row "jd.com Jd July 10, 2026 Basic 10 USD / Monthly - Subscription will be cancelled and the site will be deleted on August 10, 2026. Reactivate subscription Reactivate subscription information Change plan Manage site More options" [ref=f15e118]:
+                            - cell "jd.com" [ref=f15e119]:
+                              - generic [ref=f15e122]: jd.com
+                            - cell "Jd" [ref=f15e123]:
+                              - generic [ref=f15e124]: Jd
+                            - cell "July 10, 2026" [ref=f15e125]:
+                              - generic [ref=f15e126]: July 10, 2026
+                            - cell "Basic 10 USD / Monthly" [ref=f15e127]:
+                              - generic [ref=f15e128]:
+                                - generic [ref=f15e130]: Basic
+                                - generic [ref=f15e131]:
+                                  - text: 10 USD
+                                  - generic [ref=f15e132]: / Monthly
+                            - cell "-" [ref=f15e133]:
+                              - generic [ref=f15e135]: "-"
+                            - cell "Subscription will be cancelled and the site will be deleted on August 10, 2026. Reactivate subscription Reactivate subscription information" [ref=f15e136]:
+                              - generic [ref=f15e138]:
+                                - paragraph [ref=f15e139]:
+                                  - text: Subscription will be cancelled
+                                  - text: and the site will be deleted
+                                  - text: "on"
+                                  - strong [ref=f15e140]: August 10, 2026
+                                  - text: .
+                                - generic [ref=f15e141]:
+                                  - button "Reactivate subscription" [ref=f15e142] [cursor=pointer]
+                                  - button "Reactivate subscription information" [ref=f15e143]:
+                                    - img [ref=f15e144]
+                            - cell "Change plan" [ref=f15e147]:
+                              - button "Change plan" [ref=f15e149] [cursor=pointer]
+                            - cell "Manage site" [ref=f15e150]:
+                              - button "Manage site" [ref=f15e151] [cursor=pointer]
+                            - cell "More options" [ref=f15e152]:
+                              - button "More options" [ref=f15e154] [cursor=pointer]:
+                                - img "three dots" [ref=f15e155]
+                          - row "i.lj I July 10, 2026 Basic - Suspended More information about suspended trial Choose plan More options" [ref=f15e157]:
+                            - cell "i.lj" [ref=f15e158]:
+                              - generic [ref=f15e161]: i.lj
+                            - cell "I" [ref=f15e162]:
+                              - generic [ref=f15e163]: I
+                            - cell "July 10, 2026" [ref=f15e164]:
+                              - generic [ref=f15e165]: July 10, 2026
+                            - cell "Basic" [ref=f15e166]:
+                              - generic [ref=f15e169]: Basic
+                            - cell "-" [ref=f15e170]:
+                              - generic [ref=f15e172]: "-"
+                            - cell "Suspended More information about suspended trial" [ref=f15e173]:
+                              - generic [ref=f15e175]:
+                                - generic [ref=f15e176]: Suspended
+                                - button "More information about suspended trial" [ref=f15e177]:
+                                  - img [ref=f15e178]
+                            - cell "Choose plan" [ref=f15e181]:
+                              - button "Choose plan" [ref=f15e183] [cursor=pointer]
+                            - cell [ref=f15e184]
+                            - cell "More options" [ref=f15e185]:
+                              - button "More options" [ref=f15e187] [cursor=pointer]:
+                                - img "three dots" [ref=f15e188]
+                          - row "jih.ko Jih July 10, 2026 Pro 25 USD / Monthly Switch to Annual - Save 17% August 10, 2026 Change plan Manage site More options" [ref=f15e190]:
+                            - cell "jih.ko" [ref=f15e191]:
+                              - generic [ref=f15e194]: jih.ko
+                            - cell "Jih" [ref=f15e195]:
+                              - generic [ref=f15e196]: Jih
+                            - cell "July 10, 2026" [ref=f15e197]:
+                              - generic [ref=f15e198]: July 10, 2026
+                            - cell "Pro 25 USD / Monthly Switch to Annual - Save 17%" [ref=f15e199]:
+                              - generic [ref=f15e200]:
+                                - generic [ref=f15e202]: Pro
+                                - generic [ref=f15e203]:
+                                  - text: 25 USD
+                                  - generic [ref=f15e204]: / Monthly
+                                - button "Switch to Annual - Save 17%" [ref=f15e205] [cursor=pointer]
+                            - cell "August 10, 2026" [ref=f15e206]:
+                              - generic [ref=f15e208]: August 10, 2026
+                            - cell [ref=f15e209]
+                            - cell "Change plan" [ref=f15e210]:
+                              - button "Change plan" [ref=f15e212] [cursor=pointer]
+                            - cell "Manage site" [ref=f15e213]:
+                              - button "Manage site" [ref=f15e214] [cursor=pointer]
+                            - cell "More options" [ref=f15e215]:
+                              - button "More options" [ref=f15e217] [cursor=pointer]:
+                                - img "three dots" [ref=f15e218]
+    - region "Notifications alt+T"
+  - iframe [ref=f15e220]:
+    

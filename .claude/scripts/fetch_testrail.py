@@ -28,6 +28,7 @@ Required env vars (in .env):
 """
 
 import base64
+import glob
 import json
 import os
 import re
@@ -308,7 +309,8 @@ RUN_TYPE_MAP: dict[str, int] = {
 # (section_id is routing metadata, consumed by batch-add-cases — never sent in the body)
 DRAFT_STRIP_FIELDS = frozenset({
     "grill_status", "source_case_ids", "rewrite_notes",
-    "permission_flag", "platform_flag", "section_id",
+    "permission_flag", "platform_flag", "plan_gate_flag", "section_id",
+    "audit_status", "audit_note",
 })
 
 RESULT_FIELD_MAP: dict[str, str] = {
@@ -752,6 +754,27 @@ def batch_add_cases(
         ]
         out(preview)
         stderr(f"✓ batch-add-cases --dry-run: {len(preview)} case(s) would be posted — nothing created")
+
+        # A flagged case (permission_flag / platform_flag / plan_gate_flag) with no per-case
+        # section_id silently falls back to <default_section_id> — almost always the wrong
+        # section for a flagged case. Surface that here, before publish, not only after.
+        flagged = [c for c in to_post if any(c.get(f) is True for f in FLAG_SECTION_KEYWORDS)]
+        if flagged:
+            by_flag: dict[str, int] = {}
+            fell_back: list[str] = []
+            for c in flagged:
+                for f in FLAG_SECTION_KEYWORDS:
+                    if c.get(f) is True:
+                        by_flag[f] = by_flag.get(f, 0) + 1
+                if c.get("section_id") is None:
+                    fell_back.append(str(c.get("title")))
+            breakdown = ", ".join(f"{f.removesuffix('_flag')}: {n}" for f, n in by_flag.items())
+            if fell_back:
+                stderr(f"⚠️ Flag-routed cases: {len(flagged)} ({breakdown}) — {len(fell_back)} would fall back to the default section {section_id} (no per-case section_id set):")
+                for title in fell_back:
+                    stderr(f"   - {title}")
+            else:
+                stderr(f"✓ Flag-routed cases: {len(flagged)} ({breakdown}) — all resolved to a non-default section_id")
         return
 
     results = []
@@ -879,6 +902,310 @@ def dedup_check(
     stderr(f"✓ dedup-check: {flagged} of {len(cases)} proposed case(s) have a possible duplicate (threshold {threshold})")
 
 
+# Flag → substring that must appear (case-insensitive) in the live section path it resolves to
+FLAG_SECTION_KEYWORDS: dict[str, str] = {
+    "permission_flag": "permissions",
+    "platform_flag":   "platforms",
+    "plan_gate_flag":  "plan gates",
+}
+
+
+# Matches a quoted span (straight or curly quotes) whose content ends in an ellipsis
+# right before the closing quote — e.g. "We use cookies to help you..." or “...browser...”
+# Group 1 is everything between the opening quote and the ellipsis, used to filter out
+# quotes that are nothing but an ellipsis (e.g. a literal "..." kebab-menu icon label).
+QUOTE_TRUNCATION_RE = re.compile(r'["“]([^"“”]*?)(?:\.\.\.|…)\s*["”]')
+
+# Below this many non-whitespace characters before the ellipsis, the quote is more
+# likely a literal on-page "..." UI element (an overflow/kebab menu icon) than a
+# truncated longer quote — not worth flagging.
+QUOTE_TRUNCATION_MIN_CONTENT_CHARS = 6
+
+# grill_status/audit_status values that mean the case's quoted text has already been
+# checked against the live app (or confirmed via a from-scratch live check) at least
+# once — same precedence already established in audit-section.md for grill_status vs.
+# a stale Suite 6 source. A case carrying one of these has earned suppression from this
+# heuristic; anything else (null, "needs-manual-check", "skipped:<reason>", etc.) means
+# no such check has actually happened, so the flag stays.
+QUOTE_TRUNCATION_CLEARED_GRILL_STATUSES = frozenset({"confirmed", "fixed"})
+QUOTE_TRUNCATION_CLEARED_AUDIT_STATUSES = frozenset({"verbatim-confirmed", "reworded-fixed"})
+
+
+def _validate_quote_truncation(cases: list[Any]) -> list[dict[str, Any]]:
+    """Flag quoted on-page text that ends in an ellipsis ("..." or "…") right before
+    its closing quote.
+
+    Per migration-conventions.md §4 ("Quoted on-page text — always verbatim"), a case
+    that commits to quoting specific text must reproduce it character-for-character —
+    a truncated quote can never satisfy that, no matter how well the visible fragment
+    matches source or the live app. This bit a real audit run: three cases were marked
+    "verbatim-confirmed" with truncated quotes before anyone checked by hand.
+
+    This is a heuristic flag for review, not a verdict — two legitimate patterns will
+    still match and need a human/agent to clear them: on-page text that itself ends in
+    an ellipsis as real UI copy (a loading state like "Generating PDF..."), and a quote
+    that is nothing but an ellipsis (a literal "..." kebab-menu icon), which is filtered
+    below when there's no real content before it. Either way, the fix is to check
+    source/live app and confirm — never assume the ellipsis is disqualifying on sight.
+
+    A case whose grill_status/audit_status already shows its text was checked against
+    the live app (see QUOTE_TRUNCATION_CLEARED_* above) is suppressed — that check would
+    have caught a real truncation already, so re-flagging it every run is just noise.
+    This is the only durable way to clear a flag: there is no separate allowlist, so a
+    case with no such status (nothing has actually verified it yet) keeps showing up
+    on every run until it earns one, by design.
+
+    Content check, not a publish-state one — applies to draft and published files alike,
+    independent of `enforce_published_ids`.
+    """
+    errors: list[dict[str, Any]] = []
+    for c in cases:
+        if not isinstance(c, dict):
+            continue
+        if c.get("grill_status") in QUOTE_TRUNCATION_CLEARED_GRILL_STATUSES:
+            continue
+        if c.get("audit_status") in QUOTE_TRUNCATION_CLEARED_AUDIT_STATUSES:
+            continue
+        title = c.get("title") or "(untitled)"
+        fields: list[tuple[str, Any]] = [("preconditions", c.get("preconditions"))]
+        for i, step in enumerate(c.get("steps") or []):
+            if isinstance(step, dict):
+                fields.append((f"step{i + 1}.content", step.get("content")))
+                fields.append((f"step{i + 1}.expected", step.get("expected")))
+        for field_name, text in fields:
+            if not isinstance(text, str):
+                continue
+            match = QUOTE_TRUNCATION_RE.search(text)
+            if match and len(match.group(1).strip()) >= QUOTE_TRUNCATION_MIN_CONTENT_CHARS:
+                errors.append({
+                    "code": "truncated_quote", "case": title, "field": field_name,
+                    "detail": f"quoted text ends in an ellipsis before its closing quote ({match.group(0)!r}) — "
+                              f"needs a check: either a genuine truncation losing real content (fails the "
+                              f"character-for-character rule in migration-conventions.md §4), or legitimate "
+                              f"on-page text that itself ends in '...' (e.g. a loading-state message). Confirm "
+                              f"against source/live app, then set grill_status/audit_status accordingly — that's "
+                              f"what clears this flag for good, there's no other suppression mechanism.",
+                })
+    return errors
+
+
+def _validate_case_shape(cases: list[Any], enforce_published_ids: bool) -> list[dict[str, Any]]:
+    """Structural checks that need no network access: id presence, duplicate ids,
+    and flagged cases missing routing metadata (section_id).
+
+    `enforce_published_ids` is True for cases-*.json files, where every case is
+    expected to already have a real TestRail id.
+    """
+    errors: list[dict[str, Any]] = []
+    seen_ids: dict[Any, int] = {}
+
+    for i, c in enumerate(cases):
+        if not isinstance(c, dict):
+            errors.append({"code": "invalid_case", "index": i, "detail": "case is not a JSON object"})
+            continue
+
+        title = c.get("title") or f"(untitled, index {i})"
+        cid   = c.get("id")
+
+        if enforce_published_ids and not cid:
+            errors.append({
+                "code": "unpublished_id", "case": title,
+                "detail": "file is a published cases-*.json file but this case has no id",
+            })
+
+        if cid is not None:
+            if cid in seen_ids:
+                errors.append({
+                    "code": "duplicate_id", "case": title,
+                    "detail": f"id {cid} is also used by the case at index {seen_ids[cid]}",
+                })
+            else:
+                seen_ids[cid] = i
+
+        # Only enforce section_id routing once a case is (or claims to be) published —
+        # cases still mid-review in a draft legitimately have section_id unset until
+        # /migrate-section Step 3b stamps it.
+        if enforce_published_ids or cid is not None:
+            for flag in FLAG_SECTION_KEYWORDS:
+                if c.get(flag) is True and c.get("section_id") is None:
+                    errors.append({
+                        "code": "flag_missing_section_id", "case": title,
+                        "detail": f"{flag} is true but section_id is null — this case will not route correctly",
+                    })
+
+    return errors
+
+
+def validate_cases_file(
+    paths: list[str],
+    verify_routing: bool,
+    verify_completeness: bool,
+    project_id: int | None, suite_id: int | None,
+    base: str | None, auth: str | None,
+) -> None:
+    """Check ai-context/*.json case files for the invariants the migration pipeline
+    assumes but never enforces on its own: dict-with-cases shape, every case in a
+    cases-*.json having a real id, no duplicate ids, (with --verify-routing) every
+    flagged case's section_id actually resolving to its expected v2 section, and
+    (with --verify-completeness) every case actually live in the file's own TestRail
+    section being tracked locally — and vice versa. The latter catches cases published
+    directly to TestRail outside /fetch-section -> /migrate-section (and so never
+    written to any local file), which --verify-routing cannot see since it only checks
+    section paths, never live case membership.
+
+    Read-only. Creates and changes nothing — safe to run anytime, on any file set.
+    """
+    section_path_by_id: dict[int, str] | None = None
+    if verify_routing:
+        sections, truncated = fetch_all_sections_raw(project_id, suite_id, base, auth)
+        by_id = {s["id"]: s for s in sections}
+        section_path_by_id = {s["id"]: build_section_path(s, by_id)["path"] for s in sections}
+        if truncated:
+            stderr("Warning: section tree truncated while building the routing map; results may be incomplete")
+
+    file_reports: list[dict[str, Any]] = []
+    total_errors = 0
+
+    for path in paths:
+        basename              = os.path.basename(path)
+        enforce_published_ids = basename.startswith("cases-")
+        errors: list[dict[str, Any]] = []
+
+        try:
+            size = os.path.getsize(path)
+        except OSError as e:
+            file_reports.append({"file": path, "caseCount": 0, "ok": False, "errors": [{"code": "read_error", "detail": str(e)}]})
+            total_errors += 1
+            continue
+        if size > MAX_INPUT_BYTES:
+            file_reports.append({"file": path, "caseCount": 0, "ok": False, "errors": [{"code": "file_too_large", "detail": f"{size} bytes exceeds the {MAX_INPUT_BYTES}-byte limit"}]})
+            total_errors += 1
+            continue
+
+        try:
+            data = json.loads(open(path).read())
+        except json.JSONDecodeError as e:
+            file_reports.append({"file": path, "caseCount": 0, "ok": False, "errors": [{"code": "invalid_json", "detail": str(e)}]})
+            total_errors += 1
+            continue
+
+        if isinstance(data, list):
+            cases = data
+            with_ids = sum(1 for c in cases if isinstance(c, dict) and c.get("id"))
+            if cases and with_ids == len(cases):
+                schema_note = (f"all {len(cases)} case(s) have real ids — this looks like PUBLISHED content "
+                                f"stuck in the legacy schema, not an unpublished draft; do not skip it when "
+                                f"sweeping for unpublished work, normalize it to the envelope format instead")
+            elif with_ids:
+                schema_note = (f"{with_ids} of {len(cases)} case(s) have real ids — mixed state, do not assume "
+                                f"this is either fully unpublished or fully published without checking further")
+            else:
+                schema_note = f"all {len(cases)} case(s) have no id — looks like a genuinely unpublished draft"
+            errors.append({"code": "legacy_list_format", "detail": f"top-level JSON is a bare list, not a {{section, cases:[...]}} object — predates the draft/cases envelope format. {schema_note}."})
+        elif isinstance(data, dict):
+            cases = data.get("cases")
+            if not isinstance(cases, list):
+                errors.append({"code": "missing_cases_array", "detail": "top-level object has no 'cases' array"})
+                cases = []
+        else:
+            errors.append({"code": "invalid_root", "detail": "top-level JSON must be an object or a list"})
+            cases = []
+
+        errors.extend(_validate_case_shape(cases, enforce_published_ids))
+        errors.extend(_validate_quote_truncation(cases))
+
+        if verify_routing and section_path_by_id is not None:
+            for c in cases:
+                if not isinstance(c, dict):
+                    continue
+                title = c.get("title") or "(untitled)"
+                checked = enforce_published_ids or c.get("id") is not None
+                if not checked:
+                    continue
+                for flag, keyword in FLAG_SECTION_KEYWORDS.items():
+                    if c.get(flag) is not True:
+                        continue
+                    sid = c.get("section_id")
+                    if sid is None:
+                        continue  # already reported as flag_missing_section_id
+                    try:
+                        sid_int = int(sid)
+                    except (TypeError, ValueError):
+                        errors.append({"code": "flag_invalid_section_id", "case": title, "detail": f"{flag} section_id {sid!r} is not an integer"})
+                        continue
+                    resolved_path = section_path_by_id.get(sid_int)
+                    if resolved_path is None:
+                        errors.append({"code": "flag_section_not_found", "case": title, "detail": f"{flag} section_id {sid_int} does not exist in the live v2 section tree"})
+                    elif keyword not in resolved_path.lower():
+                        errors.append({"code": "flag_routing_mismatch", "case": title, "detail": f"{flag} routed to {resolved_path!r} (section {sid_int}) — expected a section path containing {keyword!r}"})
+
+        if verify_completeness:
+            default_section_id = data.get("section_id") if isinstance(data, dict) else None
+            if default_section_id is None:
+                errors.append({"code": "completeness_no_section_id", "detail": "top-level 'section_id' is not set — cannot verify this file's cases against its live TestRail section. Set section_id once the section's live id is known."})
+            else:
+                try:
+                    default_sid_int = int(default_section_id)
+                except (TypeError, ValueError):
+                    errors.append({"code": "completeness_no_section_id", "detail": f"top-level section_id {default_section_id!r} is not an integer — cannot verify completeness"})
+                    default_sid_int = None
+                if default_sid_int is not None:
+                    live_cases, live_truncated = fetch_all_cases(project_id, suite_id, default_sid_int, base, auth)
+                    if live_truncated:
+                        errors.append({"code": "completeness_check_truncated", "detail": f"live case fetch for section {default_sid_int} hit the page cap — completeness results may be incomplete"})
+                    live_by_id = {lc["id"]: lc.get("title") or "(untitled)" for lc in live_cases if isinstance(lc, dict) and lc.get("id") is not None}
+                    local_ids_here: set[int] = set()
+                    for c in cases:
+                        if not isinstance(c, dict) or c.get("id") is None:
+                            continue
+                        eff_sid = c.get("section_id")
+                        eff_sid = default_sid_int if eff_sid is None else eff_sid
+                        try:
+                            if int(eff_sid) == default_sid_int:
+                                local_ids_here.add(c["id"])
+                        except (TypeError, ValueError):
+                            pass
+                    untracked = set(live_by_id) - local_ids_here
+                    stale     = local_ids_here - set(live_by_id)
+                    for cid in sorted(untracked):
+                        errors.append({"code": "untracked_live_case", "detail": f"C{cid} ({live_by_id[cid]!r}) is live in section {default_sid_int} but not present in this file — likely published outside /fetch-section -> /migrate-section and never backfilled"})
+                    for cid in sorted(stale):
+                        errors.append({"code": "stale_local_case", "detail": f"C{cid} is tracked in this file as living in section {default_sid_int}, but is not actually live there — it may have been moved or deleted in TestRail"})
+
+        total_errors += len(errors)
+        file_reports.append({
+            "file":      path,
+            "caseCount": len(cases) if isinstance(cases, list) else 0,
+            "ok":        len(errors) == 0,
+            "errors":    errors,
+        })
+
+    result = {
+        "files": file_reports,
+        "summary": {
+            "filesChecked": len(file_reports),
+            "filesOk":      sum(1 for f in file_reports if f["ok"]),
+            "filesFailed":  sum(1 for f in file_reports if not f["ok"]),
+            "totalErrors":  total_errors,
+            "routingVerified": verify_routing,
+            "completenessVerified": verify_completeness,
+        },
+    }
+    out(result)
+
+    if total_errors:
+        stderr(f"✗ validate-cases-file: {total_errors} error(s) across {result['summary']['filesFailed']} of {len(file_reports)} file(s)")
+        sys.exit(EXIT_GENERIC)
+    suffixes = []
+    if verify_routing:
+        suffixes.append("routing verified live")
+    if verify_completeness:
+        suffixes.append("completeness verified live")
+    if not suffixes:
+        suffixes.append("structural only — pass --verify-routing/--verify-completeness to check live TestRail state")
+    stderr(f"✓ validate-cases-file: {len(file_reports)} file(s) clean (" + ", ".join(suffixes) + ")")
+
+
 def add_section(project_id: int, suite_id: int, name: str, parent_id, base: str, auth: str) -> None:
     body: dict[str, Any] = {"suite_id": suite_id, "name": name}
     if parent_id is not None:
@@ -992,6 +1319,7 @@ Subcommands:
   update-case      <case_id> <json_payload>
   batch-update-cases --json-file <path> [--from-draft]
   dedup-check       <project_id> <suite_id> <default_section_id> --json-file <path> [--threshold N]
+  validate-cases-file <path> [<path> ...] | --all  [--verify-routing] [--verify-completeness] [--project-id N --suite-id N]
   add-section      <project_id> <suite_id> <name> <parent_id>
   add-case         <section_id> <json_payload>
   add-run          <project_id> <suite_id> <name> <case_ids_csv>
@@ -1030,7 +1358,11 @@ Notes:
   - batch-add-cases --dry-run posts nothing and creates no IDs; it prints the exact payloads
     that would be sent and the resolved target section for each case. Use it to confirm the
     on-disk draft matches your intended cases (run_type, section_id, edited steps) before the
-    real publish — the draft is the single source of truth and is posted verbatim.
+    real publish — the draft is the single source of truth and is posted verbatim. It also
+    prints a Flag-routed cases summary (permission_flag / platform_flag / plan_gate_flag counts)
+    and warns by name about any flagged case with no per-case section_id — that case would fall
+    back to <default_section_id> instead of its flag's target section. Treat that warning as a
+    stop-and-fix signal, not something to publish through.
   - dedup-check is read-only: for each draft case it fetches the live cases in that case's
     target section (per-case "section_id", else <default_section_id>) and scores similarity
     (0.6*title + 0.4*steps, via difflib) against each. Emits per-case top matches at/above
@@ -1045,7 +1377,27 @@ Notes:
     "published_at". When every case in the file has an ID and the file is named draft-*, it is
     automatically renamed to cases-* (the publication signal). Requires a draft envelope file.
   - batch-update-cases --from-draft accepts a draft envelope or array; skips cases without IDs;
-    strips internal fields and maps run_type strings before updating.""")
+    strips internal fields and maps run_type strings before updating.
+  - validate-cases-file is read-only and creates nothing. Pass one or more paths, or --all to
+    scan every ai-context/cases-*.json and ai-context/draft-*.json file. Checks (no network
+    needed): top-level shape is a {{section, cases:[...]}} object, not a bare list
+    (legacy_list_format); every case in a cases-*.json file has a real id (unpublished_id); no
+    id is reused across cases in the same file (duplicate_id); any case with permission_flag /
+    platform_flag / plan_gate_flag true has a non-null section_id (flag_missing_section_id).
+    With --verify-routing (requires --project-id and --suite-id), also fetches the live v2
+    section tree once and confirms each flagged, already-published case's section_id actually
+    resolves to a section whose path contains the expected keyword (Permissions / Platforms /
+    Plan Gates) — catches cases that got routed to the wrong (or default) section at publish
+    time. With --verify-completeness (also requires --project-id and --suite-id), fetches the
+    live cases in each file's own top-level "section_id" and diffs against the file's local
+    case ids: untracked_live_case flags a case that's live in TestRail but missing from this
+    file entirely (e.g. published directly, bypassing /fetch-section -> /migrate-section, and
+    never backfilled — this is the gap that let 22 live General-section cases go unrecorded
+    until a manual backfill); stale_local_case flags the reverse (file claims a case lives here
+    but it's not actually live in that section anymore). completeness_no_section_id fires if the
+    file has no top-level section_id to check against. --verify-routing and --verify-completeness
+    can be combined or used independently. Exits non-zero if any file has errors, so it can gate
+    a workflow step.""")
 
 
 # ── Entry point ────────────────────────────────────────────────────────────────
@@ -1068,6 +1420,48 @@ def main() -> None:
             sys.exit(EXIT_USAGE)
         assert_safe_segment(flags["ticket"], "--ticket")
         log_gap(flags["ticket"], pos[0], flags.get("context"), flags.get("workaround"))
+        return
+
+    if subcmd == "validate-cases-file":
+        pos, flags = parse_args(sys.argv[2:])
+        verify_routing      = flags.get("verify-routing") == "true"
+        verify_completeness = flags.get("verify-completeness") == "true"
+        needs_live = verify_routing or verify_completeness
+
+        if flags.get("all") == "true":
+            pattern    = os.path.join(os.getcwd(), ARTIFACT_ROOT, "*.json")
+            candidates = sorted(glob.glob(pattern))
+            paths      = [
+                p for p in candidates
+                if os.path.basename(p).startswith("cases-") or os.path.basename(p).startswith("draft-")
+            ]
+            if not paths:
+                stderr(f"Error: no cases-*.json or draft-*.json files found under {ARTIFACT_ROOT}/")
+                sys.exit(EXIT_USAGE)
+        else:
+            require_positional(pos, 1, "validate-cases-file <path> [<path> ...] | --all [--verify-routing] [--verify-completeness] [--project-id N --suite-id N]")
+            paths = [confine_to_artifact_root(p, "path", True) for p in pos]
+
+        project_id = to_int(flags["project-id"], "--project-id") if "project-id" in flags else None
+        suite_id   = to_int(flags["suite-id"], "--suite-id")     if "suite-id"   in flags else None
+
+        base = auth = None
+        if needs_live:
+            if project_id is None or suite_id is None:
+                stderr("Error: --verify-routing/--verify-completeness require --project-id and --suite-id")
+                sys.exit(EXIT_USAGE)
+            testrail_url = os.environ.get("TESTRAIL_URL", "").rstrip("/")
+            username     = os.environ.get("TESTRAIL_USERNAME", "")
+            api_key      = os.environ.get("TESTRAIL_API_KEY", "")
+            if not testrail_url: stderr("Error: TESTRAIL_URL not set in .env (e.g. https://yourorg.testrail.io)"); sys.exit(EXIT_USAGE)
+            if not username:     stderr("Error: TESTRAIL_USERNAME not set in .env");                               sys.exit(EXIT_USAGE)
+            if not api_key:      stderr("Error: TESTRAIL_API_KEY not set in .env");                                sys.exit(EXIT_USAGE)
+            validate_url(testrail_url)
+            base = build_base_url(testrail_url)
+            auth = build_auth(username, api_key)
+            stderr(f"→ TestRail target: {urllib.parse.urlparse(testrail_url).netloc}")
+
+        validate_cases_file(paths, verify_routing, verify_completeness, project_id, suite_id, base, auth)
         return
 
     testrail_url = os.environ.get("TESTRAIL_URL", "").rstrip("/")

@@ -42,6 +42,22 @@ Group the fetched cases by their underlying scenario, ignoring role and plan pre
 
 Within each group, use the Account Owner / active paid plan case as the base text.
 
+### Log every case that doesn't survive into a group (mandatory)
+
+A case folded into a group is traceable via `source_case_ids`. A case judged fully redundant —
+not a style duplicate of anything specific, just out of scope or superseded — currently leaves
+no trace at all, which makes a genuine coverage gap indistinguishable from a case nobody
+noticed. Close that gap: any case fetched in Step 1 that does not end up in any group must be
+recorded in the draft's top-level `dropped_source_case_ids` array (written in Step 5) with a
+one-line reason, e.g.:
+```json
+{ "id": 12345, "reason": "duplicate of C12346, identical after prefix strip" }
+{ "id": 12347, "reason": "out of scope — belongs to Reports section" }
+{ "id": 12348, "reason": "superseded by C67890, older UI" }
+```
+Do this as you group, not retroactively at the end — with a 300-case fetch it is easy to lose
+track of which raw case IDs never made it into any group once grouping is done.
+
 ---
 
 ## Step 3 — Rewrite to v2 style
@@ -66,6 +82,13 @@ Examples:
 - `[Admin][Agency] Verify user cannot access Billing page`
   → leave this one's title as-is but flag it with `permission_flag: true` (structural call
   for `/migrate-section`)
+- `[Account Owner] Static IP scan shows upgrade icon on Free plan`
+  → rewrite as normal but flag with `plan_gate_flag: true` — `/migrate-section` will route
+  it to `11. Billing & Upgrade > Plan Gates` instead of the feature section
+
+**`plan_gate_flag: true`** — set this whenever the case's primary assertion is that a feature
+is locked (premium icon, disabled control, upgrade tooltip). The feature section only tests
+behaviour available to a user who has access. Locked-state assertions belong in Plan Gates.
 
 Prefixes to strip: `[Account Owner]`, `[Admin]`, `[Editor]`, `[Webapp Free]`, `[Agency]`,
 `[Trial with card]`, `[Trial without card]`, `[Plugin]`, `[Shopify]`, `[Wix]`, and any
@@ -80,12 +103,68 @@ combination thereof.
 - If a step's expected result is missing in the source, write one based on the obvious
   behavioral outcome. Mark it `[inferred]`.
 
+### Verbatim-text fidelity check (mandatory)
+
+Before finalizing any step or expected result, check one thing, with no category filter: **does
+this expected result assert that specific text is visible on the page** — a banner, a status
+badge, a button label, a dialog message, a tooltip, an email body, a page title, anything in
+quotes claiming "the app shows X"? If yes:
+
+- Copy the wording **character-for-character** from the Suite 6 source case's actual step or
+  expected-result text. Do not reword it, even to shorten it or make it read more naturally —
+  and do not skip this because the string seems minor (a plain status badge is just as subject
+  to this as a legal disclosure; see `migration-conventions.md` §4).
+- This overrides both the "drop copy" rule and the step-count pressure elsewhere in this
+  command — an assertion that needs extra length to quote exactly is correct; a shortened
+  paraphrase of it is not, no matter how close it reads.
+- If the source case's own text is truncated, garbled, or ambiguous, do not invent a
+  cleaned-up version — quote what the source has as-is and mark it `[verify against source]`
+  for `/grill-section` to confirm against the live app.
+
+This does not apply to expected results that describe an outcome or state change without quoting
+specific text ("the popup should close", "the toggle should be off by default") — those are
+unaffected and still condense normally.
+
 ### Preconditions
 
 - Remove "Logged in as Account Owner" — that is the default assumption in v2.
 - Keep only state that genuinely differs from the default (specific plan state, pre-created
   data, a prior step's output, etc.).
 - If nothing non-default remains, set preconditions to `none`.
+
+---
+
+## Step 3b — Enforce a logical case order
+
+The order of cases in the draft array **is** the published order — `batch-add-cases` posts in
+array sequence and TestRail assigns `display_order` by insertion. Nothing downstream reorders
+(neither `/migrate-section` nor the API). So the draft array must already be in reading order.
+
+Sort the rewritten cases into this order before presenting and saving:
+
+1. **Cluster by feature sub-area**, in the order a user encounters them on the page (e.g. for
+   Organisations & Sites: Organisation management → Site management → Transfer flows). If the
+   v2 spec defines sub-sections for this area, use that sub-section order.
+2. **Within each cluster, order by lifecycle:**
+   - **Display/render case first** — the "page/card renders with all controls" case leads.
+   - then **happy-path create/primary action**,
+   - then **input variants and validation** (valid → duplicate → invalid → empty → over-length),
+   - then **cancel/dismiss paths**,
+   - then **destructive actions** (delete) last in the cluster.
+3. **Multi-phase flows** (e.g. site transfer) stay in natural flow order (initiate → pending →
+   recipient → post-action).
+4. **`permission_flag` cases go last**, after all functional cases (they route out to section 14).
+
+Render-first is **conditional**: it applies only when the section/cluster owns a page or surface
+of its own. Validation-only sub-sections, sub-tabs whose render is owned by a parent, bare
+plan-gated stubs (an upgrade icon/button with no persistent card behind it), and single-case
+sections have no standalone render case — do not invent one. A plan-gated feature that owns a
+real page or card (e.g. Custom CSS) still gets a render-first case — its expected result notes
+the plan-gating as a fact and points to Plan Gates for the full verification. See
+`migration-conventions.md` §11 for the full rule and exceptions, including the "Plan-gated
+render cases" note.
+
+This ordering is mandatory — do not leave cases in Suite 6 fetch order.
 
 ---
 
@@ -104,7 +183,7 @@ For each case, show the rewritten version alongside a compact diff of what chang
 - **Source cases:** C##### [, C#####, …]  *(note if plan/role variants were collapsed)*
 - **Rewrite notes:** [what changed — stripped prefixes, dropped layout steps, inferred
   expected results — or `none` if steps were unchanged]
-- **Flag:** `permission_flag` / `platform_flag` / none  *(for /migrate-section to act on)*
+- **Flag:** `permission_flag` / `platform_flag` / `plan_gate_flag` / none  *(for /migrate-section to act on)*
 
 ---
 
@@ -173,6 +252,9 @@ date -u +"%Y-%m-%dT%H:%M:%SZ"
   "grilled_at": null,
   "published_at": null,
   "searched_section_ids": [<Suite 6 section IDs recorded in Step 1>],
+  "dropped_source_case_ids": [
+    { "id": 12345, "reason": "duplicate of C12346, identical after prefix strip" }
+  ],
   "cases": [
     {
       "id": null,

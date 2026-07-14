@@ -4,7 +4,8 @@
   "section_id": null,
   "fetched_at": "2026-07-07T04:46:37Z",
   "grilled_at": "2026-07-07T04:58:58Z",
-  "published_at": "2026-07-07T05:13:39Z",
+  "published_at": "2026-07-13T07:28:35Z",
+  "audited_at": "2026-07-13T04:37:30Z",
   "searched_section_ids": [
     36,
     355,
@@ -17,6 +18,29 @@
     591
   ],
   "cases": [
+    {
+      "id": 39407,
+      "title": "[Cookie Banner] Verify that the Custom CSS section renders correctly",
+      "preconditions": "User is on Cookie Banner > Custom CSS section.",
+      "steps": [
+        {
+          "content": "Open the Custom CSS section under Cookie Banner.",
+          "expected": "The section displays a Consent Template card at the top and an \"Add your custom css here\" card with a CSS text area below it."
+        },
+        {
+          "content": "Note the plan-gating state of the CSS text area.",
+          "expected": "- Basic plan and higher: text area is enabled and editable.\n- Free plan: text area is locked with a premium icon (see 11. Billing & Upgrade > Plan Gates for the locked-state verification)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Added retroactively per the new standing convention in migration-conventions.md \u00a711 (\"Plan-gated render cases\"): a plan-gated feature that owns a real page/card (unlike a bare upgrade-icon stub) still gets a render-first case, and that case notes the plan-gating as a fact rather than re-verifying it (the full lock/nudge behavior stays in 37144, Plan Gates). Custom CSS was previously miscategorized in \u00a711 as a \"plan-gated stub\" with no render surface \u2014 that exception has been narrowed. Not yet grilled live on QA2; spot-check the Consent Template + textarea structure description next /grill-section or /audit-section pass.",
+      "grill_status": "not-grilled",
+      "audit_status": "not-audited"
+    },
     {
       "id": 37144,
       "title": "[Cookie Banner] Verify that the Custom CSS editor is locked with an upgrade prompt on the Free plan",
@@ -32,7 +56,7 @@
         },
         {
           "content": "Click the premium/upgrade icon next to the \"Add your custom css here\" label.",
-          "expected": "The Custom CSS upgrade prompt should be displayed with:\n- A description of the Custom CSS feature\n- The plans it is available in: Basic, Pro and Ultimate\n- A \"Try Pro for free\" call-to-action"
+          "expected": "The Custom CSS upgrade prompt should be displayed with:\n- \"Style your banner with custom CSS\"\n- \"Available in: Basic, Pro and Ultimate plans\"\n- A \"Try Pro for free\" call-to-action"
         }
       ],
       "run_type": "smoke",
@@ -60,7 +84,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "grill_status": "fixed",
-      "rewrite_notes": "Collapsed 3 roles (Account Owner/Admin/Editor) across 7 Free-plan/platform sections. Stripped role/platform prefixes. Dropped nav steps, sidebar-list presence check, and Consent Template position checks (moved to preconditions), plus the tooltip-copy verification step. Kept premium-icon presence and disabled-textarea as the plan-gate signals. NOTE for /migrate-section: this is a plan-gate scenario (upgrade icon + locked state on a feature) and should be routed to 11. Billing & Upgrade > Plan Gates per convention section 6. Grilled on QA2 (Free account): confirmed the premium/crown icon appears next to the 'Add your custom css here' label and the CSS textarea is disabled ([disabled] in DOM). FIXED: the premium icon is interactive — clicking it opens an upgrade popover ('Style your banner with custom CSS', 'Available in: Basic, Pro and Ultimate plans', 'Try Pro for free' CTA); added a step to capture this nudge-opens behavior (feature section owns nudge-opens per section 6; the CTA destination belongs to section 11). The 'Try Pro for free' CTA was not clicked to avoid starting a trial. NOTE: the separate side upgrade-nudge panel on this page is a known bug per the user and was intentionally not captured."
+      "rewrite_notes": "Collapsed 3 roles (Account Owner/Admin/Editor) across 7 Free-plan/platform sections. Stripped role/platform prefixes. Dropped nav steps, sidebar-list presence check, and Consent Template position checks (moved to preconditions), plus the tooltip-copy verification step. Kept premium-icon presence and disabled-textarea as the plan-gate signals. NOTE for /migrate-section: this is a plan-gate scenario (upgrade icon + locked state on a feature) and should be routed to 11. Billing & Upgrade > Plan Gates per convention section 6. Grilled on QA2 (Free account): confirmed the premium/crown icon appears next to the 'Add your custom css here' label and the CSS textarea is disabled ([disabled] in DOM). FIXED: the premium icon is interactive \u2014 clicking it opens an upgrade popover ('Style your banner with custom CSS', 'Available in: Basic, Pro and Ultimate plans', 'Try Pro for free' CTA); added a step to capture this nudge-opens behavior (feature section owns nudge-opens per section 6; the CTA destination belongs to section 11). The 'Try Pro for free' CTA was not clicked to avoid starting a trial. NOTE: the separate side upgrade-nudge panel on this page is a known bug per the user and was intentionally not captured.",
+      "audit_status": "reworded-fixed",
+      "audit_note": "Step 3's expected result had gone vague (\"A description of the Custom CSS feature\", \"The plans it is available in: Basic, Pro and Ultimate\") where this case's own rewrite_notes already documents the exact live-confirmed popover text (\"Style your banner with custom CSS\" / \"Available in: Basic, Pro and Ultimate plans\"). Restored the exact quotes from that grill confirmation. Note: Suite 6 source (C980/C1443, 2 of 19 sampled \u2014 identical) describes a hover TOOLTIP reading \"Upgrade to Basic or a higher plan to unlock this feature.\", not the v2 app's click-to-open popover; rewrite_notes says this tooltip-copy step was intentionally dropped since the v2 app's actual interaction (click, not hover) differs \u2014 that's a deliberate scope call already documented, not a fidelity bug, so left as-is."
     },
     {
       "id": 37141,
@@ -85,7 +111,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "grill_status": "confirmed",
-      "rewrite_notes": "Rewrote the Trial-with-card \"Display of Custom CSS section\" cases (3 roles) as an element-presence/access check per convention section 4. Stripped role/platform prefixes, dropped nav/sidebar/position steps. The absence of the premium icon and the enabled textarea are the behavioral contrast to the Free-plan locked case. Grilled on QA2 (Basic trial account): Custom CSS card renders with an editable textarea and no premium icon on a paid plan; textarea accepts input."
+      "rewrite_notes": "Rewrote the Trial-with-card \"Display of Custom CSS section\" cases (3 roles) as an element-presence/access check per convention section 4. Stripped role/platform prefixes, dropped nav/sidebar/position steps. The absence of the premium icon and the enabled textarea are the behavioral contrast to the Free-plan locked case. Grilled on QA2 (Basic trial account): Custom CSS card renders with an editable textarea and no premium icon on a paid plan; textarea accepts input.",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 3 source_case_ids (C4844, C4846 \u2014 identical). \"Add your custom css here\" card/label quote matches source verbatim; no premium icon and enabled textarea correctly reflect the paid-plan contrast case."
     },
     {
       "id": 37142,
@@ -129,7 +157,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "grill_status": "fixed",
-      "rewrite_notes": "Collapsed the full Stripe upgrade sequence and the Admin/Editor team-invite setup into the paid-plan precondition per convention section 2c. Collapsed 3 roles across plan/platform variants. Stripped prefixes, dropped nav/sidebar/position steps. Inferred publish outcome: the source expected result read \"US State Laws banner should not be displayed on the user website\", a copy-paste error unrelated to Custom CSS; rewrote to the correct behavioral outcome. Grilled on QA2 (Basic trial): verified custom CSS injects into the preview iframe live (.cky-consent-container computed background-color changed to the entered value) and Publish saves (button disables; a post-publish 'Publishing Cookie Banner' dialog appears prompting script install if the site isn't installed). FIXED: corrected 'banner preview in the sidebar' to the main preview canvas (the preview is the right-hand canvas, not the sidebar), and made the publish outcome match observed behavior."
+      "rewrite_notes": "Collapsed the full Stripe upgrade sequence and the Admin/Editor team-invite setup into the paid-plan precondition per convention section 2c. Collapsed 3 roles across plan/platform variants. Stripped prefixes, dropped nav/sidebar/position steps. Inferred publish outcome: the source expected result read \"US State Laws banner should not be displayed on the user website\", a copy-paste error unrelated to Custom CSS; rewrote to the correct behavioral outcome. Grilled on QA2 (Basic trial): verified custom CSS injects into the preview iframe live (.cky-consent-container computed background-color changed to the entered value) and Publish saves (button disables; a post-publish 'Publishing Cookie Banner' dialog appears prompting script install if the site isn't installed). FIXED: corrected 'banner preview in the sidebar' to the main preview canvas (the preview is the right-hand canvas, not the sidebar), and made the publish outcome match observed behavior.",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled 2 of 22 source_case_ids (C981, C1444 \u2014 identical). \"Add your custom css here\" and \"Publish Changes\" quotes match source verbatim. The source's copy-paste error (\"US State Laws banner should not be displayed\") was already correctly identified and rewritten in rewrite_notes \u2014 not a fidelity loss."
     },
     {
       "id": 37143,
@@ -150,7 +180,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "grill_status": "suggested",
-      "rewrite_notes": "Gap found during grill (QA2, Basic trial). No draft case covered persistence of saved custom CSS. Verified live: after entering '.cky-consent-container { background-color: rgb(255, 0, 0); }', publishing, then logging out and back in, the textarea still held the published value and remained enabled. Complements the apply-and-publish case."
+      "rewrite_notes": "Gap found during grill (QA2, Basic trial). No draft case covered persistence of saved custom CSS. Verified live: after entering '.cky-consent-container { background-color: rgb(255, 0, 0); }', publishing, then logging out and back in, the textarea still held the published value and remained enabled. Complements the apply-and-publish case.",
+      "audit_status": "no-source-case",
+      "audit_note": "Gap case, no source_case_ids. Does quote \"Add your custom css here\" and \"Publish Changes\" labels, but these match the same labels already verbatim-confirmed against Suite 6 source in 37141/37142 in this same file. Persistence-after-reload behavior itself was confirmed live during grilling per rewrite_notes (grill_status: suggested, not yet promoted to confirmed) \u2014 worth a live spot-check if this case hasn't been re-verified since."
     }
   ]
 }

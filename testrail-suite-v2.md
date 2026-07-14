@@ -59,6 +59,10 @@ The 4th level is used only when a sub-section has a natural grouping need (e.g. 
 are single-surface feature areas — they are deliberately flat, with cases living directly at the
 section leaf and the standard `[Feature Area] …` title format. Do **not** add sub-sections to
 them unless the section grows large enough that cases fall into natural groups.
+`05. Cookie Manager > Cookie List & Categories` is flat for the same reason: it once had a
+per-category sub-section (Necessary/Functional/Analytics/Performance/Advertisement/Uncategorised)
+mirroring the app's category tabs, but category behavior is identical across categories (see the
+tree entry above), so all but one sub-section sat permanently empty. Removed 2026-07-13.
 
 **Miscellaneous (16).** Reserved for cases that genuinely fit no other section. Prefer filing in
 a real section; reach for Miscellaneous only as a last resort. If a cluster of related cases
@@ -92,8 +96,8 @@ CookieYes Functional Test Suite v2
 │   └── Recent Consent Logs Card
 │
 ├── 04. Cookie Banner
-│   ├── Display & Layout
-│   ├── Customization Sidebar
+│   ├── Display & Layout                ← page shell: Customization page loads, sidebar collapse/expand, tab navigation; also the live banner's own display/layout on-page
+│   ├── Customization Sidebar           ← each tab's own settings behavior, incl. that tab's "renders correctly" case
 │   │   ├── General                     ← Law selector, Geo-target, IAB TCF v2.2, Show Advance Settings
 │   │   ├── Layout                      ← layout options differ per law; law state in Preconditions
 │   │   ├── Content
@@ -105,9 +109,20 @@ CookieYes Functional Test Suite v2
 │   └── Publishing
 │
 ├── 05. Cookie Manager
-│   ├── Cookie List & Categories
-│   ├── Scan & Scan History
-│   └── Edit & Add Cookies
+│   ├── Cookie List & Categories             ← flat (deliberately, like 06/07/08 below): category panel, cookie
+│   │                                          cards, Edit Category popup, category description text, and the
+│   │                                          Uncategorised-specific warning-icon/⚠️ script-URL-warning behavior.
+│   │                                          Category behavior is identical across Necessary/Functional/
+│   │                                          Analytics/Performance/Advertisement (equivalence partitioning —
+│   │                                          see Guiding Principle 2), so cases live here as canonical cases
+│   │                                          rather than duplicated per category. Do not recreate per-category
+│   │                                          sub-sections — one existed for each category in TestRail and all
+│   │                                          but one sat empty, since only Uncategorised's behavior actually
+│   │                                          diverges (has an edit pencil like every other category, unlike
+│   │                                          what an earlier draft of this doc claimed).
+│   ├── Scan & Scan History                 ← scan cards, Scan History tab, Detailed scan history page
+│   │                                          AI Cookie Classifier (plan-gated, opt-in; cases flat in this section)
+│   └── Edit & Add Cookies                  ← Edit Cookie popup, Add Cookie popup (shared across all categories)
 │
 ├── 06. Consent Log
 │
@@ -123,6 +138,12 @@ CookieYes Functional Test Suite v2
 │   ├── My Account
 │   ├── Team
 │   ├── Organisations & Sites
+│   │   ├── Organisation Management   ← create org, org card, More menu, rename, delete, pagination
+│   │   ├── Site Management           ← add site, website-details row, plan-label column, subscription
+│   │   │                                statuses (Banner disabled / Payment failed / Suspended), and
+│   │   │                                billing entry points (Change Plan, Switch to Annual, Reactivate)
+│   │   └── Site Transfer             ← transfer modal, destination dropdown, cancel request, email,
+│   │                                    accept/reject page, 7-day expiry, payment/suspension
 │   └── Notifications
 │
 ├── 11. Billing & Upgrade
@@ -235,6 +256,7 @@ Test that the feature behaviour works correctly for the relevant plan state. Use
 - Write separate cases only when behaviour actually differs between plans (different destination, different UI state, different outcome).
 - Use a shared precondition (e.g. "Free or Basic plan") only when the behaviour is triggered identically on both plans.
 - Each feature section tests only that its entry point (link, button, icon) correctly opens the nudge. The nudge button behaviour is not re-tested in the feature section.
+- If the feature section owns a page or card of its own, its render/display case (`migration-conventions.md` §11) notes the plan-gating as a fact and points to Plan Gates for the full verification — see §11 "Plan-gated render cases". This keeps the gating discoverable to anyone browsing the feature section without duplicating Layer 2's verification.
 
 **Layer 2 — Plan Gates (live in `11. Billing & Upgrade > Plan Gates`)**
 Assert that each plan is correctly configured. One case per plan, steps walk through all gated touchpoints across all pages. Tag as `smoke`.
@@ -309,6 +331,13 @@ Do not prefix titles with `[Account Owner]` unless inside section 14.
 | Shopify native app installation | 13. Platforms > Shopify (Native App) |
 | Cookie Banner behavior | 04. Cookie Banner — tested once for Webapp |
 | Cookie Manager behavior | 05. Cookie Manager — tested once for Webapp |
+| Organisation create / rename / delete, org card, pagination | 10. Profile & Account > Organisations & Sites > Organisation Management |
+| Add site, website-details row, plan-label column, subscription statuses | 10. Profile & Account > Organisations & Sites > Site Management |
+| Site transfer flow (initiate, accept/reject, expiry, suspension) | 10. Profile & Account > Organisations & Sites > Site Transfer |
+| "Change Plan" / "Switch to Annual" / "Reactivate" — button appears and opens correct destination | 10. Profile & Account > Organisations & Sites > Site Management (entry point only) |
+| Plans page itself (layout, selecting a tier, checkout) | 11. Billing & Upgrade > Paid Plan |
+| Org create/delete, site add/transfer blocked for Admin & Editor | 14. Permissions > Admin |
+| Org / site rename blocked for Editor | 14. Permissions > Editor |
 
 ---
 

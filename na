@@ -1,0 +1,43 @@
+#1 [GET] https://qa2.kilohub.com/settings/organizations-and-sites
+
+  General
+    status:    [200] 
+    duration:  2ms
+    type:      document
+    mimeType:  text/html
+
+  Request headers
+    upgrade-insecure-requests: 1
+    user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+    sec-ch-ua: "Not;A=Brand";v="8", "Chromium";v="150", "Google Chrome";v="150"
+    sec-ch-ua-mobile: ?0
+    sec-ch-ua-platform: "macOS"
+
+  Response headers
+    age: 443
+    alt-svc: h3=":443"; ma=86400
+    cache-control: max-age=14400
+    cf-cache-status: MISS
+    cf-ray: a18eae606c503960-MAA
+    content-encoding: zstd
+    content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://bam.nr-data.net https://cdn-cookieyes.com https://googleads.g.doubleclick.net https://js-agent.newrelic.com https://js.intercomcdn.com https://js.stripe.com https://script.tapfiliate.com https://*.hotjar.com https://widget.intercom.io https://*.googletagmanager.com https://challenges.cloudflare.com https://static.cloudflareinsights.com https://cdn.mxpnl.com https://*.cookieyes.com https://www.googleadservices.com https://www.google.com https://pagead2.googlesyndication.com https://code.tidio.co https://widget-v4.tidiochat.com https://*.clarity.ms https://bat.bing.com https://e9f87d8c82343264e6ba-2977c39e5e9390b1a89ab5ed2a171102.ssl.cf1.rackcdn.com https://*.userguiding.com *.tinymce.com *.tiny.cloud https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.hotjar.com https://*.googletagmanager.com *.tinymce.com *.tiny.cloud; img-src 'self' data: * https://*.hotjar.com https://*.google-analytics.com https://*.googletagmanager.com https://googleads.g.doubleclick.net https://www.google.com https://*.userguiding.com https://cdnjs.cloudflare.com https: *.tinymce.com *.tiny.cloud data: blob:; font-src 'self' https://fonts.gstatic.com https://*.hotjar.com https://widget-v4.tidiochat.com https://fonts.intercomcdn.com *.tinymce.com *.tiny.cloud; connect-src 'self' https://*.intercom-messenger.com wss://*.intercom-messenger.com https://api-iam.intercom.io https://bam.nr-data.net https://cdn-cookieyes.com https://directory.cookieyes.com https://log.cookieyes.com wss://nexus-websocket-a.intercom.io https://*.hotjar.com https://*.hotjar.io wss://*.hotjar.com https://*.cookieyes.com https://frstre.com https://*.mixpanel.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://pagead2.googlesyndication.com https://www.google.com sentry-new.tidio.co socket.tidio.co api-v2.tidio.co https://*.userguiding.com https: wss: *.tinymce.com *.tiny.cloud blob:; frame-src 'self' https://js.stripe.com https://challenges.cloudflare.com https://bid.g.doubleclick.net https://td.doubleclick.net https://template.geniusreferrals.com https://www.googletagmanager.com https://calendly.com; object-src 'none'; base-uri 'self'; manifest-src 'self'; media-src 'self' widget-v4.tidiochat.com; worker-src 'none'; frame-ancestors https://*.wix.com;
+    content-type: text/html
+    date: Fri, 10 Jul 2026 09:53:24 GMT
+    last-modified: Thu, 09 Jul 2026 09:27:46 GMT
+    nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+    priority: u=0,i
+    referrer-policy: no-referrer, strict-origin-when-cross-origin
+    report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=JoeP%2BWybgShrFueRLAjX%2FuRKWf9Tr%2BmiZT6Pd1AyUO81TakE%2Fbzo80jHjFzijr1ZKNOFOOq2B68z7YeKXo51vlTIRVlfclmsFR8U4xw9F1vQqDisVyegvkrX8QlMoAa7tGY%3D"}]}
+    server: cloudflare
+    server-timing: cfCacheStatus;desc="MISS"
+cfEdge;dur=244,cfOrigin;dur=72
+cfExtPri
+    x-amz-id-2: cdi7+6iM56jSjkJunWprTmCXFpHSfgjjkqQb3hZUy1hk5eqFvpUYAMLJ7s7O9SKXz+ax2Bx5R7O0ulWPpknBcOLt2Cr+Q9Ts
+    x-amz-replication-status: COMPLETED
+    x-amz-request-id: AWYNX1K7CYWS5Z84
+    x-amz-server-side-encryption: AES256
+    x-amz-version-id: MkWdZeJqHlw6gqgLswYae4MSf2NGF3mj
+    x-content-type-options: nosniff
+    x-frame-options: SAMEORIGIN
+
+Call browser_network_request with part="response-body" to read the response body.

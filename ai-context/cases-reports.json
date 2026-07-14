@@ -1,0 +1,372 @@
+{
+  "section": "Reports",
+  "suite_id": 16,
+  "section_id": 1779,
+  "fetched_at": "2026-07-08T12:21:02Z",
+  "grilled_at": "2026-07-08T12:30:42Z",
+  "published_at": "2026-07-08T12:46:39Z",
+  "searched_section_ids": [
+    63,
+    382,
+    316,
+    290,
+    197,
+    418,
+    551,
+    550,
+    552,
+    549,
+    636
+  ],
+  "cases": [
+    {
+      "id": 37227,
+      "title": "[Reports] Verify that the Reports page renders with Consent Trends and Pageviews cards",
+      "preconditions": "No consent data has been recorded for this site; no pageviews have been tracked yet.\nUser is on the Reports page (accessible via the Reports link in the top navigation bar). The page displays two cards side by side: Consent Trends (left) and Pageviews (right). Each card has a title label on the top-left and a range selector dropdown on the top-right.",
+      "steps": [
+        {
+          "content": "Observe the Consent Trends card.",
+          "expected": "The Consent Trends card should be visible with a range selector dropdown defaulting to \"Last 7 days\" in the top-right corner. The main area should show an empty state with an icon and the text \"No visitor consent has been recorded yet. Make sure you've enabled consent logging\", where \"consent logging\" is a clickable link."
+        },
+        {
+          "content": "Observe the Pageviews card.",
+          "expected": "The Pageviews card should be visible with a range selector dropdown defaulting to \"Last 7 days\" in the top-right corner. The main area should show a pageviews summary box with the total pageviews count and the current date range, followed by an empty state with an icon and the text \"No pageviews found!\". On paid plans, the summary box also shows an \"Extra pageviews used\" counter."
+        },
+        {
+          "content": "Click the \"consent logging\" link in the Consent Trends empty state.",
+          "expected": "The Advanced Settings page should be displayed."
+        }
+      ],
+      "grill_status": "fixed",
+      "run_type": "smoke",
+      "source_case_ids": [
+        1006,
+        1007,
+        1008,
+        1649,
+        1650,
+        1651,
+        1656,
+        1657,
+        1658,
+        9659,
+        9660,
+        9661,
+        9671,
+        9672,
+        9673,
+        9678,
+        9679,
+        9680,
+        7529,
+        7530,
+        7531,
+        7541,
+        7542,
+        7543,
+        7548,
+        7549,
+        7550,
+        6634,
+        6635,
+        6636,
+        6646,
+        6647,
+        6648,
+        6653,
+        6654,
+        6655,
+        3644,
+        3645,
+        3646,
+        3656,
+        3657,
+        3658,
+        3663,
+        3664,
+        3665,
+        10962,
+        10963,
+        10964,
+        10974,
+        10975,
+        10976,
+        10981,
+        10982,
+        10983,
+        16874,
+        16802,
+        16803,
+        17128,
+        17133,
+        17134
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Merged display-of-page case (C1006) with empty-state cases (C1007, C1008) since the default page state IS the empty state. Stripped [Account Owner]/[Admin]/[Editor]/[Reports] prefixes. Removed static title/subtitle text checks and position/alignment checks. Kept the 'consent logging' link behavioral test (navigates to Advanced Settings). Display case for simple page \u2014 3 steps is acceptable per conventions \u00a74."
+    },
+    {
+      "id": 37228,
+      "title": "[Reports] Verify that the Consent Trends card displays a donut chart with consent breakdown when data exists",
+      "preconditions": "Consent data has been recorded for this site (accepted, rejected, and partially accepted consent events exist within the last 7 days).\nUser is on the Reports page (accessible via the Reports link in the top navigation bar).",
+      "steps": [
+        {
+          "content": "Observe the Consent Trends card.",
+          "expected": "A donut chart should be displayed in the main area, with the total consent count and \"Total Consents\" label shown in the center of the chart."
+        },
+        {
+          "content": "Observe the legend to the right of the donut chart.",
+          "expected": "The legend should display three entries with color markers:\n- \"Accepted\" with a green marker\n- \"Rejected\" with a red marker\n- \"Partially Accepted\" with a blue marker"
+        },
+        {
+          "content": "Hover over the green (Accepted) segment of the donut chart.",
+          "expected": "A tooltip should appear showing two lines: the percentage on the first line (e.g., \"50%\") and the consent type with count on the second line (e.g., \"Accepted: 1\")."
+        },
+        {
+          "content": "Hover over the red (Rejected) segment of the donut chart.",
+          "expected": "A tooltip should appear showing two lines: the percentage on the first line (e.g., \"50%\") and the consent type with count on the second line (e.g., \"Rejected: 1\")."
+        },
+        {
+          "content": "Hover over the blue (Partially Accepted) segment of the donut chart.",
+          "expected": "A tooltip should appear showing two lines: the percentage on the first line and the consent type with count on the second line (e.g., \"Partially Accepted: 1\")."
+        },
+        {
+          "content": "Compare the Consent Trends data with the Dashboard.",
+          "expected": "The consent trends data on the Reports page should match the data shown on the Dashboard."
+        }
+      ],
+      "grill_status": "fixed",
+      "run_type": "regression",
+      "source_case_ids": [
+        1012,
+        1652,
+        1659,
+        9665,
+        9674,
+        9681,
+        7535,
+        7544,
+        7551,
+        6640,
+        6649,
+        6656,
+        3650,
+        3659,
+        3666,
+        10968,
+        10977,
+        10984,
+        16798,
+        17129
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Removed navigation steps (now preconditions). Stripped role prefixes. Dropped static card title position checks. Kept hover tooltips (behavioral). Kept dashboard comparison step (cross-page data consistency check). Multi-element expected result in step 2 converted to bullet list."
+    },
+    {
+      "id": 37229,
+      "title": "[Reports] Verify that the Pageviews card displays a line chart with pageview data when data exists",
+      "preconditions": "Pageview data has been recorded for this site within the last 7 days.\nUser is on the Reports page (accessible via the Reports link in the top navigation bar).",
+      "steps": [
+        {
+          "content": "Observe the Pageviews card.",
+          "expected": "A line chart should be displayed in the main area of the Pageviews card, replacing the empty state."
+        },
+        {
+          "content": "Observe the Y axis of the line chart.",
+          "expected": "The Y axis should display pageview counts."
+        },
+        {
+          "content": "Observe the X axis of the line chart.",
+          "expected": "The X axis should display the time span for the selected range (default: last 7 days in MMM D, YYYY date format, e.g., \"Jul 2, 2026\")."
+        },
+        {
+          "content": "Hover over a data point on the line chart.",
+          "expected": "A tooltip should appear showing two lines: the date in MMM D, YYYY format on the first line (e.g., \"Jul 4, 2026\") and the pageview count followed by \"pageviews\" on the second line (e.g., \"1 pageviews\")."
+        },
+        {
+          "content": "Compare the Pageviews data with the Dashboard.",
+          "expected": "The pageviews data on the Reports page should match the data shown on the Dashboard."
+        }
+      ],
+      "grill_status": "fixed",
+      "run_type": "regression",
+      "source_case_ids": [
+        1009,
+        1653,
+        1660,
+        9662,
+        9675,
+        9682,
+        7532,
+        7545,
+        7552,
+        6637,
+        6650,
+        6657,
+        3647,
+        3660,
+        3667,
+        10965,
+        10978,
+        10985,
+        16799,
+        17130
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Removed navigation steps. Stripped role prefixes. Dropped card title position checks. Kept axis observations (structural data display verification), hover tooltip behavioral test, and dashboard comparison."
+    },
+    {
+      "id": 37230,
+      "title": "[Reports] Verify that the Consent Trends card range selector filters consent data by time period",
+      "preconditions": "Consent data has been recorded for this site across multiple time periods.\nUser is on the Reports page (accessible via the Reports link in the top navigation bar).",
+      "steps": [
+        {
+          "content": "Click the range selector dropdown on the Consent Trends card.",
+          "expected": "The dropdown should expand showing four options: \"Last 7 days\" (selected by default), \"Last 30 days\", \"Last 1 year\", \"Custom range\"."
+        },
+        {
+          "content": "Confirm \"Last 7 days\" is the active selection.",
+          "expected": "The Consent Trends card should display consent data from the last 7 days."
+        },
+        {
+          "content": "Select \"Last 30 days\" from the range selector.",
+          "expected": "The Consent Trends card should update to display consent data from the last 30 days."
+        },
+        {
+          "content": "Select \"Last 1 year\" from the range selector.",
+          "expected": "The Consent Trends card should update to display consent data from the last year."
+        },
+        {
+          "content": "Select \"Custom range\" from the range selector.",
+          "expected": "A date picker (calendar) should appear for selecting a custom date range."
+        },
+        {
+          "content": "Select a custom date range using the calendar.",
+          "expected": "The Consent Trends card should update to display consent data for the selected date range."
+        },
+        {
+          "content": "Select a custom date range for which no consent data exists.",
+          "expected": "The Consent Trends card should revert to showing the empty state."
+        }
+      ],
+      "grill_status": "fixed",
+      "run_type": "regression",
+      "source_case_ids": [
+        1016,
+        1654,
+        1661,
+        9669,
+        9676,
+        9683,
+        7539,
+        7546,
+        7553,
+        6644,
+        6651,
+        6658,
+        3654,
+        3661,
+        3668,
+        10972,
+        10979,
+        10986,
+        16800,
+        17131
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Removed navigation steps. Stripped role prefixes. Dropped static card title/position checks. Consolidated default-selection check and option listing into step 1. Empty-state fallback (step 7) kept as it tests a genuine behavioral branch."
+    },
+    {
+      "id": 37231,
+      "title": "[Reports] Verify that the Pageviews card range selector filters pageview data by time period",
+      "preconditions": "Pageview data has been recorded for this site across multiple time periods.\nUser is on the Reports page (accessible via the Reports link in the top navigation bar).",
+      "steps": [
+        {
+          "content": "Click the range selector dropdown on the Pageviews card.",
+          "expected": "The dropdown should expand showing four options: \"Last 7 days\" (selected by default), \"Last 30 days\", \"Last 1 year\", \"Custom range\"."
+        },
+        {
+          "content": "Confirm \"Last 7 days\" is the active selection.",
+          "expected": "The Pageviews card should display pageview data from the last 7 days."
+        },
+        {
+          "content": "Select \"Last 30 days\" from the range selector.",
+          "expected": "The Pageviews card should update to display pageview data from the last 30 days."
+        },
+        {
+          "content": "Select \"Last 1 year\" from the range selector.",
+          "expected": "The Pageviews card should update to display pageview data from the last year."
+        },
+        {
+          "content": "Select \"Custom range\" from the range selector.",
+          "expected": "A date picker (calendar) should appear for selecting a custom date range."
+        },
+        {
+          "content": "Select a custom date range using the calendar.",
+          "expected": "The Pageviews card should update to display pageview data for the selected date range, and the X axis of the line chart should reflect the selected date range boundaries."
+        },
+        {
+          "content": "Select a custom date range for which no pageview data exists.",
+          "expected": "The Pageviews card should revert to showing the empty state."
+        }
+      ],
+      "grill_status": "fixed",
+      "run_type": "regression",
+      "source_case_ids": [
+        1017,
+        1655,
+        1662,
+        9670,
+        9677,
+        9684,
+        7540,
+        7547,
+        7554,
+        6645,
+        6652,
+        6659,
+        3655,
+        3662,
+        3669,
+        10973,
+        10980,
+        10987,
+        16801,
+        17132
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Removed navigation steps. Stripped role prefixes. Dropped static display checks. X axis update on custom range added as part of step 6 expected result (from source step 12). Empty-state fallback in step 7 kept."
+    },
+    {
+      "id": 36704,
+      "title": "[Reports] Verify that the Pageviews card shows an Extra pageviews used counter on paid plans",
+      "preconditions": "- Account is on a paid plan (Basic or higher)\n- User is on the Reports page (accessible via the Reports link in the top navigation bar).",
+      "steps": [
+        {
+          "content": "Observe the Total pageviews summary box in the Pageviews card.",
+          "expected": "The summary box should display three rows: the total pageviews count, an \"Extra pageviews used\" counter, and the current date range. The Extra pageviews used counter should show 0 when no overages have occurred."
+        },
+        {
+          "content": "Hover over the info icon next to \"Total pageviews\" in the summary box.",
+          "expected": "A tooltip should appear explaining that the total includes the monthly plan limit plus any extra pageviews."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "grill_status": "confirmed",
+      "rewrite_notes": "Gap found during grill: on paid plans the Pageviews summary box includes an 'Extra pageviews used' counter that is absent on Free plan. Merged with existing C36704 \u2014 added paid plan precondition (was missing) and retained C36704's tooltip hover step. Title updated to v2 style."
+    }
+  ]
+}

@@ -40,14 +40,14 @@
       ],
       "permission_flag": false,
       "platform_flag": false,
-      "rewrite_notes": "Collapsed Account Owner / Admin / Editor across Free, Trial, Agency plan variants \u2014 all identical after prefix removal. Navigation steps moved to Preconditions. Dropped static page title text (S4), subtitle copy (S5), card position check (S6), and heading check (S7). Link presence merged into S1.",
+      "rewrite_notes": "Collapsed Account Owner / Admin / Editor across Free, Trial, Agency plan variants — all identical after prefix removal. Navigation steps moved to Preconditions. Dropped static page title text (S4), subtitle copy (S5), card position check (S6), and heading check (S7). Link presence merged into S1.",
       "grill_status": "fixed",
       "grill_note": "Removed trailing period from message text: actual UI shows 'Make sure you've enabled consent logging' with no period after the 'consent logging' link."
     },
     {
       "id": 37146,
       "title": "[Consent Log] Verify that the \"consent logging\" link in the empty state navigates to Advanced Settings",
-      "preconditions": "Same as the empty state case \u2014 Consent Log page with no consent entries recorded. The \"consent logging\" link is visible in the empty-state message on the \"Your visitor consents\" card.",
+      "preconditions": "Same as the empty state case — Consent Log page with no consent entries recorded. The \"consent logging\" link is visible in the empty-state message on the \"Your visitor consents\" card.",
       "steps": [
         {
           "content": "Locate the \"consent logging\" link in the empty-state message.",
@@ -79,7 +79,7 @@
     {
       "id": 37147,
       "title": "[Consent Log] Verify that the Consent Log card displays an accepted consent entry correctly on the Free plan",
-      "preconditions": "User is on the Free plan. A visitor has accepted all cookies on the connected website by clicking \"Accept All\" on the cookie banner. User is on the Consent Log page. The \"Your visitor consents\" card is visible with: an \"Export as CSV\" link button to the right of the heading, a search field in the top right, and a four-column table: Consent ID, Consent Status, Date/Time (UTC \u00b1 00:00), Proof of Consent. The Consent ID and Proof of Consent column headers each have a tooltip icon.",
+      "preconditions": "User is on the Free plan. A visitor has accepted all cookies on the connected website by clicking \"Accept All\" on the cookie banner. User is on the Consent Log page. The \"Your visitor consents\" card is visible with: an \"Export as CSV\" link button to the right of the heading, a search field in the top right, and a four-column table: Consent ID, Consent Status, Date/Time (UTC ± 00:00), Proof of Consent. The Consent ID and Proof of Consent column headers each have a tooltip icon.",
       "steps": [
         {
           "content": "Observe the consent table in the \"Your visitor consents\" card.",
@@ -121,7 +121,7 @@
       ],
       "permission_flag": false,
       "platform_flag": false,
-      "rewrite_notes": "Collapsed 10+ role/plan variants. Navigation (website visit, banner click, Dashboard, Consent Log tab) moved to Preconditions. Card structure (column list, tooltip icon positions) moved to Preconditions. Dropped layout/position checks. Hover tooltip kept \u2014 functional behavior, not static copy.",
+      "rewrite_notes": "Collapsed 10+ role/plan variants. Navigation (website visit, banner click, Dashboard, Consent Log tab) moved to Preconditions. Card structure (column list, tooltip icon positions) moved to Preconditions. Dropped layout/position checks. Hover tooltip kept — functional behavior, not static copy.",
       "grill_status": "skipped:plan-gated",
       "grill_note": "No Free plan account with consent log entries available. The QA2 free account (rahulkrishna+freeplansite@mozilor.com) is a clean account with no consent data. 4-column table structure (no Country column) requires Free plan populated state to verify."
     },
@@ -210,7 +210,7 @@
     {
       "id": 37150,
       "title": "[Consent Log] Verify that the Consent Log card on paid plans shows an accepted consent entry with a Country column",
-      "preconditions": "User is on a paid plan (Basic, Pro, or Ultimate). A visitor has accepted all cookies on the website. User is on the Consent Log page. The \"Your visitor consents\" card shows a five-column table: Consent ID, Country, Consent Status, Date/Time (UTC \u00b1 00:00), Proof of Consent. The Consent ID and Proof of Consent headers each have a tooltip icon.",
+      "preconditions": "User is on a paid plan (Basic, Pro, or Ultimate). A visitor has accepted all cookies on the website. User is on the Consent Log page. The \"Your visitor consents\" card shows a five-column table: Consent ID, Country, Consent Status, Date/Time (UTC ± 00:00), Proof of Consent. The Consent ID and Proof of Consent headers each have a tooltip icon.",
       "steps": [
         {
           "content": "Observe the consent entry in the table.",
@@ -318,7 +318,7 @@
       "platform_flag": false,
       "rewrite_notes": "Same structure as rejected paid case with Partially accepted status.",
       "grill_status": "needs-manual-check",
-      "grill_note": "Test account has no 'Partially accepted' entries \u2014 table structure and Country column confirmed by Cases 6/7, but 'Partially accepted' status label text and capitalization could not be verified directly. Also flag: Dashboard shows 'Partially Accepted' (capital A); check whether consent log table uses same capitalisation."
+      "grill_note": "Test account has no 'Partially accepted' entries — table structure and Country column confirmed by Cases 6/7, but 'Partially accepted' status label text and capitalization could not be verified directly. Also flag: Dashboard shows 'Partially Accepted' (capital A); check whether consent log table uses same capitalisation."
     },
     {
       "id": 37153,
@@ -327,7 +327,7 @@
       "steps": [
         {
           "content": "Click the \"Export as CSV\" link button.",
-          "expected": "The button should not trigger any action \u2014 the export should be blocked."
+          "expected": "The button should not trigger any action — the export should be blocked."
         },
         {
           "content": "Hover over the \"Export as CSV\" button.",
@@ -349,7 +349,7 @@
       ],
       "permission_flag": false,
       "platform_flag": false,
-      "rewrite_notes": "Collapsed 10+ role/plan variants. Navigation and consent-generation steps moved to Preconditions. Tooltip text kept \u2014 it is a validation message (blocked-state signal), not informational copy.",
+      "rewrite_notes": "Collapsed 10+ role/plan variants. Navigation and consent-generation steps moved to Preconditions. Tooltip text kept — it is a validation message (blocked-state signal), not informational copy.",
       "grill_status": "skipped:destructive-precondition",
       "grill_note": "No test account with unverified email in qa-accounts.json. Would require creating or resetting an account to pre-verification state."
     },
@@ -415,7 +415,7 @@
       ],
       "permission_flag": false,
       "platform_flag": false,
-      "rewrite_notes": "Genuinely different from Free plan case: different retention message, no upgrade nudge. Collapsed Basic/Pro/Ultimate \u2014 all show the same 5-year message.",
+      "rewrite_notes": "Genuinely different from Free plan case: different retention message, no upgrade nudge. Collapsed Basic/Pro/Ultimate — all show the same 5-year message.",
       "grill_status": "confirmed"
     },
     {
@@ -452,7 +452,7 @@
       ],
       "permission_flag": false,
       "platform_flag": false,
-      "rewrite_notes": "Collapsed 9+ role/plan variants. Email verification and navigation moved to Preconditions. Steps 1\u201315 in C1061 (navigation and modal opening) collapsed to Preconditions. Six range options verified; Custom range kept as separate step since it reveals a calendar.",
+      "rewrite_notes": "Collapsed 9+ role/plan variants. Email verification and navigation moved to Preconditions. Steps 1–15 in C1061 (navigation and modal opening) collapsed to Preconditions. Six range options verified; Custom range kept as separate step since it reveals a calendar.",
       "grill_status": "confirmed",
       "grill_note": "Verified: 6 dropdown options confirmed (Last 30 days default, Last 3 months, Last 6 months, Last 12 months, All time, Custom). Preset selection updates date picker in DD/MM/YYYY format. Custom triggers two-month calendar picker with future dates disabled. Selected range reflects in picker field."
     },
@@ -495,9 +495,11 @@
       ],
       "permission_flag": false,
       "platform_flag": false,
-      "rewrite_notes": "Collapsed 12+ role/plan variants into one linear flow. Steps 1\u201314 (navigation and modal opening) moved to Preconditions. Email body copy (logo, text paragraphs) dropped per conventions. Download button \u2192 CSV download kept as functional outcome. Merged C1063 (trigger), C1064 (confirmation pop-up), C1065 (email), C1066 (download) into a single end-to-end case.",
+      "rewrite_notes": "Collapsed 12+ role/plan variants into one linear flow. Steps 1–14 (navigation and modal opening) moved to Preconditions. Email body copy (logo, text paragraphs) dropped per conventions. Download button → CSV download kept as functional outcome. Merged C1063 (trigger), C1064 (confirmation pop-up), C1065 (email), C1066 (download) into a single end-to-end case.",
       "grill_status": "skipped:email-required",
-      "grill_note": "Case requires verifying a received CSV export email in a real inbox \u2014 cannot automate."
+      "grill_note": "Case requires verifying a received CSV export email in a real inbox — cannot automate.",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "MANUAL SIGN-OFF (2026-07-13, project owner, not a live/source check): validate-cases-file's truncated_quote heuristic flagged the \"Creating a CSV file...\" popup title as a possible truncation. Owner personally confirmed this is the real, complete on-page title (a loading-state message, not a shortened longer quote) and approved clearing the flag. Recorded as verbatim-confirmed so the heuristic suppresses it going forward, per the grill_status/audit_status precedence rule in validate-cases-file — flagged here as owner-attested rather than live-verified, since grill_status is still \"skipped:email-required\" (never actually driven)."
     },
     {
       "id": 37158,
@@ -510,7 +512,7 @@
         },
         {
           "content": "Click the download button.",
-          "expected": "The \"Proof of consent\" modal should appear."
+          "expected": "The \"Proof of consent\" modal should appear, showing a Consent ID and a Consent date, with Cancel and Generate PDF buttons."
         }
       ],
       "run_type": "regression",
@@ -528,32 +530,9 @@
       "grill_status": "confirmed"
     },
     {
-      "id": 37159,
-      "title": "[Consent Log] Verify that the Proof of Consent modal displays the correct consent details and action buttons",
-      "preconditions": "The \"Proof of consent\" modal is open for a consent entry (opened via the download button in the Proof of Consent column on the Consent Log page).",
-      "steps": [
-        {
-          "content": "Observe the modal content.",
-          "expected": "The modal should display:\n- Title: \"Proof of consent\" in the top left.\n- Consent details: \"Consent ID: [consent id]\" and \"Consent date: [Mmm DD, YYYY HH:MM:SS] UTC\" in the center.\n- Action buttons: \"Cancel\" and \"Generate PDF\" in the bottom right."
-        }
-      ],
-      "run_type": "regression",
-      "source_case_ids": [
-        1382,
-        3425,
-        6369,
-        7278
-      ],
-      "permission_flag": false,
-      "platform_flag": false,
-      "rewrite_notes": "Collapsed role/plan variants. Single display step using multi-element list format per conventions.",
-      "grill_status": "fixed",
-      "grill_note": "Date format updated: draft used '[Month dd, yyyy hh:mm:ss] UTC' but the modal uses abbreviated 3-letter month \u2014 actual: 'Jul 07, 2026 11:51:15 UTC'. Updated template to '[Mmm DD, YYYY HH:MM:SS] UTC'."
-    },
-    {
       "id": 37160,
       "title": "[Consent Log] Verify that clicking Cancel in the Proof of Consent modal closes it without generating a file",
-      "preconditions": "The \"Proof of consent\" modal is open for a consent entry.",
+      "preconditions": "The \"Proof of consent\" modal is open for a consent entry (opened via the download button in the Proof of Consent column on the Consent Log page). The modal shows a Consent ID and a Consent date, with Cancel and Generate PDF buttons.",
       "steps": [
         {
           "content": "Click the \"Cancel\" button in the \"Proof of consent\" modal.",
@@ -569,13 +548,13 @@
       ],
       "permission_flag": false,
       "platform_flag": false,
-      "rewrite_notes": "Collapsed role/plan variants. \"No file downloaded\" expected result added [inferred] \u2014 cancel implies no side effect.",
+      "rewrite_notes": "Collapsed role/plan variants. \"No file downloaded\" expected result added [inferred] — cancel implies no side effect.",
       "grill_status": "confirmed"
     },
     {
       "id": 37161,
       "title": "[Consent Log] Verify that clicking Generate PDF in the Proof of Consent modal triggers a PDF generation confirmation",
-      "preconditions": "The \"Proof of consent\" modal is open for a consent entry.",
+      "preconditions": "The \"Proof of consent\" modal is open for a consent entry (opened via the download button in the Proof of Consent column on the Consent Log page). The modal shows a Consent ID and a Consent date, with Cancel and Generate PDF buttons.",
       "steps": [
         {
           "content": "Click the \"Generate PDF\" button in the \"Proof of consent\" modal.",
@@ -597,7 +576,7 @@
       "platform_flag": false,
       "rewrite_notes": "Collapsed role/plan variants.",
       "grill_status": "fixed",
-      "grill_note": "Source cases expected a direct PDF download. Actual behavior: clicking Generate PDF shows a 'Generating PDF...' email-notification dialog (same pattern as CSV export \u2014 PDF is sent to the account email). Title also updated to reflect confirmation-trigger rather than download. The PDF receipt via email is not automatable (email-required)."
+      "grill_note": "Source cases expected a direct PDF download. Actual behavior: clicking Generate PDF shows a 'Generating PDF...' email-notification dialog (same pattern as CSV export — PDF is sent to the account email). Title also updated to reflect confirmation-trigger rather than download. The PDF receipt via email is not automatable (email-required)."
     },
     {
       "id": 37162,
@@ -649,7 +628,7 @@
       ],
       "permission_flag": false,
       "platform_flag": false,
-      "rewrite_notes": "Fixed source case bug \u2014 C1388 title says \"invalid consent ID\" but steps say \"Enter valid consent id\" \u2014 intent is clearly invalid/non-existent ID. Expected result for no results was missing; added [inferred].",
+      "rewrite_notes": "Fixed source case bug — C1388 title says \"invalid consent ID\" but steps say \"Enter valid consent id\" — intent is clearly invalid/non-existent ID. Expected result for no results was missing; added [inferred].",
       "grill_status": "fixed",
       "grill_note": "Expected result was [inferred]. Verified actual 'no results' message: 'No data available! While older logs may not be available here, you can export the data to access them.' Removed [inferred] tag and replaced with exact text."
     },
@@ -745,25 +724,25 @@
       ],
       "permission_flag": false,
       "platform_flag": false,
-      "rewrite_notes": "Source case C14916 was truncated at step 13 (only column presence checks present; steps 14+ missing). Retention window for Ultimate plan is unspecified in available data. Step 2 expected result inferred from pattern in C14913\u2013C14915. Retention window needs verification against the current product before publishing.",
+      "rewrite_notes": "Source case C14916 was truncated at step 13 (only column presence checks present; steps 14+ missing). Retention window for Ultimate plan is unspecified in available data. Step 2 expected result inferred from pattern in C14913–C14915. Retention window needs verification against the current product before publishing.",
       "grill_status": "skipped:time-dependent",
-      "grill_note": "Ultimate plan retention window is still unknown (source case truncated). Test data on qa1.kilohub.com only has entries from the past 11 days \u2014 no data to test any boundary. Retention window must be confirmed from product spec before this case can be run."
+      "grill_note": "Ultimate plan retention window is still unknown (source case truncated). Test data on qa1.kilohub.com only has entries from the past 11 days — no data to test any boundary. Retention window must be confirmed from product spec before this case can be run."
     },
     {
       "id": 37168,
       "title": "[Consent Log] Verify that clicking the clear search button restores the full consent log list",
-      "preconditions": "At least one consent entry exists. User is on the Consent Log page. A consent ID search has been submitted (via Enter or the magnifying glass button) and the table is showing filtered results. The \u00d7 clear button is visible in the search field (the magnifying glass icon has been replaced by \u00d7).",
+      "preconditions": "At least one consent entry exists. User is on the Consent Log page. A consent ID search has been submitted (via Enter or the magnifying glass button) and the table is showing filtered results. The × clear button is visible in the search field (the magnifying glass icon has been replaced by ×).",
       "steps": [
         {
-          "content": "Click the \u00d7 (clear) button in the search field.",
-          "expected": "The search field should clear. The \u00d7 button should be replaced by the magnifying glass icon. The full consent log list should be restored."
+          "content": "Click the × (clear) button in the search field.",
+          "expected": "The search field should clear. The × button should be replaced by the magnifying glass icon. The full consent log list should be restored."
         }
       ],
       "run_type": "regression",
       "source_case_ids": [],
       "permission_flag": false,
       "platform_flag": false,
-      "rewrite_notes": "New case \u2014 no source case in Suite 6. Gap identified during grilling: after submitting a search, a \u00d7 button replaces the magnifying glass icon. Clicking \u00d7 clears the search and restores the full list. This button-toggle behavior was not covered by any existing draft case.",
+      "rewrite_notes": "New case — no source case in Suite 6. Gap identified during grilling: after submitting a search, a × button replaces the magnifying glass icon. Clicking × clears the search and restores the full list. This button-toggle behavior was not covered by any existing draft case.",
       "grill_status": "confirmed"
     }
   ]

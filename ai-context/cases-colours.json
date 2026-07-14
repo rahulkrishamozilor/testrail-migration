@@ -5,6 +5,7 @@
   "fetched_at": "2026-07-06T04:43:20Z",
   "grilled_at": "2026-07-06T05:53:32Z",
   "published_at": "2026-07-06T07:02:36Z",
+  "audited_at": "2026-07-13T04:58:30Z",
   "searched_section_ids": [
     35,
     244,
@@ -25,6 +26,10 @@
         {
           "content": "Observe the colour scheme options.",
           "expected": "\"Light\", \"Dark\", and \"Auto-generated\" options should be visible. \"Light\" should be selected by default."
+        },
+        {
+          "content": "Note the plan-gating state of the \"Auto-generated\" colour option.",
+          "expected": "- Free plan: option is locked with a premium icon (see 11. Billing & Upgrade > Plan Gates for the locked-state verification).\n- Basic plan and higher: option is unlocked and selectable."
         },
         {
           "content": "Observe the Consent Template card.",
@@ -55,7 +60,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "C995 (display) and C998 (Light functionality) merged \u2014 C995 is a subset. Navigation steps 1\u20134 moved to preconditions. Sidebar tab list verification dropped as static presence check. Consent Template card position check dropped as alignment. Role variants (Account Owner, Admin, Editor) collapsed \u2014 identical behavior.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled C995 and C998 of 14 source_case_ids (rewrite_notes: role variants collapsed, identical behavior). Both agree with each other and with v2 wording for \"Light\"/\"Dark\"/\"Auto-generated\" and \"Customise light colours\" link. Source uses US spelling (\"Customize light colors\"); v2 normalizes to UK spelling (\"Colours\"/\"Customise\") consistently across the whole section \u2014 treated as house-style normalization, not content loss."
     },
     {
       "id": 37130,
@@ -84,7 +91,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Navigation steps dropped to preconditions. Static sidebar tab list check dropped. Role variants collapsed \u2014 identical behavior.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled C999 and C1633 of 7 source_case_ids. Both agree with each other and with v2 wording for \"Dark\" option and \"Customise dark colours\" link (source: \"Customize Dark colors\", UK-spelling normalized per section-wide convention)."
     },
     {
       "id": 37131,
@@ -107,7 +116,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Steps 9\u201311 (verifying specific nudge headline text, image description, and button labels as copy checks) dropped. Step 12 (\"Try it now\" \u2192 upgrade page) extracted \u2014 already covered by Plan Gates C36866. This case covers only the nudge appearing.",
-      "grill_status": "needs-manual-check"
+      "grill_status": "needs-manual-check",
+      "audit_status": "reworded-flagged",
+      "audit_note": "STRUCTURAL PROBLEM FOUND (live-verified 2026-07-13, Free plan account): the CTA-label question (\"Try Pro for free\" vs C9919's \"Try it now\") is resolved \u2014 live-confirmed the nudge headline/body/\"Available in: All premium plans\"/CTA labels (\"Try Pro for free\", \"Dismiss\") match this case's claims exactly. BUT the case's entire premise is wrong: clicking \"Dark\" on the Colours tab does NOT show this nudge on the Colours tab at all (checked directly \u2014 nothing appears there, on either Light or Dark). The nudge actually lives on the Custom CSS tab, visible unconditionally for Free-plan accounts regardless of the Colours tab's Light/Dark selection \u2014 it is the exact \"separate side upgrade-nudge panel\" that cases-custom-css.json's C37144 rewrite_notes explicitly calls out as \"a known bug per the user, intentionally not captured\" in that case. So this case is testing a real, live, correctly-worded nudge, but (a) misattributes its trigger (not caused by selecting Dark) and location (not the Colours tab, not tied to Colours at all), and (b) tests UI that the project has separately flagged as a known bug meant to be excluded from coverage. Left status/content unchanged pending a decision: should this case be corrected to describe the Custom CSS tab's static nudge accurately, merged into cases-custom-css.json where the rest of this nudge's coverage lives, or dropped as testing known-buggy behavior the project doesn't want covered? Not a simple wording fix \u2014 flagging for a scope decision rather than silently rewriting the case."
     },
     {
       "id": 37132,
@@ -128,7 +139,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Navigation and nudge appearance steps moved to preconditions. Admin/Editor role cases differ only in \"Try it now\" being disabled \u2014 that divergence is flagged as a permission case separately. Dismiss behavior is identical across all roles.",
-      "grill_status": "needs-manual-check"
+      "grill_status": "needs-manual-check",
+      "audit_status": "reworded-flagged",
+      "audit_note": "CORRECTION (live-verified 2026-07-13): the earlier pass only checked the Dismiss/no-reappear wording against source and missed that this case's precondition can't actually be reached as written \u2014 see the identical structural finding on sibling case C37131 in this same file. \"Dark is selected and the Custom CSS upgrade nudge is visible\" on the Colours tab never happens live; the nudge lives on the Custom CSS tab, unconditional of Colours' Light/Dark selection, and is the exact side-panel nudge that cases-custom-css.json's C37144 rewrite_notes flags as \"a known bug per the user, intentionally not captured.\" The Dismiss/no-reappear wording itself may well be accurate, but the precondition framing needs the same scope decision as C37131 before this case can be trusted as written."
     },
     {
       "id": 37133,
@@ -153,7 +166,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Help icon tooltip step dropped (static copy). C16743 (Free plan Auto-generated upgrade nudge) not included here \u2014 already covered by Plan Gates C36864. Role variants collapsed \u2014 identical behavior.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled C1000 and C1634 of 3 source_case_ids. Both agree with each other; \"Auto-generated\" option and \"Customise auto-generated colours\" link (source: \"Customize Auto-generated colors\") match. Dropped help-icon tooltip step is correctly noted as static copy in rewrite_notes."
     },
     {
       "id": 37134,
@@ -202,7 +217,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Navigation and GDPR default verification steps moved to preconditions. Default hex colour values retained as behavioural spec (not dropped \u2014 they define product defaults). Duplicate assertions removed. Role variants collapsed \u2014 identical behavior.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "LIVE-VERIFIED (2026-07-13, Pro account, GDPR, Light theme, Cookie Notice + Preference Centre accordions, exact DOM values read from the colour-picker hex text inputs): Banner Background #FFFFFF/Border #F4F4F4/Title #212121/Message #212121; \"Accept All\" #1863DC/#1863DC/#FFFFFF; \"Reject All\" #1863DC/#1863DC/#FFFFFF; \"Customise\" TRANSPARENT/#1863DC/#1863DC; Toggle Enabled #1863DC/Disabled #D0D5D2; \"Save My Preferences\" #1863DC/#1863DC/#FFFFFF; Floating button #0056A7; Alt Text #000000/#000000/#FFFFFF \u2014 every value matches this case exactly. This confirms the draft was correct all along and the Suite 6 source (C1001/C1635/C1644, claiming Reject All/Save My Preferences should share the Customise button's outline style) is the stale one. Resolves the earlier flag: the grill_status \"fixed\" verdict was right to take priority over source, per the rule added to audit-section.md this session. ALSO FOUND (missing precondition, not previously flagged): this case's precondition names no plan tier, but on a Free-plan account clicking \"Customise light colours\" does NOT open this picker at all — it shows a different upgrade modal (\"Design a banner that blends perfectly with your site\", Available in: Basic, Pro and Ultimate plans, \"Try Pro for free\" CTA). The whole per-component picker feature (C37134-C37137) requires Basic+ and this precondition gap applies to all four; needs \"User is on a paid plan (Basic or higher)\" added to preconditions."
     },
     {
       "id": 37135,
@@ -251,7 +268,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Source step 9 has a typo ('when Light is selected') \u2014 corrected to 'when Dark is selected'. Duplicate step 15/16 in source (same Reject All/Customize dark colour assertion repeated) kept once. Role variants collapsed.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "LIVE-VERIFIED (2026-07-13, Pro account, GDPR, Dark theme, Cookie Notice + Preference Centre + Alt Text accordions, exact DOM values read from the colour-picker hex text inputs): Banner Background #121212/Border #2A2A2A/Title #D0D0D0/Message #D0D0D0; \"Accept All\" #1578F7/#1578F7/#FFFFFF; \"Reject All\" #1578F7/#1578F7/#FFFFFF; \"Customise\" TRANSPARENT/#D0D0D0/#D0D0D0; Toggle Enabled #1578F7/Disabled #D0D5D2; \"Save My Preferences\" #1578F7/#1578F7/#FFFFFF; Alt Text #000000/#000000/#FFFFFF \u2014 every value matches this case exactly, including the brighter #1578F7 blue across Accept All/Reject All/Toggle/Save-My-Preferences. This confirms the draft was correct all along and the Suite 6 source (C1002/C1636/C1645) reflects a stale legacy default. Resolves the earlier flag: the grill_status \"fixed\" verdict was right to take priority over source, per the rule added to audit-section.md this session. ALSO: same missing-plan-precondition gap as C37134 applies here too (picker requires Basic+, precondition names no plan tier) — see C37134's audit_note for detail."
     },
     {
       "id": 37136,
@@ -300,7 +319,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Genuine variant from GDPR light case: Opt-out Center (Checkbox, Cancel, Save My Preferences) replaces Preference Center; Cookie Notice has 'Do Not Sell' link instead of 'Customise' button. Source step 17 mislabelled 'Toggle switch' but is under Opt-out Center \u2014 corrected to Checkbox. Role variants collapsed.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "LIVE-VERIFIED (2026-07-13, Pro account, US State Laws, Light theme, Cookie Notice + Opt-out Center accordions, exact DOM values read from the colour-picker hex text inputs): Banner Background #FFFFFF/Border #F4F4F4/Title #212121/Message #212121; \"Do Not Sell\" link Text #1863DC; Checkbox Enabled #1863DC/Disabled #FFFFFF; \"Cancel\" Background #FFFFFF/Border #949494/Text #595959; \"Save My Preferences\" #1863DC/#1863DC/#FFFFFF \u2014 every value matches this case exactly. This confirms the draft was correct all along and the Suite 6 source (C1003/C1637/C1646, claiming a US-State-Laws-specific #D4D8DF border and different Cancel/Save-My-Preferences values) reflects stale legacy defaults. Resolves the earlier flag: the grill_status \"fixed\" verdict was right to take priority over source, per the rule added to audit-section.md this session. ALSO: same missing-plan-precondition gap as C37134 applies here too (picker requires Basic+, precondition names no plan tier) — see C37134's audit_note for detail."
     },
     {
       "id": 37137,
@@ -349,7 +370,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "\"Cancel\" button dark variant differs from light (Background TRANSPARENT vs #FFFFFF). Role variants collapsed.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "LIVE-VERIFIED (2026-07-13, Pro account, US State Laws, Dark theme, Cookie Notice + Opt-out Center accordions, exact DOM values read from the colour-picker hex text inputs): Banner Background #121212/Border #2A2A2A/Title #D0D0D0/Message #D0D0D0; \"Do Not Sell\" link Text #609FFF; Checkbox Enabled #1578F7/Disabled #FFFFFF; \"Cancel\" Background TRANSPARENT/Border #949494/Text #A1A1A1; \"Save My Preferences\" #1578F7/#1578F7/#FFFFFF — every value matches this case exactly. This confirms the draft was correct all along and the Suite 6 source (C1004/C1638/C1647) reflects stale legacy defaults. Resolves the earlier flag: the grill_status \"fixed\" verdict was right to take priority over source, per the rule added to audit-section.md this session. ALSO: same missing-plan-precondition gap as C37134 applies here too (picker requires Basic+, precondition names no plan tier) — see C37134's audit_note for detail."
     },
     {
       "id": 37138,
@@ -378,7 +401,9 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "No specific default hex values \u2014 colours are dynamically derived from the connected website. Role variants collapsed \u2014 identical behavior.",
-      "grill_status": "fixed"
+      "grill_status": "fixed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled C1005 and C1639 of 3 source_case_ids. Both agree with each other; \"Customise auto-generated colours\" link (source: \"Customize auto-generated colors\") and \"Publish Changes\" match v2 wording. No hex values quoted here (correctly, per rewrite_notes)."
     },
     {
       "id": 37139,
@@ -403,10 +428,13 @@
       "permission_flag": false,
       "platform_flag": false,
       "rewrite_notes": "Gap found during grill: the Opt-out Center accordion has a 4th sub-section (Opt-out confirmation message) not covered by any draft case. Colours are the same in Light and Dark custom modes.",
-      "grill_status": "confirmed"
+      "grill_status": "confirmed",
+      "audit_status": "no-source-case",
+      "audit_note": "source_case_ids is empty — this is a gap case per rewrite_notes (no Suite 6 case ever covered the Opt-out confirmation message sub-section), so there is no source to diff the quoted hex values against. grill_status is \"confirmed\", meaning this was verified live against the QA app during grilling on 2026-07-06, which is the only fidelity check available for this case."
     },
     {
       "id": 37140,
+      "section_id": 1775,
       "title": "[Permissions] Verify that Admin and Editor cannot initiate the Custom CSS upgrade from the Colours tab nudge",
       "preconditions": "User is logged in as Admin or Editor. User is on Cookie Banner > Customisation sidebar > Colours tab. \"Dark\" is selected and the Custom CSS upgrade nudge is visible.",
       "steps": [
@@ -427,7 +455,9 @@
       "permission_flag": true,
       "platform_flag": false,
       "rewrite_notes": "Role divergence on billing-adjacent action (upgrade initiation). Account Owner can click Try it now; Admin and Editor cannot. Routes to section 14 (Permissions).",
-      "grill_status": "skipped:plan-gated"
+      "grill_status": "skipped:plan-gated",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Sampled C9921 and C9923 of 2 source_case_ids (Admin and Editor variants). Both agree with each other; \"Try it now\" button disabled state and tooltip \"Only account owner can change plan\" (steps 12-13 of both) match v2 wording exactly."
     }
   ]
 }

@@ -1,0 +1,1121 @@
+{
+  "section": "Advanced settings",
+  "suite_id": 16,
+  "section_id": null,
+  "fetched_at": "2026-07-08T08:47:07Z",
+  "grilled_at": "2026-07-08T09:41:13Z",
+  "published_at": "2026-07-08T11:07:47Z",
+  "searched_section_ids": [
+    16,
+    313,
+    283,
+    194,
+    615
+  ],
+  "cases": [
+    {
+      "id": 37192,
+      "title": "[Advanced Settings] Advanced Settings page shows the expected sections and navigational links",
+      "preconditions": "User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the page",
+          "expected": "Five sections are displayed:\n- Banner settings\n- Consent settings\n- Google consent mode (GCM)\n- Microsoft consent mode & Clarity API integration\n- Scan settings"
+        },
+        {
+          "content": "Note the plan-gating state of controls within these sections.",
+          "expected": "- Banner settings: \"Disable banner on specific pages\" is locked with a premium icon on non-Pro plans.\n- Consent settings: \"Subdomain consent sharing\" is locked with a premium icon on non-Pro plans.\n- Scan settings: \"Static IP Scan\" is locked with a premium icon on non-Ultimate plans.\n(See 11. Billing & Upgrade > Plan Gates for the locked-state verification of each.)"
+        },
+        {
+          "content": "Click the 'GCM Support Center' link in the GCM section info banner",
+          "expected": "The GCM Support Center page opens in a new tab"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        278,
+        2073,
+        2074,
+        7458,
+        7476,
+        7494,
+        6433,
+        3550,
+        16602
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Dropped 12 static-copy and option-enumeration steps (each option gets its own case). Retained only structural nav assertions and link targets. Collapsed AO/Admin/Editor and all plan variants.",
+      "grill_status": "fixed",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37193,
+      "title": "[Advanced Settings] Cookie banner status shows Inactive and prompts to add installation code",
+      "preconditions": "Installation code has not been added to the user's website; user is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the Cookie banner status option under Banner settings",
+          "expected": "Status shows 'Inactive'; a reload button (tooltip: 'Verify installation') and a 'Get Installation code' button are displayed"
+        },
+        {
+          "content": "Observe the text below the status",
+          "expected": "Reads: 'Looks like the installation code isn't added to your site yet! Click Get installation code to copy the code.'"
+        },
+        {
+          "content": "Click 'Get Installation code'",
+          "expected": "The banner installation popup opens"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        489,
+        2075,
+        2076,
+        7459,
+        7477,
+        7495,
+        6434,
+        3551,
+        16603
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Dropped help-icon tooltip text. Collapsed AO/Admin/Editor and plan variants.",
+      "grill_status": "fixed",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37194,
+      "title": "[Advanced Settings] Reload button verifies installation and updates Cookie banner status to Active",
+      "preconditions": "Installation code has been added to the user's website; Cookie banner status currently shows Inactive; user is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click the reload button next to the Inactive status",
+          "expected": "A mini tab opens loading the user website with the banner; status line reads 'Connecting to your site to verify installation' with a loading icon"
+        },
+        {
+          "content": "Wait for verification to complete and observe the status",
+          "expected": "Status updates to 'Active'; a help icon appears (tooltip: 'If you remove the code from your site, it may take up to 24 hours for the change to reflect here')"
+        },
+        {
+          "content": "Observe the content below the Active status",
+          "expected": "Text reads 'You have successfully set up your cookie banner!'; a 'Get Installation code' button is visible"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1030,
+        1031,
+        2077,
+        2078,
+        2079,
+        2080,
+        7460,
+        7461,
+        7478,
+        7479,
+        6435,
+        6436,
+        3552,
+        3553,
+        16604,
+        16605
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Merged C1030 (reload flow) and C1031 (Active state display) \u2014 C1031 is a functional superset of C1030. Collapsed AO/Admin/Editor and plan variants.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37195,
+      "title": "[Advanced Settings] Cookie banner status shows Inactive with a pageview-limit message when the plan limit is exceeded",
+      "preconditions": "Pageview limit has been triggered for the test site:\n1. Call `GET /api/migrate/set-pageviews?pageviews={plan_limit}&website_id={website_id}` to set the site's pageview count to the plan maximum\n2. Call `GET /api/test/execute-scheduled-task?name=pageview-limit-reached-actions` to trigger the limit-reached scheduled task\n3. Confirm that `banner_disable_at` is now set in the Pageviews table for the site\n4. Edit the `banner_disable_at` value to yesterday's date\n5. Call `GET /api/test/execute-scheduled-task?name=pageview-banner-disable` to disable the banner\n\nUser is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the Cookie banner status option",
+          "expected": "Status shows 'Inactive'; no reload button is shown; text reads: 'Pageview limit exceeded: Upgrade to activate banner.'"
+        },
+        {
+          "content": "Click the 'Upgrade' link in the message",
+          "expected": "The plan upgrade page opens"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1033,
+        2081,
+        2082,
+        7462,
+        7480,
+        7496,
+        6437,
+        3555,
+        16607
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Moved 4-step API precondition setup to Preconditions block. Dropped scheduled-task wait step. Retained key behavioral difference from case 2: no reload button, specific limit-exceeded message, Upgrade link.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37196,
+      "title": "[Advanced Settings] Banner display status dropdown defaults to Enabled with an info message",
+      "preconditions": "User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the Banner display status option under Banner settings",
+          "expected": "A dropdown shows 'Enabled' selected by default"
+        },
+        {
+          "content": "Observe the text below the dropdown",
+          "expected": "Reads: 'By disabling this, the CookieYes script/banner on your site will be disabled, allowing you to test and debug any issues.'"
+        },
+        {
+          "content": "Click the dropdown",
+          "expected": "'Enabled' and 'Disabled' options are shown"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1032,
+        2083,
+        2084,
+        7463,
+        7481,
+        7497,
+        6438,
+        3554,
+        16606
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Dropped section-enumeration steps. Retained default value, info text, and available options assertions.",
+      "grill_status": "confirmed",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37197,
+      "title": "[Advanced Settings] Banner display status dropdown confirm and discard flow",
+      "preconditions": "User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click the Banner display status dropdown and select 'Disabled'",
+          "expected": "'Disabled' is selected; Confirm and Discard icons appear to the right of the dropdown"
+        },
+        {
+          "content": "Click the Discard icon",
+          "expected": "The dropdown reverts to 'Enabled'; Confirm and Discard icons disappear"
+        },
+        {
+          "content": "Select 'Disabled' again and click the Confirm icon",
+          "expected": "'Disabled' is confirmed; changes take effect on the site"
+        },
+        {
+          "content": "Click the dropdown, select 'Enabled', and click Confirm",
+          "expected": "'Enabled' is confirmed and the banner is re-enabled on the site"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1035,
+        2085,
+        2086,
+        7464,
+        7482,
+        7498,
+        6439,
+        3557,
+        16609
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Condensed from 16 steps to 4. Dropped intermediate state annotations and repetitive selection-verification steps.",
+      "grill_status": "confirmed",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37198,
+      "title": "[Advanced Settings] Setting Banner display status to Disabled when banner is Inactive shows a user-disabled message without the reload button",
+      "preconditions": "Cookie banner status is Inactive (code not installed); user is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click the Banner display status dropdown, select 'Disabled', and click Confirm",
+          "expected": "Status section no longer shows the reload button; text below the Inactive status reads: 'Looks like you have disabled the banner on your site. Enable it from Banner display status.'"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1034,
+        2087,
+        2088,
+        7465,
+        7483,
+        7499,
+        6440,
+        3556,
+        16608
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Condensed 11 steps to 1. Behavioral assertion: user-disabled message replaces the code-not-installed message and the reload button is removed.",
+      "grill_status": "confirmed",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37199,
+      "title": "[Advanced Settings] Setting Banner display status to Disabled when banner is Active changes Cookie banner status to Inactive and disables the banner on the site",
+      "preconditions": "Cookie banner status is Active; user is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click the Banner display status dropdown, select 'Disabled', and click Confirm",
+          "expected": "Cookie banner status changes from 'Active' to 'Inactive'; text reads: 'Looks like you have disabled the banner on your site. Enable it from Banner display status.'"
+        },
+        {
+          "content": "Navigate to the user website",
+          "expected": "The cookie banner is not displayed on the site"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1036,
+        2089,
+        2090,
+        7466,
+        7484,
+        7500,
+        6441,
+        3558,
+        16610
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Condensed 12 steps to 2. Key behavioral difference from case 7: Active\u2192Inactive status change and actual site-level verification.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37200,
+      "title": "[Advanced Settings] Disable banner on specific pages is locked with a premium icon on non-Pro plans",
+      "preconditions": "Account is on a plan lower than Pro; user is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the 'Disable banner on specific pages' option under Banner settings",
+          "expected": "A premium icon is shown next to the option label; the edit icon (pencil) is disabled; label reads 'Not set'"
+        },
+        {
+          "content": "Hover over the premium icon",
+          "expected": "Tooltip reads: 'Upgrade to Pro or a higher plan to unlock this feature.'"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1037,
+        2091,
+        2092,
+        7467,
+        7485,
+        7501,
+        6442,
+        3559,
+        16611
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Condensed 10 steps to 2. Dropped help-icon tooltip (static copy). Retained premium lock state and upgrade tooltip.",
+      "grill_status": "fixed",
+      "plan_gate_flag": true,
+      "section_id": 1793
+    },
+    {
+      "id": 37201,
+      "title": "[Advanced Settings] Disable banner on specific pages popup validates URLs and saves patterns",
+      "preconditions": "Account is on Pro plan or higher; 'Disable banner on specific pages' shows 'Not set'; user is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click the edit icon next to 'Not set'",
+          "expected": "The 'Disable banner on specific pages' popup opens with a URL text area and 'Save Changes' and 'Cancel' buttons"
+        },
+        {
+          "content": "Enter an invalid URL in the text area and click 'Save Changes'",
+          "expected": "An 'Invalid URL(s)' error appears below the text area; the popup remains open"
+        },
+        {
+          "content": "Clear the text area, enter one or more valid URLs, and click 'Save Changes'",
+          "expected": "Popup closes; the option now shows '[N] URL pattern(s) added'"
+        },
+        {
+          "content": "Click the edit icon next to '[N] URL pattern(s) added'",
+          "expected": "The popup reopens with the previously saved URLs pre-filled"
+        },
+        {
+          "content": "Click 'Cancel'",
+          "expected": "Popup closes; no changes are saved"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1040,
+        2093,
+        2094,
+        7468,
+        7486,
+        7502,
+        6443,
+        3561,
+        16613
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Dropped placeholder text and heading static-copy verification. Retained URL validation error, save flow, count label, and cancel behavior.",
+      "grill_status": "confirmed",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37202,
+      "title": "[Advanced Settings] Banner is not displayed on pages saved in Disable banner on specific pages",
+      "preconditions": "- Account is on Pro plan or higher\n- One or more URLs have been saved in 'Disable banner on specific pages'\n- User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Navigate to a URL that was saved in the 'Disable banner on specific pages' option",
+          "expected": "The cookie banner is not displayed on that page"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1038,
+        2095,
+        2096,
+        7469,
+        7487,
+        7503,
+        6444,
+        3560,
+        16612
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Condensed 11 steps to 1. Only behavioral assertion: banner absent on the specified URL.",
+      "grill_status": "skipped:external-url",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37203,
+      "title": "[Advanced Settings] Consent log toggle is enabled by default and controls whether consents are recorded",
+      "preconditions": "User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the Consent log toggle under Consent settings",
+          "expected": "Toggle is enabled by default"
+        },
+        {
+          "content": "Give consent on the user website",
+          "expected": "Consent is recorded on the Consent Log page"
+        },
+        {
+          "content": "Disable the Consent log toggle",
+          "expected": "Toggle is disabled"
+        },
+        {
+          "content": "Give consent on the user website again",
+          "expected": "Consent is not recorded on the Consent Log page"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1041,
+        2097,
+        2098,
+        7470,
+        7488,
+        7504,
+        6445,
+        3562,
+        16614
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Dropped static help-icon tooltip. Retained toggle default state and both enabled/disabled behavioral outcomes.",
+      "grill_status": "needs-manual-check",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37204,
+      "title": "[Advanced Settings] Subdomain consent sharing toggle is enabled by default with a re-scan link to Cookie Manager",
+      "preconditions": "Account is on Pro plan or higher; user is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the Subdomain consent sharing toggle under Consent settings",
+          "expected": "Toggle is enabled by default"
+        },
+        {
+          "content": "Click the 're-scan' link in the text below the toggle",
+          "expected": "The Cookie Manager page opens"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1042,
+        2099,
+        2100,
+        7471,
+        7489,
+        7505,
+        6446,
+        3563,
+        16615
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Dropped help-icon tooltip text. Retained toggle default state and re-scan link navigation.",
+      "grill_status": "fixed",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37205,
+      "title": "[Advanced Settings] Consent is shared with a subdomain when Subdomain consent sharing is enabled",
+      "preconditions": "- CookieYes installation code is installed on both the main domain and a subdomain\n- Subdomain consent sharing toggle is enabled\n- The subdomain has been scanned and its cookies appear in the Cookie List\n- User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Accept the cookie banner on the main domain",
+          "expected": "Consent is registered"
+        },
+        {
+          "content": "Navigate to the subdomain",
+          "expected": "The cookie banner does not reappear; consent from the main domain is recognised on the subdomain"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1048,
+        2101,
+        2102,
+        7472,
+        7490,
+        7506,
+        6447,
+        3567,
+        16619
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Condensed from 26 steps to 2 behavioral assertions. Moved subdomain installation and scan setup (steps 1\u201314 in source) to Preconditions.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37206,
+      "title": "[Advanced Settings] Renew user consents triggers the banner to reappear for all existing users and updates the Last renewal date",
+      "preconditions": "User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click 'Renew Now' under Renew user consents",
+          "expected": "A 'Renew user consents?' confirmation popup appears with Cancel and 'Renew Consent' buttons"
+        },
+        {
+          "content": "Click Cancel",
+          "expected": "The popup closes; no renewal occurs"
+        },
+        {
+          "content": "Click 'Renew Now' again and click 'Renew Consent' in the popup",
+          "expected": "Old consents are invalidated; the cookie banner reappears on the user website; the 'Last renewal' date updates to the current date and time"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1043,
+        2103,
+        2104,
+        7473,
+        7491,
+        7507,
+        6448,
+        3564,
+        16616
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Dropped help-icon tooltip and 'Last renewed: Not renewed yet' initial display check. Retained cancel flow, renewal confirmation flow, banner re-display, and date update.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37207,
+      "title": "[Advanced Settings] Support GCM toggle is enabled by default; disabling it also disables Allow Google tags to fire before consent",
+      "preconditions": "User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the Support GCM toggle under the GCM section",
+          "expected": "Toggle is enabled by default; the help text below links to 'integrate Consent Mode with CookieYes' and 'displaying Google\u2019s Privacy Policy on your banner'"
+        },
+        {
+          "content": "Click the 'integrate Consent Mode with CookieYes' link in the help text",
+          "expected": "The CookieYes GCM integration documentation page opens in a new tab"
+        },
+        {
+          "content": "Disable the Support GCM toggle",
+          "expected": "GCM is disabled; the 'Allow Google tags to fire before consent' toggle also becomes disabled"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1044,
+        2105,
+        2106,
+        7474,
+        7492,
+        7508,
+        6449,
+        3565,
+        16617
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Dropped static body-text copy verification. Retained toggle default state, learn-more link navigation, and the cascading disable effect on the dependent toggle.",
+      "grill_status": "fixed",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37208,
+      "title": "[Advanced Settings] Allow Google tags to fire before consent toggle is disabled by default; enabling it fires tags before user consent",
+      "preconditions": "Support GCM toggle is enabled; user is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the 'Allow Google tags to fire before consent' toggle under GCM settings",
+          "expected": "Toggle is disabled by default"
+        },
+        {
+          "content": "Enable the toggle",
+          "expected": "Google tags fire before the user provides consent on the website"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        1045,
+        2107,
+        2108,
+        7475,
+        7493,
+        7509,
+        6450,
+        3566,
+        16618
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Dropped section-enumeration and static body-text steps. Retained toggle default state and enabled behavior.",
+      "grill_status": "confirmed",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37209,
+      "title": "[Advanced Settings] Check GCM status without GCM implementation shows 'Error: Consent tab empty'",
+      "preconditions": "- Google Consent Mode has not been implemented on the user's website\n- Support GCM toggle is enabled\n- User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click 'Check Now' under Check GCM status",
+          "expected": "Status briefly shows 'Checking' with a loader, then 'Last checked: [timestamp]' appears; error message 'Error: Consent tab empty' is shown"
+        },
+        {
+          "content": "Observe the error description",
+          "expected": "Reads: 'This error occurs when (i) GCM is not implemented on your website or (ii) when no consent data is collected. Here\u2019s how you can resolve this issue.'"
+        },
+        {
+          "content": "Click the 'resolve this issue' link",
+          "expected": "The GCM Troubleshooting documentation page opens"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8224,
+        8292,
+        8559,
+        9832,
+        16620
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor across Webapp Free/Trial with card/Wix. Condensed 9 steps to 3.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37210,
+      "title": "[Advanced Settings] Check GCM status after correct GCM implementation shows 'No error detected'",
+      "preconditions": "- Google Consent Mode is correctly implemented on the user's website\n- Support GCM toggle is enabled\n- User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click 'Check Now' under Check GCM status",
+          "expected": "'No error detected' appears; text reads: 'Good job! Google Consent Mode is configured correctly on your website.'"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8225,
+        8293,
+        8560,
+        9833,
+        16621
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor. Condensed 7 steps to 1.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37211,
+      "title": "[Advanced Settings] Check GCM status shows 'Error: Default consent not set' when the custom script is absent or incomplete",
+      "preconditions": "- GCM is configured in GTM without the CookieYes custom script (Method 2, custom script missing or incomplete)\n- Support GCM toggle is enabled\n- User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click 'Check Now'",
+          "expected": "Error message 'Error: Default consent not set' appears; description reads: 'This error occurs when (i) the default consent state is not defined or properly configured in the CookieYes CMP Tag in GTM, or (ii) when using the Custom Script method, the custom script for GCM is missing or incomplete. Here\u2019s how you can resolve this issue.'"
+        },
+        {
+          "content": "Click the 'resolve this issue' link",
+          "expected": "The GCM Troubleshooting documentation page opens"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8226,
+        8294,
+        8561,
+        9834,
+        16622
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor. Condensed 8 steps to 2.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37212,
+      "title": "[Advanced Settings] Check GCM status shows 'Error: Consent doesn't update' when consent preferences are not recorded",
+      "preconditions": "- GCM is configured but consent preference updates are not firing correctly\n- Support GCM toggle is enabled\n- User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click 'Check Now'",
+          "expected": "Error message 'Error: Consent doesn\u2019t update' appears; description reads: 'This error occurs when the consent preferences of users are not properly updated or recorded. Here\u2019s how you can resolve this issue.'"
+        },
+        {
+          "content": "Click the 'resolve this issue' link",
+          "expected": "The GCM Troubleshooting documentation page opens"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8227,
+        8295,
+        8562,
+        9835,
+        16623
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor. Precondition context added from case title (source preconditions were empty). Condensed 8 steps to 2.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37213,
+      "title": "[Advanced Settings] Check GCM status shows 'Error: Default consent set too late' when an analytics tag loads before the CookieYes custom script",
+      "preconditions": "- GCM is implemented with Method 2 and the Google Analytics Gtag script is placed above the CookieYes custom script in GTM\n- Support GCM toggle is enabled\n- User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click 'Check Now'",
+          "expected": "Error message 'Error: Default consent set too late' appears; description reads: 'This error occurs when (i) other tags fire before the default consent is set, or (ii) Google Tag Gateway (GTG) is active on your site, causing tags to load before the consent banner initializes. Here\u2019s how you can resolve this issue.'"
+        },
+        {
+          "content": "Click the 'resolve this issue' link",
+          "expected": "The GCM Troubleshooting documentation page opens"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8228,
+        8296,
+        8563,
+        9836,
+        16624
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor. Condensed 8 steps to 2.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37214,
+      "title": "[Advanced Settings] Check GCM status shows 'Scan failed' when the website URL is invalid or inaccessible",
+      "preconditions": "- The website URL registered with CookieYes is invalid or the site is inaccessible\n- Support GCM toggle is enabled\n- User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click 'Check Now'",
+          "expected": "Error message 'Scan failed' appears; description reads: 'The scan couldn\u2019t be completed due to an unexpected error. Please try again or check out this troubleshooting guide.'"
+        },
+        {
+          "content": "Click the 'troubleshooting guide' link",
+          "expected": "The 'Why Does the Cookie Scan for My Website Fail?' documentation page opens"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8229,
+        8297,
+        8564,
+        9837,
+        16625
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor. Condensed 8 steps to 2.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37215,
+      "title": "[Advanced Settings] GCM Debug Mode without GCM implementation shows 'No Consent Mode data found' in the console",
+      "preconditions": "- Google Consent Mode is not implemented on the user's website\n- GCM Debug Mode toggle is enabled\n- User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Enable the Debug Mode toggle under the GCM section",
+          "expected": "Toggle is enabled"
+        },
+        {
+          "content": "Open the user website in a browser with DevTools open",
+          "expected": "The browser console shows the message 'No Consent Mode data found'"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8268,
+        8299,
+        8566,
+        9839,
+        16626
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor. Retained toggle enable and console output assertion.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37216,
+      "title": "[Advanced Settings] GCM Debug Mode with correct implementation shows all consent categories as denied with 'Consent mode states were set correctly'",
+      "preconditions": "Google Consent Mode is correctly implemented on the user's website; GCM Debug Mode toggle is enabled",
+      "steps": [
+        {
+          "content": "Open the user website in a browser with DevTools open",
+          "expected": "The browser console shows each consent category (ad_storage, analytics_storage, etc.) with Default: denied and Update: denied, followed by the message 'Consent mode states were set correctly.'"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8272,
+        8298,
+        8565,
+        9838,
+        16627
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor. Console output is the key assertion \u2014 all 7 storage categories default/update denied + success message.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37217,
+      "title": "[Advanced Settings] GCM Debug Mode with 'Default consent not set' shows consent categories as Default: missing",
+      "preconditions": "GCM is set up without a default consent state configured (custom script missing); GCM Debug Mode toggle is enabled",
+      "steps": [
+        {
+          "content": "Open the user website in a browser with DevTools open",
+          "expected": "The browser console shows each consent category with Default: missing (not denied), and the warning 'Some categories are missing a default value.'"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8269,
+        8300,
+        8567,
+        9840,
+        16628
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor. Key distinction from case 25: 'Default: missing' instead of 'Default: denied' and the specific warning message.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37218,
+      "title": "[Advanced Settings] GCM Debug Mode with 'Default consent set too late' shows a tag-fired-before-consent warning in the console",
+      "preconditions": "GCM is implemented with Method 2 with the Analytics tag loading before the CookieYes custom script; GCM Debug Mode toggle is enabled",
+      "steps": [
+        {
+          "content": "Open the user website in a browser with DevTools open",
+          "expected": "The browser console shows each consent category with Default: denied and Update: denied, and the warning 'A tag read consent before a default was set.'"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8270,
+        8301,
+        8568,
+        9841,
+        16629
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor. Key distinction from case 25: same denied values but a warning replaces the success message.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37219,
+      "title": "[Advanced Settings] GCM Debug Mode with 'Consent doesn't update' shows Update: missing for all consent categories",
+      "preconditions": "GCM is configured but consent update events are not firing; GCM Debug Mode toggle is enabled",
+      "steps": [
+        {
+          "content": "Open the user website in a browser with DevTools open",
+          "expected": "The browser console shows each consent category with Default: denied but Update: missing (not denied), and the message 'Consent mode states were set correctly.'"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8271,
+        8302,
+        8569,
+        9842,
+        16630
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor. Key distinction from case 25: 'Update: missing' instead of 'Update: denied'. Note: 'set correctly' message appears in source despite the update issue \u2014 reproduced as-is.",
+      "grill_status": "skipped:destructive-precondition",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37220,
+      "title": "[Advanced Settings] Support Microsoft UET Consent Mode toggle is enabled by default and controls whether consent is passed to UET tag events",
+      "preconditions": "User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the 'Support Microsoft UET Consent Mode' toggle under Microsoft consent mode & Clarity API integration",
+          "expected": "Toggle is enabled by default"
+        },
+        {
+          "content": "Click the 'Learn more' link",
+          "expected": "The UET Consent Mode documentation page opens in a new tab"
+        },
+        {
+          "content": "Verify that user consent is passed to UET tag events while the toggle is enabled",
+          "expected": "Consent is communicated correctly to UET tags"
+        },
+        {
+          "content": "Disable the toggle",
+          "expected": "User consent is no longer passed to Microsoft UET tag events"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        12720,
+        12722,
+        12723,
+        12726,
+        12732,
+        16695
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor across Webapp Free/Trial/Wix. Dropped static info-text copy. Retained default state, learn-more link, enabled behavior, and disabled behavior.",
+      "grill_status": "needs-manual-check",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37221,
+      "title": "[Advanced Settings] Microsoft Clarity Consent API integration toggle is enabled by default and controls whether user data is sent to Clarity before consent",
+      "preconditions": "User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the 'Microsoft Clarity Consent API integration' toggle under Microsoft consent mode & Clarity API integration",
+          "expected": "Toggle is enabled by default"
+        },
+        {
+          "content": "Click the 'Clarity Consent API' link",
+          "expected": "The Clarity Consent API documentation page opens"
+        },
+        {
+          "content": "Verify that user interaction data is only passed to Clarity Dashboard after user consent while the toggle is enabled",
+          "expected": "Data is sent only post-consent"
+        },
+        {
+          "content": "Disable the toggle",
+          "expected": "User data is passed to Clarity Dashboard regardless of cookie consent"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        12721,
+        12724,
+        12725,
+        12727,
+        12733,
+        16696
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor across plan variants. (Note: C12725 has a typo in source \u2014 missing closing ']' in role prefix \u2014 not reproduced in v2.)",
+      "grill_status": "needs-manual-check",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37222,
+      "title": "[Advanced Settings] Static IP Scan is locked with a premium icon on non-Ultimate plans",
+      "preconditions": "Account is on a plan lower than Ultimate; user is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the 'Static IP scan' option under Scan settings",
+          "expected": "A premium icon is visible next to the option; the status dropdown is disabled"
+        },
+        {
+          "content": "Hover over the premium icon",
+          "expected": "Tooltip reads: 'Upgrade to the Ultimate plan to unlock this feature.'"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8273,
+        8303,
+        8570,
+        9843,
+        12738,
+        16667
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Collapsed AO/Admin/Editor across plan variants. Dropped help-text body copy.",
+      "grill_status": "needs-manual-check",
+      "plan_gate_flag": true,
+      "section_id": 1793
+    },
+    {
+      "id": 37223,
+      "title": "[Advanced Settings] Static IP Scan can be enabled and disabled via the status dropdown on Ultimate plan",
+      "preconditions": "Account is on the Ultimate plan; user is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Click the Static IP scan status dropdown",
+          "expected": "'Enabled' and 'Disabled' options are shown; 'Disabled' is selected by default"
+        },
+        {
+          "content": "Select 'Enabled' and click the Confirm icon",
+          "expected": "Static IP scan is enabled; subsequent scans are initiated from a static IP address"
+        },
+        {
+          "content": "Select 'Disabled' from the dropdown and click the Confirm icon",
+          "expected": "Static IP scan is disabled"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        8291,
+        8304,
+        8571,
+        9844,
+        12739,
+        16668
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Condensed 13 steps to 3. Retained dropdown options, default state, and enable/disable behavioral outcomes.",
+      "grill_status": "confirmed",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37224,
+      "title": "[Advanced Settings] Subdomain consent sharing is locked with a premium icon on non-Pro plans",
+      "preconditions": "Account is on a plan lower than Pro; user is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the Subdomain consent sharing option under Consent settings",
+          "expected": "A premium icon is shown next to the option label; the toggle is disabled and unchecked"
+        },
+        {
+          "content": "Hover over the premium icon",
+          "expected": "Tooltip reads: 'Upgrade to Pro or a higher plan to unlock this feature.'"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Gap found during grill: no locked-state case existed for Subdomain consent sharing on non-Pro plans, unlike Disable banner on specific pages which has Case 9.",
+      "grill_status": "suggested",
+      "plan_gate_flag": true,
+      "section_id": 1793
+    },
+    {
+      "id": 37225,
+      "title": "[Advanced Settings] Link to your list of sites validates input and saves a URL",
+      "preconditions": "- Account is on Pro plan or higher\n- Subdomain consent sharing toggle is enabled\n- User is on the Advanced Settings page",
+      "steps": [
+        {
+          "content": "Observe the 'Link to your list of sites' option under Consent settings",
+          "expected": "Label reads 'Not set'; an edit icon and a tooltip icon are shown; subtext reads: 'Provide a link to a page (e.g. your cookie or privacy policy) that lists the websites or subdomains covered by user consent.'; tooltip on the info icon reads: 'This will be linked in the first layer of your banner if you share consent across subdomains. Required for TCF 2.2 compliance.'"
+        },
+        {
+          "content": "Click the edit icon",
+          "expected": "'Add a URL listing covered sites' modal opens with description 'Enter the URL of a page (e.g. your cookie or privacy policy) where users can see which websites or subdomains their consent applies to.'; a URL text field with placeholder 'https://www.example.com' is displayed; 'Save changes' is disabled; 'Cancel' is active"
+        },
+        {
+          "content": "Click 'Cancel'",
+          "expected": "Modal closes; option still shows 'Not set'"
+        },
+        {
+          "content": "Click the edit icon again, enter an invalid URL, and click 'Save changes'",
+          "expected": "'Please enter a valid URL' error message is displayed; modal remains open"
+        },
+        {
+          "content": "Clear the field, enter a valid URL (e.g. https://www.example.com/privacy), and click 'Save changes'",
+          "expected": "Modal closes; the URL is displayed as a clickable link next to the option label; the subtext below the option disappears"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "rewrite_notes": "Gap found during grill \u2014 no source Suite 6 case existed for this option. Re-grilled on Pro account after enabling Subdomain consent sharing toggle. All steps verified via Playwright. Note: edit button is disabled (section-disabled class) when Subdomain consent sharing is OFF \u2014 covered by precondition. API failure and downgraded-plan disabled state not verified (destructive precondition).",
+      "grill_status": "fixed",
+      "plan_gate_flag": false
+    },
+    {
+      "id": 37226,
+      "title": "[Advanced Settings] IAB TCF first-layer banner renders 'subdomains' as a link to the configured URL",
+      "preconditions": "- Account is on Pro plan or higher\n- Subdomain consent sharing is enabled\n- A URL is saved in 'Link to your list of sites' (Advanced Settings)\n- Banner regulation is GDPR (IAB TCF v2.3)",
+      "steps": [
+        {
+          "content": "Navigate to Cookie Banner and observe the first-layer preview",
+          "expected": "The sentence 'Please note that your choices apply across all our subdomains' is visible; the word 'subdomains' is rendered as a clickable hyperlink"
+        },
+        {
+          "content": "Inspect the href of the 'subdomains' link",
+          "expected": "The href matches the URL saved in 'Link to your list of sites' in Advanced Settings"
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Gap found during Playwright grill \u2014 verified on Pro account with GDPR (IAB TCF v2.3) regulation. 'subdomains' link href confirmed to equal the URL set in Link to your list of sites.",
+      "grill_status": "confirmed"
+    }
+  ]
+}

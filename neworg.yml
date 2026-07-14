@@ -1,0 +1,168 @@
+- generic:
+  - generic:
+    - button:
+      - img
+  - generic:
+    - generic:
+      - generic:
+        - banner:
+          - generic:
+            - generic:
+              - button:
+                - img
+            - generic:
+              - button:
+                - generic: Become a partner
+                - img
+              - button:
+                - generic: CookieYes Documentation
+                - img
+              - generic:
+                - generic:
+                  - img
+              - button:
+                - generic:
+                  - img
+                - img
+        - navigation:
+          - generic:
+            - button:
+              - img
+              - generic: Back to Dashboard
+            - generic:
+              - list:
+                - listitem:
+                  - link:
+                    - /url: /settings/organizations-and-sites
+                    - text: Organisations & Sites
+                - listitem:
+                  - link:
+                    - /url: /settings/team
+                    - text: Team
+                - listitem:
+                  - link:
+                    - /url: /settings/billing
+                    - text: Billing & Invoices
+                - listitem:
+                  - link:
+                    - /url: /settings/mcp-access
+                    - text: MCP access
+                - listitem:
+                  - link:
+                    - /url: /settings/notifications
+                    - text: Notifications
+                - listitem:
+                  - link:
+                    - /url: /settings/account
+                    - text: My account
+        - separator
+        - main:
+          - generic:
+            - generic:
+              - generic:
+                - heading [level=1]: Organisations & Sites
+                - group:
+                  - generic: Action buttons
+                  - button [disabled]: + New site
+                  - button: + New organisation
+              - generic:
+                - search:
+                  - button:
+                    - img
+                    - generic: Submit Search
+                  - textbox:
+                    - /placeholder: Search by website URL
+            - list:
+              - listitem:
+                - article:
+                  - generic:
+                    - generic:
+                      - generic: ACCOUNT OWNER
+                      - generic: "Acc ID: 1731"
+                    - generic:
+                      - heading [level=2]: jacksnickel+ultimatetest@gmail.com
+                      - generic:
+                        - generic: MCP enabled
+                        - generic:
+                          - button: Transfer ownership
+                  - region:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - heading [level=3]:
+                            - button [expanded]:
+                              - generic:
+                                - generic:
+                                  - img
+                                  - heading [level=4]: Jacksnickel+ultimatetest's organisation
+                                  - generic: "Org ID: 1751"
+                                - button:
+                                  - button:
+                                    - img
+                                    - generic: Open organization menu
+                          - region:
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - table:
+                                    - rowgroup:
+                                      - row:
+                                        - columnheader: Site URL
+                                        - columnheader: Site name
+                                        - columnheader: Created date
+                                        - columnheader: Plan
+                                        - columnheader: Next renewal
+                                        - columnheader
+                                        - columnheader
+                                        - columnheader
+                                        - columnheader
+                                    - rowgroup:
+                                      - row:
+                                        - cell:
+                                          - generic:
+                                            - generic:
+                                              - generic: sbl-test.vercel.app
+                                        - cell:
+                                          - generic: Jdc
+                                        - cell:
+                                          - generic: July 03, 2026
+                                        - cell:
+                                          - generic:
+                                            - generic:
+                                              - generic: Ultimate
+                                            - generic:
+                                              - text: 55 USD
+                                              - generic: / Monthly
+                                            - button: Switch to Annual - Save 17%
+                                        - cell:
+                                          - generic:
+                                            - generic: August 03, 2026
+                                        - cell
+                                        - cell:
+                                          - generic:
+                                            - button: Change plan
+                                        - cell:
+                                          - button: Manage site
+                                        - cell:
+                                          - generic:
+                                            - button:
+                                              - img
+    - region "Notifications alt+T"
+  - iframe [ref=f9e281]:
+    
+  - dialog "Add new organisation" [ref=f9e448]:
+    - paragraph [ref=f9e450]: Add new organisation
+    - generic [ref=f9e451]:
+      - paragraph [ref=f9e452]: You can group sites within an organisation as well as provide organisation-wide access to users
+      - generic [ref=f9e453]:
+        - img [ref=f9e454]
+        - paragraph [ref=f9e457]: "The new organisation will be added to your own account (Acc ID: 1731)."
+      - generic [ref=f9e458]:
+        - generic [ref=f9e459]:
+          - generic [ref=f9e460]: Organisation name*
+          - textbox "Organisation name*" [active] [ref=f9e461]:
+            - /placeholder: My organisation
+        - generic [ref=f9e462]:
+          - button "Cancel" [ref=f9e463] [cursor=pointer]
+          - button "Add organisation" [disabled] [ref=f9e464]:
+            - generic [ref=f9e465]: Add organisation

@@ -163,6 +163,44 @@ The amount of structural context needed scales with the complexity of the compon
 - Complex card with multiple sub-sections: describe each sub-section and what it contains
 - Modal: name the tabs, the primary content, and the action buttons
 
+### 2e — Formatting multi-condition preconditions
+
+When a precondition has **three or more distinct conditions**, write each as a bullet point —
+not as a semicolon-separated run-on string. Two conditions as a semicolon string is fine.
+
+**Before (hard to parse):**
+```
+Account is on Pro plan or higher; GCM has not been implemented on the user's website; Support GCM toggle is enabled; user is on the Advanced Settings page
+```
+
+**After (scannable):**
+```
+- Account is on Pro plan or higher
+- GCM has not been implemented on the user's website
+- Support GCM toggle is enabled
+- User is on the Advanced Settings page
+```
+
+When a precondition includes a **sequential setup procedure** (e.g. API calls that must run
+in a specific order), write it as a numbered list under an intro sentence. End with the
+navigation state as a standalone line.
+
+```
+Pageview limit has been triggered for the test site:
+1. Call `GET /api/migrate/set-pageviews?pageviews={plan_limit}&website_id={website_id}`
+2. Call `GET /api/test/execute-scheduled-task?name=pageview-limit-reached-actions`
+3. Confirm that `banner_disable_at` is now set in the Pageviews table for the site
+4. Edit the `banner_disable_at` value to yesterday's date
+5. Call `GET /api/test/execute-scheduled-task?name=pageview-banner-disable`
+
+User is on the Advanced Settings page
+```
+
+The same principle applies to **expected results** — see section 3 "Multi-element expected
+results" for the mirror rule.
+
+---
+
 ### 2b — Chained case references
 
 Suite 6 uses `Go to [CXXX]` as step 1. Derive the actual app state from the referenced
@@ -311,6 +349,33 @@ Drop any step that verifies exact tooltip text, help text, or informational labe
 | `Verify the text when hovering the help icon: "The selected template (opt-in banner) supports GDPR (EU & UK), LGPD (Brazil)..."` | Static copy — not a logic regression |
 | `Verify the text when hovering the upgrade icon: "Upgrade to Pro or a higher plan..."` | Static copy |
 
+### Quoted on-page text — always verbatim (MANDATORY override)
+
+The "drop static copy" rule above is about whether to have a step verifying a piece of static
+text at all — layout labels, tooltip help text, and the like are often not worth a dedicated
+assertion. It is not license to be inexact about text an expected result *does* choose to quote.
+
+**The rule has one test, with no category filter: does this expected result assert that specific
+text is visible on the page?** If yes — a banner, a status badge, a button label, a dialog
+message, a tooltip, an email body, a page title, anything in quotes claiming "the app shows X" —
+that quote **overrides** the drop-copy rule above and must reproduce the text
+**character-for-character**, confirmed against the live app (during grilling) or the Suite 6
+source case (if grilling hasn't happened yet). Do not decide a quote "doesn't matter enough" to
+be exact because it isn't a legal disclosure — a status badge that says "Aborted" and a case that
+claims it says "Abort" is wrong regardless of whether "Aborted" is legally significant. If the
+case is going to name the text, name it correctly.
+
+This is not a mandate to quote everything — most expected results describe an outcome or a state
+change without quoting specific text ("the popup should close", "the toggle should be off by
+default"), and those aren't touched by this rule at all. The rule only activates once a case has
+already chosen to make a specific string part of its assertion. At that point, exactness is not
+optional and is not filtered by how important the string seems.
+
+**This overrides the default compression bias for exactly the quoted portion.** Everywhere else
+in this document, when in doubt, condense. For a quote already committed to an expected result,
+when in doubt, keep it exact — do not fold it into a paraphrase to hit the 4–8 step target in
+section 3. A step count violation here is a smell to note, not a reason to reword a quote.
+
 ### Duplicate assertions within a case
 
 When the same assertion appears more than once (common in Suite 6), keep the first
@@ -368,6 +433,50 @@ section 3:
 | `Verify display of "Forgot your password?" link` | Verify the "Forgot your password?" link is present. | "Forgot your password?" link should be visible and interactive. |
 | `Verify display of "Sign Up" link` | Verify the "Sign Up" link is present. | "Sign Up" link should be visible and interactive. |
 
+### Pop-ups and modals — never a standalone "display of" case (MANDATORY)
+
+The element-presence rewrite above applies to **full pages you land on** (login, sign-up,
+confirmation, a standalone request page). It does **not** apply to a pop-up or modal that
+opens mid-flow. A modal never gets its own "Display of X pop-up" case.
+
+The page-vs-pop-up test: *do you navigate to it (a page), or does it open on top of the
+current page during a flow (a modal)?* Pages get a render case; modals do not.
+
+Instead, a modal's coverage is split between two places:
+
+1. **Its appearance is an expected result** of the action that opens it — verified inline on
+   that step, naming the key controls.
+   ```
+   Click "+ New organization".
+   → The Add Organisation pop-up should appear with an organisation-name field and
+     Add and Cancel buttons.
+   ```
+2. **Its structure is a Precondition** for any case that acts *inside* it (per §2d).
+   ```
+   The Transfer site modal is open, showing a Destination organization dropdown and
+   Transfer / Cancel buttons.
+   ```
+
+So a Suite 6 pair like `Display of "Add organization" pop-up` + `Functionality of "Add
+Organisation" button` collapses to **one** v2 case: the functional case, with the pop-up's
+appearance as an expected result and its structure in the precondition. Do not emit a
+separate render case for the pop-up.
+
+| Suite 6 case | Action |
+|---|---|
+| `Display of "Add new organization" pop-up` | **Fold** into the "+ New organization" case as an expected result |
+| `Display of "Edit Organisation name" pop-up` | **Fold** into the rename case; structure → precondition |
+| `Display of "Delete organization?" pop-up` | **Fold** into the delete case as an expected result |
+| `Display of "Transfer site to another organization" modal` | **Fold** into the first case acting in the modal; structure → precondition |
+| `Display of Site transfer login page` | **Keep** — it is a full page, not a modal |
+| `Display of "Website transfer request" page` | **Keep** — it is a full page, not a modal |
+
+> The Organisation and transfer examples above come from **Organisations & Sites**. That
+> section's sub-structure (Organisation Management / Site Management / Site Transfer) and its
+> placement/routing rules are defined in `testrail-suite-v2.md` — see the section-structure
+> tree under `10. Profile & Account` and the "Where specific scenario types live" table.
+> Structure and placement live in the spec, not here.
+
 ---
 
 ## 5. Behavioural variants vs. style duplicates
@@ -410,11 +519,21 @@ include it as a step in the feature section case. Extract it.
 - Upgrade icon / premium badge visible in feature UI → `11. Billing & Upgrade > Plan Gates`
 - Nudge button destination (clicking opens trial/pricing page) → `11. Billing & Upgrade > Free Plan` or `Paid Plan`
 
+**Mark these cases with `plan_gate_flag: true` in the draft.** `/migrate-section` uses this
+flag to route them to `11. Billing & Upgrade > Plan Gates` automatically — they are excluded
+from the feature section's publish set and held for the Plan Gates migration.
+
 **Examples extracted from this section:**
 - Upgrade icon on "GDPR & US State Laws" law option (C299 step 11) → Plan Gates
 - Upgrade icons on EU Countries & UK and Select Countries geo-target options (C306 step 9) → Plan Gates
 
 The feature section case tests only the behaviour available to a user who has access.
+
+**Exception — the section's render/display case.** If the feature section owns a page or card
+of its own (§11), its lead "renders correctly" case may note, as a factual statement, that the
+feature is plan-gated and point to Plan Gates — see §11 "Plan-gated render cases". That is a
+description of the page, not a re-test of the locked state, so it does not need
+`plan_gate_flag` and is not extracted.
 
 ---
 
@@ -508,3 +627,71 @@ and US State Laws panels available simultaneously, switchable via the Customize 
 | US State Laws | `Law selector set to US State Laws.` |
 | GDPR & US State Laws, viewing GDPR panel | `Law selector set to GDPR & US State Laws. Customize sub-dropdown set to GDPR.` |
 | GDPR & US State Laws, viewing US State Laws panel | `Law selector set to GDPR & US State Laws. Customize sub-dropdown set to US State Laws.` |
+
+---
+
+## 11. Case ordering within a section
+
+The order of cases in a draft **is** the published order — `batch-add-cases` posts in array
+sequence and TestRail assigns `display_order` by insertion. Nothing downstream reorders
+(neither `/migrate-section` nor the API). So the draft array must already be in reading order;
+`/fetch-section` Step 3b enforces this when producing a draft, and manual edits must preserve it.
+
+### Ordering rule
+
+1. **Cluster by feature sub-area**, in the order a user encounters them on the page. If the v2
+   spec defines sub-sections for the area, use that sub-section order (e.g. Organisations &
+   Sites → Organisation Management → Site Management → Transfer flows).
+2. **Within each cluster, order by lifecycle:**
+   - **Render/display case first** — the "page/card renders with all controls" case leads.
+   - then **happy-path** create / primary action,
+   - then **input variants and validation** (valid → duplicate → invalid → empty → over-length),
+   - then **cancel / dismiss** paths,
+   - then **destructive actions** (delete) last in the cluster.
+3. **Multi-phase flows** (e.g. site transfer, password reset) stay in natural flow order
+   (initiate → pending → recipient → post-action) rather than the lifecycle order above.
+4. **`permission_flag` cases go last**, after all functional cases (they route out to section 14).
+
+### The render-first rule is conditional, not absolute
+
+"Render case first" applies **only to a section/cluster that owns a page or surface of its
+own.** It does **not** mean every sub-section must contain a render case:
+
+- **Validation-only sub-sections** (e.g. `Sign Up > Core`) have no page of their own — their
+  render case lives in a sibling (e.g. `Sign Up > Standard (Free)`). Lead with the first
+  functional/validation case.
+- **Sub-tabs** whose page render is owned by the parent (e.g. `Cookie Banner > General`
+  inherits the "Customization page renders" case) do not repeat it.
+- **Genuine plan-gated stubs** (a bare upgrade icon/button with no persistent card or page
+  behind it) and **single-case sections** have no standalone render surface — order by
+  whatever they do contain.
+- **A plan-gated feature that owns a real page or card** (e.g. `Custom CSS` — the Consent
+  Template + CSS textarea card exists regardless of plan state, just enabled or disabled)
+  still gets a render-first case. See "Plan-gated render cases" below.
+
+When a cluster does own a page/card/row surface, its render case must lead. When it doesn't,
+do not invent one just to satisfy the rule (that would be a standalone display case — see §4).
+
+### Plan-gated render cases
+
+When the render-first case belongs to a section that is plan-gated, its expected result must
+note, as a plain factual statement, that the feature is plan-gated and which plans have
+access — pointing to `11. Billing & Upgrade > Plan Gates` for the full locked-state
+verification. This is a one-line mention, not a re-verification: the detailed lock/nudge
+behavior (premium icon, disabled control, upgrade tooltip) stays exclusively in Plan Gates
+per §6. Do not set `plan_gate_flag` on this case — it is a normal feature-section case, not
+one being routed out.
+
+Split the render case into (at least) two steps: one for the page structure, one for the
+plan-gating fact — do not fold both into a single run-on expected result. Use a `-` bulleted
+list in the expected result when stating per-plan state, matching the style already used for
+multi-part expected results elsewhere (e.g. Plan Gates cases).
+
+Example (Custom CSS):
+> 1. Open the Custom CSS section under Cookie Banner.
+>    → The section displays a Consent Template card at the top and an "Add your custom css
+>    here" card with a CSS text area below it.
+> 2. Note the plan-gating state of the CSS text area.
+>    → - Basic plan and higher: text area is enabled and editable.
+>      - Free plan: text area is locked with a premium icon (see `11. Billing & Upgrade >
+>      Plan Gates` for the locked-state verification).

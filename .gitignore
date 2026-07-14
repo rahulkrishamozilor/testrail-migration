@@ -25,6 +25,9 @@ ENV/
 .claude/settings.local.json
 .cursor/
 
+# Playwright MCP output (screenshots, traces)
+.playwright-mcp/
+
 # OS
 .DS_Store
 Thumbs.db
