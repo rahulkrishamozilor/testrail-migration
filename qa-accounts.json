@@ -1,0 +1,59 @@
+{
+  "accounts": {
+    "free": {
+      "email": "rahulkrishna+freeplansite@mozilor.com",
+      "password": "Rahul123@",
+      "plan": "Free",
+      "notes": "Clean account, no domains or cookies added"
+    },
+    "basic": {
+      "email": "rahulkrishna+basicuser@mozilor.com",
+      "password": "Rahul123@",
+      "plan": "Basic",
+      "notes": "Actice paid trial account"
+    },
+    "pro": {
+      "email": "jacksnickel+protest@gmail.com",
+      "password": "Rahul123@",
+      "plan": "Pro",
+      "notes": "Active paid subscription"
+    },
+    "ultimate": {
+      "email": "jacksnickel+ultimatetest@gmail.com",
+      "password": "Rahul123@",
+      "plan": "Ultimate",
+      "notes": "Active paid ultimate subscription"
+    },
+    "generaltest": {
+      "email": "rahulkrishna+vultest@mozilor.com",
+      "password": "Rahul123@",
+      "plan": "Ultimate",
+      "env": "qa1.kilohub.com",
+      "notes": "Active paid subscription, use for scanning and pageview, consent log cases checking like a regular user who have an active banner running on site"
+    },
+    "adminuser": {
+      "email": "rahulkrishna+mcp3@mozilor.com",
+      "password": "Rahul123@",
+      "plan": "Basic",
+      "notes": "Admin user who have admin access to an organisation with paid basic plan website"
+    },
+    "editoruser": {
+      "email": "rahulkrishna+editoruser@mozilor.com",
+      "password": "Rahul123@",
+      "plan": "Basic",
+      "notes": "Editor user who have editor access to an organisation with paid basic plan website. CAUTION (2026-07-10): using this account as the recipient/new-owner in an account-ownership-transfer test silently upgrades its role to Admin -- the app's documented 'previous owner retains Admin access' behavior applies to this account too if it later transfers ownership away again. Verify via Team page (or GET /api/v2/user -> organization_users[].role_slug) before trusting it as a true Editor for permission tests; role was corrected back to 'editor' via Team > Change role on 2026-07-10."
+    },
+    "disposableuser": {
+      "email": "rahulkrishna+disposableuser@mozilor.com",
+      "password": "Rahul123@",
+      "plan": "This account will have multiple webistes with different plans",
+      "notes": "Disposable user account who will be used to test the website with different plans. This account can be mutated to have different plans and websites."
+    },
+    "multiplewebsitesuser": {
+      "email": "rahulkrishna+hud@mozilor.com",
+      "password": "Rahul123@",
+      "plan": "This account will have multiple webistes with pagination on organisation and sites page also suspended sites will be shown in the sites page",
+      "notes": "Multiple websites user account who will be used to test the website with pagination on organisation and sites page also suspended sites will be shown in the sites page"
+    }
+  }
+}

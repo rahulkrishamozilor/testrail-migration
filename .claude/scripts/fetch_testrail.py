@@ -1303,8 +1303,9 @@ def log_gap(ticket_id: str, description: str, context: str | None, workaround: s
 
 # ── Usage ──────────────────────────────────────────────────────────────────────
 
-def print_usage() -> None:
-    stderr(f"""Usage: python fetch_testrail.py <subcommand> [args]
+def print_usage(to_stdout: bool = False) -> None:
+    write = sys.stdout.write if to_stdout else sys.stderr.write
+    write(f"""Usage: python fetch_testrail.py <subcommand> [args]
 
 Subcommands:
   get-projects
@@ -1397,7 +1398,7 @@ Notes:
     but it's not actually live in that section anymore). completeness_no_section_id fires if the
     file has no top-level section_id to check against. --verify-routing and --verify-completeness
     can be combined or used independently. Exits non-zero if any file has errors, so it can gate
-    a workflow step.""")
+    a workflow step.\n""")
 
 
 # ── Entry point ────────────────────────────────────────────────────────────────
@@ -1408,6 +1409,10 @@ def main() -> None:
         sys.exit(EXIT_USAGE)
 
     subcmd = sys.argv[1]
+
+    if subcmd in ("-h", "--help", "help"):
+        print_usage(to_stdout=True)
+        sys.exit(EXIT_OK)
 
     workspace = find_workspace_root()
     load_env(os.path.join(workspace, ".env"))
