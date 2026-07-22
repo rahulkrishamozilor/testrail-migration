@@ -362,4 +362,15 @@ missing case(s) to their correct section or correcting `section_id` and re-runni
 
 After validation is clean, report every created case ID and the section each landed in.
 
+### 5e — Keep the ai-context manifest in sync
+
+`ai-context/manifest.json` lists every `cases-*.json`/`draft-*.json` filename in `ai-context/` —
+it exists because the daily `migration-status` dashboard routine fetches file content over
+`raw.githubusercontent.com` (the only host its sandbox's network policy allows) and has no way
+to list a directory otherwise. If this step 5c renamed `draft-<slug>.json` →
+`cases-<slug>.json`, or 5c-ii deleted a `draft-<slug>.json`, update
+`ai-context/manifest.json`'s `files` array to match reality (add the new `cases-<slug>.json`
+name, remove the deleted `draft-<slug>.json` name) and include it in the same commit. Skip this
+step only if no filename in `ai-context/` actually changed this run.
+
 Never create cases without explicit approval.

@@ -1,0 +1,25 @@
+{
+  "files": [
+    "cases-advanced-settings.json",
+    "cases-colours.json",
+    "cases-consent-log.json",
+    "cases-cookie-banner-content.json",
+    "cases-cookie-banner-general.json",
+    "cases-cookie-banner-layout.json",
+    "cases-cookie-manager.json",
+    "cases-cookie-policy-generator.json",
+    "cases-custom-css.json",
+    "cases-forgot-password.json",
+    "cases-general.json",
+    "cases-languages.json",
+    "cases-login.json",
+    "cases-my-account.json",
+    "cases-organisation-and-sites.json",
+    "cases-plan-gates-new.json",
+    "cases-privacy-policy-generator.json",
+    "cases-reports.json",
+    "cases-signup-core.json",
+    "cases-signup-standard-free.json",
+    "cases-team.json"
+  ]
+}
