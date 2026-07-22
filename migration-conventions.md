@@ -113,6 +113,23 @@ The divergence points are narrow. For every feature area, ask: does the role hav
 | `[Account Owner] [General] [GDPR] Functionality of "EU Countries & UK" option under "Geo-target banner" card` | `[Cookie Banner] Verify that selecting EU Countries & UK restricts the banner to EU/UK regions` |
 | `[Account Owner] [General] Functionality of empty "Select Countries" option notification` | `[Cookie Banner] Verify that publishing with no countries selected shows a validation error` |
 
+### When to quote a field/label name in the title
+
+Default to describing `<component>` in plain language ("the DPO contact-details field," "the
+custom data-transfer-safeguards field") — do not feel obliged to wrap every field reference in
+the title in quotes matching the on-page label. The §4 "always verbatim" rule governs *expected
+results that assert exact on-page text*; it does not extend to how a title names the field under
+test.
+
+Quote a label verbatim in the title only when the quoted text **is itself the identifying
+condition** — e.g. a specific answer option that triggers the behavior being tested (`Verify that
+the CCPA metrics-link field is required once "10 million or more California residents" = Yes`).
+There, the quote is load-bearing: without it, a reader can't tell which trigger the case means.
+A plain field reference doesn't have that ambiguity, so it doesn't need one.
+
+The exact on-page label still has to appear verbatim somewhere in the case — Preconditions or
+Steps — per §4. The title is just not the place that requirement applies to.
+
 ---
 
 ## 2. Preconditions
@@ -695,3 +712,43 @@ Example (Custom CSS):
 >    → - Basic plan and higher: text area is enabled and editable.
 >      - Free plan: text area is locked with a premium icon (see `11. Billing & Upgrade >
 >      Plan Gates` for the locked-state verification).
+
+---
+
+## 12. Reporting an app defect
+
+Applies whenever `/draft-section`, `/grill-section`, or `/audit-section` is about to write an
+`[APP DEFECT — verify]` or `[APP DEFECT — confirmed]` case, or flag one in `coverage-gaps.md`. A
+defect claim is a factual assertion about the live app, not a hunch — it gets the same evidentiary
+bar as a verbatim-text quote (§4), not a lower one.
+
+### The falsification check (mandatory before writing the claim)
+
+1. **Name the state that would disprove the hypothesis** — not the state that would be convenient
+   to confirm it. If the claim is "X stays broken regardless of plan/toggle state," the
+   disconfirming state is whichever plan/toggle combination should fix it if the app were working
+   correctly (e.g. "the plan tier where this content should unlock").
+2. **Re-open the raw evidence for that exact state at the moment of writing the claim** —
+   screenshot, snapshot, or direct re-check live. Do not write "confirmed unchanged across states
+   A/B/C" from memory of what earlier states showed; re-look at state C specifically, right before
+   the sentence gets written.
+3. **A state that couldn't have disproven the hypothesis is not corroborating evidence.** If a
+   toggle is unrelated to the mechanism in question (e.g. checking an EU/EEA toggle against a
+   CCPA-only gate), logging it as "reinforcing" the finding is padding, not verification — say
+   it's uninformative, or drop it from the writeup.
+4. **The sentence claiming the defect survives the strongest disconfirming check is the one to
+   scrutinize hardest**, precisely because it's doing the most persuasive work in the finding.
+
+### Marker semantics
+
+- `[APP DEFECT — verify]` — observed once, live, but the falsification check above has not been
+  fully run (e.g. a disconfirming state exists but wasn't reachable this pass). Say in the case's
+  authoring notes which state is still unchecked.
+- `[APP DEFECT — confirmed]` — the falsification check has been run and the disconfirming state
+  still failed to disconfirm it. Only use this label once that check has actually happened, not
+  once a pattern has merely repeated across several confirming-only observations.
+
+If the falsification check was skipped or the disconfirming state wasn't actually re-examined
+before writing the claim, downgrade to `[verify against live app]` or drop the defect framing
+entirely (e.g. it may be a documentation gap — a missing marker or stale spec — rather than an app
+bug) until the check is done.

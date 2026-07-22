@@ -169,7 +169,8 @@ def api_request(method: str, url: str, auth_header: str, body: Any = None, retri
 
         try:
             with urllib.request.urlopen(req, data=data, timeout=REQUEST_TIMEOUT) as resp:
-                return json.loads(resp.read())
+                raw = resp.read()
+                return json.loads(raw) if raw else None
         except urllib.error.HTTPError as e:
             status = e.code
             if status == 429:
@@ -1215,6 +1216,13 @@ def add_section(project_id: int, suite_id: int, name: str, parent_id, base: str,
     stderr(f"✓ add-section: id={data.get('id')}")
 
 
+def move_cases_to_section(section_id: int, suite_id: int, case_ids: list[int], base: str, auth: str) -> None:
+    body = {"suite_id": suite_id, "case_ids": case_ids}
+    api_request("POST", build_url(base, f"move_cases_to_section/{section_id}"), auth, body)
+    out({"section_id": section_id, "moved": len(case_ids), "case_ids": case_ids})
+    stderr(f"✓ move-cases-to-section: {len(case_ids)} case(s) → section {section_id}")
+
+
 def add_case(section_id: int, payload: dict[str, Any], base: str, auth: str) -> None:
     body = translate_case_fields(payload)
     data = api_request("POST", build_url(base, f"add_case/{section_id}"), auth, body)
@@ -1322,6 +1330,7 @@ Subcommands:
   dedup-check       <project_id> <suite_id> <default_section_id> --json-file <path> [--threshold N]
   validate-cases-file <path> [<path> ...] | --all  [--verify-routing] [--verify-completeness] [--project-id N --suite-id N]
   add-section      <project_id> <suite_id> <name> <parent_id>
+  move-cases-to-section <section_id> <suite_id> <case_ids_csv>
   add-case         <section_id> <json_payload>
   add-run          <project_id> <suite_id> <name> <case_ids_csv>
   add-results      <run_id> <json_payload>
@@ -1584,6 +1593,18 @@ def main() -> None:
         raw_parent = pos[3]
         parent_id = None if raw_parent.lower() in ("null", "none", "") else to_int(raw_parent, "parent_id")
         add_section(to_int(pos[0], "project_id"), to_int(pos[1], "suite_id"), pos[2], parent_id, base, auth)
+
+    elif subcmd == "move-cases-to-section":
+        require_positional(pos, 3, "move-cases-to-section <section_id> <suite_id> <case_ids_csv>")
+        case_ids = []
+        for token in pos[2].split(","):
+            n = token.strip()
+            try:
+                case_ids.append(int(n))
+            except ValueError:
+                stderr(f"Error: case_ids must be comma-separated integers, got {json.dumps(n)}")
+                sys.exit(EXIT_USAGE)
+        move_cases_to_section(to_int(pos[0], "section_id"), to_int(pos[1], "suite_id"), case_ids, base, auth)
 
     elif subcmd == "add-case":
         require_positional(pos, 2, "add-case <section_id> <json_payload>")

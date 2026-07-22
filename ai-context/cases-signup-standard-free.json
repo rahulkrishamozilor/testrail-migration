@@ -1,37 +1,102 @@
-[
-  {
-    "title": "[Sign Up] Verify that the signup page renders with all required fields and controls",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Verify the Email address field is present and marked as mandatory.", "expected": "Email address field should be visible and marked as a required field." },
-      { "content": "Verify the Website field is present and marked as mandatory.", "expected": "Website field should be visible and marked as a required field." },
-      { "content": "Verify the Password field is present and marked as mandatory.", "expected": "Password field should be visible and marked as a required field." },
-      { "content": "Verify the show/hide toggle (eye icon) is present on the Password field.", "expected": "Eye icon should be visible on the Password field." },
-      { "content": "Verify the Terms and Conditions & Privacy Policy checkbox is present.", "expected": "Checkbox with \"I accept the Terms and Conditions & Privacy Policy\" text should be visible and unchecked by default." },
-      { "content": "Verify the \"Get Started\" button is present.", "expected": "\"Get Started\" button should be visible and interactive." },
-      { "content": "Verify the \"Log In\" link is present.", "expected": "\"Log In\" link should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Sign Up] Verify that the \"Log In\" link on the signup page navigates to the login page",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Click the \"Log In\" link.", "expected": "The Login page should be displayed." }
-    ]
-  },
-  {
-    "title": "[Sign Up] Verify that completing signup with valid credentials creates an account and sends a verification email",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Enter a valid email address, website URL, and password in the corresponding fields.", "expected": "User should be able to enter values in all fields." },
-      { "content": "Check the \"I accept the Terms and Conditions & Privacy Policy\" checkbox.", "expected": "Checkbox should be checked." },
-      { "content": "Click \"Get Started\".", "expected": "The onboarding / banner setup page should be displayed." },
-      { "content": "Verify that a verification email with subject \"Verify your email for CookieYes\" is received at the registered email address.", "expected": "Verification email should be received." }
-    ],
-    "custom_case_test_run_type": 2
-  }
-]
+{
+  "section": "01. Authentication > Sign Up > Standard (Free)",
+  "suite_id": 16,
+  "section_id": 1984,
+  "default_section_id": 1984,
+  "fetched_at": "2026-07-21T05:48:27Z",
+  "grilled_at": "2026-07-21T06:02:58Z",
+  "published_at": "2026-07-21T06:43:09Z",
+  "restore_note": "This section's cases were accidentally deleted from TestRail (section tree intact, 0 cases live). Restored from the last-known content of ai-context/cases-signup-standard-free.json, converted to draft schema for a fresh /grill-section pass before republishing. No original Suite 6 source_case_ids were recorded when this was first migrated.",
+  "cases": [
+    {
+      "id": 39714,
+      "title": "[Sign Up] Verify that the signup page renders with all required fields and controls",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Verify the Email address field is present.",
+          "expected": "Email address field should be visible (placeholder \"name@company.com\"). It carries no visual required marker (no asterisk, no `required`/`aria-required` attribute) — its mandatory nature is enforced only on submit."
+        },
+        {
+          "content": "Verify the Website field is present.",
+          "expected": "Website field should be visible (placeholder \"example.com\"). Like Email, it has no visual required marker; enforced only on submit."
+        },
+        {
+          "content": "Verify the Password field is present.",
+          "expected": "Password field should be visible (placeholder \"Enter at least 8 characters\"). Like the other fields, it has no visual required marker; enforced only on submit."
+        },
+        {
+          "content": "Verify the show/hide toggle (eye icon) is present on the Password field.",
+          "expected": "Eye icon should be visible on the Password field."
+        },
+        {
+          "content": "Verify the Terms and Privacy Policy checkbox is present.",
+          "expected": "Checkbox with the text \"I agree to the Terms and acknowledge the Privacy Policy\" should be visible and unchecked by default. \"Terms\" and \"Privacy Policy\" are separate links (to cookieyes.com/terms-and-conditions/ and cookieyes.com/privacy-policy/)."
+        },
+        {
+          "content": "Verify the \"Get Started\" button is present.",
+          "expected": "\"Get Started\" button should be visible and interactive."
+        },
+        {
+          "content": "Verify the \"Log In\" link is present.",
+          "expected": "\"Already have an account?\" text followed by a \"Log In\" link should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Field-required-marker wording corrected to match the no-visual-marker pattern already established on Login (case 39658) — same underlying form library. Checkbox text was stale: live text is \"I agree to the Terms and acknowledge the Privacy Policy\", not \"I accept the Terms and Conditions & Privacy Policy\". Verified against the genuine clean-session default: heading \"Create Your Free Account\", subtext \"Get a lifetime free account. No obligations.\", button \"Get Started\" — matches the original draft's button text. IMPORTANT: an earlier grill pass on this same case mistakenly verified against a contaminated browser state (stale promo/campaign cookie left over from a prior grill session in the same automation profile) that showed a different headline (\"Start Your 14 Day Free Trial\") and button (\"Start Free 14-Day Trial\") — six consecutive clean-cookie reloads all confirmed \"Get Started\" as the true default, so that variant is NOT this case's content. UPDATE (user-confirmed 2026-07-21): both variants are real — free signups are randomly assigned to one of (at least) two trial-model A/B variants; the team plans to converge on one soon. This case's copy (\"Create Your Free Account\" / \"Get Started\") reflects only one of the two currently-live variants. See `coverage-gaps.md` — re-grill once the experiment converges rather than trusting this copy as settled.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 39715,
+      "title": "[Sign Up] Verify that completing signup with valid credentials creates an account and sends a verification email",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Enter a valid email address, website URL, and password in the corresponding fields.",
+          "expected": "User should be able to enter values in all fields."
+        },
+        {
+          "content": "Check the \"I agree to the Terms and acknowledge the Privacy Policy\" checkbox.",
+          "expected": "Checkbox should be checked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "The onboarding / banner setup page should be displayed (\"Install cookie banner on your website\")."
+        },
+        {
+          "content": "Verify that a verification email with subject \"Verify your email for CookieYes\" is received at the registered email address.",
+          "expected": "Verification email should be received. Body: \"Hi there, Please click the button below to verify that we have the right email for you.\" with a \"Verify Email\" button and a plaintext fallback link to `/user-verify?token=...&identity=...`, signed \"Regards, CookieYes Team\"."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Checkbox text corrected to match live copy (see Case 1); button text \"Get Started\" matches the original draft and the confirmed clean-session default. Verified live 2026-07-21 with two throwaway accounts under a clean (no stale-cookie) session: rahulkrishna+signupverify004@mozilor.com / websiteId 2591 on the \"Get Started\" flow (this case's actual path) — signup succeeded, redirected to /setup (onboarding). Verification-email receipt was confirmed on a separate throwaway account, rahulkrishna+signupverify003@mozilor.com / websiteId 2590 (created before the contaminated-state issue was discovered — email content is identical between variants so this evidence still applies), subject matched exactly, confirmed by the user directly from their inbox (screenshot), not by this agent (no Gmail access in this session). NOTE: on websiteId 2591 the resulting plan badge read \"Pro (Trial not started)\" while a separate dashboard banner simultaneously read \"Your trial has expired: Upgrade to activate banner\", and the auto-unlock Pro-trial modal still fired claiming the trial was already active — three mutually contradictory trial-state signals on one account. Not asserted in this case's expected result pending a decision on which state is correct; see grill report and coverage-gaps.md. Also note (user-confirmed 2026-07-21): the \"Get Started\" flow this case exercises is one of two live A/B trial-model variants for free signup, not settled copy — see coverage-gaps.md, re-grill once the experiment converges.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 39716,
+      "title": "[Sign Up] Verify that the \"Log In\" link on the signup page navigates to the login page",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Click the \"Log In\" link.",
+          "expected": "The Login page should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-standard-free.json) — no content change. No run_type set in the original publish; defaulted to regression per convention.",
+      "grill_status": "confirmed"
+    }
+  ]
+}

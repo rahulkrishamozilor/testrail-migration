@@ -1,183 +1,448 @@
-[
-  {
-    "title": "[Sign Up] Verify that submitting the signup form without an email shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Enter a website URL and password, leaving the email field empty.", "expected": "Values should be entered in website and password fields." },
-      { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
-      { "content": "Click \"Get Started\".", "expected": "\"Email is required\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Sign Up] Verify that submitting signup with an already-registered email shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page. An existing account is registered with a known email address.",
-    "customStepsSeparated": [
-      { "content": "Enter the existing account's email address in the email field.", "expected": "Email address should be entered." },
-      { "content": "Enter a valid website URL and password.", "expected": "Values should be entered." },
-      { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
-      { "content": "Click \"Get Started\".", "expected": "\"The email has already been taken.\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Sign Up] Verify that submitting signup with an invalid email format shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Enter an invalid email address (e.g., \"notanemail\") in the email field.", "expected": "Invalid email should be entered." },
-      { "content": "Enter a valid website URL and password.", "expected": "Values should be entered." },
-      { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
-      { "content": "Click \"Get Started\".", "expected": "\"Valid email required\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Sign Up] Verify that submitting signup with an email longer than 190 characters shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Enter an email address exceeding 190 characters in the email field.", "expected": "Oversized email should be entered." },
-      { "content": "Enter a valid website URL and password.", "expected": "Values should be entered." },
-      { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
-      { "content": "Click \"Get Started\".", "expected": "\"Your email address exceeds the maximum value of 190 characters\" error message should be displayed." }
-    ]
-  },
-  {
-    "title": "[Sign Up] Verify that submitting signup without a website shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Enter a valid email address and password, leaving the website field empty.", "expected": "Values should be entered." },
-      { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
-      { "content": "Click \"Get Started\".", "expected": "\"Website is required\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Sign Up] Verify that submitting signup with an invalid website URL shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Enter a valid email address and password.", "expected": "Values should be entered." },
-      { "content": "Enter an invalid website URL (not in \"example.com\" format) in the website field.", "expected": "Invalid URL should be entered." },
-      { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
-      { "content": "Click \"Get Started\".", "expected": "\"Please enter URL in the format example.com\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Sign Up] Verify that submitting signup with a website URL longer than 75 characters shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Enter a valid email address and password.", "expected": "Values should be entered." },
-      { "content": "Enter a website URL longer than 75 characters in the website field.", "expected": "Oversized URL should be entered." },
-      { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
-      { "content": "Click \"Get Started\".", "expected": "\"URL should be less than 75 characters\" error message should be displayed." }
-    ]
-  },
-  {
-    "title": "[Sign Up] Verify that submitting signup without a password shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Enter a valid email address and website URL, leaving the password field empty.", "expected": "Values should be entered." },
-      { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
-      { "content": "Click \"Get Started\".", "expected": "\"Password is required\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Sign Up] Verify that submitting signup with a password shorter than 8 characters shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Enter a valid email address and website URL.", "expected": "Values should be entered." },
-      { "content": "Enter a password with fewer than 8 characters in the password field.", "expected": "Short password should be entered." },
-      { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
-      { "content": "Click \"Get Started\".", "expected": "\"Minimum 8 characters required\" error message should be displayed below the password field." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Sign Up] Verify that submitting signup with a password longer than 64 characters shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Enter a valid email address and website URL.", "expected": "Values should be entered." },
-      { "content": "Enter a password longer than 64 characters in the password field.", "expected": "Oversized password should be entered." },
-      { "content": "Check the Terms and Conditions checkbox.", "expected": "Checkbox should be checked." },
-      { "content": "Click \"Get Started\".", "expected": "\"The password is too long\" error message should be displayed." }
-    ]
-  },
-  {
-    "title": "[Sign Up] Verify that submitting signup without accepting Terms and Conditions shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Enter a valid email address, website URL, and password.", "expected": "Values should be entered." },
-      { "content": "Leave the Terms and Conditions checkbox unchecked.", "expected": "Checkbox should remain unchecked." },
-      { "content": "Click \"Get Started\".", "expected": "\"Please agree to terms and conditions to proceed\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Sign Up] Verify that the \"Terms and Conditions\" link opens the CookieYes Terms and Conditions page",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Click the \"Terms and Conditions\" link in the acceptance checkbox label.", "expected": "The CookieYes Terms and Conditions page should be displayed." }
-    ]
-  },
-  {
-    "title": "[Sign Up] Verify that the \"Privacy Policy\" link opens the CookieYes Privacy Policy page",
-    "templateId": 2,
-    "customPreconds": "User is on the Sign Up page.",
-    "customStepsSeparated": [
-      { "content": "Click the \"Privacy Policy\" link in the acceptance checkbox label.", "expected": "The CookieYes Privacy Policy page should be displayed." }
-    ]
-  },
-  {
-    "title": "[Sign Up] Verify that clicking \"Verify Email\" in the signup confirmation email opens the email verification success page",
-    "templateId": 2,
-    "customPreconds": "User has completed signup with a new email address. The inbox contains a \"Verify your email for CookieYes\" email.",
-    "customStepsSeparated": [
-      { "content": "Open the \"Verify your email for CookieYes\" email in the inbox.", "expected": "Verification email should be present and opened." },
-      { "content": "Click the \"Verify Email\" button in the email.", "expected": "The email verification success page should be displayed." }
-    ],
-    "custom_case_test_run_type": 2
-  },
-  {
-    "title": "[Sign Up] Verify that clicking \"Go to Dashboard\" after email verification navigates to the Dashboard",
-    "templateId": 2,
-    "customPreconds": "User has clicked \"Verify Email\" and is on the email verification success page.",
-    "customStepsSeparated": [
-      { "content": "Click \"Go to Dashboard\".", "expected": "Dashboard page should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Sign Up] Verify that clicking an expired verification email link shows a failure page with a resend option",
-    "templateId": 2,
-    "customPreconds": "User has signed up but has not verified their email within 1 hour. The original \"Verify your email for CookieYes\" email is still in the inbox.",
-    "customStepsSeparated": [
-      { "content": "Open the \"Verify your email for CookieYes\" email (more than 1 hour after signup).", "expected": "Email should be accessible in the inbox." },
-      { "content": "Click \"Verify Email\".", "expected": "\"Your email verification failed!\" page should be displayed." },
-      { "content": "Click \"Resend Verification Email\".", "expected": "A new verification email should be received and a \"Verification email has been resent successfully.\" notification should appear." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Sign Up] Verify that clicking a verification link after account deletion shows a failure page",
-    "templateId": 2,
-    "customPreconds": "User completed signup but deleted their account before verifying email. The original \"Verify your email for CookieYes\" email is still in the inbox.",
-    "customStepsSeparated": [
-      { "content": "Open the \"Verify your email for CookieYes\" email from the inbox.", "expected": "Email should be accessible." },
-      { "content": "Click \"Verify Email\".", "expected": "\"Your email verification failed!\" page should be displayed with a \"Resend Verification Email\" button." },
-      { "content": "Click \"Resend Verification Email\".", "expected": "A new verification email should be received and a success notification should appear. [Note: source cases C70 and C1148 differ on this expected result — verify manually before automation.]" }
-    ]
-  }
-]
+{
+  "section": "01. Authentication > Sign Up > Core",
+  "suite_id": 16,
+  "section_id": 1983,
+  "default_section_id": 1983,
+  "fetched_at": "2026-07-21T05:15:14Z",
+  "grilled_at": "2026-07-21T05:35:22Z",
+  "published_at": "2026-07-21T05:42:29Z",
+  "restore_note": "This section's cases were accidentally deleted from TestRail (section tree intact, 0 cases live). Restored from the last-known content of ai-context/cases-signup-core.json, converted to draft schema for a fresh /grill-section pass before republishing. No original Suite 6 source_case_ids were recorded when this was first migrated.",
+  "cases": [
+    {
+      "id": 39695,
+      "title": "[Sign Up] Verify that submitting the signup form without an email shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Enter a website URL and password, leaving the email field empty.",
+          "expected": "Values should be entered in website and password fields."
+        },
+        {
+          "content": "Check the Terms and Conditions checkbox.",
+          "expected": "Checkbox should be checked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "\"Email is required\" error message should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39696,
+      "title": "[Sign Up] Verify that submitting signup with an already-registered email shows a validation error",
+      "preconditions": "User is on the Sign Up page. An existing account is registered with a known email address.",
+      "steps": [
+        {
+          "content": "Enter the existing account's email address in the email field.",
+          "expected": "Email address should be entered."
+        },
+        {
+          "content": "Enter a valid website URL and password.",
+          "expected": "Values should be entered."
+        },
+        {
+          "content": "Check the Terms and Conditions checkbox.",
+          "expected": "Checkbox should be checked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "\"The email has already been taken.\" error message should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39697,
+      "title": "[Sign Up] Verify that submitting signup with an invalid email format shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Enter an invalid email address (e.g., \"notanemail\") in the email field.",
+          "expected": "Invalid email should be entered."
+        },
+        {
+          "content": "Enter a valid website URL and password.",
+          "expected": "Values should be entered."
+        },
+        {
+          "content": "Check the Terms and Conditions checkbox.",
+          "expected": "Checkbox should be checked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "\"Valid email required\" error message should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. Verified live: unlike the Login page (where an invalid email format is blocked by the browser's native tooltip with no app message), this form's own JS validation catches it and shows this exact custom message, even though the field is also `type=\"email\"`.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39698,
+      "title": "[Sign Up] Verify that submitting signup with an email longer than 190 characters shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Enter an email address exceeding 190 characters in the email field.",
+          "expected": "Oversized email should be entered."
+        },
+        {
+          "content": "Enter a valid website URL and password.",
+          "expected": "Values should be entered."
+        },
+        {
+          "content": "Check the Terms and Conditions checkbox.",
+          "expected": "Checkbox should be checked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "\"Your email address exceeds the maximum value of 190 characters\" error message should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. No run_type set in the original publish. Verified live with a 194-character email (field accepts full length, no client-side truncation).",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39699,
+      "title": "[Sign Up] Verify that submitting signup without a website shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Enter a valid email address and password, leaving the website field empty.",
+          "expected": "Values should be entered."
+        },
+        {
+          "content": "Check the Terms and Conditions checkbox.",
+          "expected": "Checkbox should be checked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "\"Website is required\" error message should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39700,
+      "title": "[Sign Up] Verify that submitting signup with an invalid website URL shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Enter a valid email address and password.",
+          "expected": "Values should be entered."
+        },
+        {
+          "content": "Enter an invalid website URL (not in \"example.com\" format) in the website field.",
+          "expected": "Invalid URL should be entered."
+        },
+        {
+          "content": "Check the Terms and Conditions checkbox.",
+          "expected": "Checkbox should be checked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "\"Please enter URL in the format example.com\" error message should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39701,
+      "title": "[Sign Up] Verify that submitting signup with a website URL longer than 75 characters shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Enter a valid email address and password.",
+          "expected": "Values should be entered."
+        },
+        {
+          "content": "Enter a website URL longer than 75 characters in the website field, using multiple valid domain labels (e.g. \"sub1.sub2.sub3....example.com\") rather than one long label \u2014 a single DNS label over ~63 characters fails the URL-format check first and never reaches the length check.",
+          "expected": "Oversized URL should be entered."
+        },
+        {
+          "content": "Check the Terms and Conditions checkbox.",
+          "expected": "Checkbox should be checked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "\"URL should be less than 75 characters\" error message should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. No run_type set in the original publish. Verified live: a single 76-char label (e.g. \"aaa...a.com\") triggers \"Please enter URL in the format example.com\" instead \u2014 the format regex rejects the label before length is even checked. An 80-char multi-label domain (each label short) correctly triggers this case's message.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 39702,
+      "title": "[Sign Up] Verify that submitting signup without a password shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Enter a valid email address and website URL, leaving the password field empty.",
+          "expected": "Values should be entered."
+        },
+        {
+          "content": "Check the Terms and Conditions checkbox.",
+          "expected": "Checkbox should be checked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "\"Password is required\" error message should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39703,
+      "title": "[Sign Up] Verify that submitting signup with a password shorter than 8 characters shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Enter a valid email address and website URL.",
+          "expected": "Values should be entered."
+        },
+        {
+          "content": "Enter a password with fewer than 8 characters in the password field.",
+          "expected": "Short password should be entered."
+        },
+        {
+          "content": "Check the Terms and Conditions checkbox.",
+          "expected": "Checkbox should be checked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "\"The password must be at least 8 characters long\" error message should be displayed below the password field."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. Mismatch found: expected \"Minimum 8 characters required\" | actual (verified live) \"The password must be at least 8 characters long\" \u2014 same wording as the Forgot Password > Reset Password page's short-password message, confirming this is a shared, app-wide validation string.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 39704,
+      "title": "[Sign Up] Verify that submitting signup with a password longer than 64 characters shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Enter a valid email address and website URL.",
+          "expected": "Values should be entered."
+        },
+        {
+          "content": "Enter a password longer than 64 characters in the password field.",
+          "expected": "Oversized password should be entered."
+        },
+        {
+          "content": "Check the Terms and Conditions checkbox.",
+          "expected": "Checkbox should be checked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "\"The password is too long\" error message should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. No run_type set in the original publish. Verified live with a 68-character password (field accepts full length).",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39705,
+      "title": "[Sign Up] Verify that submitting signup without accepting Terms and Conditions shows a validation error",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Enter a valid email address, website URL, and password.",
+          "expected": "Values should be entered."
+        },
+        {
+          "content": "Leave the Terms and Conditions checkbox unchecked.",
+          "expected": "Checkbox should remain unchecked."
+        },
+        {
+          "content": "Click \"Get Started\".",
+          "expected": "\"Please agree to the terms and privacy policy to proceed\" error message should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. Mismatch found: expected \"Please agree to terms and conditions to proceed\" | actual (verified live) \"Please agree to the terms and privacy policy to proceed\".",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 39706,
+      "title": "[Sign Up] Verify that the \"Terms and Conditions\" link opens the CookieYes Terms and Conditions page",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Click the \"Terms and Conditions\" link in the acceptance checkbox label.",
+          "expected": "The CookieYes Terms and Conditions page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. No run_type set in the original publish. Confirmed live: link href is https://www.cookieyes.com/terms-and-conditions/ \u2014 an external marketing-site URL, not part of the app.",
+      "grill_status": "skipped:external-url"
+    },
+    {
+      "id": 39707,
+      "title": "[Sign Up] Verify that the \"Privacy Policy\" link opens the CookieYes Privacy Policy page",
+      "preconditions": "User is on the Sign Up page.",
+      "steps": [
+        {
+          "content": "Click the \"Privacy Policy\" link in the acceptance checkbox label.",
+          "expected": "The CookieYes Privacy Policy page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. No run_type set in the original publish. Confirmed live: link href is https://www.cookieyes.com/privacy-policy/ \u2014 an external marketing-site URL, not part of the app.",
+      "grill_status": "skipped:external-url"
+    },
+    {
+      "id": 39708,
+      "title": "[Sign Up] Verify that clicking \"Verify Email\" in the signup confirmation email opens the email verification success page",
+      "preconditions": "User has completed signup with a new email address. The inbox contains a \"Verify your email for CookieYes\" email.",
+      "steps": [
+        {
+          "content": "Open the \"Verify your email for CookieYes\" email in the inbox.",
+          "expected": "Verification email should be present and opened."
+        },
+        {
+          "content": "Click the \"Verify Email\" button in the email.",
+          "expected": "The link is `/user-verify?token=<token>&identity=<identity>`, redirecting to `/v1/user-verify?...`. The email verification success page should be displayed: a success icon, the heading \"Your email is verified!\", the message \"You have successfully verified your email address.\", and a \"Go to Dashboard\" button."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. Verified live via a real signup + real confirmation email (link provided out-of-band by the user).",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39709,
+      "title": "[Sign Up] Verify that clicking \"Go to Dashboard\" after email verification navigates to the Dashboard",
+      "preconditions": "User has clicked \"Verify Email\" and is on the email verification success page.",
+      "steps": [
+        {
+          "content": "Click \"Go to Dashboard\".",
+          "expected": "Dashboard page should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. Verified live end-to-end via a real signup + confirmation email.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39710,
+      "title": "[Sign Up] Verify that clicking an expired verification email link shows a failure page with a resend option",
+      "preconditions": "User has signed up but has not verified their email within 1 hour. The original \"Verify your email for CookieYes\" email is still in the inbox.",
+      "steps": [
+        {
+          "content": "Open the \"Verify your email for CookieYes\" email (more than 1 hour after signup).",
+          "expected": "Email should be accessible in the inbox."
+        },
+        {
+          "content": "Click \"Verify Email\".",
+          "expected": "\"Your email verification failed!\" page should be displayed."
+        },
+        {
+          "content": "Click \"Resend Verification Email\".",
+          "expected": "A new verification email should be received and a \"Verification email has been resent successfully.\" notification should appear."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. Not automatable this pass: requires waiting 1+ hour on a real signup's verification token, plus real inbox access for both the original and resent email. Strong adjacent evidence gathered live instead: a fresh, never-verified signup hit with a garbage token+identity (never a real expiry) produced exactly this failure page (red X icon, \"Your email verification failed!\", \"Please try again or click the button below to receive a new verification email.\", \"Resend Verification Email\" button), and clicking Resend showed the notification \"Verification email has been resent successfully.\" character-for-character matching this case's expected text. A cooldown timer (\"Resend email in N seconds\") also appeared, undocumented elsewhere \u2014 see the new suggested case. Root cause (real 1-hour expiry) still unconfirmed, but the failure-page shape and resend behavior are now verified via the closest obtainable proxy.",
+      "grill_status": "skipped:time-dependent"
+    },
+    {
+      "id": 39711,
+      "title": "[Sign Up] Verify that clicking a verification link after account deletion shows a failure page",
+      "preconditions": "User completed signup but deleted their account before verifying email. The original \"Verify your email for CookieYes\" email is still in the inbox.",
+      "steps": [
+        {
+          "content": "Open the \"Verify your email for CookieYes\" email from the inbox.",
+          "expected": "Email should be accessible."
+        },
+        {
+          "content": "Click \"Verify Email\".",
+          "expected": "\"Your email verification failed!\" page should be displayed with a \"Resend Verification Email\" button."
+        },
+        {
+          "content": "Click \"Resend Verification Email\".",
+          "expected": "A new verification email should be received and a success notification should appear. [Note: source cases C70 and C1148 differ on this expected result \u2014 verify manually before automation.]"
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. No run_type set in the original publish. Source cases C70/C1148 disagreed on this expected result even before restoration \u2014 flagged in the original case. Not automatable this pass: requires a real signup, real inbox access, and deleting the account before verifying \u2014 a destructive precondition combined with email-required. Same adjacent evidence as the expired-token case applies here too: a garbage-token verify attempt reproduces the identical failure page and confirms the Resend button's success notification is exactly \"Verification email has been resent successfully.\" \u2014 this resolves the C70/C1148 disagreement in favor of that exact wording, though the account-deletion precondition specifically remains unconfirmed.",
+      "grill_status": "skipped:destructive-precondition"
+    }
+  ]
+}

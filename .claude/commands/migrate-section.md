@@ -41,6 +41,10 @@ in the draft, acknowledge any `permission_flag` or `platform_flag` entries, and 
 > ⚠️ Draft was fetched on `<fetched_at>`. Suite 6 may have changed since then. Consider
 > re-running `/fetch-section $ARGUMENTS` to refresh it.
 
+**If the draft has an `existing_cases_file` field** (set by `/draft-section` Step 0), this is a
+gap-closing run against an already-published section — publishing in Step 5c will need the extra
+merge in Step 5c-ii afterward, since `cases-<section-slug>.json` already exists.
+
 ### Step 2a — Review suggested cases (if any)
 
 Before proceeding, check whether any cases in the draft have `"grill_status": "suggested"`.
@@ -294,6 +298,41 @@ uv run .claude/scripts/fetch_testrail.py batch-add-cases <default_section_id> \
 ```
 
 The summary prints a per-section breakdown when cases land in more than one section.
+
+### 5c-ii — Merge a gap-closing publish into the existing cases file
+
+**Applies only when the draft had an `existing_cases_file` field (Step 2).** After 5c's
+`--write-back` patches real ids into `draft-<section-slug>.json`, that file will **not** be
+renamed to `cases-<section-slug>.json` — `fetch_testrail.py` only renames when that target
+doesn't already exist, and here it does. Left alone, this leaves two files describing the same
+section: the original `cases-<section-slug>.json` missing the cases you just published, and an
+orphaned `draft-<section-slug>.json` holding only them. That breaks the single-source-of-truth
+convention every other command (`/audit-section`, `validate-cases-file`, and any future
+gap-closing `/draft-section` run) relies on.
+
+Merge them explicitly, right after 5c, by hand — this touches the published source of truth, so
+do not script it silently:
+
+1. Read both files in full.
+2. Append the newly-published cases (now carrying real ids, from `draft-<section-slug>.json`'s
+   `cases` array) to the end of `cases-<section-slug>.json`'s `cases` array.
+3. For each gap this run closed, find its entry in `cases-<section-slug>.json`'s
+   `out_of_scope_notes` and edit its `reason` in place to prefix
+   `RESOLVED <today's date> — <one-line summary + new case ids>` — matching the convention
+   already used in that file (see e.g. the "Final 'Generate privacy policy' action" entry in
+   `cases-privacy-policy-generator.json`). Don't delete the entry; a resolved note is still
+   useful history.
+4. Append the new draft's `reconciliation_notes` (if any) onto `cases-<section-slug>.json`'s
+   array — these are additive, not competing.
+5. Set `cases-<section-slug>.json`'s `published_at` to the new draft's `published_at`.
+6. Delete `draft-<section-slug>.json` — its content now lives entirely inside
+   `cases-<section-slug>.json`, and keeping both around violates the single-source-of-truth
+   convention. Git history is the safety net.
+7. Update `coverage-gaps.md`: mark the closed gap's line with `~~strikethrough~~` and the
+   date/case IDs, per that file's own instructions — don't leave the resolution only in the JSON.
+
+Show the user a summary (cases appended, gap(s) marked resolved, file deleted) before moving to
+Step 5d.
 
 ### 5d — Validate the published file
 

@@ -31,19 +31,27 @@ already has a `grill_status` set (do not re-execute it).
 
 #### 2a. Load the account pool
 
-Read `qa-accounts.json` from the project root (if it exists). Build an account map keyed by
-plan tier (e.g. `free`, `basic`, `pro`, `ultimate`). If the file does not exist, all
-plan-gated cases will be skipped as before — continue without an account pool.
+Read `qa-accounts.json` from the project root — this is the source of truth for every account and
+its credentials (`accounts.<key>.email` / `.password` / `.plan`, plus an optional per-account
+`.env` override). Build an account map keyed by plan tier (e.g. `free`, `basic`, `pro`,
+`ultimate`). If the file does not exist, all plan-gated cases will be skipped — continue without an
+account pool.
 
-Track a `current_account` variable throughout the session. It starts as the default
-`QA2_TEST_EMAIL` / `QA2_TEST_PASSWORD` account from the environment.
+Do not read `$QA2_TEST_EMAIL` / `$QA2_TEST_PASSWORD` from the environment; those are not used by
+this command. If `qa-accounts.json` is absent, stop and tell the user it's required for login —
+there is no environment fallback.
+
+Track a `current_account` variable throughout the session. It starts as the `free` account from
+`qa-accounts.json` (lowest tier, so the most plan gates are visible from it by default).
 
 #### 2b. Log in
 
 Use the Playwright MCP browser tools to:
 
-1. Navigate to `$QA2_BASE_URL` (read from environment — do not hard-code a URL).
-2. If redirected to a login page, fill in `$QA2_TEST_EMAIL` and `$QA2_TEST_PASSWORD` and submit.
+1. Navigate to `current_account`'s `.env` value if it has one; otherwise `$QA2_BASE_URL`
+   (environment — only used for the base URL, never for credentials).
+2. If redirected to a login page, fill in `current_account`'s `email` and `password` from
+   `qa-accounts.json` and submit.
 3. Confirm you land on the Dashboard (or equivalent post-login page).
 4. Take a screenshot and report the logged-in state and current plan tier.
 
@@ -79,8 +87,9 @@ session switches.
      });
    }
    ```
-   Then navigate to `$QA2_BASE_URL`, log in with the matching account's credentials,
-   confirm Dashboard, update `current_account`.
+   Then navigate to that account's `.env` value if it has one, otherwise `$QA2_BASE_URL`, log in
+   with its `email`/`password` from `qa-accounts.json`, confirm Dashboard, update
+   `current_account`.
 4. If it differs and no matching account exists in `qa-accounts.json` → skip with
    `skipped:plan-gated`.
 
@@ -149,6 +158,16 @@ extracted live text used as the fix. This is what would have caught, at grill-ti
 in a later retrospective audit, a case claiming a "Copy code" button in the "top-right corner"
 when the live button is actually labeled "Copy" and left-aligned, or a banner alert paraphrased
 away from its real wording.
+
+**The fix text is the current wording only — never a comparison against what it replaced.**
+When recording a ⚠️ Mismatch fix (or any other correction to a precondition or expected result),
+write just the correct, current text. Do not append a parenthetical contrasting it with the old/
+stale/reworded/previously-drafted version (`(NOT "..." — that label no longer exists)` and
+similar). A case body is read cold by someone with no memory of what it used to say — a negation
+of text they've never seen is confusing, not clarifying, and this phrasing has already leaked
+into published cases (see `coverage-gaps.md` history). If the discrepancy itself is worth
+preserving — why it changed, when it was caught, whether it needs a follow-up — record that in
+`coverage-gaps.md` or the run log, not in the case body.
 
 **Skip reasons — automatically skip and record reason, do not attempt to execute:**
 

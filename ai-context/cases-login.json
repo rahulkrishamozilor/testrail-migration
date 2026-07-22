@@ -1,106 +1,305 @@
-[
-  {
-    "title": "[Login] Verify that the login page renders with all required fields and controls",
-    "templateId": 2,
-    "customPreconds": "User is on the Login page.",
-    "customStepsSeparated": [
-      { "content": "Verify the Email address field is present and marked as mandatory.", "expected": "Email address field should be visible and marked as a required field." },
-      { "content": "Verify the Password field is present and marked as mandatory.", "expected": "Password field should be visible and marked as a required field." },
-      { "content": "Verify the show/hide toggle (eye icon) is present on the Password field.", "expected": "Eye icon should be visible on the Password field." },
-      { "content": "Verify the \"Log In\" button is present.", "expected": "\"Log In\" button should be visible and interactive." },
-      { "content": "Verify the \"Forgot your password?\" link is present.", "expected": "\"Forgot your password?\" link should be visible and interactive." },
-      { "content": "Verify the \"Sign Up\" link is present.", "expected": "\"Sign Up\" link should be visible and interactive." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Login] Verify that valid credentials log the user in and redirect to the Dashboard",
-    "templateId": 2,
-    "customPreconds": "User has a registered account and is on the Login page.",
-    "customStepsSeparated": [
-      { "content": "Enter valid credentials in the email and password fields.", "expected": "Credentials should be accepted in the fields." },
-      { "content": "Click \"Log In\".", "expected": "Dashboard page should be displayed." }
-    ],
-    "custom_case_test_run_type": 2
-  },
-  {
-    "title": "[Login] Verify that submitting login with an empty email field shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Login page.",
-    "customStepsSeparated": [
-      { "content": "Enter a valid password in the password field, leaving the email field empty.", "expected": "Password should be entered." },
-      { "content": "Click \"Log In\".", "expected": "\"Email is required\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Login] Verify that submitting login with an invalid email format shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Login page.",
-    "customStepsSeparated": [
-      { "content": "Enter an invalid email address in the email field.", "expected": "Invalid email should be entered." },
-      { "content": "Enter a password in the password field.", "expected": "Password should be entered." },
-      { "content": "Click \"Log In\".", "expected": "\"Valid email required\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Login] Verify that submitting login with a non-existing email shows an authentication error",
-    "templateId": 2,
-    "customPreconds": "User is on the Login page.",
-    "customStepsSeparated": [
-      { "content": "Enter an email address that has no registered account.", "expected": "Email should be entered." },
-      { "content": "Enter a password.", "expected": "Password should be entered." },
-      { "content": "Click \"Log In\".", "expected": "\"Invalid email/password. Please try again\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Login] Verify that the password visibility toggle reveals and hides the entered password",
-    "templateId": 2,
-    "customPreconds": "User is on the Login page.",
-    "customStepsSeparated": [
-      { "content": "Enter a password in the password field.", "expected": "The entered characters should be masked (displayed as dots)." },
-      { "content": "Click the eye icon on the password field.", "expected": "The entered password should be displayed in plain text." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Login] Verify that submitting login with an empty password field shows a validation error",
-    "templateId": 2,
-    "customPreconds": "User is on the Login page.",
-    "customStepsSeparated": [
-      { "content": "Enter a valid email address in the email field, leaving the password field empty.", "expected": "Email should be entered." },
-      { "content": "Click \"Log In\".", "expected": "\"Password is required\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Login] Verify that submitting login with an incorrect password shows an authentication error",
-    "templateId": 2,
-    "customPreconds": "User is on the Login page. A registered account exists for the email being used.",
-    "customStepsSeparated": [
-      { "content": "Enter a registered email address in the email field.", "expected": "Email should be entered." },
-      { "content": "Enter an incorrect password in the password field.", "expected": "Incorrect password should be entered." },
-      { "content": "Click \"Log In\".", "expected": "\"Invalid email/password. Please try again\" error message should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  },
-  {
-    "title": "[Login] Verify that the \"Sign Up\" link on the login page navigates to the signup page",
-    "templateId": 2,
-    "customPreconds": "User is on the Login page.",
-    "customStepsSeparated": [
-      { "content": "Click the \"Sign Up\" link.", "expected": "Sign Up page should be displayed." }
-    ]
-  },
-  {
-    "title": "[Login] Verify that the \"Forgot your password?\" link on the login page navigates to the Forgot Password page",
-    "templateId": 2,
-    "customPreconds": "User is on the Login page.",
-    "customStepsSeparated": [
-      { "content": "Click the \"Forgot your password?\" link.", "expected": "Forgot Password page should be displayed." }
-    ],
-    "custom_case_test_run_type": 1
-  }
-]
+{
+  "section": "01. Authentication > Login",
+  "suite_id": 16,
+  "section_id": 1980,
+  "default_section_id": 1980,
+  "fetched_at": "2026-07-20T05:15:00Z",
+  "grilled_at": "2026-07-20T05:27:21Z",
+  "published_at": "2026-07-20T05:46:57Z",
+  "restore_note": "This section's cases were accidentally deleted from TestRail (section tree intact, 0 cases live). Restored from the last-known content of ai-context/cases-login.json, converted to draft schema for a fresh /grill-section pass before republishing. No original Suite 6 source_case_ids were recorded when this was first migrated.",
+  "cases": [
+    {
+      "id": 39658,
+      "title": "[Login] Verify that the login page renders with all required fields and controls",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        {
+          "content": "Verify the Email address field is present.",
+          "expected": "Email address field should be visible. It carries no visual required marker (no asterisk, no `required`/`aria-required` attribute) \u2014 its mandatory nature is enforced only on submit (see the empty-field validation case)."
+        },
+        {
+          "content": "Verify the Password field is present.",
+          "expected": "Password field should be visible. Like the Email field, it has no visual required marker; it is enforced only on submit."
+        },
+        {
+          "content": "Verify the show/hide toggle (eye icon) is present on the Password field.",
+          "expected": "Eye icon should be visible on the Password field."
+        },
+        {
+          "content": "Verify the \"Log In\" button is present.",
+          "expected": "\"Log In\" button should be visible and interactive."
+        },
+        {
+          "content": "Verify the \"Forgot your password?\" link is present.",
+          "expected": "\"Forgot your password?\" link should be visible and interactive."
+        },
+        {
+          "content": "Verify the \"Sign Up\" link is present.",
+          "expected": "\"Sign Up\" link should be visible and interactive."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-login.json) \u2014 no content change.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 39659,
+      "title": "[Login] Verify that valid credentials log the user in and redirect to the Dashboard",
+      "preconditions": "User has a registered account and is on the Login page.",
+      "steps": [
+        {
+          "content": "Enter valid credentials in the email and password fields.",
+          "expected": "Credentials should be accepted in the fields."
+        },
+        {
+          "content": "Click \"Log In\".",
+          "expected": "Dashboard page should be displayed."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-login.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39660,
+      "title": "[Login] Verify that a successful login redirects back to the originally-requested page",
+      "preconditions": "User attempted to access a protected page while logged out (e.g. navigated directly to /consent-logs) and was redirected to the Login page with a `next` parameter (e.g. `/login?next=%2Fconsent-logs`).",
+      "steps": [
+        {
+          "content": "Enter valid credentials and click \"Log In\".",
+          "expected": "User is redirected to the originally-requested page (e.g. `/consent-logs`), not unconditionally to the Dashboard."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Found during gap-hunting \u2014 no existing draft case covers the `next` redirect-preservation behavior; Case 2 only covers direct navigation to /login.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39661,
+      "title": "[Login] Verify that pressing Enter in the password field submits the login form",
+      "preconditions": "User is on the Login page with valid credentials entered.",
+      "steps": [
+        {
+          "content": "Enter valid credentials in the email and password fields, then press Enter instead of clicking \"Log In\".",
+          "expected": "The form submits the same as clicking \"Log In\" \u2014 user is logged in and redirected to the Dashboard (or the originally-requested page, per the `next` redirect case)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Found during gap-hunting \u2014 no existing draft case covers keyboard-driven form submission.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39662,
+      "title": "[Login] Verify that login with an email address is case-insensitive",
+      "preconditions": "User has a registered account and is on the Login page.",
+      "steps": [
+        {
+          "content": "Enter the registered email address in a different letter case (e.g. all uppercase) along with the correct password, then click \"Log In\".",
+          "expected": "User is logged in successfully and redirected to the Dashboard \u2014 email matching is case-insensitive."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Found during gap-hunting \u2014 no existing draft case covers email case-insensitivity.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39663,
+      "title": "[Login] Verify that submitting login with an empty email field shows a validation error",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        {
+          "content": "Enter a valid password in the password field, leaving the email field empty.",
+          "expected": "Password should be entered."
+        },
+        {
+          "content": "Click \"Log In\".",
+          "expected": "\"Email is required\" error message should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-login.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39664,
+      "title": "[Login] Verify that submitting login with an invalid email format shows a validation error",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        {
+          "content": "Enter an invalid email address (e.g. \"notanemail\", no \"@\") in the email field.",
+          "expected": "Invalid email should be entered."
+        },
+        {
+          "content": "Enter a password in the password field.",
+          "expected": "Password should be entered."
+        },
+        {
+          "content": "Click \"Log In\".",
+          "expected": "The form does not submit (no request is sent to the login API). The browser's own native email-format validation blocks it and shows its native tooltip near the field (Chrome: \"Please include an '@' in the email address. '<value>' is missing an '@'.\") \u2014 this is not an app-rendered message, so exact wording is browser/locale-dependent. The app itself displays no custom error message for a pure format error."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-login.json) \u2014 no content change.",
+      "grill_status": "fixed"
+    },
+    {
+      "id": 39665,
+      "title": "[Login] Verify that submitting login with a non-existing email shows an authentication error",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        {
+          "content": "Enter an email address that has no registered account.",
+          "expected": "Email should be entered."
+        },
+        {
+          "content": "Enter a password.",
+          "expected": "Password should be entered."
+        },
+        {
+          "content": "Click \"Log In\".",
+          "expected": "\"Invalid email/password. Please try again\" error message should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-login.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39666,
+      "title": "[Login] Verify that the password visibility toggle reveals and hides the entered password",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        {
+          "content": "Enter a password in the password field.",
+          "expected": "The entered characters should be masked (displayed as dots)."
+        },
+        {
+          "content": "Click the eye icon on the password field.",
+          "expected": "The entered password should be displayed in plain text."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-login.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39667,
+      "title": "[Login] Verify that submitting login with an empty password field shows a validation error",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        {
+          "content": "Enter a valid email address in the email field, leaving the password field empty.",
+          "expected": "Email should be entered."
+        },
+        {
+          "content": "Click \"Log In\".",
+          "expected": "\"Password is required\" error message should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-login.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39668,
+      "title": "[Login] Verify that submitting login with an incorrect password shows an authentication error",
+      "preconditions": "User is on the Login page. A registered account exists for the email being used.",
+      "steps": [
+        {
+          "content": "Enter a registered email address in the email field.",
+          "expected": "Email should be entered."
+        },
+        {
+          "content": "Enter an incorrect password in the password field.",
+          "expected": "Incorrect password should be entered."
+        },
+        {
+          "content": "Click \"Log In\".",
+          "expected": "\"Invalid email/password. Please try again\" error message should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-login.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39669,
+      "title": "[Login] Verify that the \"Sign Up\" link on the login page navigates to the signup page",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        {
+          "content": "Click the \"Sign Up\" link.",
+          "expected": "Sign Up page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-login.json) \u2014 no content change. No run_type set in the original publish.",
+      "grill_status": "confirmed"
+    },
+    {
+      "id": 39670,
+      "title": "[Login] Verify that the \"Forgot your password?\" link on the login page navigates to the Forgot Password page",
+      "preconditions": "User is on the Login page.",
+      "steps": [
+        {
+          "content": "Click the \"Forgot your password?\" link.",
+          "expected": "Forgot Password page should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-login.json) \u2014 no content change.",
+      "grill_status": "confirmed"
+    }
+  ]
+}

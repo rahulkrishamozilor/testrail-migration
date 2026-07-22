@@ -1,0 +1,2879 @@
+{
+  "section": "Privacy Policy Generator",
+  "suite_id": 16,
+  "section_id": null,
+  "fetched_at": "2026-07-14T08:31:02Z",
+  "grilled_at": "2026-07-14T11:24:33Z",
+  "published_at": "2026-07-21T12:26:15Z",
+  "audited_at": "2026-07-15T12:38:32Z",
+  "source_docs": [
+    "internal-docs/PPG - Questionnaire & Clauses - Privacy Policy.pdf",
+    "internal-docs/Character limit - Privacy Policy Fields (1).pdf",
+    "internal-docs/PPG TESTCASES - Sheet1 (1).pdf"
+  ],
+  "out_of_scope_notes": [
+    {
+      "topic": "Final 'Generate privacy policy' action",
+      "reason": "RESOLVED 2026-07-14 — exercised live end-to-end on the disposableuser account's Pro-plan site (jih.ko), safe because the account is meant to absorb exactly this kind of mutating/irreversible action. 5 cases added covering: policy creation itself, the 'Add policy to site' modal, the Code snippet method flow, the 'Complete generation' confirmation, and the final 'Yes, I have installed' terminal state. Further gaps found and left open: the 'HTML format' method, the 'Install code' alternate button, and the post-generation editing surface (Version history, Options menu, Publish changes) were not exercised this pass."
+    },
+    {
+      "topic": "Non-English secondary-language generation and per-language editing in Preview",
+      "reason": "PARTIALLY RESOLVED 2026-07-15 — case 39604 confirms multi-language selection (Deutsch primary, Français/Italiano secondary) persists correctly after Save draft and a browser refresh on a Pro account, closing the \"never unlocked during the live crawl\" half of this gap. Still open: per-language editing in Preview (editing an already-selected secondary language's translated content) was not exercised this pass and remains uncased."
+    },
+    {
+      "topic": "Field-level boundary values beyond the representative cases (18, 43)",
+      "reason": "PARTIALLY RESOLVED 2026-07-16 — /grill-section's gap-closing pass added boundary-value tests (required + character-limit enforcement) for Data Retention's custom-period and \"Not yet decided\" fields, and Disclosure of Data's age-category opt-in/opt-out, delete/correct/access, sensitive-info, and third-party-disclosure fields (cases 39613-39621). Still open: boundary values for fields elsewhere in the wizard (Company Details, Collection of Data, Miscellaneous Disclosures) remain untested individually, covered only by representative equivalence-partitioning patterns. UPDATED 2026-07-21 — /grill-section + /migrate-section gap-closing pass added boundary-value tests for Miscellaneous Disclosures (DPO/controller-2000, CCPA metrics-2000, custom-safeguard-3000, cases 39730-39735) and Collection of Data > Additional Information (cookie-policy-link-2000, DNT-2500, review-change-process-2500, case 39736). Still open: Company Details boundary values remain untested individually, covered only by representative equivalence-partitioning patterns."
+    },
+    {
+      "topic": "\"HTML format\" method on the Add-policy-to-site modal",
+      "reason": "only the \"Code snippet\" method (default-selected) was exercised during the 2026-07-14 terminal-action re-grill; the alternate method and its resulting UI (manual HTML block instead of a script tag, presumably no auto-update copy) were not seen live"
+    },
+    {
+      "topic": "\"Install code\" button on the \"Policy installed?\" confirmation dialog",
+      "reason": "only \"Yes, I have installed\" was exercised 2026-07-14; \"Install code\" is presumably a re-surface of the code snippet / help flow rather than a terminal action, but not confirmed live"
+    },
+    {
+      "topic": "Post-generation editing surface (Version history, Options menu, Publish changes)",
+      "reason": "the 2026-07-14 re-grill stopped at the terminal \"Yes, I have installed\" state; editing an already-generated policy and republishing via \"Publish changes\" is a distinct feature surface, not yet exercised or cased"
+    }
+  ],
+  "reconciliation_notes": [
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "Wizard step list is dynamic — 'Disclosure of data' only appears once sell/share=Yes OR CCPA thresholds=Yes OR Include-CCPA-clauses=Yes (cases 2, 48)"
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "'Unsaved changes' confirmation dialog on step switch (cases 3-5), not documented in either spec PDF"
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "'Resume your draft?' dialog on re-entry (cases 6-7), not documented"
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "Entire 'Preview & add policy' step is undocumented in either spec PDF (case 36)"
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "Three distinct plan-gate UX patterns coexist in this feature: disabled control + modal (cases 13/14/29), clickable chip + toast (case 21), visibly-disabled chip with inline Pro+ label (case 32) — neither doc distinguishes these"
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "'Remove CCPA clauses?' / 'Remove GDPR clauses?' confirmation dialogs when toggling California/EU-EEA from Yes to No (cases 15-16, 45)"
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "Direct-URL navigation between wizard steps bypasses in-page 'Next' validation entirely — used as a crawl workaround this session, not documented anywhere; worth flagging to the app team separately"
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "Persistent 'fields not completely filled out' validation banner on Additional Information that did not clear even once every visible required field appeared filled — root cause unresolved (case 27)"
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "'Preview Privacy Policy' is a separate popup distinct from the final 'Preview & add policy' step (case 41), plus an unsaved-primary-language-lost-on-refresh behavior (case 42), per the manually-authored test case file"
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "A third distinct flow-control dialog: 'Back to Dashboard' -> 'Save progress?' (Discard/Save draft/Close), separate from the unsaved-changes and resume-draft dialogs (case 54)"
+    },
+    {
+      "type": "doc-ahead-of-live",
+      "detail": "CCPA 'users under 13' question and its Children's Privacy clause — Pro+-gated behind the unanswered for-profit question, never reached live; now covered via the manual test case file instead (case 48 area)"
+    },
+    {
+      "type": "doc-ahead-of-live",
+      "detail": "Secondary-language generation and the 'translations don't auto-update' caveat — only seen locked live, never exercised unlocked (case 40, doc-sourced)"
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "'Categories sold or shared' field: both spec PDFs state a 500-char limit; live enforces 2000 chars via submit-time validation, not a native maxlength attribute (case 18, resolved)"
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "UNRESOLVED CONFLICT: case 21 (live crawl) found CCPA-gated data-category chips render as plain, unlocked, clickable chips with a toast-on-click; case 49 (manual test case file, TC083-087) says these should render with a Pro+ badge, locked/disabled up front. Flagged for /grill-section to adjudicate, not resolved in this draft."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "The character-limit doc flags roughly a dozen of its own current limits as wrong ('Increase'/'Add') — a pre-existing internal inconsistency in that source, not a live conflict"
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "The standalone \"Preview privacy policy\" button (reachable from the Language preferences step at 0% wizard completion) renders the full policy translated into the current primary language using default content for unfilled sections. TC10 in PPG TESTCASES only checks that the popup opens/closes without errors — it doesn't mention this translation behavior at all."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "The questionnaire doc marks both the DPO-contact and data-controller/representative fields on Miscellaneous disclosures 'Shown if: Users in EU/EEA = Yes'. Confirmed live that DPO correctly hides when EU/EEA is set to No, but the data-controller/representative field does not — it stays visible and editable, and its value is then silently dropped from the generated policy with no indication to the user."
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "The questionnaire doc's footnote ('H1, H2, H3, & H4 are set to 18, 16, 14, & 12 respectively, to understand the hierarchy') predicts a two-tier CCPA \"Children's privacy\" clause — ages 13–16 get explicit user consent, under 13 gets parental consent — that isn't documented anywhere in the testcases sheet. Confirmed live this pass."
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "A \"Do we share your information?\" GDPR sharing-basis section (three bullets: Sharing with your consent / Legal Obligations / For business transfers) renders in the generated policy whenever EU/EEA=Yes. Not documented in either source doc. Found during the Business Details matrix sweep (2026-07-15)."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "Resolves a previously-unconfirmed out_of_scope_note from the language-preferences pass: the questionnaire doc's 'Legal bases for collecting the data' EU/EEA=Yes gating claim is now confirmed live both directions — absent when EU/EEA=No, present when EU/EEA=Yes, alongside the under-16 age-gating question which is gated identically. Confirmed during the Business Details matrix sweep (2026-07-15)."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "First-pass text extraction of internal-docs/Character limit - Privacy Policy Fields (1).pdf (pdftotext -layout) appeared to show a CCPA-gated 'other purposes' question in Use of Data. Viewing the actual rendered PDF pages (5 and 12) resolved this: the CCPA condition belongs to a Disclosure of Data field ('Do you not sell or share data with any of the listed age groups?'), not to Use of Data's 'Are there any other purposes for which you use the collected data?' field, which has no gating condition at all. No real mismatch — resolved before writing any case, per migration-conventions.md §12's falsification-check discipline."
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "Doc does not mention duplicate-rejection or whitespace-only rejection behavior for the custom-purpose field; both confirmed live (duplicate silently not added, whitespace keeps Add disabled)."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "Data retention's 'Add your own retention period' free-text field: doc (internal-docs/Character limit - Privacy Policy Fields (1).pdf p.13, current-limit table) states the current character limit is 500. Live testing (typing progressively longer strings and reading the submit-time inline error) confirmed the actual live limit is 1000 — which matches the doc's own 'recommended' value on p.20, not its 'current' value. The doc's current-state column is stale; the recommendation appears to have already been implemented."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "Data retention's 'Not yet decided' (Pro+) free-text field: doc (p.13) states the current character limit is 2000. Live testing confirmed the actual live limit is 2500 — again matching the doc's 'recommended' value (p.20) rather than its stated 'current' value. Same stale-doc pattern as the custom-period field above."
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "The 'Not yet decided' free-text field (only reachable on Pro+, since it's disabled on Free per existing case 39498) was never previously live-verified. Live confirms it renders a required field labeled 'Disclose how the retention period is determined.' — the doc (p.6, p.13) only names the field internally as 'not_yet_decided_additional' with a functional description ('Provide additional details about your data retention timeline'), not its exact live copy. Not a conflict, just previously unconfirmed."
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "Verified the 'Disclosure of data' step's full trigger rule live on Company details > Business details, on a clean rebuilt baseline (not the shared Pro account's pre-existing dirty draft state): EU/EEA=Yes alone never triggers it; California=Yes + for-profit=Yes alone (thresholds=No) is a confirmed no-op (matches existing case 39611); the step only appears once California=Yes AND (sell/share=Yes OR thresholds=Yes OR the 'Do you want to include CCPA-compliant clauses even if not legally required?' opt-in=Yes). That opt-in question — referenced only by case 39611's title, never walked through before — is a plain Business-details Yes/No question (not a modal) that only renders once for-profit=Yes and thresholds=No, and toggles the step on/off live with no confirmation dialog (unlike the EU/EEA and California toggles, which prompt 'Remove GDPR/CCPA clauses from your policy?' first). Not part of the internal docs at all; confirmed by direct live testing."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "Disclosure of data's four field-level free-text limits (age-category opt-in/opt-out under 16 and under 13, the delete/correct/access process field, the sensitive-info-exemptions reveal, and both third-party-past-12-months reveal fields) all doc-state a current limit of 2000 (internal-docs/Character limit - Privacy Policy Fields (1).pdf p.12). Live testing (submit-time inline error) confirms the actual limit is 2500 across every one of them — matching the doc's own 'recommended' value (p.19) rather than its 'current' value. Same stale-doc-current-column pattern already found on Data Retention's fields."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "The doc's field-to-question map (p.12) predicts the 'Do you disclose sensitive information for purposes beyond listed exemptions?' = Yes path reveals two fields (categories disclosed + third parties shared with), mirroring the 'disclosed to third parties in the past 12 months' = Yes path. Live only reveals one field: 'Describe the purposes for which you disclose Sensitive Personal Information beyond the listed exemptions.' The third-party-past-12-months path does match the doc's two-field prediction."
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "The 'Do you sell or share the personal information of users in the following categories?' question's three options (Users under 16 / Users under 13 / None) are a mutually-exclusive accordion, confirmed by direct testing (selecting one option collapses whichever was previously expanded and clears its fields from view). Neither doc states this. Also confirmed the under-13 opt-in/opt-out field wording explicitly references parental/guardian consent ('How can parents or guardians of such users opt in to a sale?'), while the under-16 wording does not ('What is the process by which such users can opt in to such a sale?') — a genuine content difference between the two brackets, not just a label swap."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "DPO contact-details and data controller/representative fields: internal-docs/Character limit - Privacy Policy Fields (1).pdf p.13-14 states a current limit of 1000 for both; live enforces 2000, matching the doc's own recommended value (p.20-21) rather than its current column — same stale-doc-current-column pattern already found on Data Retention and Disclosure of Data fields."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "Custom data-transfer-safeguards free-text field ('Add your own'): doc p.14 states current limit 2000; live enforces 3000, matching the doc's recommended value (p.21) — same stale-doc pattern."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "CCPA metrics-link field: doc p.14 states current limit 500; live enforces 2000, matching the doc's recommended value (p.21) — same stale-doc pattern."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "CCPA metrics-link field: doc p.14 marks this field 'Optional'; live requires it once 'Do you process the personal information of 10 million or more California residents?' = Yes, blocking Next with the standard 'fields not completely filled out' banner if left empty."
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "The 'What applicable safeguards have been implemented?' chip-select is multi-select, not mutually exclusive — confirmed live that 'Standard contractual clauses' and 'Add your own' can be selected simultaneously. Neither doc states this."
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "The 'Add your own' custom safeguard slot holds only one entry at a time — adding a new value replaces the existing custom chip rather than appending a second one. Neither doc states this, and it differs from other custom-entry lists elsewhere in the wizard (e.g. Use of data's custom-purpose list) which do accumulate multiple values."
+    },
+    {
+      "type": "live-ahead-of-docs",
+      "detail": "Duplicate-value and whitespace-only rejection on the custom safeguard input (Add button stays disabled for whitespace; exact duplicates are silently not re-added) — same undocumented pattern already found on Data Retention's custom-period field."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "Character-limit audit of Company Details, Collection of Data, and Use of Data (per BACKLOG.md's 'sweep the remaining PPG steps' item): Collection of Data's cookie policy URL field states a current limit of 500 (doc p.9-10); live enforces 2000, matching the doc's own recommended value (p.17, Assessment=Increase)."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "Collection of Data's 'Do Not Track' response field states a current limit of 2000 (doc p.10); live enforces 2500, matching the doc's own recommended value (p.17, Assessment=Increase)."
+    },
+    {
+      "type": "doc-live-mismatch",
+      "detail": "Collection of Data's review/change-process description field (CalOPPA-gated, shown when sell/share=Yes) states a current limit of 2000 (doc p.11); live enforces 2500, matching the doc's own recommended value (p.18, Assessment=Increase)."
+    }
+  ],
+  "cases": [
+    {
+      "id": 39441,
+      "title": "[Privacy Policy Generator] Verify that the wizard renders with all steps and a progress indicator",
+      "preconditions": "User is on the Dashboard for a website with no privacy policy created yet.",
+      "steps": [
+        {
+          "content": "Navigate to the Privacy Policy Generator entry point.",
+          "expected": "The wizard should open with heading \"Privacy Policy\" and subtext \"Generating privacy policy for [website].\""
+        },
+        {
+          "content": "Observe the step sidebar.",
+          "expected": "A vertical list of steps should be displayed: Language preferences, Company details, Collection of data, Use of data, Data retention, Miscellaneous disclosures, Preview & add policy — all steps except Language preferences shown disabled until reached."
+        },
+        {
+          "content": "Observe the progress indicator.",
+          "expected": "An \"X% complete\" label and progress bar should be displayed above the step content, updating as steps are completed (e.g. 20% after Collection of data, 100% at Preview & add policy)."
+        },
+        {
+          "content": "Observe the bottom action bar.",
+          "expected": "\"Previous\", \"Save draft\", and \"Next\" buttons should be displayed; the final step shows \"Generate privacy policy\" instead of \"Next\"."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed via cumulative session evidence (2026-07-14) rather than a fresh no-policy account: heading/subtext, 7-step sidebar list (Disclosure of data correctly absent by default, matching case 2's OR-trigger), disabled-until-reached step gating, progress % updating (0/10/20/40/60/80/100 observed at various points), and the bottom action bar (Previous/Save draft/Next, final step showing \"Generate privacy policy\") were all directly observed at multiple points this session, including the very first Dashboard entry where later steps showed disabled.",
+      "section_id": 1960,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39442,
+      "title": "[Privacy Policy Generator] Verify that returning to the wizard with a saved draft prompts to resume or start over",
+      "preconditions": "A privacy policy draft has already been saved for the site.",
+      "steps": [
+        {
+          "content": "Re-enter the Privacy Policy Generator.",
+          "expected": "A \"Resume your draft?\" dialog should appear with the text \"You have a saved privacy policy draft. Continue where you left off or start over from the beginning.\" and buttons \"Start over\" and \"Resume draft\" (plus a Close icon)."
+        },
+        {
+          "content": "Click \"Resume draft\".",
+          "expected": "The dialog should close and the wizard should open on the last saved step, with previously entered answers intact."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "live-ahead-of-docs — new finding",
+      "section_id": 1960,
+      "audit_status": "no-source-case",
+      "audit_note": "Dialog title/body/buttons (\"Resume your draft?\", \"You have a saved privacy policy draft. Continue where you left off or start over from the beginning.\", \"Start over\", \"Resume draft\") authored from a single live-crawl observation; never independently re-confirmed by grill or this audit. No Suite 6 source to diff against — recommend a live spot-check."
+    },
+    {
+      "id": 39443,
+      "title": "[Privacy Policy Generator] Verify that \"Start over\" on the resume-draft dialog restarts the wizard from Language preferences",
+      "preconditions": "A privacy policy draft has already been saved for the site.",
+      "steps": [
+        {
+          "content": "Trigger the \"Resume your draft?\" dialog.",
+          "expected": "The dialog should appear."
+        },
+        {
+          "content": "Click \"Start over\".",
+          "expected": "[verify against live app] The dialog should close and the wizard should reset to the Language preferences step; whether previously saved answers are cleared or retained was not confirmed during the live crawl (avoided clicking it to protect this session's test state)."
+        }
+      ],
+      "run_type": "",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "not exercised in this pass either, for the same reason — the account's draft was actively needed by many other cases this session (Business details answers, Collection of data selections, Preview content). Recommend testing this once, deliberately, on a disposable account/site right before this section is migrated.",
+      "section_id": 1960,
+      "audit_status": "no-source-case",
+      "audit_note": "The \"Start over\" click-through behavior was explicitly not exercised during the crawl (author avoided it to protect session state, per rewrite_notes) — the case's own expected result is caveated \"[verify against live app]\". Needs a live check on a disposable account before this can be trusted."
+    },
+    {
+      "id": 39444,
+      "title": "[Privacy Policy Generator] Verify that \"Save and continue\" on the unsaved-changes dialog persists edits before navigating",
+      "preconditions": "User is on any Privacy Policy Generator wizard step with at least one field edited since the last save.",
+      "steps": [
+        {
+          "content": "Edit a field on the current step without clicking \"Save draft\".",
+          "expected": "The field should show the edited value."
+        },
+        {
+          "content": "Click a different step in the sidebar.",
+          "expected": "An \"Unsaved changes\" dialog should appear with the text \"You have unsaved changes. Save your draft before switching steps, discard changes and reload your last saved draft, or stay on this step.\" and three buttons: \"Stay here\", \"Discard changes\", \"Save and continue\" (plus a Close icon)."
+        },
+        {
+          "content": "Click \"Save and continue\".",
+          "expected": "The dialog should close, the edited field's value should be saved, and the wizard should navigate to the selected step."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14): dialog text/buttons match word-for-word, and the edit was verified persisted via a full page reload (not just in-memory), confirming a true save-to-backend.",
+      "section_id": 1960,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39445,
+      "title": "[Privacy Policy Generator] Verify that \"Stay here\" dismisses the unsaved-changes dialog without navigating",
+      "preconditions": "User is on any Privacy Policy Generator wizard step with at least one field edited since the last save.",
+      "steps": [
+        {
+          "content": "Edit a field on the current step without saving, then click a different sidebar step.",
+          "expected": "The \"Unsaved changes\" dialog should appear (as in the prior case)."
+        },
+        {
+          "content": "Click \"Stay here\".",
+          "expected": "The dialog should close and the wizard should remain on the current step, with the edited field's unsaved value still present."
+        }
+      ],
+      "run_type": "",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14): dialog title/body/buttons match word-for-word, and Stay here correctly keeps the unsaved edit and remains on the same step.",
+      "section_id": 1960,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39446,
+      "title": "[Privacy Policy Generator] Verify that \"Discard changes\" reverts unsaved edits when navigating away",
+      "preconditions": "User is on any Privacy Policy Generator wizard step with at least one field edited since the last save.",
+      "steps": [
+        {
+          "content": "Edit a field on the current step without saving, then click a different sidebar step.",
+          "expected": "The \"Unsaved changes\" dialog should appear."
+        },
+        {
+          "content": "Click \"Discard changes\".",
+          "expected": "The dialog should close and the wizard should navigate to the selected step."
+        },
+        {
+          "content": "Navigate back to the originally-edited step.",
+          "expected": "The field should show its last-saved value, not the discarded edit."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14) exactly as specced — the field correctly reverted to its last-saved value, scoped only to the edited field/step (contrast with the \"Back to Dashboard\" Discard, which was found to revert the entire draft — see the Save Progress dialog case's notes; the two Discard actions behave differently and only the Dashboard-exit one is defective).",
+      "section_id": 1960,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39447,
+      "title": "[Privacy Policy Generator] Verify that \"Preview Privacy Policy\" opens a policy-preview popup independent of wizard step progress",
+      "preconditions": "User is on any Privacy Policy Generator wizard step.",
+      "steps": [
+        {
+          "content": "Click the \"Preview Privacy Policy\" button (top of the step content area, distinct from the final \"Preview & add policy\" step).",
+          "expected": "A popup should open showing the privacy policy preview, loading without errors from whatever has been entered so far."
+        },
+        {
+          "content": "Close the popup.",
+          "expected": "The popup should close and the user should remain on the same wizard step, with no data changed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC10"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14): the popup opens with the exact title \"Preview privacy policy\", loads the generated policy with no errors, additionally shows a Free-plan \"Your privacy policy is missing a few clauses\" upgrade nudge (bonus finding, not required by this case), and Close returns to the same wizard step with no data changed.",
+      "section_id": 1960,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39448,
+      "title": "[Privacy Policy Generator] Verify that \"Back to Dashboard\" from any wizard step shows a Save Progress confirmation dialog",
+      "preconditions": "User is on any Privacy Policy Generator wizard step with entered or modified data that has not been saved.",
+      "steps": [
+        {
+          "content": "Click \"Back to Dashboard\".",
+          "expected": "A dialog titled \"Save progress?\" should appear with body text \"Save a draft to continue where you left off when you return.\" and buttons \"Discard\", \"Save draft\" (plus a Close icon) — confirmed word-for-word live."
+        },
+        {
+          "content": "Click \"Discard\".",
+          "expected": "The dialog should close and the user should be navigated to the Dashboard. [APP DEFECT — confirmed broad] On live re-test, Discard reverted the ENTIRE draft, not just the current step's unsaved edit: after discarding one unsaved DPO-field edit on Miscellaneous disclosures, Company details > Contact information (Name/Website/Email/URL-to-contact/Full address) came back completely blank, progress dropped to 10% complete, and the \"Disclosure of data\" step disappeared from the sidebar (sell/share=Yes reverted). This is a full-draft rollback to some earlier checkpoint, not a scoped undo of the current field — confirmed reproducible, root cause (which checkpoint it reverts to) not determinable from the UI alone; flag to engineering as a data-loss risk."
+        },
+        {
+          "content": "Repeat and click \"Save draft\" instead.",
+          "expected": "A \"Draft saved successfully!\" message should be shown and the user should be navigated to the Dashboard."
+        },
+        {
+          "content": "Repeat and click the Close (X) icon instead.",
+          "expected": "The dialog should close, the user should remain on the current wizard step, and all previously entered information should remain unchanged."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC152-155"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "dialog text/buttons confirmed live exactly (2026-07-14). Discard's over-broad revert is a real, reproduced concern — recorded as an open defect rather than silently treated as case-authoring error. Save-draft and Close-icon sub-paths not independently re-run this pass after the Discard finding; still need direct confirmation.",
+      "section_id": 1960,
+      "audit_status": "no-source-case",
+      "audit_note": "Dialog title/body/buttons confirmed live exactly, and the Discard over-broad-revert defect was independently reproduced — but per this case's own rewrite_notes, the \"Draft saved successfully!\" message (Save-draft sub-path, step 3) and the Close-icon sub-path (step 4) were \"not independently re-run this pass after the Discard finding; still need direct confirmation.\" Needs a live check on those two remaining sub-paths."
+    },
+    {
+      "id": 39449,
+      "title": "[Privacy Policy Generator] Verify that the Language preferences step renders a primary-language selector and a Basic+ multi-language section",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "Open the Language preferences step.",
+          "expected": "A primary-language selector should be displayed offering English, Français, Deutsch, Italiano, and Español."
+        },
+        {
+          "content": "Select a primary language (e.g. English).",
+          "expected": "The language should be applied as Primary, and a \"Generate policy in multiple languages\" section labeled \"Basic+\" should appear below."
+        },
+        {
+          "content": "Note the plan-gating state of the multi-language section.",
+          "expected": "Basic plan and higher: secondary-language buttons enabled. Free plan: secondary-language buttons disabled with the text \"Upgrade to Basic or above to enable multi-language support.\" (see 11. Billing & Upgrade > Plan Gates for the locked-state verification)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/PPG - Questionnaire & Clauses - Privacy Policy.pdf p.1"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "plan-gated render case per migration-conventions §11 — factual mention, not itself a re-test of the lock",
+      "section_id": 1961,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted plan-gate copy \"Upgrade to Basic or above to enable multi-language support.\" authored from live crawl only; not independently re-confirmed since. Needs a live check."
+    },
+    {
+      "id": 39450,
+      "title": "[Privacy Policy Generator] Verify that clicking Next on Language preferences without a primary language shows a validation message",
+      "preconditions": "Language preferences step; no primary language selected.",
+      "steps": [
+        {
+          "content": "Leave all language options unselected and click \"Next\".",
+          "expected": "\"Please make sure that all fields are completely filled out before we continue with the process.\" should be displayed; the wizard should remain on the Language Preferences step."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC03"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14) exactly as specced.",
+      "section_id": 1961,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39451,
+      "title": "[Privacy Policy Generator] Verify that multiple secondary languages can be selected simultaneously on Basic/Pro/Ultimate plans",
+      "preconditions": "User has a Basic, Pro, or Ultimate plan. Language preferences step, a primary language is selected.",
+      "steps": [
+        {
+          "content": "Select more than one secondary language from the multiple-language section.",
+          "expected": "All selected languages should display as selected and remain selected simultaneously (unlike the primary-language selector, which allows only one)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC07"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14) on a Pro account: selected Français and Deutsch as secondary languages, both remained selected simultaneously (verified via selected-state CSS class), unlike the primary-language selector which is single-select.",
+      "section_id": 1961,
+      "audit_status": "not-applicable",
+      "audit_note": "No specific on-page text quoted; behavior/state-only assertions."
+    },
+    {
+      "id": 39452,
+      "title": "[Privacy Policy Generator] Verify that an unsaved primary-language change is not retained after a browser refresh",
+      "preconditions": "A primary language has been previously saved (via Save draft or Next).",
+      "steps": [
+        {
+          "content": "Select a different primary language without saving.",
+          "expected": "The newly selected language should show as selected."
+        },
+        {
+          "content": "Refresh the browser.",
+          "expected": "The page should reload."
+        },
+        {
+          "content": "Observe the selected primary language.",
+          "expected": "The previously saved primary language should be displayed as selected again; the unsaved selection should not be retained."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC12"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14): saved English, then selected Français without saving, refreshed — English (saved) remained selected, Français (unsaved) reverted, exactly as specced.",
+      "section_id": 1961,
+      "audit_status": "not-applicable",
+      "audit_note": "No specific on-page text quoted; behavior/state-only assertions."
+    },
+    {
+      "id": 39453,
+      "title": "[Privacy Policy Generator] Verify that the Company details > Contact information tab renders with all required fields",
+      "preconditions": "User is on Company details step, Contact information tab (default tab).",
+      "steps": [
+        {
+          "content": "Observe the Contact information tab.",
+          "expected": "Fields should be displayed: \"Name (either company or individual)\" (placeholder \"John Doe\"), \"Website URL\" (placeholder \"www.yoursite.com\"), \"Email address\" (placeholder \"john@yoursite.com\"), \"URL to contact (if applicable)\" (placeholder \"www.yoursite.com/contact\"), and \"Full address\" (placeholder \"Company name / Street address / City, State / ZIP/postal code / Country\")."
+        },
+        {
+          "content": "Note the sidebar tip.",
+          "expected": "A \"Why company details matter\" note should be displayed: \"Your privacy policy must clearly state who is responsible for handling personal data. Laws like GDPR and CCPA require you to include accurate company or contact information so users know who to reach for privacy-related requests.\""
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1969,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted field labels/placeholders and the \"Why company details matter\" sidebar paragraph authored from a single live-crawl pass, never re-confirmed. Needs a live check."
+    },
+    {
+      "id": 39454,
+      "title": "[Privacy Policy Generator] Verify that switching to Business details before Contact information is complete is blocked with inline validation",
+      "preconditions": "User is on Company details > Contact information tab with one or more required fields empty.",
+      "steps": [
+        {
+          "content": "Click the \"Business details\" tab.",
+          "expected": "The tab switch should be blocked; Contact information should remain active."
+        },
+        {
+          "content": "Observe the empty required fields.",
+          "expected": "Each empty required field should show inline text \"This field is required\" underneath it; \"Full address\" should show \"Please enter valid address\" if empty/invalid."
+        },
+        {
+          "content": "Observe the page-level alert.",
+          "expected": "A banner should display: \"Please make sure that all fields are completely filled out before we continue with the process.\""
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1969,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted inline-validation strings (\"This field is required\", \"Please enter valid address\") and the page-level banner text authored from live crawl only; not independently re-confirmed for this specific case (the banner text itself has been verified verbatim elsewhere, e.g. cases 39450/39471, so risk is low, but this case wasn't itself re-checked)."
+    },
+    {
+      "id": 39455,
+      "title": "[Privacy Policy Generator] Verify that Contact Information fields enforce their individual format and character-limit validations",
+      "preconditions": "Company details > Contact information tab; all other fields filled with valid data except the field under test.",
+      "steps": [
+        {
+          "content": "Enter a Name of 300 characters or fewer.",
+          "expected": "Accepted without a validation message."
+        },
+        {
+          "content": "Enter a Name of more than 300 characters.",
+          "expected": "Message \"Please limit your response to 300 characters.\" should be shown."
+        },
+        {
+          "content": "Enter a valid Website URL and move focus away.",
+          "expected": "Accepted without a validation message."
+        },
+        {
+          "content": "Enter an invalid Website URL format and move focus away or click Next.",
+          "expected": "Message \"Please enter valid URL\" should be shown; the invalid value should not be accepted."
+        },
+        {
+          "content": "Enter a Website URL of more than 500 characters.",
+          "expected": "Message \"Please limit your response to 500 characters.\" should be shown."
+        },
+        {
+          "content": "Enter an invalid Email Address format and move focus away.",
+          "expected": "Message \"Please enter valid email address\" should be shown."
+        },
+        {
+          "content": "Leave \"URL to Contact\" empty and click Next (all other fields valid).",
+          "expected": "No validation error should be shown for this field; the user should be able to proceed, confirming it is optional."
+        },
+        {
+          "content": "Enter a \"URL to Contact\" of more than 2000 characters.",
+          "expected": "Message \"Please limit your response to 2000 characters.\" should be shown."
+        },
+        {
+          "content": "Enter a Full Address of more than 1000 characters.",
+          "expected": "Message \"Please limit your response to 1000 characters.\" should be shown."
+        }
+      ],
+      "run_type": "",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC020-021",
+        "TC022-024",
+        "TC025-026",
+        "TC027-028",
+        "TC029-031"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14) — every message matched exactly: Name 300-char limit, Website URL invalid-format (\"Please enter valid URL\") and 500-char limit, Email invalid-format (\"Please enter valid email address\"), URL to Contact confirmed optional (proceeds with it empty) and its 2000-char limit, Full Address 1000-char limit. All messages verified via exact string match against the rendered page.",
+      "section_id": 1969,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39456,
+      "title": "[Privacy Policy Generator] Verify the tooltip for the URL to Contact field",
+      "preconditions": "Company details > Contact information tab.",
+      "steps": [
+        {
+          "content": "Hover over the tooltip icon next to \"URL to Contact (if applicable)\".",
+          "expected": "Tooltip should display: \"The ‘URL to contact’ refers to the link users can use to reach support in case of issues or questions regarding the privacy policy. This is not a mandatory field.\" (note: live uses typographic curly quotes ‘ ’ around ‘URL to contact’, not straight quotes)."
+        },
+        {
+          "content": "Move the cursor away.",
+          "expected": "The tooltip should disappear."
+        }
+      ],
+      "run_type": "",
+      "source_case_ids": [
+        "internal-docs/PPG - Questionnaire & Clauses - Privacy Policy.pdf p.2",
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC037"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14) except quote style: draft used straight quotes around ‘URL to contact’, live renders typographic curly quotes ‘ ’ there. Minor character-level fix per the exact-match standard; body text otherwise verbatim.",
+      "section_id": 1969,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39457,
+      "title": "[Privacy Policy Generator] Verify that answering the EU/EEA and California user questions updates the applicable-law context",
+      "preconditions": "User is on Company details > Business details tab, Contact information already complete.",
+      "steps": [
+        {
+          "content": "Answer \"Do you have users in EU/EEA?\" = Yes.",
+          "expected": "\"Yes\" should be selected."
+        },
+        {
+          "content": "Answer \"Do you have users in California?\" = Yes.",
+          "expected": "\"Yes\" should be selected; a new question \"Are you a 'for-profit' organisation?\" should appear below, labeled \"Pro+\"."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/PPG - Questionnaire & Clauses - Privacy Policy.pdf p.1"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1970,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted label \"Are you a 'for-profit' organisation?\" authored from live crawl only; not re-confirmed since. Needs a live check."
+    },
+    {
+      "id": 39458,
+      "title": "[Privacy Policy Generator] Verify that the Disclosure of data step appears in the wizard when any CCPA/CalOPPA-qualifying condition is met",
+      "preconditions": "User is on Company details > Business details tab.",
+      "steps": [
+        {
+          "content": "Confirm the step sidebar before answering any Business details question.",
+          "expected": "Sidebar should list 6 steps: Language preferences, Company details, Collection of data, Use of data, Data retention, Miscellaneous disclosures, Preview & add policy — no \"Disclosure of data\" step present."
+        },
+        {
+          "content": "Answer \"Do you sell or share the personal information of users?\" = Yes, leaving CCPA thresholds and Include-CCPA-clauses at their default/No state.",
+          "expected": "A 7th step, \"Disclosure of data\", should appear between \"Use of data\" and \"Data retention\"."
+        },
+        {
+          "content": "Revert sell/share to No, then (on a Pro/Ultimate plan) set \"Do you cross one or more of the following thresholds?\" = Yes, or \"Do you want to include CCPA-compliant clauses even if not legally required?\" = Yes instead.",
+          "expected": "The \"Disclosure of data\" step should appear via this alternate trigger too."
+        },
+        {
+          "content": "Set all three qualifying conditions (sell/share, thresholds, include-clauses) to No.",
+          "expected": "The \"Disclosure of data\" step should be removed from the sidebar."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC077"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "revised — the trigger is an OR across three conditions (sell/share, CCPA thresholds, Include CCPA clauses), not sell/share alone as first observed live; step 3 requires a Pro/Ultimate account. Step 3 confirmed live on a Pro account (2026-07-14): with sell/share reverted to No, both thresholds=Yes alone and (thresholds=No + include-clauses=Yes) independently kept \"Disclosure of data\" visible; setting all three to No removed it. Full three-way OR logic confirmed.",
+      "section_id": 1970,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39459,
+      "title": "[Privacy Policy Generator] Verify that answering \"sell or share personal information\" = Yes reveals the sold/shared categories and third-party free-text fields",
+      "preconditions": "Company details > Business details tab.",
+      "steps": [
+        {
+          "content": "Answer \"Do you sell or share the personal information of users?\" = Yes.",
+          "expected": "Two free-text fields should appear: \"Provide the categories of personal information that are sold or shared\" (placeholder \"List data types, e.g. contact details, browsing data\") and \"For each category of personal information that is sold or shared, the categories of third parties to which such information is sold or shared\" (placeholder \"Name third parties, e.g. marketing partners, analytics tools\")."
+        },
+        {
+          "content": "Enter values into both fields (e.g. \"Contact details, browsing behavior data\" / \"Marketing partners, analytics providers\").",
+          "expected": "Both fields should accept and retain the entered text."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/PPG - Questionnaire & Clauses - Privacy Policy.pdf p.1-2"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1970,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted field labels/placeholders for the sold/shared-categories and third-parties free-text fields authored from live crawl only; not re-confirmed since."
+    },
+    {
+      "id": 39460,
+      "title": "[Privacy Policy Generator] Verify that the categories-sold-or-shared and third-parties free-text fields enforce a 2000-character limit via submit-time validation",
+      "preconditions": "Company details > Business details tab. \"Do you sell or share the personal information of users?\" = Yes.",
+      "steps": [
+        {
+          "content": "Enter valid text (under 2000 characters) into \"Provide the categories of personal information that are sold or shared\" and the third-parties field.",
+          "expected": "Both fields should accept the text without a validation message."
+        },
+        {
+          "content": "Enter more than 2000 characters into either field and click \"Next\".",
+          "expected": "A field-level message \"Please limit your response to 2000 characters.\" should appear below the field, alongside the page-level \"Please make sure that all fields are completely filled out before we continue with the process.\" banner, and the wizard should not proceed until the value is reduced to 2000 characters or fewer."
+        }
+      ],
+      "run_type": "",
+      "source_case_ids": [
+        "live crawl",
+        "both internal spec PDFs (500-char limit stated)",
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC072-075"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live in this grill pass (2026-07-14): entered 2001 chars, clicked Next, got exactly \"Please limit your response to 2000 characters.\" Both internal spec docs' stated 500-char limit is stale; the 'increase to 2000' recommendation has already shipped. Same mechanism confirmed for Do-Not-Track response and review/update-process description (2500 chars each) and the Public Task / Legitimate Interest justification fields (2000 chars each) — not individually re-cased, this is the representative pattern for all of them.",
+      "section_id": 1970,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39461,
+      "title": "[Privacy Policy Generator] Verify that a Pro/Ultimate account can progress through the full CCPA thresholds and clauses question chain",
+      "preconditions": "User has a Pro or Ultimate subscription. Company details > Business details tab. \"Do you have users in California?\" = Yes. \"Are you a 'for-profit' organisation?\" = Yes.",
+      "steps": [
+        {
+          "content": "Observe \"Do you cross one or more of the following thresholds?\".",
+          "expected": "Should be visible with Yes/No options and the three threshold criteria listed verbatim: \"$25 million or more gross revenue in the previous calendar year.\"; \"Process information for 100,000 or more customers\"; \"Earns 50% or more revenue from the sale of the personal information of the customers (including those shared for of cross-context behavioural advertising)\" (note: this third bullet's live wording — including the \"shared for of\" phrasing — differs from a cleaner paraphrase; quote it exactly, not the smoother alternative)."
+        },
+        {
+          "content": "Answer \"No\" to the thresholds question.",
+          "expected": "A further question \"Do you want to include CCPA-compliant clauses even if not legally required?\" should appear."
+        },
+        {
+          "content": "Answer \"Yes\" to the thresholds question instead (reverting the include-clauses answer).",
+          "expected": "The \"Disclosure of data\" step should appear in the left navigation above \"Data retention\"."
+        },
+        {
+          "content": "Set the thresholds answer back to \"No\" and \"include clauses\" to \"Yes\".",
+          "expected": "The \"Disclosure of data\" step should remain visible (confirming the OR-trigger logic)."
+        },
+        {
+          "content": "Set both the thresholds and \"include clauses\" answers to \"No\" (with sell/share also \"No\").",
+          "expected": "The \"Disclosure of data\" step should be removed from the left navigation."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC051-059"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14) on a Pro account — full chain works exactly as specced (each of the 3 OR-conditions independently shows/keeps/hides the Disclosure of data step). MISMATCH found: the draft paraphrased the third threshold bullet; live text is \"Earns 50% or more revenue from the sale of the personal information of the customers (including those shared for of cross-context behavioural advertising)\" — extracted verbatim via DOM query, including its slightly awkward \"shared for of\" phrasing. Not plan_gate_flag: this case verifies the working chain on a paid tier, not a locked state, so it stays in the feature section rather than routing to Plan Gates.",
+      "section_id": 1970,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39462,
+      "title": "[Privacy Policy Generator] Verify that toggling \"users in California?\" from Yes to No shows a confirmation dialog before removing CCPA clauses",
+      "preconditions": "Company details > Business details tab. \"Do you have users in California?\" is currently Yes.",
+      "steps": [
+        {
+          "content": "Click \"No\" on \"Do you have users in California?\".",
+          "expected": "A dialog titled \"Remove CCPA clauses from your policy?\" should appear with body text \"If you remove this clause, all CCPA-related sections will be excluded from your policy. Your policy may no longer meet California's data privacy requirements.\" and buttons \"Keep clause\", \"Remove\", \"Close\"."
+        },
+        {
+          "content": "Click \"Remove\".",
+          "expected": "The dialog should close, the answer should switch to \"No\", and CCPA-only questions (e.g. \"for-profit organisation\") should no longer be shown."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "this is a data-removal confirmation, not an upgrade nudge — not routed to Plan Gates",
+      "section_id": 1970,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted dialog title/body/buttons (\"Remove CCPA clauses from your policy?\", body text, \"Keep clause\"/\"Remove\"/\"Close\") authored from live crawl only; not independently re-confirmed since — contrast with the sibling GDPR-removal dialog (case 39464), which was re-confirmed word-for-word during grill; this CCPA-side dialog wasn't."
+    },
+    {
+      "id": 39463,
+      "title": "[Privacy Policy Generator] Verify that \"Keep clause\" cancels the California removal toggle",
+      "preconditions": "Company details > Business details tab. \"Do you have users in California?\" is currently Yes.",
+      "steps": [
+        {
+          "content": "Click \"No\" on \"Do you have users in California?\".",
+          "expected": "The confirmation dialog appears."
+        },
+        {
+          "content": "Click \"Keep clause\".",
+          "expected": "The dialog should close and the answer should remain \"Yes\"."
+        }
+      ],
+      "run_type": "",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "low-traffic cancel path",
+      "section_id": 1970,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted button \"Keep clause\" — same gap as its sibling case 39462, never independently re-confirmed."
+    },
+    {
+      "id": 39464,
+      "title": "[Privacy Policy Generator] Verify that toggling \"users in EU/EEA?\" from Yes to No shows a confirmation dialog before removing GDPR clauses",
+      "preconditions": "Company details > Business details tab. \"Do you have users in EU/EEA?\" is currently Yes.",
+      "steps": [
+        {
+          "content": "Click \"No\" on \"Do you have users in EU/EEA?\".",
+          "expected": "A dialog titled \"Remove GDPR clauses from your policy?\" should appear with body text \"If you remove this clause, all GDPR-related sections will be excluded from your policy. Your policy may no longer meet EU/EEA data protection requirements.\" and buttons \"Keep clause\", \"Remove\", \"Close\"."
+        },
+        {
+          "content": "Click \"Keep clause\".",
+          "expected": "The dialog should close and the answer should remain \"Yes\"."
+        },
+        {
+          "content": "Repeat and click \"Remove\" instead.",
+          "expected": "The dialog should close, the answer should switch to \"No\", and GDPR-specific questions/fields should no longer be shown."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC041-044",
+        "TC048-049"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14) — dialog title/body/buttons match exactly, Keep clause retains Yes, Remove switches to No and hides GDPR-specific fields (for-profit question was already gone since California was independently set to No earlier in this pass; the EU/EEA-specific effect itself confirmed via the answer flipping and dialog behavior).",
+      "section_id": 1970,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39465,
+      "title": "[Privacy Policy Generator] Verify the informational tooltips for the EU/EEA and California user questions",
+      "preconditions": "Company details > Business details tab.",
+      "steps": [
+        {
+          "content": "Hover over the tooltip icon next to \"Do you have users in EU/EEA?\".",
+          "expected": "Tooltip should display \"Applies to any business that collects and processes the information of EU/EEA residents. List of EU/EEA countries:\" followed by a clickable link reading \"https://www.gov.uk/eu-eea\"."
+        },
+        {
+          "content": "Hover over the tooltip icon next to \"Do you have users in California?\".",
+          "expected": "Tooltip should display \"The CCPA does not mention anything about accidental or one-time visitors. However, if your service does not target users from California, you may choose not to answer 'Yes' to this question, although it is recommended to do so.\""
+        }
+      ],
+      "run_type": "",
+      "source_case_ids": [
+        "internal-docs/PPG - Questionnaire & Clauses - Privacy Policy.pdf p.1",
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC044",
+        "TC050"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "MISMATCH fixed (2026-07-14): EU/EEA tooltip live text is \"Applies to any business that collects and processes the information of EU/EEA residents. List of EU/EEA countries:\" plus a link to https://www.gov.uk/eu-eea — the draft's original expected text omitted the \"List of EU/EEA countries:\" lead-in sentence before the link. California tooltip confirmed verbatim, no changes.",
+      "section_id": 1970,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39466,
+      "title": "[Privacy Policy Generator] Verify the informational tooltip for the for-profit organisation question",
+      "preconditions": "Company details > Business details tab. \"Do you have users in California?\" = Yes.",
+      "steps": [
+        {
+          "content": "Hover over the tooltip icon next to \"Are you a 'for-profit' organisation?\".",
+          "expected": "Tooltip should display \"Under the CCPA/CPRA, only for-profit businesses that collect, share, or sell personal information of California residents are required to comply. Nonprofits and government entities are generally exempt.\""
+        }
+      ],
+      "run_type": "",
+      "source_case_ids": [
+        "internal-docs/PPG - Questionnaire & Clauses - Privacy Policy.pdf p.1",
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC065"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14) word-for-word, and confirmed the tooltip is reachable via hover even while the Yes/No control itself is Pro+-locked/disabled.",
+      "section_id": 1970,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39467,
+      "title": "[Privacy Policy Generator] Verify that Collection of data > Personal information renders grouped personal and sensitive data chip-selectors",
+      "preconditions": "User is on Collection of data step, Personal information tab (default tab).",
+      "steps": [
+        {
+          "content": "Observe the \"Personal information\" group.",
+          "expected": "Four sub-sections should be displayed: \"Personal data\" (Name, Address, Email address, Identification ID number, Location data, Birthday, Political and religious affiliations, Biometric information), \"Behavioral & financial data\" (Internet browsing history, Income and similar information, Commercial information), \"Professional & educational data\" (Professional or employment related information, Educational information that is not publicly available), and \"Custom data you collect\" (free-text input + \"Add\" button)."
+        },
+        {
+          "content": "Observe the \"Sensitive personal information\" group.",
+          "expected": "Six sub-sections should be displayed: \"Identity & demographics\" (Racial and ethnic origin, Religious or philosophical beliefs, Genetic information, Biometric information, Health information, Information regarding sex life, Sexual orientation), \"Political opinions\" (Political opinion), \"Accounts & authentication\" (State ID number, Drivers' licences, Passport numbers, Account login information, Social security number), \"Location tracking\" (Precise geolocation data, Citizenship or immigration status), \"Communications & financial data\" (Contents of emails or text messages, Debit or credit card numbers combined with any security or access code), and \"Custom data you collect\" (free-text input + \"Add\" button)."
+        },
+        {
+          "content": "Note the sidebar tips.",
+          "expected": "\"Why personal information matters\" and \"Be accurate and specific\" notes should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1971,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted category/sub-section labels (Personal data, Behavioral & financial data, Professional & educational data, Sensitive personal information groups, sidebar tips) authored from live crawl only; not re-confirmed since — a long, detailed list, so worth a live check."
+    },
+    {
+      "id": 39468,
+      "title": "[Privacy Policy Generator] Verify that selecting personal and sensitive data chips marks them selected, including custom entries",
+      "preconditions": "User is on Collection of data > Personal information tab.",
+      "steps": [
+        {
+          "content": "Click the \"Name\" chip under Personal data.",
+          "expected": "The chip should switch to a selected visual state and remain selected on re-render."
+        },
+        {
+          "content": "Click the \"Racial and ethnic origin\" chip under Identity & demographics.",
+          "expected": "The chip should switch to a selected visual state."
+        },
+        {
+          "content": "Type a custom value (e.g. \"Loyalty program ID\") into the \"Custom data you collect\" field under Personal data and click \"Add\".",
+          "expected": "The value should be added as a new selected chip in that sub-section."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1971,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted chip labels (\"Name\", \"Racial and ethnic origin\") authored from live crawl only; not re-confirmed since."
+    },
+    {
+      "id": 39469,
+      "title": "[Privacy Policy Generator] Verify that GDPR/CCPA-specific data categories require the correct combination of EU/EEA, thresholds, and clause answers to render as selectable",
+      "preconditions": "Collection of data > Personal information tab; varies EU/EEA and CCPA thresholds/Include-CCPA-clauses answers per scenario.",
+      "steps": [
+        {
+          "content": "With EU/EEA = No and CCPA thresholds/Include-CCPA-clauses = No, observe the Personal/Sensitive Information sections.",
+          "expected": "Only the default (non-GDPR, non-CCPA) categories should be shown; GDPR-specific (Identification ID number, Location data) and CCPA-specific (Birthday, Internet browsing history, Account login information, Precise geolocation data, Contents of emails or text messages, etc.) categories should not be displayed at all."
+        },
+        {
+          "content": "With EU/EEA = Yes and CCPA not applicable, observe.",
+          "expected": "GDPR-specific categories (Identification ID number, Location data under Personal data; a new \"Political opinions\" section under Sensitive personal information) should be shown in addition to the defaults; CCPA-specific categories should still not be displayed."
+        },
+        {
+          "content": "On a Pro/Ultimate account with either thresholds or include-clauses = Yes, EU/EEA = No, observe.",
+          "expected": "CCPA-specific categories should be shown in addition to the defaults: Birthday, Political and religious affiliations, Biometric information added to Personal data; new sections \"Behavioral & financial data\", \"Accounts & authentication\", \"Location tracking\", and \"Communications & financial data\" appear under Sensitive personal information. GDPR-specific categories (Identification ID number, Location data, Political opinions) should not be displayed. On this Pro account the CCPA-specific chips (e.g. Birthday) render as fully normal, unlocked, selectable chips — no lock icon, no disabled state, no Pro+ badge (that gating only applies on Free plan)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC083-087"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "conflict fully resolved via live re-verification across both Free and Pro accounts (2026-07-14). Steps 1-3 confirmed live on a Pro account by toggling EU/EEA and CCPA-threshold answers directly and observing the Personal/Sensitive Information sections change in real time. Step 4 cross-references the Free-plan Birthday-chip case's own resolution rather than duplicating it.",
+      "section_id": 1971,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39470,
+      "title": "[Privacy Policy Generator] Verify that Custom Data You Collect entries validate length, duplicates, empty input, and whitespace, and support add/remove — Personal and Sensitive sections",
+      "preconditions": "Collection of data > Personal information tab.",
+      "steps": [
+        {
+          "content": "Enter a custom data label of up to 500 characters under \"Custom data you collect\" (Personal data) and click \"Add (✓)\".",
+          "expected": "The entry should be added as a separate chip/card below the section, and the input field should clear."
+        },
+        {
+          "content": "Enter a custom data label of more than 500 characters.",
+          "expected": "The \"Add (✓)\" button should remain disabled, or an appropriate validation message should be shown, and the entry should not be added."
+        },
+        {
+          "content": "Enter a value with leading/trailing spaces and add it.",
+          "expected": "The displayed entry should have the whitespace trimmed."
+        },
+        {
+          "content": "Enter the same value again and attempt to add it.",
+          "expected": "The duplicate should be rejected; only one instance should remain in the list."
+        },
+        {
+          "content": "Attempt to add an empty value.",
+          "expected": "No entry should be created."
+        },
+        {
+          "content": "Click the \"Remove (-)\" button on an existing custom entry.",
+          "expected": "The entry should be removed; other entries should remain unaffected."
+        },
+        {
+          "content": "Repeat the above for \"Custom data you collect\" under Sensitive personal information.",
+          "expected": "Same behavior should apply."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC090-103"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14) on the Personal data custom-data section: add, whitespace-trim, duplicate-rejection, empty-rejection, 500-char limit (\"Please limit your response to 500 characters.\" exact match), and remove all behave as specced. Sensitive-section repeat not independently re-run — same component pattern, representative per equivalence partitioning.",
+      "section_id": 1971,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39471,
+      "title": "[Privacy Policy Generator] Verify that incomplete mandatory fields in Personal Information block progression to Use of Data even after Additional Information is complete",
+      "preconditions": "Collection of data step; Additional Information tab fully completed; one or more mandatory fields/selections in Personal Information left incomplete.",
+      "steps": [
+        {
+          "content": "Click \"Next\" from the Additional Information tab.",
+          "expected": "The application should validate both subsections; the wizard should not proceed to Use of Data, and the page-level message \"Please make sure that all fields are completely filled out before we continue with the process.\" should be shown."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC149"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14): with Additional Information fully complete and Personal Information empty, Next stayed on Collection of data and showed the exact banner. Selecting one Personal-info chip then let Next proceed to the Additional information tab (and onward once that tab was also completed), confirming Personal Information was genuinely the blocker, not a repeat of the unrelated persistent-banner defect found earlier on this same tab.",
+      "section_id": 1971,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39472,
+      "title": "[Privacy Policy Generator] Verify that the Collection of data step shows a completed checkmark once both subsections are fully filled",
+      "preconditions": "Collection of data step.",
+      "steps": [
+        {
+          "content": "Complete all mandatory fields in both Personal Information and Additional Information, then click Next.",
+          "expected": "The application should navigate to Use of Data, and the \"Collection of data\" entry in the left navigation should be marked complete with a checkmark icon."
+        },
+        {
+          "content": "Click the \"Personal Information\" label in the left navigation (under the completed Collection of Data step).",
+          "expected": "The wizard should navigate back to the Personal Information subsection with all previously entered data retained."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC150-151"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14): completing both subsections and clicking Next navigated to Use of Data with Collection of data shown enabled/complete in the sidebar (no longer disabled). Clicking \"Collection of data\" in the left navigation (rather than a distinct \"Personal Information\" sub-item, which doesn't exist as its own nav entry) returned to the Personal Information tab with the prior chip selection still visually selected.",
+      "section_id": 1971,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39473,
+      "title": "[Privacy Policy Generator] Verify that Collection of data > Additional information renders tracking, DNT, age, legal-basis, and review-process questions",
+      "preconditions": "User is on Collection of data step, Additional information tab.",
+      "steps": [
+        {
+          "content": "Observe the field list.",
+          "expected": "Fields should be displayed in order: \"Do you use cookies or other tracking technologies?\" (Yes/No), \"How do you respond to 'Do Not Track' requests?\" (free-text, placeholder \"Explain how your website handles these requests.\"), \"Do you collect information about users below the age of 16?\" (Yes/No), \"What are the legal bases for collecting the data?\" (chip-select: Consent, Performing contractual obligations, Legal obligations, Public task, Legitimate interest of the controller, Vital interest), and \"Do you have a process that allows users to review and request changes to their information?\" (Yes/No)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1972,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted field list (cookies/tracking question, DNT placeholder, age question, legal-basis chip-select options, review-process question) authored from live crawl only; not re-confirmed since."
+    },
+    {
+      "id": 39474,
+      "title": "[Privacy Policy Generator] Verify that answering \"use cookies or tracking technologies\" = Yes reveals a required cookie-policy-link field",
+      "preconditions": "Collection of data > Additional information tab.",
+      "steps": [
+        {
+          "content": "Answer \"Do you use cookies or other tracking technologies?\" = Yes.",
+          "expected": "A field \"Add link to your cookie policy\" should appear (placeholder \"www.yourwebsite.com/cookie-policy\"), with helper text \"Need a cookie policy for your website? Click here to create one in minutes!\" linking to the Cookie Policy generator."
+        },
+        {
+          "content": "Enter a URL (e.g. \"https://www.hd.com/cookie-policy\").",
+          "expected": "The value should be retained."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1972,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted field label/placeholder/helper text (\"Add link to your cookie policy\", helper text linking to the Cookie Policy generator) authored from live crawl only; not re-confirmed since."
+    },
+    {
+      "id": 39475,
+      "title": "[Privacy Policy Generator] Verify that answering the review-and-change-information question = Yes reveals a free-text description field",
+      "preconditions": "Collection of data > Additional information tab.",
+      "steps": [
+        {
+          "content": "Answer \"Do you have a process that allows users to review and request changes to their information?\" = Yes.",
+          "expected": "A field \"Describe how users can review or update their data.\" should appear."
+        },
+        {
+          "content": "Enter a description (e.g. \"Users can email privacy@hd.com to request access to or correction of their personal information.\").",
+          "expected": "The value should be retained."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1972,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted field label authored from live crawl only; not re-confirmed since."
+    },
+    {
+      "id": 39476,
+      "title": "[Privacy Policy Generator] Verify that selecting a legal basis for collection updates the chip-select state",
+      "preconditions": "Collection of data > Additional information tab.",
+      "steps": [
+        {
+          "content": "Click \"Consent\" under \"What are the legal bases for collecting the data?\".",
+          "expected": "The \"Consent\" chip should switch to a selected visual state; other options remain unselected until separately chosen."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1972,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted chip label \"Consent\" authored from live crawl only; not re-confirmed since (low risk, single short label)."
+    },
+    {
+      "id": 39477,
+      "title": "[Privacy Policy Generator] Verify that \"Public task\" and \"Legitimate interest of the controller\" reveal a mandatory, character-limited, removable justification field",
+      "preconditions": "Collection of data > Additional information tab.",
+      "steps": [
+        {
+          "content": "Click \"Public task\" under \"What are the legal bases for collecting the data?\".",
+          "expected": "A field \"What is the said Public task?\" should appear, with its \"Confirm\" button (icon-only, blue) disabled until text is entered."
+        },
+        {
+          "content": "Enter a description (up to 2000 characters) and click \"Confirm\".",
+          "expected": "The description should save successfully; the button should change to a red icon-only button with aria-label \"Remove\" (a minus/trash icon, not literal visible text)."
+        },
+        {
+          "content": "Click \"Next\" without entering a description, having selected \"Public task\".",
+          "expected": "The wizard should not proceed; the page-level \"Please make sure that all fields are completely filled out before we continue with the process.\" message should be shown."
+        },
+        {
+          "content": "Enter more than 2000 characters into the description field.",
+          "expected": "A message \"Please limit your response to 2000 characters.\" should be shown, the \"Confirm\" button should remain disabled, and the excess should not be saved."
+        },
+        {
+          "content": "Click the red \"Remove\" icon button on a saved description.",
+          "expected": "The description should be cleared and the field should return to its empty state with \"Confirm\" disabled again."
+        },
+        {
+          "content": "Deselect \"Public task\".",
+          "expected": "Its justification field should no longer be displayed."
+        },
+        {
+          "content": "Repeat the above for \"Legitimate interest of the controller\" (field label \"What are these legitimate interests?\").",
+          "expected": "Same behavior should apply."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG - Questionnaire & Clauses - Privacy Policy.pdf p.4",
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC137-148"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "MISMATCH fixed via live re-verification (2026-07-14): the doc/manual-test-case-file's button labels were wrong — live shows an icon-only \"Confirm\" button (not \"Add (✓)\") that becomes an icon-only red \"Remove\" button (not literal \"(-) Remove\" text) on save. All other behavior (2000-char limit + exact validation message, Next-blocked banner, deselect hides field, clear-on-remove) confirmed live exactly as specced for \"Public task\"; \"Legitimate interest of the controller\" not independently re-run — same component pattern, representative per equivalence partitioning.",
+      "section_id": 1972,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found. Minor residual gap: the \"Legitimate interest of the controller\" field label (\"What are these legitimate interests?\") was not independently re-run this pass — assumed via equivalence partitioning with the confirmed \"Public task\" path, not itself directly re-verified."
+    },
+    {
+      "id": 39478,
+      "title": "[Privacy Policy Generator] Verify that the Additional Information tab shows GDPR/CCPA/CalOPPA-specific questions only when their corresponding Business Details answers require them",
+      "preconditions": "Collection of data > Additional information tab; varies EU/EEA, CCPA thresholds/clauses, and sell/share answers per scenario.",
+      "steps": [
+        {
+          "content": "With EU/EEA = No, CCPA not applicable, and sell/share = No, observe the page.",
+          "expected": "Only the default questions (cookies/tracking, Do Not Track response) should be shown; the GDPR question (under-16 collection), CCPA question (under-13 collection), and CalOPPA question (review/change-info process) should not be displayed."
+        },
+        {
+          "content": "With EU/EEA = Yes, observe.",
+          "expected": "The GDPR-specific \"Do you collect information about users below the age of 16?\" question should additionally be shown."
+        },
+        {
+          "content": "On a Pro/Ultimate account with CCPA applicable, observe.",
+          "expected": "The CCPA-specific \"Do you collect information about users below the age of 13?\" question should additionally be shown."
+        },
+        {
+          "content": "With sell/share = Yes, observe.",
+          "expected": "The CalOPPA-specific \"Do you have a process that allows users to review and request changes to their information?\" question should additionally be shown."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC112-116"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14) on a Pro account: with EU/EEA=No and CCPA not applicable, only the default questions (cookies/tracking, DNT, legal-bases) appeared — no age-16/age-13/review-process questions. Setting thresholds=Yes (CCPA applicable) alone added only the under-13 question. Then additionally setting EU/EEA=Yes and sell/share=Yes together produced all three conditional questions simultaneously (under-16, under-13, review-process) alongside the defaults — confirming each trigger independently controls its own question.",
+      "section_id": 1972,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39479,
+      "title": "[Privacy Policy Generator] Verify that clicking \"Next\" on Additional information with any field incomplete shows a persistent inline validation banner",
+      "preconditions": "Collection of data > Additional information tab, at least one required field left empty.",
+      "steps": [
+        {
+          "content": "Click \"Next\" without completing all fields.",
+          "expected": "A banner should appear: \"Please make sure that all fields are completely filled out before we continue with the process.\"; the wizard should remain on the tab."
+        },
+        {
+          "content": "Complete every visible field on both Personal information and Additional information tabs (at least one data-category chip selected, cookies/DNT/age/legal-basis/review-process all answered) and click \"Next\" again.",
+          "expected": "[APP DEFECT] The banner does NOT clear and the wizard does NOT proceed, even though no visibly-incomplete field remains on either tab. Reproduced live on 2026-07-14 with a Free-plan account: Name/Address/Email selected on Personal information, and on Additional information cookies=Yes+URL filled, DNT response filled, age-question answered, Consent chip selected, review-process=Yes+description filled — banner persisted regardless. Root cause not identifiable from the UI alone (likely a hidden/required field not rendered for this plan tier, or a stale validation flag); flag to engineering rather than treating as a case-authoring error."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "app defect confirmed live, not a crawl artifact — the persistent-banner-after-all-fields-filled behavior reproduces reliably. Case kept as regression documenting current (buggy) behavior; step 1 (banner appears via genuinely incomplete required field) is the migratable assertion, step 2 documents the open defect for the report.",
+      "section_id": 1972,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39480,
+      "title": "[Privacy Policy Generator] Verify that Use of data renders a multi-select purposes list and accepts a custom purpose",
+      "preconditions": "User is on the Use of data step.",
+      "steps": [
+        {
+          "content": "Observe the step.",
+          "expected": "Question \"What are the uses for the information you collect?\" should be displayed with chip options: \"To provide and maintain service\", \"To manage your account\", \"To perform a contract with us\", \"To contact the user\", \"To send marketing and promotional communications\", \"To comply with legal obligations for targeted advertising\", \"To manage user requests related to business transfers, such as when our business is acquired, amalgamated, merged, restructured, or otherwise sold or transferred to another entity, in whole or in part.\", \"To evaluate and improve our products/services\", and \"To examine the usage trends\"."
+        },
+        {
+          "content": "Click \"To provide and maintain service\".",
+          "expected": "The chip should switch to a selected visual state."
+        },
+        {
+          "content": "Type a custom purpose (e.g. \"Personalise experience\") into the field below the chip list and click \"Add\".",
+          "expected": "The \"Add\" button should be disabled until text is entered; once entered, \"Add\" should add the purpose as a new selected chip."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1964,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted purposes-list chip options (9 distinct strings) authored from live crawl only; not re-confirmed since — a long list, worth a live check."
+    },
+    {
+      "id": 39481,
+      "title": "[Privacy Policy Generator] Verify that Disclosure of data renders its CCPA data-disclosure fields",
+      "preconditions": "\"Do you sell or share the personal information of users?\" = Yes on Business details (so the step is visible in the sidebar). User is on the Disclosure of data step.",
+      "steps": [
+        {
+          "content": "Observe the step.",
+          "expected": "Four questions should be displayed: \"Do you sell or share the personal information of users in the following categories?\" (options: Users under the age of 16 years / Users under the age of 13 years / None), \"What is the process for users to submit requests to delete, correct, or access the information they have shared?\" (free-text), \"Do you disclose sensitive information for purposes beyond listed exemptions?\" (Yes/No, with a static list of 8 exemption categories), and \"Have you disclosed any of the information collected to third parties for business purposes in the past 12 months?\" (Yes/No)."
+        },
+        {
+          "content": "Note the plan-gating state of these fields.",
+          "expected": "[inferred] - Pro plan and higher: fields are enabled and editable. - Free plan: fields are disabled with a \"Pro+\" badge and \"Upgrade to Pro or higher to add this clause.\" text (see 11. Billing & Upgrade > Plan Gates for the locked-state verification)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "derived during /migrate-section from case testing Disclosure of data Pro+-gating, to satisfy the render-case convention for a plan-gated page that owns real content"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "section_id": 1965,
+      "rewrite_notes": "New case authored during /migrate-section (2026-07-14): split out of the original Disclosure-of-data plan-gate case so the feature section retains a render case per migration-conventions.md §11, while the deep lock-state verification stays in Plan Gates unchanged.",
+      "audit_status": "no-source-case",
+      "audit_note": "The plan-gate copy (\"Upgrade to Pro or higher to add this clause.\") is explicitly tagged \"[inferred]\" in this case's own expected result — a self-flagged guess, not an observed string. Highest-priority item in this batch: needs live confirmation before it can be trusted."
+    },
+    {
+      "id": 39482,
+      "title": "[Privacy Policy Generator] Verify that Data retention offers preset and custom retention options",
+      "preconditions": "User is on the Data retention step.",
+      "steps": [
+        {
+          "content": "Observe the step.",
+          "expected": "Question \"How long do you retain the information you collect?\" should be displayed with options: \"6 months\", \"12 months\", \"As long as it is necessary\", \"Add your own retention period\", and \"Not yet decided\" (labeled \"Pro+\")."
+        },
+        {
+          "content": "Note the sidebar tip.",
+          "expected": "A \"Why data retention matters\" note should be displayed, referencing GDPR (Art. 5(1)(e)) and CCPA/CPRA retention requirements."
+        },
+        {
+          "content": "Click \"6 months\".",
+          "expected": "The chip should switch to a selected visual state."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1966,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted retention-option labels and the \"Why data retention matters\" tip (referencing GDPR Art. 5(1)(e)) authored from live crawl only; not re-confirmed since."
+    },
+    {
+      "id": 39483,
+      "title": "[Privacy Policy Generator] Verify that selecting \"Add your own retention period\" reveals a free-text duration field",
+      "preconditions": "Data retention step.",
+      "steps": [
+        {
+          "content": "Click \"Add your own retention period\".",
+          "expected": "A free-text field should appear inline (label \"Enter data retention duration.\")."
+        },
+        {
+          "content": "Enter a value (e.g. \"18 months\").",
+          "expected": "The value should be retained."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1966,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted field label \"Enter data retention duration.\" authored from live crawl only; not re-confirmed since."
+    },
+    {
+      "id": 39484,
+      "title": "[Privacy Policy Generator] Verify that Miscellaneous disclosures renders its data-transfer, automated-processing, and contact-role questions",
+      "preconditions": "User is on the Miscellaneous disclosures step.",
+      "steps": [
+        {
+          "content": "Observe the field list.",
+          "expected": "Fields should be displayed: \"Do you transfer data collected to a non-adequate country or region outside the EU?\" (Yes/No), \"Do you automatically process the data that you have collected?\" (Yes/No), \"Provide the contact details of the Data Protection Officer (DPO).\" (free-text, placeholder \"Enter your DPO's name and contact information.\"), and \"Provide the details of the data controller/representative if applicable.\" (free-text, placeholder \"Provide contact details if your organisation has one.\")."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1967,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted field labels/placeholders for the four Miscellaneous-disclosures questions authored from live crawl only; not re-confirmed since."
+    },
+    {
+      "id": 39485,
+      "title": "[Privacy Policy Generator] Verify that answering the non-adequate-country transfer question = Yes reveals a safeguards chip-select",
+      "preconditions": "Miscellaneous disclosures step.",
+      "steps": [
+        {
+          "content": "Answer \"Do you transfer data collected to a non-adequate country or region outside the EU?\" = Yes.",
+          "expected": "A field \"What applicable safeguards have been implemented?\" should appear with chip options \"Standard contractual clauses\", \"Binding corporate rules\", and \"Add your own\"."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1967,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted field label and chip options (\"Standard contractual clauses\", \"Binding corporate rules\", \"Add your own\") authored from live crawl only; not re-confirmed since."
+    },
+    {
+      "id": 39486,
+      "title": "[Privacy Policy Generator] Verify that the automatic-processing answer determines the GDPR \"Automatic processing of data\" clause in the generated policy, and that toggling the answer cleanly swaps the clause text",
+      "preconditions": "Miscellaneous disclosures step. \"Do you automatically process the data that you have collected?\" answered and saved.",
+      "steps": [
+        {
+          "content": "Answer \"Do you automatically process the data that you have collected?\" = Yes and save the draft.",
+          "expected": "No additional field appears on this step; the answer is retained after navigating away and back."
+        },
+        {
+          "content": "Navigate to Preview & add policy.",
+          "expected": "The \"GDPR Disclosures > Automatic processing of data\" section should read \"We use automated processing of the personal information we collect to personalise our services for you and others.\""
+        },
+        {
+          "content": "Return to Miscellaneous disclosures, answer \"Do you automatically process the data that you have collected?\" = No, and save the draft.",
+          "expected": "No validation error; the change saves."
+        },
+        {
+          "content": "Navigate to Preview & add policy again.",
+          "expected": "The \"GDPR Disclosures > Automatic processing of data\" heading still renders (it is not GDPR-presence-gated, only its wording is answer-conditional), now reading \"We do not use any automated processing of the personal information we collect.\" — with no trace of the prior Yes-variant text."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/PPG - Questionnaire & Clauses - Privacy Policy.pdf p.2"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live (2026-07-14): answered Yes, clicked Save draft, then navigated to Preview & add policy via Next — the \"GDPR Disclosures > Automatic processing of data\" section reads exactly \"We use automated processing of the personal information we collect to personalise our services for you and others.\" The clean save round-trip works correctly; the earlier doubt was purely a crawl-methodology artifact from editing via direct URL without saving first. Extended 2026-07-21 during /migrate-section (merged in place of publishing a new near-duplicate case, dedup-check score 0.517): confirmed live that toggling the answer back to No cleanly swaps in \"We do not use any automated processing of the personal information we collect.\" with no stale Yes-variant content — this closes the gap the grill pass flagged (39486 previously covered only the Yes-path).",
+      "section_id": 1967,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes for both the Yes-variant and the No-variant; no discrepancy from source found."
+    },
+    {
+      "id": 39487,
+      "title": "[Privacy Policy Generator] Verify that Preview & add policy renders the generated policy with a legal disclaimer and language selector",
+      "preconditions": "User is on the Preview & add policy step, all prior required steps completed (100% complete progress indicator).",
+      "steps": [
+        {
+          "content": "Observe the top of the page.",
+          "expected": "Heading \"Preview\" and subtext \"Review your answers and generate your privacy policy.\" should be displayed, followed by the legal disclaimer: \"We do not take any responsibility, and we are not liable, for any privacy policies created using our service. Any information, materials, or services provided herein do not ensure any form of regulatory compliance and are not intended to be a substitute for professional legal advice. If any legal assistance is required, users should seek the services of an attorney.\""
+        },
+        {
+          "content": "Observe the language control.",
+          "expected": "A button showing the current primary language (e.g. \"English (Primary)\") and a \"Language options\" button should be displayed."
+        },
+        {
+          "content": "Observe the generated policy body.",
+          "expected": "The full policy should render, with section headings matching the wizard's answers (e.g. \"What information do we collect about you?\", \"Cookies and similar technologies\", \"Do not track requests\", \"How long do we retain your information?\", \"Do we share your information?\", \"GDPR Disclosures\", \"CCPA disclosures\", \"Contact us\"), and a footer credit link \"Privacy Policy generated by CookieYes - Privacy Policy Generator\"."
+        },
+        {
+          "content": "Observe the bottom action bar.",
+          "expected": "\"Previous\", \"Save draft\", and \"Generate privacy policy\" buttons should be displayed (not \"Publish\" or \"Add policy\")."
+        }
+      ],
+      "run_type": "smoke",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "this step exists live but is completely undocumented in either internal spec PDF — live-ahead-of-docs. This is the single most critical happy-path check for this feature area.",
+      "section_id": 1968,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted heading/subtext, the full legal disclaimer paragraph, section headings, and footer credit link authored from live crawl only; not re-confirmed since. This case is run_type=smoke (the section's single most-critical happy-path check) and contains a lengthy legal disclaimer — high-priority live re-check despite lacking a Suite 6 source."
+    },
+    {
+      "id": 39488,
+      "title": "[Privacy Policy Generator] Verify that earlier wizard answers are reflected verbatim in specific clauses of the generated policy preview",
+      "preconditions": "Preview & add policy step. Cookie policy URL, Do-Not-Track response text, categories sold/shared, third parties, and review/update-process text were entered earlier in the wizard.",
+      "steps": [
+        {
+          "content": "Locate the \"Cookies and similar technologies\" section.",
+          "expected": "It should link to the exact cookie policy URL entered earlier (e.g. \"https://www.hd.com/cookie-policy\") via the text \"please visit our cookie policy.\""
+        },
+        {
+          "content": "Locate the \"Do not track requests\" section.",
+          "expected": "It should show the exact text entered for \"How do you respond to 'Do Not Track' requests?\""
+        },
+        {
+          "content": "Locate the \"Sale/sharing of information\" section.",
+          "expected": "It should show the exact categories-sold-or-shared text and third-parties text entered earlier, under \"The categories of personal information that are sold or shared with third parties are as follows:\" and \"The categories of third parties to whom the information is disclosed are as follows:\""
+        },
+        {
+          "content": "Locate the \"Review and change information\" section.",
+          "expected": "It should show the exact text entered for the review/update-process description."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "verbatim-text fidelity per migration-conventions §4 — the generated clause text is user-content echo and must not be paraphrased in the case",
+      "section_id": 1968,
+      "audit_status": "no-source-case",
+      "audit_note": "The three fixed connector phrases (\"please visit our cookie policy.\", \"The categories of personal information that are sold or shared with third parties are as follows:\", \"The categories of third parties to whom the information is disclosed are as follows:\") have never been confirmed against the live app — rewrite_notes only explains the migration-conventions §4 rationale for keeping user-echoed content verbatim, it does not state these fixed phrases were checked live. Needs a live check."
+    },
+    {
+      "id": 39489,
+      "title": "[Privacy Policy Generator] Verify that Language options on Preview shows only an edit-policy option when no secondary languages are enabled",
+      "preconditions": "Free plan (secondary/multi-language generation not enabled). Preview & add policy step.",
+      "steps": [
+        {
+          "content": "Click \"Language options\" next to the primary-language button.",
+          "expected": "A menu should open with a single menu item: \"Edit policy\"."
+        }
+      ],
+      "run_type": "",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "thin edge-case check on the default single-language menu state",
+      "section_id": 1968,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted menu item \"Edit policy\" authored from live crawl only; not re-confirmed since (low risk — the same menu's other item was independently confirmed live in case 39491)."
+    },
+    {
+      "id": 39490,
+      "title": "[Privacy Policy Generator] Verify that switching between primary and secondary language tabs on Preview & add policy renders the fully auto-translated policy",
+      "preconditions": "User has a Basic, Pro, or Ultimate plan. At least one secondary language (e.g. Deutsch) selected on Language preferences and saved. User is on the Preview & add policy step, 100% complete.",
+      "steps": [
+        {
+          "content": "Observe the language row above the generated policy.",
+          "expected": "Alongside \"English (Primary)\" and \"Language options\", a separate button for each selected secondary language (e.g. \"Deutsch\") should be displayed."
+        },
+        {
+          "content": "Click the \"Deutsch\" language button.",
+          "expected": "The entire generated policy body should re-render fully translated into German — heading (\"Datenschutzerklärung\"), all section headings, all body paragraphs, and the footer credit link (\"CookieYes - Datenschutzrichtlinien-Generator\") should all be in German. User-entered content that has no fixed translation (e.g. the categories-sold-or-shared free text, third-party names) remains in the original language it was entered in."
+        },
+        {
+          "content": "Click back on \"English (Primary)\".",
+          "expected": "The policy body should revert to the English version."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl — gap found during /grill-section"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "gap found during grill-section gap-hunting (2026-07-14): the entire multi-language auto-translation preview-switching mechanism was untested by the original draft, which only covered the single-language Preview state. Confirmed live on a Pro account with Deutsch as a secondary language — this is a real, working feature deserving its own case.",
+      "section_id": 1968,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39491,
+      "title": "[Privacy Policy Generator] Verify that the Language options menu on Preview shows \"Edit policy\" and \"Delete language\" once a secondary language exists",
+      "preconditions": "User has a Basic, Pro, or Ultimate plan. At least one secondary language selected and saved. User is on the Preview & add policy step, viewing a secondary language (e.g. Deutsch) tab.",
+      "steps": [
+        {
+          "content": "Click \"Language options\" next to the language row.",
+          "expected": "A menu should open with two items: \"Edit policy\" and \"Delete language\" (contrast with the single-language state, which shows only \"Edit policy\" — see the existing case for that state)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl — gap found during /grill-section"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "gap found during grill-section gap-hunting (2026-07-14): confirmed live on a Pro account. Companion to the existing single-language \"Language options\" case.",
+      "section_id": 1968,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39492,
+      "title": "[Privacy Policy Generator] Verify that \"Delete language\" on the Language options menu shows a confirmation dialog before removing a secondary language",
+      "preconditions": "User has a Basic, Pro, or Ultimate plan. At least one secondary language selected and saved. User is on the Preview & add policy step, viewing a secondary language (e.g. Deutsch) tab.",
+      "steps": [
+        {
+          "content": "Click \"Language options\" then \"Delete language\".",
+          "expected": "A confirmation dialog should appear with body text \"Are you sure you want to remove the [language] draft of your privacy policy?\" (e.g. \"Deutsch\") and buttons \"Keep version\", \"Delete\" (plus a Close icon). [APP DEFECT — verify] Live observation (2026-07-14) showed the dialog's title text \"Delete language?\" rendered twice in sequence before the body text — possibly a duplicate-heading rendering bug; re-verify by inspecting the rendered DOM directly rather than relying on an accessibility-tree snapshot, since this was not extracted via element-level text query."
+        },
+        {
+          "content": "Click \"Keep version\".",
+          "expected": "The dialog should close and the secondary language should remain in the language row, unchanged."
+        },
+        {
+          "content": "Repeat and click \"Delete\" instead.",
+          "expected": "[verify against live app] The dialog should close and the secondary language should be removed from the language row and the Language preferences step's multi-language selection. Not exercised this pass to avoid destructively altering the draft other cases in this session depended on."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl — gap found during /grill-section"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "gap found during grill-section gap-hunting (2026-07-14). \"Keep version\" (cancel) path confirmed live; \"Delete\" path deliberately not exercised (destructive-precondition), and the duplicated dialog title needs a DOM-level re-check before treating it as a confirmed defect.",
+      "section_id": 1968,
+      "audit_status": "no-source-case",
+      "audit_note": "Dialog body/buttons (\"Are you sure you want to remove the [language] draft...\", \"Keep version\") confirmed live via the Keep-version path — but the claimed app defect (dialog title \"Delete language?\" rendering twice) explicitly \"needs a DOM-level re-check\" per this case's own notes, and the Delete-path outcome was deliberately never exercised (destructive precondition). Needs a live/DOM-level re-check."
+    },
+    {
+      "id": 39493,
+      "title": "[Privacy Policy Generator] Verify that clicking \"Upgrade to Basic\" on the multi-language gate opens an upgrade modal comparing Basic and Pro plans",
+      "preconditions": "User is on a Free plan. Language preferences step, primary language selected, \"Generate policy in multiple languages\" (Basic+) section visible with disabled secondary-language buttons.",
+      "steps": [
+        {
+          "content": "Click \"Upgrade to Basic\".",
+          "expected": "A dialog should open titled \"Your Privacy Policy is incomplete\" with subtitle \"Add these essential features to make your policy complete.\""
+        },
+        {
+          "content": "Observe the dialog body.",
+          "expected": "A bulleted list should display: \"CCPA/CPRA clauses for eligible US businesses\", \"Privacy policy in multiple languages\", \"Auto-translated policy for your global audience\", followed by \"Without them, your policy may not meet all required legal standards. Upgrade to Pro (or higher) for a complete, compliant Privacy Policy.\""
+        },
+        {
+          "content": "Observe the plan cards.",
+          "expected": "Both a Basic plan card ($10/mo) and a Pro plan card ($25/mo, labeled \"Recommended\") should be displayed side by side."
+        },
+        {
+          "content": "Observe the action buttons.",
+          "expected": "\"Get started with Basic plan\", \"Get started with Pro plan\", \"Continue without multi-lingual privacy policy\", and \"Close\" should be displayed."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": true,
+      "rewrite_notes": "authored from live crawl",
+      "section_id": 1793,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted upgrade-modal title/body/plan pricing (\"Your Privacy Policy is incomplete\", bullet list, \"$10/mo\"/\"$25/mo\", button labels) authored from live crawl only; not re-confirmed since — pricing text especially worth a live check given plans change."
+    },
+    {
+      "id": 39494,
+      "title": "[Privacy Policy Generator] Verify that the for-profit organisation question is Pro+-gated with a disabled control and a dedicated upgrade modal",
+      "preconditions": "User is on a Free plan. Company details > Business details tab. \"Do you have users in California?\" = Yes.",
+      "steps": [
+        {
+          "content": "Observe \"Are you a 'for-profit' organisation?\".",
+          "expected": "The question should show a \"Pro+\" badge, disabled \"Yes\"/\"No\" buttons, and the text \"Upgrade to Pro or higher to add this and the subsequent clauses. CCPA applies only to eligible for-profit businesses (see criteria on the right -->).\""
+        },
+        {
+          "content": "Click \"Upgrade to Pro\".",
+          "expected": "A dialog should open with a bulleted list: \"CCPA/CPRA clauses for US users\", \"Create your policy in multiple languages\", \"Auto-translated policies for your global audience\", showing only a single Pro plan card, with buttons \"Get started with Pro plan\", \"Continue with limited policy\", and \"Close\"."
+        },
+        {
+          "content": "Click \"Continue with limited policy\".",
+          "expected": "The dialog should close and the wizard should remain on the current step with the for-profit question still unanswered/locked."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": true,
+      "rewrite_notes": "distinct modal copy from the Basic+ multi-language modal — do not assume upgrade dialogs share identical wording across gates in this feature",
+      "section_id": 1793,
+      "audit_status": "no-source-case",
+      "audit_note": "Quoted upgrade-gate inline text and modal body authored from live crawl only; not re-confirmed since."
+    },
+    {
+      "id": 39495,
+      "title": "[Privacy Policy Generator] Verify that clicking \"Next\" with a locked Pro+ field unanswered surfaces the same upgrade-or-continue modal",
+      "preconditions": "User is on a Free plan. Company details > Business details tab. \"Are you a 'for-profit' organisation?\" is Pro+-locked and unanswered.",
+      "steps": [
+        {
+          "content": "Click \"Next\".",
+          "expected": "The same \"policy incomplete\" dialog opens (Pro plan card only, \"Get started with Pro plan\" / \"Continue with limited policy\" / \"Close\")."
+        },
+        {
+          "content": "Click \"Continue with limited policy\".",
+          "expected": "The dialog should close and the wizard should advance to Collection of data, with the for-profit question left unanswered."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": true,
+      "rewrite_notes": "confirmed live (2026-07-14) — but only once every OTHER required field on the tab was answered; with another field also incomplete (sell/share unanswered), clicking Next instead surfaces the generic \"Please make sure that all fields are completely filled out...\" banner, not this modal. Precondition matters: this modal only appears when the locked Pro+ field is the sole remaining gap.",
+      "section_id": 1793,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39496,
+      "title": "[Privacy Policy Generator] Verify that clicking a CCPA-gated data-category chip on a Free plan shows a lock icon and Pro+ badge but remains clickable, surfacing an inline upgrade toast",
+      "preconditions": "User is on a Free plan. Collection of data > Personal information tab.",
+      "steps": [
+        {
+          "content": "Click the \"Birthday\" chip under Personal data.",
+          "expected": "The chip should render visually locked — greyed-out label, a lock icon on the left, and an amber Pro+/crown badge on the right — but is not a native disabled control; it remains clickable. Clicking it should not select it. An inline toast-style popup should appear directly below the chip: \"CCPA/CPRA-related clauses are available on the Pro plan and above.\" with an \"Upgrade now\" link."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": true,
+      "rewrite_notes": "CONFLICT RESOLVED via /grill-section live re-verification (2026-07-14): neither source was fully correct. The chip does show a lock icon + Pro+ badge as internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC083-087 (case 49) claimed — contradicting this case's original 'no lock icon' description — but it is not natively disabled/unclickable as TC083-087 claimed either; clicking it works and surfaces the toast this case originally described, word-for-word confirmed live.",
+      "section_id": 1793,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39497,
+      "title": "[Privacy Policy Generator] Verify that the Disclosure of data step's fields are entirely Pro+-gated on a Free plan",
+      "preconditions": "User is on a Free plan. \"Do you sell or share the personal information of users?\" = Yes on Business details (so the step is visible in the sidebar). User is on the Disclosure of data step.",
+      "steps": [
+        {
+          "content": "Observe \"Do you sell or share the personal information of users in the following categories?\".",
+          "expected": "The question should show a \"Pro+\" badge, inline text \"Upgrade to Pro or higher to add this clause.\" with an \"Upgrade to Pro\" button, and three disabled options: \"Users under the age of 16 years\", \"Users under the age of 13 years\", \"None\"."
+        },
+        {
+          "content": "Observe \"What is the process for users to submit requests to delete, correct, or access the information they have shared?\".",
+          "expected": "The same Pro+ badge/upgrade pattern should be shown, with a disabled free-text field (placeholder \"Describe how users can make data requests (e.g., via email or form).\")."
+        },
+        {
+          "content": "Observe \"Do you disclose sensitive information for purposes beyond listed exemptions?\".",
+          "expected": "The same pattern should be shown, along with a static list of 8 exemption categories and disabled \"Yes\"/\"No\" buttons."
+        },
+        {
+          "content": "Observe \"Have you disclosed any of the information collected to third parties for business purposes in the past 12 months?\".",
+          "expected": "The same pattern should be shown, with disabled \"Yes\"/\"No\" buttons."
+        },
+        {
+          "content": "Click \"Upgrade to Pro\" on any of the above.",
+          "expected": "The same \"Your Privacy Policy is incomplete\" upgrade modal opens as the Business Details for-profit gate — identical title, bullet list (\"CCPA/CPRA clauses for US users\", \"Create your policy in multiple languages\", \"Auto-translated policies for your global audience\"), single Pro plan card, and buttons (\"Get started with Pro plan\" / \"Continue with limited policy\" / \"Close\")."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": true,
+      "rewrite_notes": "confirmed live (2026-07-14): this step's inline gate copy ('Upgrade to Pro or higher to add this clause.') is indeed shorter than the Business Details for-profit gate's inline copy, but the resulting upgrade MODAL is byte-identical between the two gates — the draft's speculation that the modal itself would have step-specific wording was wrong; it's one shared modal component reused across all Pro+ gates in this feature.",
+      "section_id": 1793,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
+    },
+    {
+      "id": 39498,
+      "title": "[Privacy Policy Generator] Verify that the Not yet decided retention option is shown as a visibly disabled chip on a Free plan",
+      "preconditions": "User is on a Free plan. Data retention step.",
+      "steps": [
+        {
+          "content": "Observe the \"Not yet decided\" option.",
+          "expected": "The chip renders visibly disabled up front (not clickable), with an inline \"Pro+\" label shown directly on the chip. No click interaction is available — the button is disabled at the DOM level, so clicking it has no effect and no toast or upgrade modal opens."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": true,
+      "rewrite_notes": "third distinct plan-gate UX pattern observed in this feature — keep distinguishable from the other two",
+      "section_id": 1793,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Re-verified live 2026-07-22: confirmed the chip carries a native HTML `disabled` attribute (Playwright's own actionability check refuses to click it — \"element is not enabled\"), with \"Pro+\" rendered as a child element directly on the chip, and no toast/modal appears since no click can register. Expected result rewritten to be self-contained (previously referenced two other cases' patterns by name without describing them, failing the isolation test) and title unquoted to match the established \"plain field reference, not a trigger condition\" convention."
+    },
+    {
+      "title": "[Privacy Policy Generator] Verify that clicking \"Generate privacy policy\" creates a versioned policy and opens the policy management view",
+      "preconditions": "User is on the Preview & add policy step, all prior required steps completed (100% complete progress indicator).",
+      "steps": [
+        {
+          "content": "Click \"Generate privacy policy\".",
+          "expected": "The page navigates to the generated-policy view. A dismissible success banner reads \"Your privacy policy has been generated successfully.\" The heading \"Privacy Policy\" is shown alongside the site name, a version label (\"Version: V1.0 (<generation date>)\"), and a \"Version history\" link. The legal disclaimer text is repeated in a left-hand panel. The language control (\"English (Primary)\") and Options button remain visible above the rendered policy, matching the Preview step's content."
+        },
+        {
+          "content": "Observe the bottom action bar.",
+          "expected": "A single \"Add policy to site\" button is shown — the \"Previous\", \"Save draft\", and \"Generate privacy policy\" controls from the wizard are gone."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account, Pro-plan site). This closes the out_of_scope_notes item 'Final Generate privacy policy action' — exercised live end-to-end on a disposable site specifically so the irreversible action was safe to perform. FLAG FOR HUMAN REVIEW: this is arguably the single most critical happy-path action in the entire feature, more so than case 39487's 'renders the generated policy' check, which currently holds the section's one run_type=smoke slot. Consider moving smoke to this case instead — not changed here since this run is additive-only and that edit touches an already-published case.",
+      "section_id": 1968,
+      "grill_status": "confirmed",
+      "id": 39596,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "title": "[Privacy Policy Generator] Verify that \"Add policy to site\" opens a method-selection modal with an initially-disabled completion action",
+      "preconditions": "User has just generated a privacy policy (V1.0) and is on the generated-policy view.",
+      "steps": [
+        {
+          "content": "Click \"Add policy to site\".",
+          "expected": "A modal titled \"Add privacy policy to your website\" opens, subtitled with the site name. It shows \"Select your preferred method to add the policy\" with two options: \"Code snippet\" (\"Automatically update your privacy policy each time you modify the generated policy.\") and \"HTML format\" (\"Manually update the code on your site each time you modify the generated policy.\"). A \"Complete generation\" button is visible but disabled, and a \"Close\" (X) control is available."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). Entirely undocumented in either spec PDF or the prior draft — the whole 'Add policy to site' distribution flow was out of scope until now.",
+      "section_id": 1968,
+      "grill_status": "confirmed",
+      "id": 39597,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "title": "[Privacy Policy Generator] Verify that selecting \"Code snippet\" on the Add-policy-to-site modal reveals the install code and enables \"Complete generation\"",
+      "preconditions": "User has the \"Add privacy policy to your website\" modal open, on the method-selection screen.",
+      "steps": [
+        {
+          "content": "Click the \"Code snippet\" option.",
+          "expected": "The option shows a selected/pressed state. A new \"Add this code to your site\" section appears below, showing \"Privacy policy available in: English\", then \"Step 1: Copy this JavaScript code.\" above a 3-line read-only code block containing an HTML comment wrapper (\"<!-- Start CookieYes privacy policy -->\" / \"<!-- End CookieYes privacy policy -->\") around a `<script id=\"cky-privacy-policy\">` tag pointed at the site's generated-policy script URL. \"Copy code\" and \"Send code to a teammate\" buttons are shown, followed by \"Step 2: Paste the copied code into the required page on your website.\""
+        },
+        {
+          "content": "Observe the \"Complete generation\" button.",
+          "expected": "The button is now enabled (it was disabled before a method was actively selected, despite \"Code snippet\" appearing visually pre-highlighted as the default option)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). Note the gap between visual default state and actual selection state — the option must be explicitly clicked to register, a default-highlighted look is not enough to unlock the next step. HTML format's equivalent flow was not exercised this pass — flagged as a further gap, not covered by this case.",
+      "section_id": 1968,
+      "grill_status": "confirmed",
+      "id": 39598,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "title": "[Privacy Policy Generator] Verify that \"Complete generation\" prompts a \"Policy installed?\" confirmation before finishing the add-to-site flow",
+      "preconditions": "User has selected \"Code snippet\" on the Add-policy-to-site modal and \"Complete generation\" is enabled.",
+      "steps": [
+        {
+          "content": "Click \"Complete generation\".",
+          "expected": "A second dialog, \"Policy installed?\", appears on top of the first, reading \"You have generated a completed privacy policy for your website <site>. Have you installed the policy code to your website yet?\" with two buttons: \"Yes, I have installed\" and \"Install code\"."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). The \"Install code\" path (as opposed to \"Yes, I have installed\") was not exercised this pass — flagged as a further gap.",
+      "section_id": 1968,
+      "grill_status": "confirmed",
+      "id": 39599,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "title": "[Privacy Policy Generator] Verify that confirming \"Yes, I have installed\" finalises the add-to-site flow and replaces the add-policy control with Publish changes",
+      "preconditions": "User has the \"Policy installed?\" confirmation dialog open after completing the Add-policy-to-site modal.",
+      "steps": [
+        {
+          "content": "Click \"Yes, I have installed\".",
+          "expected": "Both dialogs close, returning to the generated-policy view. The \"Add policy to site\" button is replaced by a code-icon button and a \"Publish changes\" button; \"Publish changes\" is shown in a disabled state since no further edits have been made to the policy yet."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). This is the true terminal state of the wizard's happy path — previously nothing in this section covered past the Preview step. \"Publish changes\", \"Version history\", and the post-generation \"Options\" menu are a distinct post-generation editing surface, not exercised further this pass — flagged as a further gap for a future targeted pass, not this one.",
+      "section_id": 1968,
+      "grill_status": "confirmed",
+      "id": 39600,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39601,
+      "title": "[Privacy Policy Generator] Verify that the \"What to know\" hints card displays the correct translation FAQ content on Language preferences",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "Open the Language preferences step and locate the \"What to know\" card.",
+          "expected": "The card is displayed with heading \"What to know\"."
+        },
+        {
+          "content": "Review the card's content.",
+          "expected": "Two Q&A entries are displayed verbatim: \"Are translations available for these languages?\" — \"Yes. We provide default translations for the languages you select. After generating your policy in the primary language, you can review and customise each translation to ensure accuracy and local relevance. Offering your privacy policy in multiple languages helps meet legal requirements for clarity and accessibility under laws like GDPR and CCPA.\" \"Will updates to the default content apply to all translations?\" — \"No. Changes made to the default content won’t automatically update your translated versions. Be sure to review and adjust each translation after editing your primary policy.\""
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC11"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "verbatim text confirmed identical on both Free (hd.com) and Pro (hi.com) tiers via browser_snapshot, 2026-07-15. Originally mis-skipped as already covered by case 39449 during this pass's own scoping; corrected after user review flagged that no existing case actually asserts this text.",
+      "section_id": 1961,
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39602,
+      "title": "[Privacy Policy Generator] Verify that only one primary language can be selected at a time on Language preferences",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "Select English as the primary language.",
+          "expected": "English should be marked selected."
+        },
+        {
+          "content": "Select Français as the primary language.",
+          "expected": "Français should be marked selected; English should no longer be marked selected — only one primary language remains selected at a time."
+        },
+        {
+          "content": "Select Italiano as the primary language.",
+          "expected": "Italiano should be marked selected; Français should no longer be marked selected."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC02"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live 2026-07-15 on a Pro account (hi.com), verified via the selected-state CSS class (bg-primary-lightest) rather than by eye.",
+      "section_id": 1961,
+      "grill_status": "confirmed",
+      "audit_status": "not-applicable",
+      "audit_note": "No specific on-page text quoted; behavior/state-only assertions."
+    },
+    {
+      "id": 39603,
+      "title": "[Privacy Policy Generator] Verify that the multi-language section excludes whichever language is currently selected as primary",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "Select a primary language (e.g. Deutsch).",
+          "expected": "Deutsch is marked primary; the \"Generate policy in multiple languages\" section lists English, Français, Italiano, and Español as secondary options."
+        },
+        {
+          "content": "Select a different primary language (e.g. Français).",
+          "expected": "Français is marked primary; the secondary-language list updates to English, Deutsch, Italiano, and Español — Français no longer appears as a secondary option."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC05"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live 2026-07-15 on both Free (hd.com, disabled secondary buttons) and Pro (hi.com, enabled secondary buttons) — same exclusion behavior reproduced on both tiers.",
+      "section_id": 1961,
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39604,
+      "title": "[Privacy Policy Generator] Verify that multiple secondary language selections persist after Save draft and a browser refresh",
+      "preconditions": "User has a Basic, Pro, or Ultimate plan. A non-English primary language and one or more secondary languages have been selected.",
+      "steps": [
+        {
+          "content": "Select Deutsch as primary, and Français and Italiano as secondary languages.",
+          "expected": "All three show as selected (Deutsch as primary; Français and Italiano as secondary)."
+        },
+        {
+          "content": "Click \"Save draft\".",
+          "expected": "A \"Draft saved successfully!\" notification is displayed."
+        },
+        {
+          "content": "Refresh the browser (full page reload).",
+          "expected": "The page reloads."
+        },
+        {
+          "content": "Observe the selected languages.",
+          "expected": "Deutsch remains selected as primary; Français and Italiano both remain selected as secondary languages."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "gap-closing pass (2026-07-15) targeting the coverage-gaps.md \"Non-English secondary-language generation\" entry — extends existing case 39451 (simultaneous selection) with an actual save-and-refresh persistence check, confirmed live on Pro (hi.com).",
+      "section_id": 1961,
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39605,
+      "title": "[Privacy Policy Generator] Verify that \"Preview privacy policy\" renders a full policy preview translated into the selected primary language",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "On Language preferences, with Deutsch selected as primary and 0% of the wizard completed, click \"Preview privacy policy\".",
+          "expected": "A preview dialog titled \"Preview privacy policy\" opens."
+        },
+        {
+          "content": "Observe the rendered policy body.",
+          "expected": "The entire policy — heading (\"Datenschutzerklärung\"), every section heading (e.g. \"Welche Informationen erheben wir über Sie?\", \"Cookies und ähnliche Technologien\"), and the footer credit link (\"CookieYes - Datenschutzrichtlinien-Generator\") — renders fully in German, using default content for sections not yet filled in."
+        },
+        {
+          "content": "Close the dialog.",
+          "expected": "The dialog closes and the user remains on the Language preferences step."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl — gap found during this pass, not documented in either internal doc"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "distinct surface from the \"Preview & add policy\" wizard step (case 39487+); confirmed live on Pro (hi.com) 2026-07-15 — accessible and fully functional even at 0% wizard completion.",
+      "section_id": 1960,
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39606,
+      "title": "[Privacy Policy Generator] Verify that Miscellaneous disclosures renders the CCPA \"10 million+ California residents\" and \"financial incentives\" questions",
+      "preconditions": "User has a Pro or Ultimate plan. \"Do you have users in California?\" = Yes and either CCPA thresholds = Yes or Include-CCPA-clauses = Yes on Business details.",
+      "steps": [
+        {
+          "content": "Navigate to Miscellaneous disclosures.",
+          "expected": "\"Do you process the personal information of 10 million or more California residents?\" and \"Do you give financial incentives in exchange for their personal information?\" are both displayed with Yes/No options, alongside the existing transfer/automatic-processing/DPO/controller fields."
+        },
+        {
+          "content": "Answer \"Do you process the personal information of 10 million or more California residents?\" = Yes.",
+          "expected": "A follow-up field \"Provide a link to the page that shows the metrics.\" appears."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl — previously entirely uncased"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live on Pro (hi.com), 2026-07-15 — neither field was in any of the 63 previously published cases.",
+      "section_id": 1967,
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39607,
+      "title": "[Privacy Policy Generator] Verify that the CCPA \"10 million+ residents\" and \"financial incentives\" answers produce the correct clauses in the generated policy",
+      "preconditions": "Miscellaneous disclosures answered as in the preceding case; metrics-link field filled in.",
+      "steps": [
+        {
+          "content": "Answer both questions = Yes, provide a metrics URL, save, and navigate to Preview & add policy.",
+          "expected": "A \"Metrics\" section states the CCPA metrics-disclosure obligation and links to the exact URL entered; a \"Financial incentives\" section states the financial-incentives disclosure."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "verbatim-text fidelity per migration-conventions §4; confirmed live on Pro (hi.com), 2026-07-15.",
+      "section_id": 1968,
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39608,
+      "title": "[Privacy Policy Generator] Verify that GDPR \"under 16\" and CCPA \"under 13\" age-gating answers produce the correct Children's Privacy clauses in the generated policy",
+      "preconditions": "EU/EEA=Yes and CCPA-applicable=Yes on Business details. \"Under 16\" and \"under 13\" both answered Yes on Additional information.",
+      "steps": [
+        {
+          "content": "Navigate to Preview & add policy.",
+          "expected": "The standalone \"Privacy of children\" section states data of children under 16 is only collected/processed after verified parental/guardian consent."
+        },
+        {
+          "content": "Locate the CCPA disclosures' own \"Children's privacy\" subsection.",
+          "expected": "It shows two distinct clauses: ages 13–16 require the user's own explicit consent; under 13 requires parental/legal-guardian consent — a two-tier structure, not a single clause."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/PPG - Questionnaire & Clauses - Privacy Policy.pdf (H1-H4 age-hierarchy footnote)"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live on Pro (hi.com), 2026-07-15; this end-to-end cascade (Business details -> Additional information -> generated clause) had never been walked before this pass.",
+      "section_id": 1968,
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39609,
+      "title": "[Privacy Policy Generator] [APP DEFECT — confirmed] The data controller/representative field is not hidden by EU/EEA=No and its value is silently dropped from the generated policy",
+      "preconditions": "EU/EEA=Yes initially with the data controller/representative field filled in, then EU/EEA switched to No via the \"Remove GDPR clauses?\" dialog.",
+      "steps": [
+        {
+          "content": "Set EU/EEA=No and confirm \"Remove\" on the dialog.",
+          "expected": "The DPO field disappears from Miscellaneous disclosures as expected — but the data controller/representative field remains visible and still shows its previously entered value."
+        },
+        {
+          "content": "Navigate to Preview & add policy (confirmed via hard reload, not a caching artifact).",
+          "expected": "The data-controller/representative contact line is absent from the Contact section — the field's value is silently dropped despite the field still being shown and editable in the wizard."
+        },
+        {
+          "content": "Re-run the sequence with an explicit \"Save draft\" click immediately after confirming \"Remove\" on the EU/EEA dialog, before checking Miscellaneous disclosures or Preview (falsification check: rules out a save-timing artifact like the one found in case 39486).",
+          "expected": "EU/EEA=No persists after a hard reload of Company details > Business details. Despite the confirmed save, the data controller/representative field still remains visible in Miscellaneous disclosures with its value intact, and the value is still completely absent from the generated policy's Contact us section (verified via direct text search of the rendered Preview dialog, not just the Contact heading) — the defect is not a save-timing artifact."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl — gap found during this pass"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "contradicts the questionnaire doc, which marks this field 'Shown if: Users in EU/EEA = Yes' same as its sibling DPO field. Worth reporting to the app team, not just cased as a regression check. Confirmed live on Pro (hi.com), 2026-07-15. FALSIFICATION CHECK RUN 2026-07-16: re-tested with an explicit Save draft click after the EU/EEA Yes→No removal (the disconfirming state suggested by case 39486's earlier save-timing artifact) and hard-reload-verified the EU/EEA=No persisted before checking downstream state. The field-visibility bug and the silent value-drop from the generated Preview both still reproduced. Per migration-conventions.md §12, upgraded from [verify] to [confirmed].",
+      "section_id": 1967,
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39610,
+      "title": "[Privacy Policy Generator] Verify that the under-16 and legal-bases questions on Additional information are gated by EU/EEA",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "With EU/EEA=No on Business details, navigate to Collection of data > Additional information.",
+          "expected": "Only \"Do you use cookies or other tracking technologies?\" and \"How do you respond to 'Do Not Track' requests?\" are shown; no under-16 age question and no \"legal bases for collecting the data\" question appear."
+        },
+        {
+          "content": "Set EU/EEA=Yes on Business details, save, and return to Additional information.",
+          "expected": "\"Do you collect information about users below the age of 16?\" and \"What are the legal bases for collecting the data?\" (options: Consent, Performing contractual obligations, Legal obligations, Public task, Legitimate interest of the controller, Vital interest) both appear."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl — Business Details matrix sweep"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "closes a previously-unconfirmed out_of_scope_note from the language-preferences pass, which had only observed the legal-bases question appearing with EU/EEA=Yes but never re-tested with EU/EEA=No afterward. Confirmed live both directions on Pro (hi.com), 2026-07-15, during the Business Details matrix sweep.",
+      "section_id": 1972,
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39611,
+      "title": "[Privacy Policy Generator] Verify that the for-profit organisation question alone surfaces no CCPA-specific content without crossing thresholds or opting in to CCPA clauses anyway",
+      "preconditions": "User has a Pro or Ultimate plan. California=Yes, for-profit organisation=Yes, \"cross one or more thresholds\"=No, \"include CCPA-compliant clauses even if not legally required\"=No.",
+      "steps": [
+        {
+          "content": "Navigate to Miscellaneous disclosures.",
+          "expected": "Only the data controller/representative field is shown; no \"10 million or more California residents\" question and no \"financial incentives\" question appear."
+        },
+        {
+          "content": "Navigate to Preview & add policy.",
+          "expected": "No \"CCPA disclosures\" section appears anywhere in the generated policy."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl — Business Details matrix sweep"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "resolves the \"for-profit alone is believed to be a no-op downstream\" open question carried over from the matrix-sweep handoff notes. Confirmed live on Pro (hi.com), 2026-07-15 — the actual CCPA-content trigger is thresholds=Yes OR include-clauses=Yes, not for-profit alone. plan_gate_flag corrected from true to false during /migrate-section Step 3b: this is a Layer-1 functional case (the CCPA-content gating logic itself), not a Layer-2 Plan Gates case (testing that the for-profit control is properly locked/nudged for Free users) — that distinction is in testrail-suite-v2.md's Plan-gated features section. Requiring a Pro+ account as a precondition does not by itself make a case a plan-gate case.",
+      "section_id": 1970,
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39612,
+      "title": "[Privacy Policy Generator] Verify that the \"Do we share your information?\" GDPR sharing-basis section renders only when EU/EEA=Yes",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "With EU/EEA=No, navigate to Preview & add policy.",
+          "expected": "No \"Do we share your information?\" heading appears anywhere in the generated policy."
+        },
+        {
+          "content": "Set EU/EEA=Yes, save draft, and return to Preview & add policy.",
+          "expected": "A \"Do we share your information?\" section appears, listing three sharing bases verbatim: \"Sharing with your consent:\", \"Legal Obligations:\", and \"For business transfers:\"."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl — gap found during Business Details matrix sweep, previously entirely undocumented"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "confirmed live on Pro (hi.com), 2026-07-15 — this section is not mentioned in either source doc.",
+      "section_id": 1968,
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Quoted text confirmed live word-for-word during /grill-section (grill_status: confirmed)."
+    },
+    {
+      "id": 39613,
+      "title": "[Privacy Policy Generator] Verify that the custom purpose free-text field on Use of data validates length, duplicates, and empty/whitespace input, and supports removal",
+      "preconditions": "User is on the Use of data step.",
+      "steps": [
+        {
+          "content": "Type a valid custom purpose (e.g. \"Fraud prevention\") into the field below the chip list and click \"Add\".",
+          "expected": "It's added as a new selected chip with its own \"Remove\" control."
+        },
+        {
+          "content": "Type the same value (\"Fraud prevention\") again and click \"Add\".",
+          "expected": "No duplicate chip is created; only one instance of \"Fraud prevention\" remains."
+        },
+        {
+          "content": "Type only whitespace into the field.",
+          "expected": "The \"Add\" button stays disabled; no chip is added."
+        },
+        {
+          "content": "Type a value exceeding 500 characters and click \"Add\".",
+          "expected": "Inline error \"Please limit your response to 500 characters.\" is shown; no chip is added."
+        },
+        {
+          "content": "Click \"Remove\" on the \"Fraud prevention\" chip.",
+          "expected": "The chip is removed from the selected list."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.5",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.12"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl — gap-closing pass on Use of Data (flagged as thin/unswept for plan-tier gating in docs/wiki/09-legal-policies/privacy-policy-generator.md); confirmed no plan-gating exists on this step at all, and boundary/duplicate/removal behavior for the custom-purpose field wasn't covered by existing case 39480",
+      "grill_status": "confirmed",
+      "section_id": 1964
+    },
+    {
+      "id": 39614,
+      "title": "[Privacy Policy Generator] Verify that the custom retention period free-text field on Data retention validates length and empty input",
+      "preconditions": "User is on the Data retention step.",
+      "steps": [
+        {
+          "content": "Select \"Add your own retention period.\"",
+          "expected": "A free-text field labeled \"Enter data retention duration.\" appears below the option."
+        },
+        {
+          "content": "Click \"Next\" without entering any text.",
+          "expected": "The persistent \"Please make sure that all fields are completely filled out before we continue with the process.\" banner is shown; the wizard does not advance."
+        },
+        {
+          "content": "Type a valid retention period (e.g. \"We retain data for 3 years from the last user login.\") and click \"Next.\"",
+          "expected": "The wizard advances to the next step with no validation error, and the text later renders verbatim in the generated policy's \"How long do we retain your information?\" section."
+        },
+        {
+          "content": "Return to the Data retention step and replace the text with a value exceeding 1000 characters.",
+          "expected": "Inline error \"Please limit your response to 1000 characters.\" is shown below the field; \"Next\" remains blocked."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.6",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.13",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.20"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "gap-closing pass on Data retention (flagged as thin/unswept in docs/wiki/09-legal-policies/privacy-policy-generator.md); doc-live-mismatch confirmed — doc's stated current limit (500) is stale, live enforces 1000 (matching the doc's own recommended value)",
+      "grill_status": "confirmed",
+      "section_id": 1966
+    },
+    {
+      "id": 39615,
+      "title": "[Privacy Policy Generator] Verify that selecting \"Not yet decided\" on a Pro+ plan reveals a required, character-limited free-text field",
+      "preconditions": "- User is on a paid plan (Pro or higher)\n- User is on the Data retention step",
+      "steps": [
+        {
+          "content": "Click the \"Not yet decided\" option.",
+          "expected": "The chip becomes selected and a free-text field labeled \"Disclose how the retention period is determined.\" appears below it."
+        },
+        {
+          "content": "Click \"Next\" without entering any text.",
+          "expected": "The persistent \"Please make sure that all fields are completely filled out before we continue with the process.\" banner is shown; the wizard does not advance."
+        },
+        {
+          "content": "Type a valid explanation (e.g. \"We are currently reviewing our internal data governance policies to determine an appropriate retention period.\") and click \"Next.\"",
+          "expected": "The wizard advances to the next step with no validation error."
+        },
+        {
+          "content": "Return to the Data retention step and replace the text with a value exceeding 2500 characters.",
+          "expected": "Inline error \"Please limit your response to 2500 characters.\" is shown below the field; \"Next\" remains blocked."
+        },
+        {
+          "content": "Select \"6 months\" instead.",
+          "expected": "\"Not yet decided\" is deselected and its free-text field disappears, confirming the retention options are mutually exclusive (single-select)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.6",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.13",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.20"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "previously-undocumented, never-live-verified scenario — existing case 39498 only covers the disabled/Free-plan state of \"Not yet decided\"; this case is the unlocked Pro+ behavior the doc hinted at (a field appearing when selected_option=not_yet_decided) but that no one had tested live since it's plan-gated. Same doc-live-mismatch pattern as the sibling case: doc's current limit (2000) is stale, live enforces 2500 (the doc's recommended value).",
+      "grill_status": "confirmed",
+      "section_id": 1966
+    },
+    {
+      "id": 39616,
+      "title": "[Privacy Policy Generator] Verify that opting in to CCPA clauses despite not meeting thresholds adds the Disclosure of data step",
+      "preconditions": "- User is on a paid plan (Pro or higher)\n- On Company details > Business details: \"Do you have users in California?\" = Yes, \"Are you a 'for-profit' organisation?\" = Yes, \"Do you cross one or more of the following thresholds?\" = No",
+      "steps": [
+        {
+          "content": "Observe the Business details tab below the thresholds question.",
+          "expected": "A \"Do you want to include CCPA-compliant clauses even if not legally required?\" question is displayed with Yes/No options."
+        },
+        {
+          "content": "Check the wizard sidebar before answering.",
+          "expected": "The sidebar lists Language preferences, Company details, Collection of data, Use of data, Data retention, Miscellaneous disclosures, and Preview & add policy — no \"Disclosure of data\" step is present."
+        },
+        {
+          "content": "Click \"Yes\" on the opt-in question.",
+          "expected": "\"Disclosure of data\" appears in the wizard sidebar, positioned between \"Use of data\" and \"Data retention\"."
+        },
+        {
+          "content": "Click \"No\" on the opt-in question.",
+          "expected": "\"Disclosure of data\" is immediately removed from the sidebar with no confirmation dialog — unlike the \"users in EU/EEA?\" and \"users in California?\" toggles, which prompt \"Remove GDPR/CCPA clauses from your policy?\" before removing their sections."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored at explicit user request after live-verifying the 'Disclosure of data' step's full sidebar-visibility trigger rule (EU/EEA vs California+for-profit). Covers the opt-in path referenced only by existing case 39611's title (\"...without crossing thresholds or opting in to CCPA clauses anyway\") but never walked through step-by-step until now. Confirms the opt-in is a plain Business-details Yes/No question, not a modal, and that it toggles the step silently (no confirmation dialog), unlike the sibling EU/EEA and California toggles.",
+      "grill_status": "confirmed",
+      "section_id": 1970
+    },
+    {
+      "id": 39617,
+      "title": "[Privacy Policy Generator] Verify that selecting an age category on Disclosure of data reveals distinct opt-in/opt-out process fields per bracket",
+      "preconditions": "- User is on a paid plan (Pro or higher)\n- On Company details > Business details: \"Do you have users in California?\" = Yes, \"Are you a 'for-profit' organisation?\" = Yes, thresholds = No, \"Do you want to include CCPA-compliant clauses even if not legally required?\" = Yes (so the Disclosure of data step is visible)\n- User is on the Disclosure of data step",
+      "steps": [
+        {
+          "content": "Observe \"Do you sell or share the personal information of users in the following categories?\"",
+          "expected": "Three options are shown: \"Users under the age of 16 years\", \"Users under the age of 13 years\", \"None\"."
+        },
+        {
+          "content": "Select \"Users under the age of 16 years.\"",
+          "expected": "Two fields appear: \"What is the process by which such users can opt in to such a sale?\" and \"What is the process of opting out of sharing or selling information?\""
+        },
+        {
+          "content": "Select \"Users under the age of 13 years\" instead.",
+          "expected": "The under-16 fields collapse and two different fields appear: \"How can parents or guardians of such users opt in to a sale?\" and \"How can users opt out of sharing or selling information?\" — the options are mutually exclusive, and the under-13 wording explicitly references parental/guardian consent unlike under-16's."
+        },
+        {
+          "content": "Select \"None.\"",
+          "expected": "All prior fields collapse; no additional fields are shown."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.6",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.12"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "none of the existing cases (39458/39459/39460/39461/39481/39497) test what happens when an age category is actually selected — they only list the question and its 3 options",
+      "grill_status": "confirmed",
+      "section_id": 1965
+    },
+    {
+      "id": 39618,
+      "title": "[Privacy Policy Generator] Verify that the age-category opt-in/opt-out fields on Disclosure of data are required and enforce a 2500-character limit",
+      "preconditions": "Same as the age-category reveal case, with \"Users under the age of 16 years\" selected.",
+      "steps": [
+        {
+          "content": "Leave both the opt-in and opt-out fields empty and click \"Next.\"",
+          "expected": "The persistent \"Please make sure that all fields are completely filled out before we continue with the process.\" banner is shown; the wizard does not advance."
+        },
+        {
+          "content": "Enter valid text into both fields and click \"Next.\"",
+          "expected": "The wizard advances to Data retention with no validation error."
+        },
+        {
+          "content": "Return to Disclosure of data and enter a value exceeding 2500 characters into the opt-in field.",
+          "expected": "Inline error \"Please limit your response to 2500 characters.\" is shown; \"Next\" remains blocked."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.12",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.19"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "doc-live-mismatch — doc states current limit 2000, live enforces 2500 (matches doc's own recommended value), same pattern already found on Data Retention's fields",
+      "grill_status": "confirmed",
+      "section_id": 1965
+    },
+    {
+      "id": 39619,
+      "title": "[Privacy Policy Generator] Verify that the delete/correct/access and sensitive-information free-text fields on Disclosure of data are required and enforce a 2500-character limit",
+      "preconditions": "- User is on a paid plan (Pro or higher)\n- On Company details > Business details: \"Do you have users in California?\" = Yes, \"Are you a 'for-profit' organisation?\" = Yes, thresholds = No, \"Do you want to include CCPA-compliant clauses even if not legally required?\" = Yes (so the Disclosure of data step is visible)\n- User is on the Disclosure of data step",
+      "steps": [
+        {
+          "content": "Confirm \"What is the process for users to submit requests to delete, correct, or access the information they have shared?\" is visible regardless of the age-category or sensitive-information answers.",
+          "expected": "The field is present with placeholder \"Describe how users can make data requests (e.g., via email or form).\""
+        },
+        {
+          "content": "Enter a value exceeding 2500 characters into it and click \"Next.\"",
+          "expected": "Inline error \"Please limit your response to 2500 characters.\" is shown; \"Next\" remains blocked."
+        },
+        {
+          "content": "Reduce it to a valid value, then answer \"Do you disclose sensitive information for purposes beyond listed exemptions?\" = Yes.",
+          "expected": "A single field, \"Describe the purposes for which you disclose Sensitive Personal Information beyond the listed exemptions,\" appears — not the two separate fields (categories disclosed and third parties shared with) the field-mapping doc predicts for this question."
+        },
+        {
+          "content": "Leave that field empty and click \"Next.\"",
+          "expected": "The wizard is blocked by the \"fields not completely filled out\" banner."
+        },
+        {
+          "content": "Enter a value exceeding 2500 characters into it.",
+          "expected": "Inline error \"Please limit your response to 2500 characters.\" is shown."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.12"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "doc-live-mismatch — doc's field map predicts two reveal fields for the sensitive-info Yes path; live only has one",
+      "grill_status": "confirmed",
+      "section_id": 1965
+    },
+    {
+      "id": 39620,
+      "title": "[Privacy Policy Generator] Verify that answering \"disclosed to third parties in the past 12 months\" = Yes reveals and validates two free-text category fields",
+      "preconditions": "- User is on a paid plan (Pro or higher)\n- On Company details > Business details: \"Do you have users in California?\" = Yes, \"Are you a 'for-profit' organisation?\" = Yes, thresholds = No, \"Do you want to include CCPA-compliant clauses even if not legally required?\" = Yes (so the Disclosure of data step is visible)\n- User is on the Disclosure of data step",
+      "steps": [
+        {
+          "content": "Answer \"Have you disclosed any of the information collected to third parties for business purposes in the past 12 months?\" = Yes.",
+          "expected": "Two fields appear: \"What are the categories of information that have been disclosed?\" and \"What are the categories of third parties with whom you have shared the data?\""
+        },
+        {
+          "content": "Leave both fields empty and click \"Next.\"",
+          "expected": "The wizard is blocked by the \"fields not completely filled out\" banner."
+        },
+        {
+          "content": "Enter valid text into both and click \"Next.\"",
+          "expected": "The wizard advances with no validation error."
+        },
+        {
+          "content": "Return to Disclosure of data and enter a value exceeding 2500 characters into either field.",
+          "expected": "Inline error \"Please limit your response to 2500 characters.\" is shown; \"Next\" remains blocked."
+        },
+        {
+          "content": "Answer the question \"No\" instead.",
+          "expected": "Both fields disappear from the step."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.12",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.13"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "matches the doc's 2-field prediction for this question (unlike the sensitive-info question in the sibling case); confirms the reveal/limit/hide-on-No cycle",
+      "grill_status": "confirmed",
+      "section_id": 1965
+    },
+    {
+      "id": 39621,
+      "title": "[Privacy Policy Generator] Verify that answering the sensitive-information disclosure question \"No\" hides its reveal field",
+      "preconditions": "- User is on a paid plan (Pro or higher)\n- On Company details > Business details: \"Do you have users in California?\" = Yes, \"Are you a 'for-profit' organisation?\" = Yes, thresholds = No, \"Do you want to include CCPA-compliant clauses even if not legally required?\" = Yes (so the Disclosure of data step is visible)\n- User is on the Disclosure of data step\n- \"Do you disclose sensitive information for purposes beyond listed exemptions?\" = Yes, with \"Describe the purposes for which you disclose Sensitive Personal Information beyond the listed exemptions.\" filled in",
+      "steps": [
+        {
+          "content": "Answer \"Do you disclose sensitive information for purposes beyond listed exemptions?\" = No.",
+          "expected": "The \"Describe the purposes for which you disclose Sensitive Personal Information beyond the listed exemptions.\" field disappears from the step."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "gap found during /grill-section gap-hunt: existing case 39481 only observes that the sensitive-info question renders, never toggles it after answering Yes; no case in this file or elsewhere tests the hide-on-No behavior for this specific field (case 8's sibling third-party-disclosure question does test hide-on-No, but the sensitive-info question's own toggle was untested until now)",
+      "grill_status": "confirmed",
+      "section_id": 1965
+    },
+    {
+      "id": 39730,
+      "title": "[Privacy Policy Generator] Verify that the data-transfer and automatic-processing toggles on Miscellaneous disclosures are required before advancing",
+      "preconditions": "Miscellaneous disclosures step, with \"Do you have users in EU/EEA?\" = Yes on Business details — these two questions are GDPR-gated and do not render otherwise.",
+      "steps": [
+        {
+          "content": "Leave \"Do you transfer data collected to a non-adequate country or region outside the EU?\" and \"Do you automatically process the data that you have collected?\" unanswered and click \"Next.\"",
+          "expected": "The persistent \"Please make sure that all fields are completely filled out before we continue with the process.\" banner is shown; the wizard does not advance."
+        },
+        {
+          "content": "Answer both questions (e.g. both \"No\") and click \"Next.\"",
+          "expected": "The wizard advances to Preview & add policy with no validation error."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl — gap-closing pass, required-field validation not previously cased for this step",
+      "grill_status": "fixed",
+      "section_id": 1967
+    },
+    {
+      "id": 39731,
+      "title": "[Privacy Policy Generator] Verify that the DPO contact-details and data controller/representative fields are optional and enforce a 2000-character limit",
+      "preconditions": "Miscellaneous disclosures step, with the transfer and automatic-processing questions already answered.",
+      "steps": [
+        {
+          "content": "Leave both \"Provide the contact details of the Data Protection Officer (DPO).\" and \"Provide the details of the data controller/representative if applicable.\" empty and click \"Next.\"",
+          "expected": "The wizard advances with no validation error — both fields are optional."
+        },
+        {
+          "content": "Return to Miscellaneous disclosures and enter exactly 2000 characters into the DPO field.",
+          "expected": "No inline error is shown."
+        },
+        {
+          "content": "Enter one additional character (2001 total) into the DPO field.",
+          "expected": "Inline error \"Please limit your response to 2000 characters.\" is shown below the field; \"Next\" remains blocked."
+        },
+        {
+          "content": "Reduce the DPO field to a valid value, then enter a value exceeding 2000 characters into the data controller/representative field.",
+          "expected": "The same inline error, \"Please limit your response to 2000 characters.\", is shown for that field; \"Next\" remains blocked."
+        }
+      ],
+      "run_type": "",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.13-14, p.20-21"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl — gap-closing pass, boundary values for this field were the targeted coverage-gaps.md item",
+      "grill_status": "confirmed",
+      "section_id": 1967
+    },
+    {
+      "id": 39732,
+      "title": "[Privacy Policy Generator] Verify that the custom data-transfer-safeguards field is multi-select, validates duplicates/whitespace/length, and holds only one custom entry",
+      "preconditions": "- Miscellaneous disclosures step\n- \"Do you transfer data collected to a non-adequate country or region outside the EU?\" = Yes\n- \"Standard contractual clauses\" selected under \"What applicable safeguards have been implemented?\"",
+      "steps": [
+        {
+          "content": "Click \"Add your own\" without deselecting \"Standard contractual clauses.\"",
+          "expected": "Both chips remain selected simultaneously — the safeguards field is multi-select, not mutually exclusive."
+        },
+        {
+          "content": "Type a valid custom safeguard (e.g. \"Data processed under an approved certification mechanism\") into the field that appears and click \"Add.\"",
+          "expected": "It's added as a chip with its own \"Remove\" control, shown below the chip-select options."
+        },
+        {
+          "content": "Type the same value again and click \"Add.\"",
+          "expected": "No duplicate chip is created; only one instance remains."
+        },
+        {
+          "content": "Type only whitespace into the field.",
+          "expected": "The \"Add\" button stays disabled; no chip is added."
+        },
+        {
+          "content": "Type a value exceeding 3000 characters and click \"Add.\"",
+          "expected": "Inline error \"Please limit your response to 3000 characters.\" is shown; no chip is added."
+        },
+        {
+          "content": "Type a second, different valid value and click \"Add.\"",
+          "expected": "The new value replaces the existing custom chip rather than being added alongside it — only one custom safeguard entry is retained at a time, unlike duplicate-entry chip lists used elsewhere in the wizard (e.g. Use of data's custom-purpose list)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.14, p.21"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl — gap-closing pass, boundary values plus incidental multi-select/cardinality findings not previously cased",
+      "grill_status": "confirmed",
+      "section_id": 1967
+    },
+    {
+      "id": 39733,
+      "title": "[Privacy Policy Generator] Verify that a custom data-transfer safeguard renders verbatim in the generated policy alongside the standard safeguards clause",
+      "preconditions": "Miscellaneous disclosures step. Transfer = Yes with \"Standard contractual clauses\" selected and a custom safeguard entered via \"Add your own\".",
+      "steps": [
+        {
+          "content": "Save the draft and navigate to Preview & add policy.",
+          "expected": "The \"GDPR Disclosures > Cross border data transfer\" section includes the standard \"Standard Contractual Clauses:\" explanatory paragraph, followed by a separate paragraph containing the exact custom safeguard text entered — rendered verbatim, not paraphrased or merged into the standard paragraph."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl — verbatim-text fidelity check per migration-conventions.md §4",
+      "grill_status": "confirmed",
+      "section_id": 1967
+    },
+    {
+      "id": 39734,
+      "title": "[Privacy Policy Generator] Verify that the CCPA metrics-link field is required once \"10 million or more California residents\" = Yes, and enforces a 2000-character limit",
+      "preconditions": "- User has a Pro or Ultimate plan\n- On Business details: \"Do you have users in California?\" = Yes and either CCPA thresholds = Yes or Include-CCPA-clauses = Yes\n- \"Do you process the personal information of 10 million or more California residents?\" = Yes on Miscellaneous disclosures",
+      "steps": [
+        {
+          "content": "Leave \"Provide a link to the page that shows the metrics.\" empty and click \"Next.\"",
+          "expected": "The persistent \"Please make sure that all fields are completely filled out before we continue with the process.\" banner is shown; the wizard does not advance."
+        },
+        {
+          "content": "Enter exactly 2000 characters into the field.",
+          "expected": "No inline error is shown."
+        },
+        {
+          "content": "Enter one additional character (2001 total).",
+          "expected": "Inline error \"Please limit your response to 2000 characters.\" is shown; \"Next\" remains blocked."
+        },
+        {
+          "content": "Reduce it to a valid URL and click \"Next.\"",
+          "expected": "The wizard advances to Preview & add policy with no validation error."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl",
+        "internal-docs/Character limit - Privacy Policy Fields (1).pdf p.14, p.21"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl — gap-closing pass, boundary values for this field were the targeted coverage-gaps.md item; also surfaces a doc-live-mismatch on the field's Optional/required status",
+      "grill_status": "confirmed",
+      "section_id": 1967
+    },
+    {
+      "id": 39735,
+      "title": "[Privacy Policy Generator] Verify that answering \"10 million or more California residents\" back to \"No\" cleanly removes the metrics field and its generated-policy section",
+      "preconditions": "As above, with \"10 million or more California residents\" = Yes and a valid metrics URL entered.",
+      "steps": [
+        {
+          "content": "Answer \"Do you process the personal information of 10 million or more California residents?\" = \"No.\"",
+          "expected": "The \"Provide a link to the page that shows the metrics.\" field disappears immediately from the step."
+        },
+        {
+          "content": "Save the draft and navigate to Preview & add policy.",
+          "expected": "No \"Metrics\" section appears anywhere in the generated policy."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "authored from live crawl — confirmed-clean toggle-to-No behavior, contrasting with the stale-content-on-toggle-to-No defect pattern logged in coverage-gaps.md for other fields in this wizard",
+      "grill_status": "confirmed",
+      "section_id": 1967
+    },
+    {
+      "id": 39736,
+      "title": "[Privacy Policy Generator] Verify that the cookie-policy-link and \"Do Not Track\" response fields enforce a 2000/2500-character limit, and the review/change-process description field enforces a 2500-character limit",
+      "preconditions": "- Collection of data > Additional information tab\n- \"Do you use cookies or other tracking technologies?\" = Yes\n- On Business details, \"Do you sell or share the personal information of users?\" = Yes (reveals the review/change-process question)",
+      "steps": [
+        {
+          "content": "Enter a value exceeding 2000 characters into \"Add link to your cookie policy\" (a URL field).",
+          "expected": "Inline error \"Please limit your response to 2000 characters.\" is shown; a value at or under 2000 characters is accepted with no error."
+        },
+        {
+          "content": "Enter a value exceeding 2500 characters into \"How do you respond to 'Do Not Track' requests?\"",
+          "expected": "Inline error \"Please limit your response to 2500 characters.\" is shown; a value at or under 2500 characters is accepted with no error."
+        },
+        {
+          "content": "Answer \"Do you have a process that allows users to review and request changes to their information?\" = Yes, then enter a value exceeding 2500 characters into \"Describe how users can review or update their data.\"",
+          "expected": "The same \"Please limit your response to 2500 characters.\" error is shown; a value at or under 2500 characters is accepted with no error."
+        }
+      ],
+      "run_type": "",
+      "source_case_ids": [
+        "live crawl"
+      ],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "section_id": 1972,
+      "rewrite_notes": "authored from live crawl — character limit audit of Company Details/Collection of Data/Use of Data (BACKLOG.md item); limits re-confirmed live 2026-07-21 (2000/2500/2500), live behavior taken as source of truth, not the internal field-mapping doc",
+      "grill_status": "confirmed"
+    }
+  ],
+  "default_section_id": 1960
+}

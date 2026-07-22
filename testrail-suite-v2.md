@@ -132,7 +132,27 @@ CookieYes Functional Test Suite v2
 │
 ├── 09. Legal Policies                 ← document generators (matches the app's "Legal Policies" nav)
 │   ├── Cookie Policy Generator
-│   └── Privacy Policy Generator
+│   └── Privacy Policy Generator             ← 7-step wizard, each step its own route; sub-sectioned like
+│       │                                       Cookie Banner's Customization Sidebar given its size/complexity
+│       ├── Wizard Navigation & Progress     ← cross-cutting flow control: step sidebar/progress render, the
+│       │                                      unsaved-changes, resume-draft, and save-progress dialogs, and
+│       │                                      the "Preview Privacy Policy" popup reachable from every step —
+│       │                                      none of these belong to one specific wizard step
+│       ├── Language Preferences
+│       ├── Company Details
+│       │   ├── Contact Information
+│       │   └── Business Details             ← EU/EEA, California, CCPA thresholds/clauses chain; largest
+│       │                                      cluster in this feature, split out for size, not component type
+│       ├── Collection of Data
+│       │   ├── Personal Information         ← chip-selector grid (personal + sensitive data categories)
+│       │   └── Additional Information       ← linear Q&A list (tracking, DNT, legal basis, review process);
+│       │                                      structurally distinct component from Personal Information, same
+│       │                                      rationale as Cookie Banner's Content > GDPR / US State Laws split
+│       ├── Use of Data
+│       ├── Disclosure of Data
+│       ├── Data Retention
+│       ├── Miscellaneous Disclosures
+│       └── Preview & Add Policy
 │
 ├── 10. Profile & Account
 │   ├── My Account
@@ -259,8 +279,19 @@ Test that the feature behaviour works correctly for the relevant plan state. Use
 - If the feature section owns a page or card of its own, its render/display case (`migration-conventions.md` §11) notes the plan-gating as a fact and points to Plan Gates for the full verification — see §11 "Plan-gated render cases". This keeps the gating discoverable to anyone browsing the feature section without duplicating Layer 2's verification.
 
 **Layer 2 — Plan Gates (live in `11. Billing & Upgrade > Plan Gates`)**
-Assert that each plan is correctly configured. One case per plan, steps walk through all gated touchpoints across all pages. Tag as `smoke`.
+Assert that each plan is correctly configured. Tag as `smoke`.
 
+- Default shape: one case per plan, steps walk through all gated touchpoints across all pages.
+- **Feature-scoped exception:** when a single feature has many independent, clause/field-level
+  gates rather than one binary feature-level lock (e.g. Privacy Policy Generator — a wizard where
+  individual questions, chips, and steps are gated per-plan throughout, using three visually
+  distinct gating presentations, rather than the whole feature being hidden), write feature-scoped
+  cases instead: one case per plan *per feature*, e.g. `[Plan Gates] Privacy Policy Generator —
+  Free plan`. These still live in `11. Billing & Upgrade > Plan Gates` alongside the app-wide
+  per-plan cases — do not move them into the feature's own section. This keeps section 11 as the
+  single place all plan-gating lives (see "What is NOT in this suite") while preventing one
+  feature's dozen-plus touchpoints from bloating a single app-wide per-plan case into an
+  unmaintainable list.
 - These cases are automation candidates. The Playwright test provides per-gate assertion granularity; the TestRail case is the coverage marker.
 
 **Nudge button behaviour (live in `11. Billing & Upgrade`)**
@@ -321,6 +352,7 @@ Do not prefix titles with `[Account Owner]` unless inside section 14.
 | "Try Pro for free" button (Free plan) | 11. Billing & Upgrade > Free Plan |
 | Upgrade button from nudge (Basic plan) | 11. Billing & Upgrade > Paid Plan |
 | Plan-gated feature configuration (all plans) | 11. Billing & Upgrade > Plan Gates |
+| Clause/field-level plan gating within one feature (e.g. Privacy Policy Generator's per-question, per-chip gates) | 11. Billing & Upgrade > Plan Gates — as a feature-scoped case per plan (see "Plan-gated features" Layer 2), not inside the feature's own section |
 | In-app nudge opens from a feature entry point | Feature section where the entry point lives (e.g. 03. Dashboard > Cookie Banner Status Card) |
 | "Ends in N days" trial display | 11. Billing & Upgrade > Trial — with card |
 | "Buy Pro" / "Switch to Pro trial?" | 11. Billing & Upgrade > Trial — with card |

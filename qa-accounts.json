@@ -2,9 +2,9 @@
   "accounts": {
     "free": {
       "email": "rahulkrishna+freeplansite@mozilor.com",
-      "password": "Rahul123@",
+      "password": "FreePlan2026!Test",
       "plan": "Free",
-      "notes": "Clean account, no domains or cookies added"
+      "notes": "Clean account, no domains or cookies added. Password changed 2026-07-20 during /grill-section Forgot Password — real end-to-end reset flow test (was Rahul123@)."
     },
     "basic": {
       "email": "rahulkrishna+basicuser@mozilor.com",
