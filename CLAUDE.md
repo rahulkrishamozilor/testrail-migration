@@ -67,7 +67,11 @@ existing cases before writing new ones. Available as an MCP tool in this project
 
 ## Migration workflow
 
-1. **User invokes `/fetch-section <section-name>`** — style-rewrite draft, human-reviewed
+1. **User invokes `/fetch-section <section-name>`** — style-rewrite draft, human-reviewed, sourced
+   from Suite 6. **`/draft-section <section-name>`** is the parallel entry point for sections with
+   no Suite 6 cases at all — live-crawls the actual QA2 page first for structural ground truth,
+   then fills in with files from `internal-docs/`, flagging any mismatch between the two. Both
+   write the same `ai-context/draft-<slug>.json` shape, so everything downstream is identical.
 2. **User invokes `/grill-section <section-name>`** — verifies the draft against the live QA app
 3. **User invokes `/migrate-section <section-name>`** — applies structural v2 rules, publishes
    to TestRail on explicit `publish`
@@ -79,7 +83,18 @@ existing cases before writing new ones. Available as an MCP tool in this project
    systematic version of the manual "v1 audit" that first caught this happening on
    Organisations & Sites.
 
+**`/migration-status [section]`** — read-only progress dashboard across the whole tree (or one
+top-level section): what's not started, drafted, published, or due for audit, plus open gap
+counts from `coverage-gaps.md`. Run anytime; makes no edits. Useful before picking the next
+section to work on, or to spot pipeline drift (e.g. a file stuck mid-merge, an inconsistent
+timestamp field) that's invisible looking at one section at a time.
+
 Cases are never created without explicit user approval.
+
+`coverage-gaps.md` tracks scenarios deliberately deferred during a `/grill-section` or
+`/audit-section` pass (plan tier unavailable, destructive action, out of scope for that pass),
+organized by v2 section — check it before starting work on a section to see what's already
+known to be incomplete, and update it when a gap opens or closes.
 
 ---
 
