@@ -3,7 +3,10 @@
 An LLM-readable knowledge base of the CookieYes web app — one page per feature area, each
 self-contained (newcomer test / isolation test / RAG accuracy test, per
 `migration-conventions.md` §0). Structure mirrors the 17-section app map in
-`testrail-suite-v2.md` (read that file for the canonical section tree).
+`testrail-suite-v2.md` (read that file for the canonical section tree). See `CONVENTIONS.md` for
+this knowledge base's own writing standard (perspective, no inline case-ID references, page
+skeleton, etc.) — a separate concern from `migration-conventions.md`, which governs TestRail case
+authoring, not wiki page authoring.
 
 **Coverage as of 2026-07-23:** 24 pages drafted from the existing `ai-context/cases-*.json`
 TestRail export files. Most of these have not been live-verified against the running QA app yet —
