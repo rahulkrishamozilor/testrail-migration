@@ -187,9 +187,10 @@ CookieYes Functional Test Suite v2
 │   └── Plan Gates                      ← plan-gated feature configuration checks across all plans
 │
 ├── 12. Agency                         ← not yet created in TestRail under this name; keeping as
-│   ├── Agency Dashboard                  planned placeholder. Unrelated to live section 21. Agentic
-│   └── Agency Billing & Upgrade          Tests — see that section's note; its Agency-named children
-│                                          are transient dev-authored drafts, not this section's real home
+│   ├── Agency Dashboard                  planned placeholder. Unrelated to live section 21. Draft
+│   └── Agency Billing & Upgrade          Cases (Dev Workflow) — see that section's note; its
+│                                          Agency-named children are transient dev-authored drafts,
+│                                          not this section's real home
 │
 ├── 13. Platforms
 │   ├── Plugin (WordPress)
@@ -218,15 +219,16 @@ CookieYes Functional Test Suite v2
 │                                          structure above — cases here are for reference, not
 │                                          feature-section placement
 │
-└── 21. Agentic Tests                   ← dev-facing staging area, unrelated to "12. Agency" above.
-    ├── Agency Billing                     Devs writing a feature in the dev workspace can generate
-    ├── Referral Campaign (Genius Referral) draft cases in parallel via the QA agentic workflow
-    ├── Agency                             commands; publish target for that pathway is locked to
-    └── Agency Sign Up                     this section only. QA reviews + dedup-checks, then
-                                            publishes each case to its real section in the tree
-                                            above. Current children are just today's in-flight
-                                            dev-authored drafts (agency-related by coincidence) —
-                                            not a permanent home for Agency cases.
+└── 21. Draft Cases (Dev Workflow)       ← dev-facing staging area, unrelated to "12. Agency" above.
+    ├── Agency Billing                     Renamed 2026-07-23 from "Agentic Tests" for clarity.
+    ├── Referral Campaign (Genius Referral) Devs writing a feature in the dev workspace can
+    ├── Agency                             generate draft cases in parallel via the QA agentic
+    └── Agency Sign Up                     workflow commands; publish target for that pathway is
+                                            locked to this section only. QA reviews + dedup-checks,
+                                            then publishes each case to its real section in the
+                                            tree above. Current children are just today's
+                                            in-flight dev-authored drafts (agency-related by
+                                            coincidence) — not a permanent home for Agency cases.
 ```
 
 > Section ordering is indicative. `17. Reports` is numbered last so it does not renumber the
@@ -473,9 +475,10 @@ Suite 16 is **not** a separate legacy archive — it is the live v2 target suite
   in the dev workspace generate draft cases in parallel via the QA agentic workflow commands,
   publish for that pathway is locked to this section only, and QA reviews + dedup-checks before
   publishing each case to its real section in the tree. The current Agency-named children are
-  just today's in-flight drafts, not a permanent home for Agency cases. See the tree note on
-  section 21 for the full explanation, and "Opinion: Agentic Tests staging pathway" below for
-  process considerations.
+  just today's in-flight drafts, not a permanent home for Agency cases. Also renamed live to
+  `Draft Cases (Dev Workflow)` (2026-07-23) per the naming consideration below. See the tree
+  note on section 21 for the full explanation, and "Dev-facing staging pathway" below for the
+  remaining process considerations.
 
 - [x] **[N3] Orphaned duplicate "Legal Policies" section in TestRail** — Resolved: the duplicate
   has been deleted from TestRail. Confirmed via live query — only one `Legal Policies` section
@@ -483,20 +486,20 @@ Suite 16 is **not** a separate legacy archive — it is the live v2 target suite
 
 ---
 
-## Dev-facing staging pathway (`21. Agentic Tests`) — process notes
+## Dev-facing staging pathway (`21. Draft Cases (Dev Workflow)`) — process notes
 
 Devs building a feature in the dev workspace can generate draft test cases in parallel via the
-QA agentic workflow commands. That workflow's publish target is locked to `21. Agentic Tests`
-only — it cannot write directly into the canonical tree above. QA reviews and dedup-checks
-(`dedup-check` in `fetch_testrail.py` already supports this) before publishing each case to its
-real section. This keeps the canonical structure clean without blocking devs from writing
-coverage as they build.
+QA agentic workflow commands. That workflow's publish target is locked to
+`21. Draft Cases (Dev Workflow)` only — it cannot write directly into the canonical tree above.
+QA reviews and dedup-checks (`dedup-check` in `fetch_testrail.py` already supports this) before
+publishing each case to its real section. This keeps the canonical structure clean without
+blocking devs from writing coverage as they build.
 
 Considerations worth deciding on explicitly, rather than letting the pathway run informally:
 
-- **Section name is not self-documenting.** `Agentic Tests` doesn't read as "pending QA review
-  staging" to someone browsing TestRail cold. A name like `0. Pending Review (Dev-authored)` would
-  make the transient nature obvious without needing this doc as context.
+- ~~**Section name is not self-documenting.**~~ — **Closed 2026-07-23.** Renamed live from
+  `Agentic Tests` to `Draft Cases (Dev Workflow)`, which reads as a staging queue rather than a
+  permanent category.
 - **No visible throughput signal.** If dev velocity outpaces QA review cadence, drafts pile up
   silently. Worth tracking age of oldest unreviewed batch, or setting a review SLA, so the section
   doesn't become a permanent home by default.
