@@ -186,9 +186,10 @@ CookieYes Functional Test Suite v2
 │   ├── Paid Plan
 │   └── Plan Gates                      ← plan-gated feature configuration checks across all plans
 │
-├── 12. Agency                         ← not yet created in TestRail under this name; keeping as planned
-│   ├── Agency Dashboard                  placeholder (see also live section 21. Agentic Tests — its
-│   └── Agency Billing & Upgrade          relationship to this planned section is unconfirmed, flagged below)
+├── 12. Agency                         ← not yet created in TestRail under this name; keeping as
+│   ├── Agency Dashboard                  planned placeholder. Unrelated to live section 21. Agentic
+│   └── Agency Billing & Upgrade          Tests — see that section's note; its Agency-named children
+│                                          are transient dev-authored drafts, not this section's real home
 │
 ├── 13. Platforms
 │   ├── Plugin (WordPress)
@@ -212,15 +213,20 @@ CookieYes Functional Test Suite v2
 │
 ├── 19. Add a New Site                  ← live top-level section; same promotion as Header above
 │
-├── 20. User Flows                      ← live top-level section, currently empty (no sub-sections or
-│                                          cases yet). Purpose not yet confirmed against this doc —
-│                                          flagged in Open issues below rather than guessed at
+├── 20. User Flows                      ← reference-only store of notable end-to-end user journeys,
+│                                          currently empty. Not part of the canonical per-feature
+│                                          structure above — cases here are for reference, not
+│                                          feature-section placement
 │
-└── 21. Agentic Tests                   ← live top-level section. Purpose/relationship to the planned
-    ├── Agency Billing                     "12. Agency" section above is unconfirmed — flagged in
-    ├── Referral Campaign (Genius Referral) Open issues below rather than guessed at
-    ├── Agency
-    └── Agency Sign Up
+└── 21. Agentic Tests                   ← dev-facing staging area, unrelated to "12. Agency" above.
+    ├── Agency Billing                     Devs writing a feature in the dev workspace can generate
+    ├── Referral Campaign (Genius Referral) draft cases in parallel via the QA agentic workflow
+    ├── Agency                             commands; publish target for that pathway is locked to
+    └── Agency Sign Up                     this section only. QA reviews + dedup-checks, then
+                                            publishes each case to its real section in the tree
+                                            above. Current children are just today's in-flight
+                                            dev-authored drafts (agency-related by coincidence) —
+                                            not a permanent home for Agency cases.
 ```
 
 > Section ordering is indicative. `17. Reports` is numbered last so it does not renumber the
@@ -228,11 +234,6 @@ CookieYes Functional Test Suite v2
 > migration conventions. Sections 18–21 are appended at the end for the same reason: they reflect
 > live TestRail structure discovered during a 2026-07-23 tree sync and are numbered last purely to
 > avoid renumbering every existing cross-reference in this document.
->
-> **Not reflected above:** live TestRail also has an empty, childless, case-less duplicate section
-> named `Legal Policies` alongside `09. Legal Policies` — almost certainly leftover clutter from a
-> restructure, not part of the intended tree. Left out of the canonical structure above; see Open
-> issues.
 
 ---
 
@@ -463,22 +464,43 @@ Suite 16 is **not** a separate legacy archive — it is the live v2 target suite
 
 - [x] **[L3] "Reports" is a misleading section name** — Resolved: section 09 is renamed **Legal Policies** (matching the app's left-nav label) and holds Cookie Policy Generator + Privacy Policy Generator. A distinct **Reports** section (analytics & reporting) is added as section 17 — kept last so it does not renumber the referenced sections 10–16.
 
-- [ ] **[N1] "20. User Flows" purpose unconfirmed** — Discovered live during the 2026-07-23 tree
-  sync as an empty top-level section (no sub-sections, no cases). Name suggests cross-feature
-  end-to-end journey cases, but that's a guess — confirm intended purpose before writing any
-  cases into it or documenting a placement rule for it.
+- [x] **[N1] "20. User Flows" purpose unconfirmed** — Resolved: it's a reference-only store of
+  notable end-to-end user journeys, not part of the per-feature section-placement structure. No
+  placement rule needed — it's not a destination the migration workflow routes cases to.
 
-- [ ] **[N2] "21. Agentic Tests" relationship to planned "12. Agency" section unconfirmed** —
-  Discovered live during the 2026-07-23 tree sync as a top-level section with children `Agency
-  Billing`, `Referral Campaign (Genius Referral)`, `Agency`, `Agency Sign Up`. This may be where
-  Agency work has actually landed instead of the planned `12. Agency` (Agency Dashboard / Agency
-  Billing & Upgrade) — or it may be an unrelated automation/scratch area given the "Agentic" name.
-  Confirm before writing new Agency cases to either location, and reconcile section 12 with this
-  once confirmed.
+- [x] **[N2] "21. Agentic Tests" relationship to planned "12. Agency" section unconfirmed** —
+  Resolved: unrelated to section 12. It's a dev-facing staging section — devs building a feature
+  in the dev workspace generate draft cases in parallel via the QA agentic workflow commands,
+  publish for that pathway is locked to this section only, and QA reviews + dedup-checks before
+  publishing each case to its real section in the tree. The current Agency-named children are
+  just today's in-flight drafts, not a permanent home for Agency cases. See the tree note on
+  section 21 for the full explanation, and "Opinion: Agentic Tests staging pathway" below for
+  process considerations.
 
-- [ ] **[N3] Orphaned duplicate "Legal Policies" section in TestRail** — Live TestRail has a
-  second, empty, childless, case-less section literally named `Legal Policies` alongside
-  `09. Legal Policies` (which holds the real Cookie Policy Generator / Privacy Policy Generator
-  content). Almost certainly leftover clutter from a restructure. Not included in the tree above.
-  Recommend deleting it in the TestRail UI once confirmed unused — deletion wasn't done here since
-  it's a live, potentially destructive TestRail change outside the scope of a doc sync.
+- [x] **[N3] Orphaned duplicate "Legal Policies" section in TestRail** — Resolved: the duplicate
+  has been deleted from TestRail. Confirmed via live query — only one `Legal Policies` section
+  remains (`09. Legal Policies`, id 1958).
+
+---
+
+## Dev-facing staging pathway (`21. Agentic Tests`) — process notes
+
+Devs building a feature in the dev workspace can generate draft test cases in parallel via the
+QA agentic workflow commands. That workflow's publish target is locked to `21. Agentic Tests`
+only — it cannot write directly into the canonical tree above. QA reviews and dedup-checks
+(`dedup-check` in `fetch_testrail.py` already supports this) before publishing each case to its
+real section. This keeps the canonical structure clean without blocking devs from writing
+coverage as they build.
+
+Considerations worth deciding on explicitly, rather than letting the pathway run informally:
+
+- **Section name is not self-documenting.** `Agentic Tests` doesn't read as "pending QA review
+  staging" to someone browsing TestRail cold. A name like `0. Pending Review (Dev-authored)` would
+  make the transient nature obvious without needing this doc as context.
+- **No visible throughput signal.** If dev velocity outpaces QA review cadence, drafts pile up
+  silently. Worth tracking age of oldest unreviewed batch, or setting a review SLA, so the section
+  doesn't become a permanent home by default.
+- **The review step is the only place v2 conventions get enforced for this pathway** (section
+  placement, naming, `run_type`, no `automation_type`, no role/plan variant clones). Since the
+  whole point is keeping the canonical tree clean, that review needs to actually check these
+  conventions, not just dedup — otherwise violations just arrive late instead of never.
