@@ -153,6 +153,27 @@ File: `ai-context/cases-cookie-policy-generator.json`
 
 ---
 
+## 10. Profile & Account > Organisations & Sites
+
+File: `ai-context/cases-organisation-and-sites.json`
+
+- **Shopify-connected site cross-account transfer needs a live-verify test account** — a
+  Shopify-connected site (created via the Shopify app install) is blocked from cross-account
+  transfer with the error "This site can only be transferred to an organization you own, as it
+  is connected to your account via CookieYes' Shopify app." Sourced from C9717/C17212 (C11237,
+  filed under the Shopify section but showing the generic banner instead, is a
+  faulty/mislabeled duplicate from a Suite-6 section mix-up, excluded as a source). Case not
+  yet live-verified — needs a Shopify-connected test site, which doesn't currently exist in
+  `qa-accounts.json`.
+- **"Add staging site" Plan Gates touchpoint may need consolidating** — verified live
+  2026-07-10 as plan-gated (disabled with a premium/upgrade badge icon on Free plan, enabled on
+  Basic). Cased per `migration-conventions.md` §6 as its own `plan_gate_flag: true` case routed
+  to `11. Billing & Upgrade > Plan Gates`, since no existing Plan Gates case covered this
+  touchpoint. May need merging into a consolidated per-plan Plan Gates walkthrough case later
+  rather than staying a standalone touchpoint case.
+
+---
+
 ## 11. Billing & Upgrade
 
 - **Auto-unlocked free 14-day Pro trial on new signup** — identified 2026-07-21 during the
