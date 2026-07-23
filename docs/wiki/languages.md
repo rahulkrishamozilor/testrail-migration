@@ -6,7 +6,7 @@
 **Plan gating:** Adding any language beyond the pre-set default requires a paid plan (Basic or
 higher) — the Add Language popup itself is plan-gated. On the Free plan, the "Add Language"
 button is enabled but opens an upgrade nudge instead of the popup. See
-`docs/wiki/11-billing-upgrade/plan-gates.md` for the full gate-by-plan verification (this
+`docs/wiki/billing-upgrade/plan-gates.md` for the full gate-by-plan verification (this
 specific nudge case is tracked there, not under Languages, per the two-layer plan-gating
 convention).
 
@@ -140,7 +140,7 @@ language.
 **11. Edit a language's content**
 1. Click the **"Edit Content"** button on a language's row in the list.
    Result: the Edit Content page for that language opens (see
-   `docs/wiki/04-cookie-banner/content-gdpr.md` / `content-us-state-laws.md` for the content
+   `docs/wiki/cookie-banner/content-gdpr.md` / `content-us-state-laws.md` for the content
    types edited there).
 
 **12. Change the default language when only one language exists**
@@ -203,10 +203,10 @@ Precondition: at least two languages exist, one non-default.
   user adds their second language.
 
 ## Related pages
-- `docs/wiki/04-cookie-banner/general.md`
-- `docs/wiki/04-cookie-banner/content-gdpr.md`
-- `docs/wiki/04-cookie-banner/content-us-state-laws.md`
-- `docs/wiki/11-billing-upgrade/plan-gates.md`
+- `docs/wiki/cookie-banner/general.md`
+- `docs/wiki/cookie-banner/content-gdpr.md`
+- `docs/wiki/cookie-banner/content-us-state-laws.md`
+- `docs/wiki/billing-upgrade/plan-gates.md`
 
 ## Source
 Derived from `ai-context/cases-languages.json` (23 TestRail cases). Drafted 2026-07-14, not yet

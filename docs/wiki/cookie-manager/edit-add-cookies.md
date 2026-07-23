@@ -3,7 +3,7 @@
 **Nav path:** Cookie Manager > Cookie List tab > any category panel > "+ Add Cookie" button, or a cookie's "..." menu > "Edit cookie" / "Delete cookie"
 **Route:** (not captured in source data — needs live verification). These are modal popups/dialogs layered over the Cookie List tab, not separate pages.
 **Roles:** Account Owner, Admin, Editor — all equal access
-**Plan gating:** None indicated in the source cases (no case here carries a `plan_gate_flag`). See [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md) if gating is found elsewhere in Cookie Manager.
+**Plan gating:** None indicated in the source cases (no case here carries a `plan_gate_flag`). See [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md) if gating is found elsewhere in Cookie Manager.
 
 ## Purpose
 These popups let a site owner manually add a cookie CookieYes didn't discover, or edit/delete a cookie (discovered or manually added) within any category. Behavior is shared identically across all categories, including Uncategorised.
@@ -64,8 +64,8 @@ These popups let a site owner manually add a cookie CookieYes didn't discover, o
 ## Related pages
 - [cookie-list-categories.md](cookie-list-categories.md) — category sidebar, Edit Category popup, and the Uncategorised warning-row/"Add now" entry point into Edit Cookie.
 - [scan-and-scan-history.md](scan-and-scan-history.md) — scans that discover the cookies edited/deleted here.
-- [../06-consent-log.md](../06-consent-log.md) — consent proof tied to cookies managed here.
-- [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md) — plan-gating matrix for other Cookie Manager features.
+- [../consent-log.md](../consent-log.md) — consent proof tied to cookies managed here.
+- [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md) — plan-gating matrix for other Cookie Manager features.
 
 ## Source
 Derived from `ai-context/cases-cookie-manager.json` (34 TestRail cases total, split by sub-topic — 5 cases feed this file: 37275, 37276, 39427, 37289, 37292). Drafted 2026-07-14, not yet live-verified against the QA app.

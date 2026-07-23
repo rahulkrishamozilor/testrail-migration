@@ -94,6 +94,17 @@ A section can map to more than one page (e.g. Organisations & Sites splits into 
 Management / Site Management / Site Transfer). Resolve section → page(s) via `README.md`'s table,
 not by guessing a filename transform.
 
+**No numbered path prefixes.** Folder and file names use plain feature names
+(`cookie-banner/general.md`, `billing-upgrade/plan-gates.md`) — never a `testrail-suite-v2.md`
+section number (no `04-cookie-banner/`, `11-billing-upgrade/`). The same reasoning as §2 applies
+one level up: `docs/wiki/` is meant to stand alone as an app-behavior KB, and a migration-specific
+section number baked into every path is exactly the kind of provenance coupling that decouples
+badly — those numbers already drift (see `testrail-suite-v2.md`'s own note on sections renumbered
+out of sequence to avoid a ripple effect). The section-tree ordering this would otherwise convey
+lives in `README.md`'s numbered `##` headings instead, which is the right place for it — that
+file is this project's own maintenance index, not a page an external reader or RAG system
+consumes standalone.
+
 ## 6. README.md and log.md
 
 - `README.md` is the index: one table per top-level section, columns Page / Source / Cases /

@@ -91,7 +91,7 @@ File: `ai-context/cases-privacy-policy-generator.json`
   navigation was still correctly re-blocked until Business Details was re-answered, so this
   looks like a stale-checkmark cosmetic issue rather than data loss — but it's relevant to the
   wizard shell's already-flagged, unresolved "Start over" open question
-  (`docs/wiki/09-legal-policies/privacy-policy-generator.md`, Resume-draft dialog). Not yet
+  (`docs/wiki/legal-policies/privacy-policy-generator.md`, Resume-draft dialog). Not yet
   root-caused or cased; wizard-shell scope, not Collection of Data.
 - **Post-purchase success toaster not cased** — identified 2026-07-20. Completing a plan
   purchase/upgrade initiated from the PPG page (e.g. via a plan-gate nudge) should display a

@@ -3,7 +3,7 @@
 **Nav path:** Cookie Banner > Customization > General tab (first of five sidebar tabs: General, Layout, Content, Colours, Custom CSS — see [display-layout.md](display-layout.md) for the shell)
 **Route:** (not captured in source data — needs live verification)
 **Roles:** Account Owner, Admin, Editor — all equal access
-**Plan gating:** Partial — see below for what the source cases confirm; full CTA/plan matrix at [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md).
+**Plan gating:** Partial — see below for what the source cases confirm; full CTA/plan matrix at [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md).
 
 - Free and Basic plans: the "GDPR & US State Laws" Law selector option, the "EU Countries & UK" / "Select Countries" (GDPR) or "United States" / "Select Countries" (US State Laws) Geo-target options, and the "Support IAB TCF v2.3" toggle are all locked behind an upgrade icon/crown icon.
 - Pro and Ultimate plans: all three are unlocked and interactive.
@@ -71,7 +71,7 @@ The banner preview panel (to the right of the sidebar, part of the page shell �
 9. **Trigger upgrade nudges on locked options (Free/Basic plans)**
    - Clicking the crown/upgrade icon next to a locked Geo-target option ("EU Countries & UK", "Select Countries", or "United States" depending on active law) opens an upgrade nudge headlined "Display your banner only in select countries and regions" with an upgrade CTA.
    - Clicking the upgrade icon next to "Support IAB TCF v2.3" opens an upgrade nudge headlined "Comply with IAB TCF and Google's requirements" (Free-plan tooltip additionally includes the body text "Communicate user consent status to IAB vendors to enable Google ad personalization in EEA and the UK." per the Basic-plan variant case) with an upgrade CTA that navigates to the Plans page.
-   - Exact CTA label differs by plan tier (Basic: "Upgrade now"; Free: "Try Pro for free" per Plan Gates cases) — see [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md) for the full matrix; not duplicated here per the section-ownership convention.
+   - Exact CTA label differs by plan tier (Basic: "Upgrade now"; Free: "Try Pro for free" per Plan Gates cases) — see [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md) for the full matrix; not duplicated here per the section-ownership convention.
 
 ## Validation & edge cases
 
@@ -90,7 +90,7 @@ The banner preview panel (to the right of the sidebar, part of the page shell �
 - [custom-css.md](custom-css.md) — Custom CSS tab (law-agnostic).
 - [content-gdpr.md](content-gdpr.md) — Content tab, GDPR variant (Preference Center, Cookie Notice, Cookie List).
 - [content-us-state-laws.md](content-us-state-laws.md) — Content tab, US State Laws variant (Opt-out Center, Cookie Notice, Cookie List).
-- [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md) — full plan-gating CTA/tooltip matrix for the locked controls referenced above.
+- [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md) — full plan-gating CTA/tooltip matrix for the locked controls referenced above.
 
 ## Source
 Derived from `ai-context/cases-cookie-banner-general.json` (26 TestRail cases). Drafted 2026-07-14, not yet live-verified against the QA app.

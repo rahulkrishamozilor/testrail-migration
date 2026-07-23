@@ -3,7 +3,7 @@
 **Nav path:** Cookie Banner > Customization (page shell surrounding all five sidebar tabs)
 **Route:** (not captured in source data — needs live verification)
 **Roles:** Account Owner, Admin, Editor — all equal access
-**Plan gating:** see [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md) (no plan-gating specific to the shell itself is captured in the source case)
+**Plan gating:** see [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md) (no plan-gating specific to the shell itself is captured in the source case)
 
 ## Purpose
 This page is the outer shell of the Cookie Banner Customization experience: the sidebar that switches between the five settings tabs, the live banner preview panel, and the Publish Changes control that commits changes across all tabs. It is distinct from the tab content itself (General, Layout, Content, Colours, Custom CSS each have their own page).

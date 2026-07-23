@@ -5,7 +5,7 @@
 **Roles:** Account Owner, Admin, Editor — all equal access
 **Plan gating:** Gated. The custom CSS editor is available on Basic, Pro, and Ultimate plans and is
 locked on the Free plan. See "Validation & edge cases" below for the exact locked-state behavior,
-and docs/wiki/11-billing-upgrade/plan-gates.md for the general upgrade-nudge/CTA pattern shared
+and docs/wiki/billing-upgrade/plan-gates.md for the general upgrade-nudge/CTA pattern shared
 across gated features.
 
 ## Purpose
@@ -66,7 +66,7 @@ confirmed/tracked bug and is intentionally not documented as expected behavior h
 - **Free plan — upgrade prompt:** Clicking the premium/upgrade icon opens an upgrade popover
   reading "Style your banner with custom CSS", "Available in: Basic, Pro and Ultimate plans", and a
   "Try Pro for free" call-to-action. (The CTA's destination/checkout flow is owned by
-  docs/wiki/11-billing-upgrade/plan-gates.md — not exercised here to avoid starting a trial.)
+  docs/wiki/billing-upgrade/plan-gates.md — not exercised here to avoid starting a trial.)
 - **Invalid CSS handling:** not captured in source data — needs live verification. No case in the
   source set exercises malformed/invalid CSS input or documents an error state for it.
 - **Consent Template card contents/interaction:** not captured in source data — needs live
@@ -75,7 +75,7 @@ confirmed/tracked bug and is intentionally not documented as expected behavior h
 ## Related pages
 - [Cookie Banner — General](general.md)
 - [Cookie Banner — Colours](colours.md)
-- [Plan Gates](../11-billing-upgrade/plan-gates.md)
+- [Plan Gates](../billing-upgrade/plan-gates.md)
 
 ## Source
 Derived from `ai-context/cases-custom-css.json` (5 TestRail cases — thin, may need a live-crawl

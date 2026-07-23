@@ -3,7 +3,7 @@
 **Nav path:** Cookie Banner > Customization > Colours
 **Route:** (not captured in source data — needs live verification)
 **Roles:** Account Owner, Admin, Editor — all equal access
-**Plan gating:** Partial — gating is specific to sub-features here, not the whole tab. The "Auto-generated" colour scheme option is locked on Free (unlocked Basic and higher). The per-component colour pickers ("Customise light/dark colours") also require Basic or higher on a Free account (see Validation & edge cases). For the general Free/paid plan model, see docs/wiki/11-billing-upgrade/plan-gates.md.
+**Plan gating:** Partial — gating is specific to sub-features here, not the whole tab. The "Auto-generated" colour scheme option is locked on Free (unlocked Basic and higher). The per-component colour pickers ("Customise light/dark colours") also require Basic or higher on a Free account (see Validation & edge cases). For the general Free/paid plan model, see docs/wiki/billing-upgrade/plan-gates.md.
 
 ## Purpose
 The Colours tab lets a user pick an overall colour scheme for the cookie banner (Light, Dark, or
@@ -145,7 +145,7 @@ template (GDPR vs. US State Laws) is currently selected in the Consent Template 
   colours available), selecting "Auto-generated" silently reverts to the Dark scheme — no error
   is shown.
 - **Auto-generated locked on Free plan**: shown with a premium icon; unlocked Basic and higher.
-  See docs/wiki/11-billing-upgrade/plan-gates.md.
+  See docs/wiki/billing-upgrade/plan-gates.md.
 - **Per-component pickers require Basic+ (undocumented precondition gap)**: on a Free-plan
   account, clicking "Customise light/dark colours" does **not** open the per-component picker at
   all. Instead a different upgrade modal appears — headline "Design a banner that blends
@@ -161,7 +161,7 @@ template (GDPR vs. US State Laws) is currently selected in the Consent Template 
   verification (2026-07-13) confirmed the nudge's copy/buttons are real and accurate, but found
   the *trigger and location claimed by these cases are wrong*: the nudge does not appear on the
   Colours tab at all (neither Light nor Dark), regardless of selection. It actually lives on the
-  Custom CSS tab (see docs/wiki/04-cookie-banner/custom-css.md), shown unconditionally to Free
+  Custom CSS tab (see docs/wiki/cookie-banner/custom-css.md), shown unconditionally to Free
   accounts there. This is tracked as a known bug/scope question, not resolved as of this writing —
   do not cite "selecting Dark shows the Custom CSS nudge" as confirmed Colours-tab behavior.
 - **Role permission on the (misattributed) nudge**: for Admin/Editor, the nudge's "Try it now"
@@ -180,10 +180,10 @@ template (GDPR vs. US State Laws) is currently selected in the Consent Template 
   captured in source data — needs live verification).
 
 ## Related pages
-- docs/wiki/04-cookie-banner/general.md
-- docs/wiki/04-cookie-banner/layout.md
-- docs/wiki/04-cookie-banner/custom-css.md
-- docs/wiki/11-billing-upgrade/plan-gates.md
+- docs/wiki/cookie-banner/general.md
+- docs/wiki/cookie-banner/layout.md
+- docs/wiki/cookie-banner/custom-css.md
+- docs/wiki/billing-upgrade/plan-gates.md
 
 ## Source
 Derived from `ai-context/cases-colours.json` (12 TestRail cases). Drafted 2026-07-14, not yet live-verified against the QA app.

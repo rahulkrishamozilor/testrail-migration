@@ -4,7 +4,7 @@
 **Route:** (not captured in source data — needs live verification)
 **Roles:** Account Owner, Admin, Editor — all equal access
 **Plan gating:** Popup layout (Cookie Notice sub-section, GDPR only) requires Pro or higher — see
-docs/wiki/11-billing-upgrade/plan-gates.md for the full gate matrix. All other Layout controls
+docs/wiki/billing-upgrade/plan-gates.md for the full gate matrix. All other Layout controls
 (Box, Banner, position options, Preference Centre / Opt-out Center styles, Categories on first
 layer toggle) are available on every plan.
 
@@ -59,7 +59,7 @@ state. Law state is read from the Preconditions of each case, not chosen on this
 ### Combined "GDPR & US State Laws" template
 
 When the Law selector is set to **GDPR & US State Laws**, a **Customize** sub-dropdown appears in
-the Consent Template card (owned by the General tab; see docs/wiki/04-cookie-banner/general.md).
+the Consent Template card (owned by the General tab; see docs/wiki/cookie-banner/general.md).
 Switching that sub-dropdown between GDPR and US State Laws live-updates which of the two Layout
 tab structures above is displayed — see Workflow 3 below.
 
@@ -120,7 +120,7 @@ tab structures above is displayed — see Workflow 3 below.
     shows the crown icon. An in-app nudge appears headlined **"Use a popup layout to boost opt-in
     rates,"** stating availability on Pro and Ultimate plans, with an upgrade CTA reading **"Try
     Pro for Free"** (Free plan) or **"Upgrade now"** (Basic plan). See
-    docs/wiki/11-billing-upgrade/plan-gates.md for destination behavior of the CTA.
+    docs/wiki/billing-upgrade/plan-gates.md for destination behavior of the CTA.
 
 ### US State Laws
 
@@ -178,12 +178,12 @@ tab structures above is displayed — see Workflow 3 below.
   non-default layout already configured.
 
 ## Related pages
-- docs/wiki/04-cookie-banner/general.md
-- docs/wiki/04-cookie-banner/display-layout.md
-- docs/wiki/04-cookie-banner/colours.md
-- docs/wiki/04-cookie-banner/content-gdpr.md
-- docs/wiki/04-cookie-banner/content-us-state-laws.md
-- docs/wiki/11-billing-upgrade/plan-gates.md
+- docs/wiki/cookie-banner/general.md
+- docs/wiki/cookie-banner/display-layout.md
+- docs/wiki/cookie-banner/colours.md
+- docs/wiki/cookie-banner/content-gdpr.md
+- docs/wiki/cookie-banner/content-us-state-laws.md
+- docs/wiki/billing-upgrade/plan-gates.md
 
 ## Source
 Derived from `ai-context/cases-cookie-banner-layout.json` (23 TestRail cases). Drafted

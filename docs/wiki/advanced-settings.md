@@ -7,7 +7,7 @@
 are gated: "Disable banner on specific pages" (Pro+), "Subdomain consent sharing" and its
 dependent "Link to your list of sites" (Pro+), and "Static IP Scan" (Ultimate+). All other
 controls on this page are available on every plan. See "Validation & edge cases" below for the
-exact locked-state behavior of each, and docs/wiki/11-billing-upgrade/plan-gates.md for the
+exact locked-state behavior of each, and docs/wiki/billing-upgrade/plan-gates.md for the
 general upgrade-nudge/CTA pattern shared across gated features.
 
 ## Purpose
@@ -248,13 +248,13 @@ The Advanced Settings page displays five sections, top to bottom (per case 37192
 - **Plan-gated: Disable banner on specific pages (below Pro).** Premium icon shown next to the
   label; edit (pencil) icon disabled; label reads "Not set"; tooltip on the premium icon reads
   "Upgrade to Pro or a higher plan to unlock this feature." See
-  docs/wiki/11-billing-upgrade/plan-gates.md.
+  docs/wiki/billing-upgrade/plan-gates.md.
 - **Plan-gated: Subdomain consent sharing (below Pro).** Premium icon shown; toggle is disabled
   and unchecked; tooltip reads "Upgrade to Pro or a higher plan to unlock this feature." See
-  docs/wiki/11-billing-upgrade/plan-gates.md.
+  docs/wiki/billing-upgrade/plan-gates.md.
 - **Plan-gated: Static IP Scan (below Ultimate).** Premium icon shown; status dropdown disabled;
   tooltip reads "Upgrade to the Ultimate plan to unlock this feature." See
-  docs/wiki/11-billing-upgrade/plan-gates.md.
+  docs/wiki/billing-upgrade/plan-gates.md.
 - **Check GCM status — result states (each with a distinct message and troubleshooting link):**
   - No GCM implementation: "Error: Consent tab empty" — "This error occurs when (i) GCM is not
     implemented on your website or (ii) when no consent data is collected."
@@ -296,9 +296,9 @@ The Advanced Settings page displays five sections, top to bottom (per case 37192
   needs live verification.
 
 ## Related pages
-- [Cookie Banner — General](04-cookie-banner/general.md)
-- [Languages](07-languages.md)
-- [Plan Gates](11-billing-upgrade/plan-gates.md)
+- [Cookie Banner — General](cookie-banner/general.md)
+- [Languages](languages.md)
+- [Plan Gates](billing-upgrade/plan-gates.md)
 
 ## Source
 Derived from `ai-context/cases-advanced-settings.json` (35 TestRail cases). Drafted 2026-07-14, not yet live-verified against the QA app.

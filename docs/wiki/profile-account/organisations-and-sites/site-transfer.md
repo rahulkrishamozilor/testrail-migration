@@ -6,7 +6,7 @@ recipient-side routes (logout confirmation page, site-transfer Log In page, "Web
 request" page) are not captured in source data — needs live verification.
 **Roles:** **Account Owner only** — Admin and Editor are both blocked: the "Transfer Site" option
 is disabled in a website's More (⋯) menu with tooltip "Only the Account Owner can transfer a
-site." for either role. See `docs/wiki/14-permissions.md` for the app-wide role hierarchy.
+site." for either role. See `docs/wiki/permissions.md` for the app-wide role hierarchy.
 **Plan gating:** None captured in source data for this sub-topic.
 
 ## Purpose
@@ -202,8 +202,8 @@ dropdown, labelled as belonging to another account.
 - [Organisation Management](organisation-management.md)
 - [Site Management](site-management.md)
 - [Team](../team.md)
-- [Paid Plan](../../11-billing-upgrade/paid-plan.md)
-- [Permissions](../../14-permissions.md)
+- [Paid Plan](../../billing-upgrade/paid-plan.md)
+- [Permissions](../../permissions.md)
 
 ## Source
 Derived from `ai-context/cases-organisation-and-sites.json` (66 TestRail cases total, split by

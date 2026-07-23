@@ -2,7 +2,7 @@
 
 **Nav path:** Profile & Account > Team
 **Route:** (not captured in source data — needs live verification)
-**Roles:** Account Owner, Admin can manage team (add/remove members, invite, modify roles); Editor is blocked from these actions — see docs/wiki/14-permissions.md
+**Roles:** Account Owner, Admin can manage team (add/remove members, invite, modify roles); Editor is blocked from these actions — see docs/wiki/permissions.md
 **Plan gating:** (not captured in source data — needs live verification; no case in this set asserts a seat-count limit or plan-gated cap on team size)
 
 ## Purpose
@@ -84,8 +84,8 @@ This flow is identical for Admin and Editor invitees except for the role badge a
 - Destructive action ("Remove user?") always requires confirmation via the pop-up before the row disappears — no undo after confirming.
 
 ## Related pages
-- docs/wiki/10-profile-account/organisations-and-sites/site-transfer.md — ownership/role interactions when transferring site or organisation ownership
-- docs/wiki/14-permissions.md — app-wide role/permission hierarchy (Account Owner / Admin / Editor)
+- docs/wiki/profile-account/organisations-and-sites/site-transfer.md — ownership/role interactions when transferring site or organisation ownership
+- docs/wiki/permissions.md — app-wide role/permission hierarchy (Account Owner / Admin / Editor)
 
 ## Source
 Derived from `ai-context/cases-team.json` (17 TestRail cases). Drafted 2026-07-14, not yet live-verified against the QA app.

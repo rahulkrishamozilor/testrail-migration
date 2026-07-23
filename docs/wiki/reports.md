@@ -3,7 +3,7 @@
 **Nav path:** Reports
 **Route:** (not captured in source data — needs live verification)
 **Roles:** Account Owner, Admin, Editor — all equal access
-**Plan gating:** Page itself is not plan-gated. One element within it — the "Extra pageviews used" counter in the Pageviews summary box — only appears on paid plans (Basic or higher); see docs/wiki/11-billing-upgrade/plan-gates.md for the broader plan-gate inventory.
+**Plan gating:** Page itself is not plan-gated. One element within it — the "Extra pageviews used" counter in the Pageviews summary box — only appears on paid plans (Basic or higher); see docs/wiki/billing-upgrade/plan-gates.md for the broader plan-gate inventory.
 
 ## Purpose
 The Reports page gives a site owner a single place to see consent-collection and traffic trends over time, so they can confirm the banner is capturing consent as expected and track how many pageviews are being tracked against their plan's limit.
@@ -71,9 +71,9 @@ Both cards' range-selector dropdowns expand to the same four options: "Last 7 da
 - Error/failure states (e.g., chart failing to load, API error) are (not captured in source data — needs live verification).
 
 ## Related pages
-- docs/wiki/06-consent-log.md — underlying consent event log that Consent Trends aggregates.
-- docs/wiki/03-dashboard (Consent Trends Card / Pageviews Card, once written) — Dashboard equivalents that Reports data is cross-checked against.
-- docs/wiki/11-billing-upgrade/plan-gates.md (once written) — plan-gating reference for the "Extra pageviews used" counter and other paid-plan-only elements.
+- docs/wiki/consent-log.md — underlying consent event log that Consent Trends aggregates.
+- docs/wiki/dashboard (Consent Trends Card / Pageviews Card, once written) — Dashboard equivalents that Reports data is cross-checked against.
+- docs/wiki/billing-upgrade/plan-gates.md (once written) — plan-gating reference for the "Extra pageviews used" counter and other paid-plan-only elements.
 
 ## Source
 Derived from `ai-context/cases-reports.json` (6 TestRail cases — thin, may need a live-crawl follow-up). Drafted 2026-07-14, not yet live-verified against the QA app.

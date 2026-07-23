@@ -63,9 +63,9 @@ Specific to this flow:
   URL format, and whether that site becomes the account's first tracked site immediately.)
 
 ## Related pages
-- `docs/wiki/01-authentication/signup-core.md` — shared signup form validation, email
+- `docs/wiki/authentication/signup-core.md` — shared signup form validation, email
   verification mechanics (not yet written)
-- `docs/wiki/01-authentication/login.md` — destination of the "Log In" link (not yet written)
+- `docs/wiki/authentication/login.md` — destination of the "Log In" link (not yet written)
 
 ## Source
 Derived from `ai-context/cases-signup-standard-free.json` (3 TestRail cases — thin, may need a

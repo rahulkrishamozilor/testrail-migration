@@ -3,7 +3,7 @@
 **Nav path:** Cookie Manager (top navigation bar) > scan cards (page top) and Scan History tab
 **Route:** (not captured in source data for the Cookie Manager page itself — needs live verification). The Detailed Scan History page is confirmed at `/manage-cookies/scan-history/{id}`, implying the parent Cookie Manager page's base path is `/manage-cookies`.
 **Roles:** Account Owner, Admin, Editor — all equal access
-**Plan gating:** Partial. **Schedule Scan** is plan-gated (locked on plans without scan scheduling, e.g. Free/Basic) — see Validation & edge cases below and [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md) for the full matrix. The **AI Cookie Classifier** is described in `testrail-suite-v2.md` as plan-gated and opt-in, but the source cases here only capture its entry-point card, not its gating rules or plan tiers — (not captured in source data — needs live verification).
+**Plan gating:** Partial. **Schedule Scan** is plan-gated (locked on plans without scan scheduling, e.g. Free/Basic) — see Validation & edge cases below and [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md) for the full matrix. The **AI Cookie Classifier** is described in `testrail-suite-v2.md` as plan-gated and opt-in, but the source cases here only capture its entry-point card, not its gating rules or plan tiers — (not captured in source data — needs live verification).
 
 ## Purpose
 This is where a site owner triggers and monitors cookie scans — one-off or scheduled — reviews scan history and per-scan detail, and (on eligible plans) opts into AI-assisted cookie classification.
@@ -100,7 +100,7 @@ Reached via a row's "More info" link. Contains:
 
 - **Unverified email blocks scanning**: if the account email is not verified, clicking "Scan now" shows no popup and instead a tooltip: *"Please verify your email address to rescan your website for cookies."* The same tooltip and blocked behavior apply to "Schedule scan."
 - **Custom Scan field validation**: entering a second URL on the same line (without pressing Enter) in the Custom Scan text field shows *"Invalid URL(s)"* below the field.
-- **Schedule Scan plan gate**: on plans without scan scheduling (below Pro), clicking "Schedule scan" (with a verified email) opens a promotion modal headlined *"Run automated scans and get an up-to-date cookie list every time,"* with text *"Available in: Pro and Ultimate plans"* and a **"Try Pro for free"** CTA button (not "Upgrade now" — a stale label from an earlier product version). See [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md).
+- **Schedule Scan plan gate**: on plans without scan scheduling (below Pro), clicking "Schedule scan" (with a verified email) opens a promotion modal headlined *"Run automated scans and get an up-to-date cookie list every time,"* with text *"Available in: Pro and Ultimate plans"* and a **"Try Pro for free"** CTA button (not "Upgrade now" — a stale label from an earlier product version). See [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md).
 - **Weekly frequency is the odd one out**: it shows a day-of-week picker ("Select Day") rather than a date picker, unlike Only Once/Monthly.
 - **Failed scan state**: shows the on-page alert banner (verbatim above), a "Failed" badge with tooltip in Scan History, and empty stat columns.
 - **In-progress scan state**: "In Progress" badge (blue), empty stat columns, and an "Abort scan" icon button.
@@ -109,8 +109,8 @@ Reached via a row's "More info" link. Contains:
 ## Related pages
 - [cookie-list-categories.md](cookie-list-categories.md) — Cookie List tab, category sidebar, and where newly-discovered cookies from a scan land.
 - [edit-add-cookies.md](edit-add-cookies.md) — Edit/Add Cookie popups for cookies surfaced by a scan.
-- [../06-consent-log.md](../06-consent-log.md) — consent proof recorded against cookies/categories a scan discovers.
-- [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md) — Schedule Scan (and other Cookie Manager) plan-gating detail.
+- [../consent-log.md](../consent-log.md) — consent proof recorded against cookies/categories a scan discovers.
+- [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md) — Schedule Scan (and other Cookie Manager) plan-gating detail.
 
 ## Source
 Derived from `ai-context/cases-cookie-manager.json` (34 TestRail cases total, split by sub-topic — 23 cases feed this file: 37261, 37262, 37263, 37264, 37265, 37266, 37267, 37268, 37269, 37270, 37271, 37272, 37273, 37274, 37283, 37284, 37285, 37286, 37287, 37288, 37290, 37291, 37293). Drafted 2026-07-14, not yet live-verified against the QA app.

@@ -9,7 +9,7 @@ rename). Renaming an organisation ("Edit organization name") — **Account Owner
 (Editor blocked: the organisation's More (⋯) control is not rendered at all for an Editor).
 Account ownership transfer — **Account Owner only** (Admin and Editor blocked: the "Transfer
 Ownership" button is not rendered on the Account Owner card for them). See
-`docs/wiki/14-permissions.md` for the app-wide role hierarchy (Editor ⊂ Admin ⊂ Account Owner).
+`docs/wiki/permissions.md` for the app-wide role hierarchy (Editor ⊂ Admin ⊂ Account Owner).
 **Plan gating:** None captured in source data for this sub-topic — organisation create/rename/
 delete and account ownership transfer are not plan-gated in the source cases.
 
@@ -141,8 +141,8 @@ The Organisations & Sites page (Profile menu > Organisation & Sites) is laid out
 - [Site Management](site-management.md)
 - [Site Transfer](site-transfer.md)
 - [Team](../team.md)
-- [Paid Plan](../../11-billing-upgrade/paid-plan.md)
-- [Permissions](../../14-permissions.md)
+- [Paid Plan](../../billing-upgrade/paid-plan.md)
+- [Permissions](../../permissions.md)
 
 ## Source
 Derived from `ai-context/cases-organisation-and-sites.json` (66 TestRail cases total, split by

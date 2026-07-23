@@ -3,7 +3,7 @@
 **Nav path:** Cookie Manager > Cookie List tab (default active tab) > category sidebar
 **Route:** (not captured in source data — needs live verification; the Cookie Manager page's base path is inferred to be `/manage-cookies` from the Detailed Scan History page's URL pattern `/manage-cookies/scan-history/{id}`, see [scan-and-scan-history.md](scan-and-scan-history.md))
 **Roles:** Account Owner, Admin, Editor — all equal access
-**Plan gating:** Not itself plan-gated in the source cases (no case here carries a `plan_gate_flag`). See [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md) for gates elsewhere in Cookie Manager (e.g. Schedule Scan, covered in [scan-and-scan-history.md](scan-and-scan-history.md)).
+**Plan gating:** Not itself plan-gated in the source cases (no case here carries a `plan_gate_flag`). See [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md) for gates elsewhere in Cookie Manager (e.g. Schedule Scan, covered in [scan-and-scan-history.md](scan-and-scan-history.md)).
 
 ## Purpose
 The Cookie List tab is where a site owner reviews the cookies CookieYes has discovered (or that were added manually), organized into categories, and configures per-category consent behavior via the Edit Category popup. It is also where missing-Script-URL-Pattern warnings surface, since blocking a cookie prior to consent depends on that pattern being set.
@@ -55,10 +55,10 @@ Clicking "Add now" opens the **Edit Cookie** popup for that cookie with the Scri
    4. Click "Publish changes" on the page. Only after this step does the change take effect on the live banner/site.
 
 3. **Mark a category's cookies as opted out of data sales (US State Laws)**
-   1. Set the Law selector to US State Laws (precondition — see [../04-cookie-banner/general.md](../04-cookie-banner/general.md)).
+   1. Set the Law selector to US State Laws (precondition — see [../cookie-banner/general.md](../cookie-banner/general.md)).
    2. Open Edit Category on a non-Necessary category and confirm "Sells or shares personal data" is enabled (default), then "Save draft" and "Publish changes".
    3. On the live site, click the **"Do Not Sell or Share My Personal Information"** link (capitalization confirmed live) to open the opt-out preference panel, which lists the affected category.
-   4. Toggling off the category's consent there and clicking "Save My Preferences" records the category's cookies as rejected in the Consent Log's proof of consent (see [../06-consent-log.md](../06-consent-log.md)).
+   4. Toggling off the category's consent there and clicking "Save My Preferences" records the category's cookies as rejected in the Consent Log's proof of consent (see [../consent-log.md](../consent-log.md)).
 
 4. **Load a category's cookies before consent is given**
    1. Open Edit Category on a non-Necessary category, enable "Load cookies prior to consent" (off by default), "Save draft", then "Publish changes".
@@ -69,7 +69,7 @@ Clicking "Add now" opens the **Edit Cookie** popup for that cookie with the Scri
    2. On the live site, opening the preference panel (e.g. via "Customise" on the banner) no longer lists the hidden category.
 
 6. **Switch the Cookie List's display language**
-   1. Click the language selector dropdown (top left of the tab), which lists the languages added via the Languages page (e.g. English, Arabic, Spanish) — see [../07-languages.md](../07-languages.md) if present.
+   1. Click the language selector dropdown (top left of the tab), which lists the languages added via the Languages page (e.g. English, Arabic, Spanish) — see [../languages.md](../languages.md) if present.
    2. Select a non-English language. The dropdown closes and the category names, category descriptions, and duration labels in the panel update to that language.
 
 7. **Resolve a missing Script URL Pattern warning**
@@ -89,8 +89,8 @@ Clicking "Add now" opens the **Edit Cookie** popup for that cookie with the Scri
 ## Related pages
 - [scan-and-scan-history.md](scan-and-scan-history.md) — scan cards, Scan History tab, Detailed Scan History page, AI Cookie Classifier; also the page-level shell (tabs, title) that this Cookie List tab lives inside.
 - [edit-add-cookies.md](edit-add-cookies.md) — Edit Cookie and Add Cookie popups referenced above ("Add now", "+ Add Cookie", the "..." menu's "Edit cookie").
-- [../06-consent-log.md](../06-consent-log.md) — where opted-out/rejected consent proof from category toggles (e.g. "Sells or shares personal data") is recorded.
-- [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md) — plan-gating matrix for other Cookie Manager features.
+- [../consent-log.md](../consent-log.md) — where opted-out/rejected consent proof from category toggles (e.g. "Sells or shares personal data") is recorded.
+- [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md) — plan-gating matrix for other Cookie Manager features.
 
 ## Source
 Derived from `ai-context/cases-cookie-manager.json` (34 TestRail cases total, split by sub-topic — 6 cases feed this file: 37277, 37278, 37279, 37280, 37281, 37282). Drafted 2026-07-14, not yet live-verified against the QA app.

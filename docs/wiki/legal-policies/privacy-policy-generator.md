@@ -7,7 +7,7 @@ nav; a multi-step wizard, each step its own route)
 until a permission case says otherwise.
 **Plan gating:** Extensive and inconsistent in presentation — three distinct plan-gate UX patterns
 coexist in this one feature (see "Plan gating patterns" below). Full CTA/plan matrix lives at
-[../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md); this page only
+[../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md); this page only
 documents what's gated and how it visually presents at each touchpoint.
 
 This page covers the whole wizard in one file for now (progress is section-by-section within it,
@@ -504,7 +504,7 @@ The Basic+ multi-language gate (Language preferences) uses a variant of pattern 
 different button labels ("Get started with Basic plan" / "Get started with Pro plan" / "Continue
 without multi-lingual privacy policy").
 
-Full plan-by-plan matrix: [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md).
+Full plan-by-plan matrix: [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md).
 
 ## Known open issues (consolidated)
 
@@ -544,7 +544,7 @@ broken one — worth product/PM input, not an app defect to fix blindly.
 
 ## Related pages
 
-- [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md) — full plan-gating
+- [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md) — full plan-gating
   CTA/tooltip matrix for every locked control referenced above.
 
 ## Source

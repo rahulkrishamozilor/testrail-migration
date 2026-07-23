@@ -7,7 +7,7 @@
 - Cookie Notice: **Custom logo** and **Disable CookieYes branding** require an Ultimate plan (orange crown icon when locked).
 - Revisit Consent Button: **Custom icon** requires an Ultimate plan (shared with the US State Laws view — see [content-us-state-laws.md](content-us-state-laws.md)).
 - The **GDPR & US State Laws** combined Consent Template option requires a Pro plan or higher.
-Full lock-state/tooltip/CTA matrix: [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md).
+Full lock-state/tooltip/CTA matrix: [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md).
 
 ## Purpose
 The GDPR view of the Content tab configures the on-banner text and controls used when the site's Consent Template (Law selector) is set to GDPR, or the GDPR half of the combined GDPR & US State Laws template. It governs the wording, toggles, and cookie-table labels for the opt-in banner's first layer (Cookie Notice) and second layer (Preference Centre), plus the Cookie List embed and the two law-agnostic accordions (Revisit Consent Button, Blocked Content) that appear identically regardless of law state.
@@ -147,7 +147,7 @@ The banner preview panel (part of the page shell — see [display-layout.md](dis
 - [display-layout.md](display-layout.md) — the Customization page shell (sidebar, tab navigation, preview panel, Publish Changes).
 - [layout.md](layout.md) — Layout tab.
 - [colours.md](colours.md) — Colours tab.
-- [../11-billing-upgrade/plan-gates.md](../11-billing-upgrade/plan-gates.md) — full plan-gating CTA/tooltip matrix for the locked controls referenced above.
+- [../billing-upgrade/plan-gates.md](../billing-upgrade/plan-gates.md) — full plan-gating CTA/tooltip matrix for the locked controls referenced above.
 
 ## Source
 Derived from `ai-context/cases-cookie-banner-content.json` (31 TestRail cases total, split by law state). Drafted 2026-07-14, not yet live-verified against the QA app.

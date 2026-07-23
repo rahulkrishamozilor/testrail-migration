@@ -21,7 +21,7 @@ column already self-flags most of these as "Increase," so this isn't unnoticed d
 "current" column nobody went back to update after the recommendation shipped.
 
 **Why it matters:** the doc still reads as authoritative for anyone who hasn't cross-checked it
-against a specific gap-closing pass's reconciliation notes, and `docs/wiki/09-legal-policies/
+against a specific gap-closing pass's reconciliation notes, and `docs/wiki/legal-policies/
 privacy-policy-generator.md` records confirmed character limits for some fields (e.g. Contact
 Information, ~line 131–135; another field ~line 184–186) but not others — Miscellaneous
 Disclosures currently has none recorded despite this pass confirming four.
@@ -37,7 +37,7 @@ Disclosures currently has none recorded despite this pass confirming four.
   — awaiting `/grill-section` and `/migrate-section`). No further steps in this feature remain
   unswept for this pattern.
 - ~~Update the wiki page to record every confirmed character limit per field~~ — **done 2026-07-17**
-  for the three fields above (`docs/wiki/09-legal-policies/privacy-policy-generator.md`, section
+  for the three fields above (`docs/wiki/legal-policies/privacy-policy-generator.md`, section
   3b Additional Information). Miscellaneous Disclosures' four fields from the same 2026-07-16 pass
   (DPO, controller, custom safeguard, CCPA metrics) are still not recorded in the wiki — that part
   of this task is still open.

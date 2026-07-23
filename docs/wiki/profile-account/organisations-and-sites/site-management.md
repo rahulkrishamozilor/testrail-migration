@@ -14,10 +14,10 @@ subscription" is disabled with a tooltip). Adding a staging site — **Account O
 (Editor blocked: "Add staging site" is disabled for an Editor, no tooltip observed, just an
 aria-disabled state — Account Owner and Admin are unrestricted). "Copy configuration" carries
 **no role restriction** — confirmed enabled for both Admin and Editor. See
-`docs/wiki/14-permissions.md` for the app-wide role hierarchy.
+`docs/wiki/permissions.md` for the app-wide role hierarchy.
 **Plan gating:** "Add staging site" is locked with a premium/upgrade badge icon and disabled on
 the **Free plan**; it is enabled (no badge) on Basic and above — the gate boundary is Free vs.
-Basic-or-higher, not Pro-or-higher. See `docs/wiki/11-billing-upgrade/plan-gates.md` for other
+Basic-or-higher, not Pro-or-higher. See `docs/wiki/billing-upgrade/plan-gates.md` for other
 plan gates.
 
 ## Purpose
@@ -191,8 +191,8 @@ a **Change Plan** button, a **Manage Site** button, and a **More (⋯)** option.
 - [Organisation Management](organisation-management.md)
 - [Site Transfer](site-transfer.md)
 - [Team](../team.md)
-- [Paid Plan](../../11-billing-upgrade/paid-plan.md)
-- [Permissions](../../14-permissions.md)
+- [Paid Plan](../../billing-upgrade/paid-plan.md)
+- [Permissions](../../permissions.md)
 
 ## Source
 Derived from `ai-context/cases-organisation-and-sites.json` (66 TestRail cases total, split by

@@ -6,7 +6,7 @@
 pending manual review.
 **Plan gating:** No plan-gated *access* — every plan tier lands on this page. Individual cards and
 header elements change content/format by plan tier (called out inline below). See
-docs/wiki/11-billing-upgrade/plan-gates.md for the general plan-gate model.
+docs/wiki/billing-upgrade/plan-gates.md for the general plan-gate model.
 
 ## Purpose
 
@@ -192,10 +192,10 @@ revisiting — Header in particular is global chrome, not Dashboard-specific.
 
 ## Related pages
 
-- docs/wiki/11-billing-upgrade/plan-gates.md
-- docs/wiki/04-cookie-banner/display-layout.md
-- docs/wiki/05-cookie-manager/cookie-list-categories.md
-- docs/wiki/06-consent-log.md
+- docs/wiki/billing-upgrade/plan-gates.md
+- docs/wiki/cookie-banner/display-layout.md
+- docs/wiki/cookie-manager/cookie-list-categories.md
+- docs/wiki/consent-log.md
 
 ## Source
 

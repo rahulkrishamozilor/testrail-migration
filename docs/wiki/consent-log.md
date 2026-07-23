@@ -5,7 +5,7 @@
 **Roles:** Account Owner, Admin, Editor — all equal access
 **Plan gating:** No plan-gated *access* to the page itself (Free and paid plans both reach it).
 Plan state changes what the page shows and enforces — see the plan-dependent behavior called
-out under Page structure and Workflows below, and see docs/wiki/11-billing-upgrade/plan-gates.md
+out under Page structure and Workflows below, and see docs/wiki/billing-upgrade/plan-gates.md
 for the general plan-gate model.
 
 ## Purpose
@@ -146,8 +146,8 @@ can be retrieved via CSV export:
 
 ## Related pages
 
-- docs/wiki/05-cookie-manager/cookie-list-categories.md
-- docs/wiki/17-reports.md
+- docs/wiki/cookie-manager/cookie-list-categories.md
+- docs/wiki/reports.md
 
 ## Source
 
