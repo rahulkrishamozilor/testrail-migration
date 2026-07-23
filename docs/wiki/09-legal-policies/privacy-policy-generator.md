@@ -227,12 +227,18 @@ A chip-selector grid grouped into sub-sections, each with an "add custom" free-t
   or text messages, Debit or credit card numbers combined with any security or access code), +
   custom entries.
 
-\* GDPR-gated (EU/EEA = Yes) † CCPA-gated (thresholds = Yes OR include-clauses = Yes, Pro+) — the
-default (non-GDPR, non-CCPA) categories always show; the GDPR and CCPA groups/chips only appear
-once their respective condition is met, independently of each other. On a Pro/Ultimate account
-where CCPA is applicable, CCPA-specific chips render as fully normal, unlocked, selectable chips —
-no lock icon, no Pro+ badge (that visual gating is specific to the Free plan — see Plan gating
-patterns).
+\* GDPR-gated (EU/EEA = Yes) † CCPA-gated: **visible once California = Yes alone** — independent
+of the deeper `thresholds = Yes OR include-clauses = Yes` condition that gates full CCPA *content*
+elsewhere in the wizard (Disclosure of data step, generated policy CCPA section — see the
+toggle-chain note above). Confirmed live 2026-07-23 (Plan Gates re-sweep,
+`ai-context/plan-gates-ppg-resweep-progress.md`): the plan-tier lock is a separate, additional
+layer on top of that baseline visibility, not the same condition as content-gating. The default
+(non-GDPR, non-CCPA) categories always show; the GDPR and CCPA groups/chips only appear once their
+respective visibility condition is met, independently of each other. On Free/Basic, these CCPA
+chip groups render locked (padlock icon + amber Pro+/crown badge, remaining clickable without
+selecting, inline toast "CCPA/CPRA-related clauses are available on the Pro plan and above."). On
+Pro/Ultimate, CCPA-specific chips render as fully normal, unlocked, selectable chips — no lock
+icon, no Pro+ badge (see Plan gating patterns).
 
 **Custom data entries** (both Personal and Sensitive sections): accept up to 500 characters,
 trim leading/trailing whitespace, reject exact duplicates and empty input, and can be removed
@@ -484,10 +490,11 @@ interchangeable when reading a case or filing a bug:
    gap — if another required field is also incomplete, the generic "fields not completely filled
    out" banner shows instead).
 2. **Clickable-but-locked chip + inline toast** (CCPA-gated data-category chips on Collection of
-   data > Personal information, Free plan). The chip renders visually locked — greyed label, lock
-   icon, amber Pro+ badge — but remains natively clickable; clicking it doesn't select it but
-   surfaces an inline toast below it: "CCPA/CPRA-related clauses are available on the Pro plan and
-   above." with an "Upgrade now" link.
+   data > Personal information, Free/Basic plan — confirmed identical on both tiers via the
+   2026-07-23 Plan Gates re-sweep). The chip renders visually locked — greyed label, lock icon,
+   amber Pro+ badge — but remains natively clickable; clicking it doesn't select it but surfaces
+   an inline toast below it: "CCPA/CPRA-related clauses are available on the Pro plan and above."
+   with an "Upgrade now" link.
 3. **Visibly-disabled chip, no interaction** (Data retention's "Not yet decided" option, Free
    plan). Renders disabled up front with an inline "Pro+" label directly on the chip — no click
    response, no toast, no modal.

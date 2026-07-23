@@ -70,22 +70,19 @@ File: `ai-context/cases-privacy-policy-generator.json`
   12 months" and the CCPA "Sale or share of information" sections both render the literal
   string "yes" where a free-text description is expected. Root cause not chased; flagged for
   a future pass.
-- **Layer 2 Plan Gates cases missing for this feature** — identified 2026-07-16. PPG's
-  clause/field-level gates (for-profit question, CCPA-gated chips, the entirely-gated
-  Disclosure of data step, the retention "Not yet decided" option — cases 39494–39498) exist
-  only as Layer 1 touchpoint cases in the feature section; no Layer 2 case in
-  `11. Billing & Upgrade > Plan Gates` consolidates them per plan tier. Per
-  `testrail-suite-v2.md`'s "Plan-gated features" Layer 2 feature-scoped exception (added
-  2026-07-16), needs one case per plan tier — e.g. `[Plan Gates] Privacy Policy Generator —
-  Free plan`, `... — Pro plan` (Basic confirmed identical to Free for every CCPA touchpoint in
-  Collection of Data as of the 2026-07-16 re-sweep — for-profit is Pro+-locked on Basic too,
-  so CCPA never becomes reachable there; likely a shared precondition rather than its own case
-  body, but re-confirm across the rest of the wizard before assuming that holds everywhere).
-  **Held 2026-07-16, not just for this feature** — every section in the suite has plan gates,
-  so this needs a suite-wide check (which sections already have their Layer 2 case, which have
-  only scattered Layer 1 touchpoint cases like PPG did) before authoring PPG's specifically, to
-  avoid doing this section-by-section piecemeal. Not yet authored; needs user approval before
-  casing either way.
+- ~~**Layer 2 Plan Gates cases missing for this feature**~~ — **PPG-specific part closed
+  2026-07-23, cases 39738–39740.** A full live re-sweep across Free/Basic/Pro/Ultimate
+  (`ai-context/plan-gates-ppg-resweep-progress.md`) found zero defects and confirmed Basic≡Free
+  and Pro≡Ultimate for every one of PPG's 6 gated touchpoints. Authored 3 feature-scoped
+  consolidated cases per `testrail-suite-v2.md`'s Layer 2 exception — `[Plan Gates] Privacy
+  Policy Generator — Free plan`, `— Basic plan`, `— Pro plan` (precondition covers Pro or
+  Ultimate, since the sweep found no behavioral difference between those two tiers — consistent
+  with the doc's own equivalence-partitioning convention, so no separate Ultimate case). **Still
+  open, unresolved by this:** the broader suite-wide question from 2026-07-16 — every section in
+  the suite has plan gates, and this was only ever a per-feature (PPG) fix. Other sections may
+  still have only scattered Layer 1 touchpoint cases with no consolidated Layer 2 case; a
+  suite-wide check of which sections already have theirs is still needed before assuming this
+  pattern is handled elsewhere.
 - **"Start over" may not fully reset a saved draft** — observed 2026-07-16 on the Pro account
   during a Collection of Data re-sweep. After "Start over" on a wizard with a prior saved
   draft, the sidebar showed Collection of data/Use of data/Disclosure of data/Data
