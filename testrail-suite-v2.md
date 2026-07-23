@@ -26,7 +26,7 @@ The actual behavioral differences between most of these variants are minimal —
 
 3. **Plan-specific behavior lives in one place.**
    Billing, upgrade flows, trial state display, and plan-gated UI belong in section 11 (Billing & Upgrade) and section 12 (Agency). Nowhere else.
-   *Exception: credit-card entry that is part of **account creation** stays in `01. Authentication > Sign Up > Checkout` — the checkout page is part of the signup surface (same rationale as the Principle 1 signup exception). Card entry to change the plan on an **existing** account belongs in section 11.*
+   *Exception: credit-card entry that is part of **account creation** stays in `01. Authentication > Sign Up > Signup - Checkout` — the checkout page is part of the signup surface (same rationale as the Principle 1 signup exception). Card entry to change the plan on an **existing** account belongs in section 11.*
 
 4. **Role differences belong in Permissions, not everywhere.**
    The default role for all cases outside section 14 is Account Owner. Admin and Editor cases exist only where their permissions actually diverge.
@@ -73,31 +73,31 @@ CookieYes Functional Test Suite v2
 │
 ├── 01. Authentication
 │   ├── Sign Up
-│   │   ├── Core                        ← form validation + email verification cases (shared across all signup pages)
-│   │   ├── Standard (Free)
-│   │   ├── Trial without card
-│   │   ├── Trial with card (Checkout)
-│   │   └── Agency
-│   ├── Log In
-│   └── Password Reset
+│   │   ├── Signup - Core                ← form validation + email verification cases (shared across all signup pages)
+│   │   ├── Signup - Standard (Free)
+│   │   ├── Signup - Trial with card      ← trial account creation flow itself (plan selection, trial terms)
+│   │   ├── Signup - Checkout             ← card-entry step; live TestRail section distinct from "Trial with card"
+│   │   ├── Signup - Trial without card
+│   │   └── Agency registration
+│   ├── Login
+│   └── Forgot Password
 │
 ├── 02. Onboarding
-│   ├── Banner Setup
-│   └── Banner Installation
+│   ├── Banner setup
+│   └── Banner installation
 │
 ├── 03. Dashboard
-│   ├── Alert Banners                   ← email verify, onboarding pending, compliance, pageview overage
-│   ├── Header
-│   ├── Add a New Site
-│   ├── Cookie Banner Status Card
+│   ├── Dashboard States                ← overall dashboard render across account states (new/empty/populated)
+│   ├── Alert banners                   ← email verify, onboarding pending, compliance, pageview overage
+│   ├── Banner Status Card
 │   ├── Cookie Summary Card
-│   ├── Consent Trends Card
+│   ├── Consent Trends
 │   ├── Pageviews Card
-│   └── Recent Consent Logs Card
+│   └── Consent Logs Card
 │
 ├── 04. Cookie Banner
 │   ├── Display & Layout                ← page shell: Customization page loads, sidebar collapse/expand, tab navigation; also the live banner's own display/layout on-page
-│   ├── Customization Sidebar           ← each tab's own settings behavior, incl. that tab's "renders correctly" case
+│   ├── Customisation sidebar           ← each tab's own settings behavior, incl. that tab's "renders correctly" case
 │   │   ├── General                     ← Law selector, Geo-target, IAB TCF v2.2, Show Advance Settings
 │   │   ├── Layout                      ← layout options differ per law; law state in Preconditions
 │   │   ├── Content
@@ -131,9 +131,20 @@ CookieYes Functional Test Suite v2
 ├── 08. Advanced Settings
 │
 ├── 09. Legal Policies                 ← document generators (matches the app's "Legal Policies" nav)
-│   ├── Cookie Policy Generator
+│   ├── Cookie Policy Generator              ← now a built-out wizard live, mirroring Privacy Policy
+│   │   │                                       Generator's sub-sectioning rationale (own route per step)
+│   │   ├── Wizard Navigation & Progress
+│   │   ├── Language Settings
+│   │   ├── About Cookies
+│   │   ├── Use of Cookies
+│   │   ├── Types of Cookies
+│   │   ├── Cookie Preferences
+│   │   ├── Generate Policy
+│   │   ├── Policy Preview & Translations
+│   │   ├── Install & Publish
+│   │   └── Manage Policy
 │   └── Privacy Policy Generator             ← 7-step wizard, each step its own route; sub-sectioned like
-│       │                                       Cookie Banner's Customization Sidebar given its size/complexity
+│       │                                       Cookie Banner's Customisation sidebar given its size/complexity
 │       ├── Wizard Navigation & Progress     ← cross-cutting flow control: step sidebar/progress render, the
 │       │                                      unsaved-changes, resume-draft, and save-progress dialogs, and
 │       │                                      the "Preview Privacy Policy" popup reachable from every step —
@@ -162,20 +173,23 @@ CookieYes Functional Test Suite v2
 │   │   ├── Site Management           ← add site, website-details row, plan-label column, subscription
 │   │   │                                statuses (Banner disabled / Payment failed / Suspended), and
 │   │   │                                billing entry points (Change Plan, Switch to Annual, Reactivate)
+│   │   │   └── Cancel Trial
 │   │   └── Site Transfer             ← transfer modal, destination dropdown, cancel request, email,
 │   │                                    accept/reject page, 7-day expiry, payment/suspension
-│   └── Notifications
+│   ├── Billing & Invoices
+│   └── Notifications                 ← not yet created in TestRail; keeping as planned placeholder
 │
 ├── 11. Billing & Upgrade
 │   ├── Free Plan
-│   ├── Trial — without card
-│   ├── Trial — with card
+│   ├── Trial — without card            ← not yet created in TestRail; keeping as planned placeholder
+│   ├── Trial — with card               ← not yet created in TestRail; keeping as planned placeholder
 │   ├── Paid Plan
 │   └── Plan Gates                      ← plan-gated feature configuration checks across all plans
 │
-├── 12. Agency
-│   ├── Agency Dashboard
-│   └── Agency Billing & Upgrade
+├── 12. Agency                         ← not yet created in TestRail under this name; keeping as
+│   ├── Agency Dashboard                  planned placeholder. Unrelated to live section 21. Agentic
+│   └── Agency Billing & Upgrade          Tests — see that section's note; its Agency-named children
+│                                          are transient dev-authored drafts, not this section's real home
 │
 ├── 13. Platforms
 │   ├── Plugin (WordPress)
@@ -186,18 +200,40 @@ CookieYes Functional Test Suite v2
 │   ├── Admin
 │   └── Editor
 │
-├── 15. Internal Tools
+├── 15. Internal Tools                  ← not yet created in TestRail; keeping as planned placeholder
 │   ├── Maintenance Page
 │   └── CKY-Admin
 │
-├── 16. Miscellaneous
+├── 16. Miscellaneous                   ← not yet created in TestRail; keeping as planned placeholder
 │
-└── 17. Reports                         ← analytics & reporting (distinct from Legal Policies)
+├── 17. Reports                         ← analytics & reporting (distinct from Legal Policies)
+│
+├── 18. Header                          ← live top-level section; promoted out of Dashboard at some point
+│                                          after this doc was last synced — no longer a Dashboard child
+│
+├── 19. Add a New Site                  ← live top-level section; same promotion as Header above
+│
+├── 20. User Flows                      ← reference-only store of notable end-to-end user journeys,
+│                                          currently empty. Not part of the canonical per-feature
+│                                          structure above — cases here are for reference, not
+│                                          feature-section placement
+│
+└── 21. Agentic Tests                   ← dev-facing staging area, unrelated to "12. Agency" above.
+    ├── Agency Billing                     Devs writing a feature in the dev workspace can generate
+    ├── Referral Campaign (Genius Referral) draft cases in parallel via the QA agentic workflow
+    ├── Agency                             commands; publish target for that pathway is locked to
+    └── Agency Sign Up                     this section only. QA reviews + dedup-checks, then
+                                            publishes each case to its real section in the tree
+                                            above. Current children are just today's in-flight
+                                            dev-authored drafts (agency-related by coincidence) —
+                                            not a permanent home for Agency cases.
 ```
 
 > Section ordering is indicative. `17. Reports` is numbered last so it does not renumber the
 > existing sections 10–16, which are referenced by number throughout this document and the
-> migration conventions.
+> migration conventions. Sections 18–21 are appended at the end for the same reason: they reflect
+> live TestRail structure discovered during a 2026-07-23 tree sync and are numbered last purely to
+> avoid renumbering every existing cross-reference in this document.
 
 ---
 
@@ -345,15 +381,15 @@ Do not prefix titles with `[Account Owner]` unless inside section 14.
 
 | Scenario | Lives in |
 |---|---|
-| Form field validation (email, password, website URL) | 01. Authentication > Sign Up > Core |
-| Email verification flow | 01. Authentication > Sign Up > Core |
-| Credit card entry during trial signup (account creation) | 01. Authentication > Sign Up > Trial with card (Checkout) |
+| Form field validation (email, password, website URL) | 01. Authentication > Sign Up > Signup - Core |
+| Email verification flow | 01. Authentication > Sign Up > Signup - Core |
+| Credit card entry during trial signup (account creation) | 01. Authentication > Sign Up > Signup - Checkout |
 | Credit card entry to change plan on an existing account | 11. Billing & Upgrade > Paid Plan |
 | "Try Pro for free" button (Free plan) | 11. Billing & Upgrade > Free Plan |
 | Upgrade button from nudge (Basic plan) | 11. Billing & Upgrade > Paid Plan |
 | Plan-gated feature configuration (all plans) | 11. Billing & Upgrade > Plan Gates |
 | Clause/field-level plan gating within one feature (e.g. Privacy Policy Generator's per-question, per-chip gates) | 11. Billing & Upgrade > Plan Gates — as a feature-scoped case per plan (see "Plan-gated features" Layer 2), not inside the feature's own section |
-| In-app nudge opens from a feature entry point | Feature section where the entry point lives (e.g. 03. Dashboard > Cookie Banner Status Card) |
+| In-app nudge opens from a feature entry point | Feature section where the entry point lives (e.g. 03. Dashboard > Banner Status Card) |
 | "Ends in N days" trial display | 11. Billing & Upgrade > Trial — with card |
 | "Buy Pro" / "Switch to Pro trial?" | 11. Billing & Upgrade > Trial — with card |
 | Agency license / seat purchase, agency-console billing, client allocation | 12. Agency > Agency Billing & Upgrade |
@@ -403,7 +439,8 @@ Suite 6 ("Functional Cases") and Suite 7 ("Cookie Manager Revamp") remain in Tes
 |---|---|---|
 | Suite 6 — Functional Cases | Archived, read-only | ~12,042 cases, ~570 sections |
 | Suite 7 — Cookie Manager Revamp | Archived, read-only | 19 sections, Cookie Manager feature |
-| Suite 16 — CookieYes Functional Test Suite | Archived, read-only | 1 section |
+
+Suite 16 is **not** a separate legacy archive — it is the live v2 target suite itself (`TESTRAIL_SUITE_ID_V2=16`). It started as a near-empty "CookieYes Functional Test Suite" shell (1 section) before migration began, and is now the suite holding the entire v2 tree documented above. See resolved issue [L2].
 
 ---
 
@@ -413,7 +450,7 @@ Suite 6 ("Functional Cases") and Suite 7 ("Cookie Manager Revamp") remain in Tes
 
 - [x] **[H2] "Permission gates" sub-sub-section violates the depth rule** — Resolved: depth rule updated to 4 levels. `14. Permissions > Admin > Permission gates` is now valid. Authentication also restructured to use the 4th level for Sign Up variants.
 
-- [x] **[M1] Credit card entry during signup belongs in Billing, not Authentication** — Resolved: documented as an exception to Principle 3. Card entry that is part of **account creation** stays in `01. Authentication > Sign Up > Checkout` (the checkout page is part of the signup surface); card entry to change the plan on an **existing** account goes to `11. Billing & Upgrade > Paid Plan`. See Principle 3 and the scenario-placement table.
+- [x] **[M1] Credit card entry during signup belongs in Billing, not Authentication** — Resolved: documented as an exception to Principle 3. Card entry that is part of **account creation** stays in `01. Authentication > Sign Up > Signup - Checkout` (the checkout page is part of the signup surface); card entry to change the plan on an **existing** account goes to `11. Billing & Upgrade > Paid Plan`. See Principle 3 and the scenario-placement table.
 
 - [x] **[M2] Sections 06, 07, 08, and 16 have no sub-sections defined** — Resolved: 06/07/08 are intentionally flat (cases at the section leaf, standard title format, no sub-sections unless they grow); Miscellaneous (16) is last-resort only, and a cluster there should be promoted to its own section. See "Intentionally flat sections" under Section structure.
 
@@ -423,6 +460,47 @@ Suite 6 ("Functional Cases") and Suite 7 ("Cookie Manager Revamp") remain in Tes
 
 - [x] **[L1] Billing boundary between section 11 and section 12 is undefined** — Resolved: section 12 owns only agency-unique billing (license/seat purchase, agency-console billing, client/sub-account allocation); all standard-account billing stays in section 11, even for agency users when the flow is identical. See "Billing: section 11 vs section 12".
 
-- [ ] **[L2] Suite 16 legacy entry is unexplained** — The legacy table lists `Suite 16 — CookieYes Functional Test Suite` with no context on how it relates to the new v2 suite. Add a one-line note clarifying the lineage.
+- [x] **[L2] Suite 16 legacy entry is unexplained** — Resolved during the 2026-07-23 section-tree sync: confirmed via live API query that Suite 16 is not a separate archive but the v2 target suite itself (`TESTRAIL_SUITE_ID_V2=16`), which started as a near-empty shell before migration began. See "Legacy suite reference".
 
 - [x] **[L3] "Reports" is a misleading section name** — Resolved: section 09 is renamed **Legal Policies** (matching the app's left-nav label) and holds Cookie Policy Generator + Privacy Policy Generator. A distinct **Reports** section (analytics & reporting) is added as section 17 — kept last so it does not renumber the referenced sections 10–16.
+
+- [x] **[N1] "20. User Flows" purpose unconfirmed** — Resolved: it's a reference-only store of
+  notable end-to-end user journeys, not part of the per-feature section-placement structure. No
+  placement rule needed — it's not a destination the migration workflow routes cases to.
+
+- [x] **[N2] "21. Agentic Tests" relationship to planned "12. Agency" section unconfirmed** —
+  Resolved: unrelated to section 12. It's a dev-facing staging section — devs building a feature
+  in the dev workspace generate draft cases in parallel via the QA agentic workflow commands,
+  publish for that pathway is locked to this section only, and QA reviews + dedup-checks before
+  publishing each case to its real section in the tree. The current Agency-named children are
+  just today's in-flight drafts, not a permanent home for Agency cases. See the tree note on
+  section 21 for the full explanation, and "Opinion: Agentic Tests staging pathway" below for
+  process considerations.
+
+- [x] **[N3] Orphaned duplicate "Legal Policies" section in TestRail** — Resolved: the duplicate
+  has been deleted from TestRail. Confirmed via live query — only one `Legal Policies` section
+  remains (`09. Legal Policies`, id 1958).
+
+---
+
+## Dev-facing staging pathway (`21. Agentic Tests`) — process notes
+
+Devs building a feature in the dev workspace can generate draft test cases in parallel via the
+QA agentic workflow commands. That workflow's publish target is locked to `21. Agentic Tests`
+only — it cannot write directly into the canonical tree above. QA reviews and dedup-checks
+(`dedup-check` in `fetch_testrail.py` already supports this) before publishing each case to its
+real section. This keeps the canonical structure clean without blocking devs from writing
+coverage as they build.
+
+Considerations worth deciding on explicitly, rather than letting the pathway run informally:
+
+- **Section name is not self-documenting.** `Agentic Tests` doesn't read as "pending QA review
+  staging" to someone browsing TestRail cold. A name like `0. Pending Review (Dev-authored)` would
+  make the transient nature obvious without needing this doc as context.
+- **No visible throughput signal.** If dev velocity outpaces QA review cadence, drafts pile up
+  silently. Worth tracking age of oldest unreviewed batch, or setting a review SLA, so the section
+  doesn't become a permanent home by default.
+- **The review step is the only place v2 conventions get enforced for this pathway** (section
+  placement, naming, `run_type`, no `automation_type`, no role/plan variant clones). Since the
+  whole point is keeping the canonical tree clean, that review needs to actually check these
+  conventions, not just dedup — otherwise violations just arrive late instead of never.

@@ -14,8 +14,35 @@
     405,
     587
   ],
-  "note": "The 22 cases below (36716-36734, 36821-36823) were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline (created 2026-06-25 by a different account, and 2026-07-02 supplementing crown-icon nudge cases) and were never tracked locally until this backfill. grill_status/audit_status are honestly marked not-tracked-by-repo rather than assumed confirmed. The 2 stub cases (36827, 36828) are unrelated gap-cases discovered during Layout's grill that were rerouted to Layout and Plan Gates respectively per their own rewrite_notes -- kept here only because that's where they were originally filed.",
+  "note": "The 22 cases below (36716-36734, 36821-36823) were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline (created 2026-06-25 by a different account, and 2026-07-02 supplementing crown-icon nudge cases) and were never tracked locally until this backfill. grill_status/audit_status are honestly marked not-tracked-by-repo rather than assumed confirmed. The 2 stub cases (36827, 36828) are unrelated gap-cases discovered during Layout's grill that were rerouted to Layout and Plan Gates respectively per their own rewrite_notes -- kept here only because that's where they were originally filed. Case 36710 is a Cookie Banner Customization-page-shell case (sidebar tabs, banner preview, Publish Changes button) merged in from the now-deleted duplicate `cases-general.json` -- it structurally belongs to 04. Cookie Banner > Display & Layout, but there's no dedicated file for that section yet, so it's kept here rather than left orphaned.",
   "cases": [
+    {
+      "id": 36710,
+      "title": "[Cookie Banner] Verify that the Customization page renders with all required controls",
+      "preconditions": "User is on the Cookie Banner tab. The Customization page is open. The sidebar contains five tabs: General, Layout, Content, Colours, Custom CSS. The banner preview is visible on the right.",
+      "steps": [
+        {
+          "content": "Verify the General tab is selected in the Customization sidebar.",
+          "expected": "The General tab should be highlighted and the General section content should be displayed."
+        },
+        {
+          "content": "Verify the banner preview panel is visible to the right of the sidebar.",
+          "expected": "A live banner preview should be displayed."
+        },
+        {
+          "content": "Verify the Publish Changes button is visible at the bottom of the sidebar.",
+          "expected": "The \"Publish Changes\" button should be present but disabled by default until changes are made in the Customization settings."
+        }
+      ],
+      "source_case_ids": [275, 1392, 1398, 5104, 5110],
+      "permission_flag": false,
+      "platform_flag": false,
+      "run_type": "smoke",
+      "rewrite_notes": "Schema-normalized from legacy raw-export format during audit; no source_case_ids existed prior — see source_case_ids/audit_note for what Phase 2/3 found.",
+      "grill_status": null,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "Matches C275/C1392/C1398 (Webapp, AO/Admin/Editor) 1:1: sidebar tab list, \"Publish Changes\" button disabled by default, General shown by default. No load-bearing text distorted."
+    },
     {
       "id": 36716,
       "title": "[Cookie Banner] Verify that the General section renders with all required cards and controls",
