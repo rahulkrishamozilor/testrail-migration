@@ -238,7 +238,8 @@ the per-section reports — same shape as `/audit-section`'s `all` mode.
   case-shaped object — never invent new Playwright-driving instructions here.
 - Every applied change gets a `docs/wiki/log.md` entry. No silent edits.
 - Every drafted addition/correction is held to `migration-conventions.md` §0 before being
-  proposed.
+  proposed, and must follow `docs/wiki/CONVENTIONS.md`'s writing standard (perspective, no
+  inline TestRail case-ID/filename references, page skeleton, etc.).
 - This command does not know about, and must not guess at, how the separate consumer project
   reindexes `docs/wiki/`. Its job stops at a correct, logged, committed wiki.
 - Don't delete a stray progress file until every one of its findings is individually traced to a
