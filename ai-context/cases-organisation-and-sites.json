@@ -368,7 +368,7 @@
     {
       "id": 37303,
       "title": "[Organisations & Sites] Verify that deleting an organisation shows the confirmation pop-up and confirming deletes it",
-      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). An organisation that contains sites exists (the Delete organization option is only shown for such organisations).",
+      "preconditions": "User is on the Organisations & Sites page (Profile menu > Organisation & Sites). The account has more than one organisation associated with it (the Delete organization option is only shown when multiple organisations exist).",
       "steps": [
         {
           "content": "Click the More (\u22ef) option against the organisation and select \"Delete organization\".",
