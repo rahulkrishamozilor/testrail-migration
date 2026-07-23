@@ -5,11 +5,13 @@ self-contained (newcomer test / isolation test / RAG accuracy test, per
 `migration-conventions.md` §0). Structure mirrors the 17-section app map in
 `testrail-suite-v2.md` (read that file for the canonical section tree).
 
-**Coverage as of 2026-07-15:** 23 pages drafted from the existing `ai-context/cases-*.json`
+**Coverage as of 2026-07-23:** 24 pages drafted from the existing `ai-context/cases-*.json`
 TestRail export files. Most of these have not been live-verified against the running QA app yet —
 each page's own **Source** section says so explicitly where that's still true. The
 [Privacy Policy Generator](09-legal-policies/privacy-policy-generator.md) page is the first
-exception: most of its wizard has been live-verified across a Free and a Pro/Ultimate account.
+exception: most of its wizard has been live-verified across a Free and a Pro/Ultimate account. The
+[Dashboard](03-dashboard.md) page (added 2026-07-23 via `/wiki-sync`) is partially live-verified —
+about 20 of its 88 backing cases, concentrated on empty/default states.
 Roughly half the app's sections have **no page yet at all** (see "Not yet documented" below)
 because no TestRail case data exists for them — they need a first live-crawl pass through
 `qa-accounts.json`, which was deliberately deferred rather than run automatically. See the plan at
@@ -34,9 +36,13 @@ Not yet documented: Banner Setup, Banner Installation — no case file exists ye
 
 ## 03. Dashboard
 
-Not yet documented: Alert Banners, Header, Add a New Site, Cookie Banner Status Card, Cookie
-Summary Card, Consent Trends Card, Pageviews Card, Recent Consent Logs Card — no case file exists
-yet.
+| Page | Source | Cases | Freshness |
+|---|---|---|---|
+| [Dashboard](03-dashboard.md) | 9 files: `cases-dashboard-header.json`, `-alert-banners.json`, `-cookie-banner-status-card.json`, `-cookie-summary-card.json`, `-consent-trends-card.json`, `-pageviews-card.json`, `-recent-consent-logs-card.json`, `-add-a-new-site.json`, `-states.json` | 88 (published outside this repo's pipeline; `grill_status: not-tracked-by-repo`) | Drafted 2026-07-23; ~20 of 88 cases live-verified via `/wiki-sync` (empty/default states only) — see page's Known gaps |
+
+Not yet documented within this section: most of the Add a New Site creation flow, Active/verified
+banner and card states, paid-plan variants, populated chart/log states — see the page's own Known
+gaps section.
 
 ## 04. Cookie Banner
 
@@ -148,7 +154,7 @@ This first pass deliberately used only existing TestRail case data (`ai-context/
 no live browsing of the QA app yet. Two follow-up passes remain, both deferred for now at the
 user's request:
 
-1. **Live crawl for sections with no case file** — Onboarding, Dashboard, Cookie Policy Generator,
+1. **Live crawl for sections with no case file** — Onboarding, Cookie Policy Generator,
    My Account, Notifications, Billing (Free/Trial/Paid Plan), Agency, Platforms, Permissions,
    Internal Tools. Requires logging into the live app via the `playwright` MCP with the accounts in
    `qa-accounts.json` (free/basic/pro/ultimate/admin/editor as appropriate per page).
@@ -157,4 +163,6 @@ user's request:
    source data — needs live verification)" gaps each page already flags (exact routes, thin
    pages like `signup-standard-free.md`, `custom-css.md`, `plan-gates.md`, `reports.md`,
    `display-layout.md`, and the Use of Data / Data Retention sections of
-   `privacy-policy-generator.md`).
+   `privacy-policy-generator.md`). `03-dashboard.md` is a partial case of this already — most of
+   its 88 backing cases (active/verified states, paid-plan variants, populated charts, the full
+   Add a New Site flow) still need their own live-check pass; see that page's Known gaps section.
