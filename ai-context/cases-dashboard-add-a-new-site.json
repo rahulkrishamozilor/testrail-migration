@@ -1,0 +1,291 @@
+{
+  "section": "03. Dashboard > Add a New Site",
+  "suite_id": 16,
+  "section_id": 1777,
+  "default_section_id": 1777,
+  "fetched_at": "2026-07-23T05:36:46Z",
+  "grilled_at": null,
+  "published_at": "2026-06-24T13:19:21Z",
+  "audited_at": null,
+  "note": "All 10 case(s) below were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline and were never tracked locally until this backfill (2026-07-23). Case IDs and creation dates indicate they predate this migration project. Content is taken verbatim (HTML converted to plain text only) -- no v2 style-rewrite, Plan Gates extraction check, or Suite 6 source_case_ids cross-reference has been done yet; grill_status is honestly marked not-tracked-by-repo rather than assumed confirmed. live TestRail section \"Add a New Site\" is a top-level section (no parent), not nested under \"Dashboard\" like the doc's tree shows.",
+  "cases": [
+    {
+      "id": 36635,
+      "title": "[Add a New Site] Verify that the Add a new site page renders with all required fields and controls",
+      "preconditions": "User is on the Dashboard. At least one website already exists in the account.",
+      "steps": [
+        {
+          "content": "Open the website selector dropdown next to the CookieYes logo in the header and click \"+ New Site\".",
+          "expected": "The \"Add a new site\" page should be displayed."
+        },
+        {
+          "content": "Locate the \"1. Site details\" card.",
+          "expected": "The card should display an \"Organization *\" dropdown, a \"Site URL *\" text field, and a \"Site name\" text field, with Organization and Site URL marked as required."
+        },
+        {
+          "content": "Locate the \"2. Select Plan\" card.",
+          "expected": "The card should display \"Monthly\" and \"Annual\" billing toggle options, with \"Monthly\" selected by default."
+        },
+        {
+          "content": "Observe the Currency dropdown on the Select Plan card.",
+          "expected": "The Currency dropdown should be present with \"USD $\" selected by default."
+        },
+        {
+          "content": "Observe the plan columns on the Select Plan card.",
+          "expected": "Free, Basic, Pro, and Ultimate plan columns should each be displayed with a \"Get Started\" button."
+        },
+        {
+          "content": "Click the \"See all features and compare plans\" control below the plans table.",
+          "expected": "The plans table should expand to show the full feature comparison list across all plan columns."
+        },
+        {
+          "content": "Locate the \"X Cancel\" control on the page.",
+          "expected": "The \"X Cancel\" button should be visible and interactive."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:21Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36636,
+      "title": "[Add a New Site] Verify that submitting with no organization selected shows a validation error",
+      "preconditions": "User is on the \"Add a new site\" page.",
+      "steps": [
+        {
+          "content": "Leave the \"Organisation *\" dropdown with no organisation selected.",
+          "expected": "No organisation should be selected in the \"Organisation *\" dropdown."
+        },
+        {
+          "content": "Enter a valid site URL in the \"Site URL *\" field.",
+          "expected": "The entered URL should be accepted in the field."
+        },
+        {
+          "content": "Click the \"Get Started\" button on any plan column.",
+          "expected": "The \"Organisation is required\" validation message should be displayed under the \"Organisation *\" dropdown and submission should be blocked."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:22Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36637,
+      "title": "[Add a New Site] Verify that submitting with an invalid site URL shows a validation error",
+      "preconditions": "User is on the \"Add a new site\" page.",
+      "steps": [
+        {
+          "content": "Select an organization from the \"Organization *\" dropdown.",
+          "expected": "The selected organization should be set in the dropdown."
+        },
+        {
+          "content": "Enter an invalid URL in the \"Site URL *\" field.",
+          "expected": "The entered value should be accepted into the field."
+        },
+        {
+          "content": "Click the \"Get Started\" button on any plan column.",
+          "expected": "The \"Valid website required\" validation message should be displayed under the \"Site URL *\" field and submission should be blocked."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:24Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36638,
+      "title": "[Add a New Site] Verify that submitting with an empty site URL shows a validation error",
+      "preconditions": "User is on the \"Add a new site\" page.",
+      "steps": [
+        {
+          "content": "Select an organization from the \"Organization *\" dropdown.",
+          "expected": "The selected organization should be set in the dropdown."
+        },
+        {
+          "content": "Leave the \"Site URL *\" field empty.",
+          "expected": "The \"Site URL *\" field should remain blank."
+        },
+        {
+          "content": "Click the \"Get Started\" button on any plan column.",
+          "expected": "The \"URL is required\" validation message should be displayed under the \"Site URL *\" field and submission should be blocked."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:25Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36639,
+      "title": "[Add a New Site] Verify that a new site is created and the entered site name is saved",
+      "preconditions": "User is on the \"Add a new site\" page. A valid payment card is available for checkout.",
+      "steps": [
+        {
+          "content": "Select an organization from the \"Organization *\" dropdown.",
+          "expected": "The selected organization should be set in the dropdown."
+        },
+        {
+          "content": "Enter a valid site URL in the \"Site URL *\" field and a site name in the \"Site name\" field.",
+          "expected": "Both values should be accepted into their fields."
+        },
+        {
+          "content": "Click the \"Get Started\" button on a plan column and complete the Stripe checkout with valid card details.",
+          "expected": "After subscribing, the Banner setup page should be displayed."
+        },
+        {
+          "content": "Click \"Next Step\", then \"Go to Dashboard\", and proceed through the \"Banner isn't installed yet\" prompt via \"Done! Take me to Dashboard\".",
+          "expected": "The Dashboard for the newly created site should be displayed."
+        },
+        {
+          "content": "Open the user profile dropdown and go to \"Organization and Sites\".",
+          "expected": "The Organization and Sites page should be displayed."
+        },
+        {
+          "content": "Locate the newly created site in the list.",
+          "expected": "The entered site name should be shown under the \"Site name\" column for the new site."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:26Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36640,
+      "title": "[Add a New Site] Verify that toggling between Monthly and Annual billing updates plan prices",
+      "preconditions": "User is on the \"Add a new site\" page.",
+      "steps": [
+        {
+          "content": "Confirm the billing period toggle state on the Select Plan card.",
+          "expected": "\"Monthly\" should be selected by default and plan columns should show per-month pricing."
+        },
+        {
+          "content": "Select the \"Annual\" billing option.",
+          "expected": "The plan columns should update to show annual (per-year) pricing for Basic, Pro, and Ultimate."
+        },
+        {
+          "content": "Select the \"Monthly\" billing option again.",
+          "expected": "The plan columns should revert to per-month pricing."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:28Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36641,
+      "title": "[Add a New Site] Verify that changing the Currency updates plan prices to the selected currency",
+      "preconditions": "User is on the \"Add a new site\" page.",
+      "steps": [
+        {
+          "content": "Open the Currency dropdown on the Select Plan card.",
+          "expected": "The dropdown should list USD $, GBP £, and EUR € options, with USD $ selected by default."
+        },
+        {
+          "content": "Select \"GBP £\".",
+          "expected": "The plan columns should update to display prices in GBP (£)."
+        },
+        {
+          "content": "Select \"EUR €\".",
+          "expected": "The plan columns should update to display prices in EUR (€)."
+        },
+        {
+          "content": "Select \"USD $\".",
+          "expected": "The plan columns should update to display prices in USD ($)."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:29Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36642,
+      "title": "[Add a New Site] Verify that selecting a plan with Get Started subscribes the new site to that plan",
+      "preconditions": "User is on the \"Add a new site\" page with a valid organization selected and a valid site URL entered. A valid payment card is available for checkout.",
+      "steps": [
+        {
+          "content": "Select the desired billing currency from the Currency dropdown.",
+          "expected": "The chosen currency should be selected and plan prices should display in that currency."
+        },
+        {
+          "content": "Click \"Get Started\" on the chosen plan column (Basic, Pro, or Ultimate).",
+          "expected": "The Stripe checkout page should be displayed showing the selected plan price in the selected currency."
+        },
+        {
+          "content": "Enter valid card details and click \"Subscribe\".",
+          "expected": "The subscription should complete and the Banner setup page should be displayed."
+        },
+        {
+          "content": "Proceed through \"Next Step\", \"Go to Dashboard\", and the \"Banner isn't installed yet\" prompt to reach the Dashboard.",
+          "expected": "The Dashboard for the new site should be displayed."
+        },
+        {
+          "content": "Open the user profile dropdown, go to \"Organization and Sites\", and locate the new site.",
+          "expected": "The new site should show the subscribed plan name and price (in the selected currency) under the \"Plan\" field, matching the chosen plan."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:30Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36643,
+      "title": "[Add a New Site] Verify that the Cancel button discards site creation and returns to the Dashboard",
+      "preconditions": "User is on the \"Add a new site\" page.",
+      "steps": [
+        {
+          "content": "Click the \"X Cancel\" button in the top-right of the page.",
+          "expected": "The page should close without creating a site and the Dashboard should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:32Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36644,
+      "title": "[Add a New Site] Verify that the “reach out to support” link opens the CookieYes troubleshoot page",
+      "preconditions": "User is on the \"Add a new site\" page.",
+      "steps": [
+        {
+          "content": "Locate the \"* To activate scan behind login, reach out to support\" footnote at the bottom-left of the page.",
+          "expected": "The \"reach out to support\" portion should be rendered as a link."
+        },
+        {
+          "content": "Click the \"reach out to support\" link.",
+          "expected": "The CookieYes troubleshoot page (cookieyes.com/support/#troubleshoot) should open in a new tab."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:33Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    }
+  ]
+}

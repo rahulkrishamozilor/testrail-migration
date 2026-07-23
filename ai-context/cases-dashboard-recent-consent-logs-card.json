@@ -1,0 +1,196 @@
+{
+  "section": "03. Dashboard > Recent Consent Logs Card",
+  "suite_id": 16,
+  "section_id": 1771,
+  "default_section_id": 1771,
+  "fetched_at": "2026-07-23T05:36:46Z",
+  "grilled_at": null,
+  "published_at": "2026-06-24T13:20:54Z",
+  "audited_at": null,
+  "note": "All 7 case(s) below were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline and were never tracked locally until this backfill (2026-07-23). Case IDs and creation dates indicate they predate this migration project. Content is taken verbatim (HTML converted to plain text only) -- no v2 style-rewrite, Plan Gates extraction check, or Suite 6 source_case_ids cross-reference has been done yet; grill_status is honestly marked not-tracked-by-repo rather than assumed confirmed. live TestRail section is named \"Consent Logs Card\" (missing \"Recent\") vs the doc's \"Recent Consent Logs Card\".",
+  "cases": [
+    {
+      "id": 36681,
+      "title": "[Dashboard] Verify that the Recent consent logs card shows the empty state when no consents are recorded",
+      "preconditions": "User is on the Dashboard page. No visitor consents have been recorded yet (consent logging not yet producing logs).",
+      "steps": [
+        {
+          "content": "Observe the Recent consent logs card on the Dashboard.",
+          "expected": "The card empty state should display the message \"No consent log found!\" with the supporting text \"Visitor consents may not have been recorded yet. Make sure you've enabled consent logging\"."
+        },
+        {
+          "content": "Locate the \"consent logging\" text within the empty-state message.",
+          "expected": "\"consent logging\" should be rendered as a clickable link."
+        },
+        {
+          "content": "Locate the \"View all logs\" control on the card.",
+          "expected": "The \"View all logs\" button should be present at the bottom of the card."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:54Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36682,
+      "title": "[Dashboard] Verify that the consent logging link in the Recent consent logs empty state navigates to Advanced Settings",
+      "preconditions": "User is on the Dashboard page. The Recent consent logs card is in its empty state (no consents recorded).",
+      "steps": [
+        {
+          "content": "Click the \"consent logging\" link in the Recent consent logs card empty-state message.",
+          "expected": "The Advanced Settings page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:55Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36683,
+      "title": "[Dashboard] Verify that the Recent consent logs card records an Accepted consent",
+      "preconditions": "A cookie banner is published on the user's website. User can access both the live website and the Dashboard.",
+      "steps": [
+        {
+          "content": "On the user's website, open the page where the cookie banner is displayed.",
+          "expected": "The cookie banner should be displayed with an \"Accept All\" button."
+        },
+        {
+          "content": "Click \"Accept All\" on the cookie banner.",
+          "expected": "The banner should close and the \"Consent Preferences\" revisit button should be displayed."
+        },
+        {
+          "content": "Navigate to the Dashboard and locate the Recent consent logs card.",
+          "expected": "The newly recorded consent should appear as a row in the Recent consent logs list."
+        },
+        {
+          "content": "Read the Consent Status of the new log row.",
+          "expected": "The Consent Status should be \"Accepted\"."
+        },
+        {
+          "content": "Confirm the row shows a Consent ID and a Date/Time value.",
+          "expected": "The row should display a Consent ID and a Date/Time (UTC ± 00:00) value."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:56Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36684,
+      "title": "[Dashboard] Verify that the Recent consent logs card records a Rejected consent",
+      "preconditions": "A cookie banner is published on the user's website. User can access both the live website and the Dashboard.",
+      "steps": [
+        {
+          "content": "On the user's website, open the page where the cookie banner is displayed.",
+          "expected": "The cookie banner should be displayed with a \"Reject All\" button."
+        },
+        {
+          "content": "Click \"Reject All\" on the cookie banner.",
+          "expected": "The banner should close and the \"Consent Preferences\" revisit button should be displayed."
+        },
+        {
+          "content": "Navigate to the Dashboard and locate the Recent consent logs card.",
+          "expected": "The newly recorded consent should appear as a row in the Recent consent logs list."
+        },
+        {
+          "content": "Read the Consent Status of the new log row.",
+          "expected": "The Consent Status should be \"Rejected\"."
+        },
+        {
+          "content": "Confirm the row shows a Consent ID and a Date/Time value.",
+          "expected": "The row should display a Consent ID and a Date/Time (UTC ± 00:00) value."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:57Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36685,
+      "title": "[Dashboard] Verify that the Recent consent logs card records a Partially-Accepted consent",
+      "preconditions": "A cookie banner with at least one non-Necessary category is published on the user's website. User can access both the live website and the Dashboard.",
+      "steps": [
+        {
+          "content": "On the user's website, open the cookie banner and click \"Customize\".",
+          "expected": "The second layer of the cookie banner with category toggles should be displayed."
+        },
+        {
+          "content": "Enable the toggle for one category other than \"Necessary\".",
+          "expected": "The selected category toggle should be enabled."
+        },
+        {
+          "content": "Click \"Save My Preferences\".",
+          "expected": "The banner should collapse and the revisit consent button should be displayed."
+        },
+        {
+          "content": "Navigate to the Dashboard and locate the Recent consent logs card.",
+          "expected": "The newly recorded consent should appear as a row in the Recent consent logs list."
+        },
+        {
+          "content": "Read the Consent Status of the new log row.",
+          "expected": "The Consent Status should be \"Partially-Accepted\"."
+        },
+        {
+          "content": "Confirm the row shows a Consent ID and a Date/Time value.",
+          "expected": "The row should display a Consent ID and a Date/Time (UTC ± 00:00) value."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:59Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36686,
+      "title": "[Dashboard] Verify that the Consent ID tooltip Learn more link opens the consent recording documentation",
+      "preconditions": "User is on the Dashboard page. At least one consent log exists so the Recent consent logs card displays the consent table.",
+      "steps": [
+        {
+          "content": "Hover over the information tooltip next to the \"Consent ID\" column header in the Recent consent logs card.",
+          "expected": "The Consent ID help tooltip should be displayed and should contain a \"Learn more\" link."
+        },
+        {
+          "content": "Click the \"Learn more\" link in the tooltip.",
+          "expected": "The \"How to Record User Consent for Cookies\" documentation page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:21:00Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36687,
+      "title": "[Dashboard] Verify that the View all logs button opens the Consent Log page",
+      "preconditions": "User is on the Dashboard page with the Recent consent logs card displayed.",
+      "steps": [
+        {
+          "content": "Click the \"View all logs\" button at the bottom of the Recent consent logs card.",
+          "expected": "The Consent Log page (/consent-logs) should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:21:01Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    }
+  ]
+}

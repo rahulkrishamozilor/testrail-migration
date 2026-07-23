@@ -5,7 +5,7 @@
   "default_section_id": 1983,
   "fetched_at": "2026-07-21T05:15:14Z",
   "grilled_at": "2026-07-21T05:35:22Z",
-  "published_at": "2026-07-21T05:42:29Z",
+  "published_at": "2026-07-23T05:07:27Z",
   "restore_note": "This section's cases were accidentally deleted from TestRail (section tree intact, 0 cases live). Restored from the last-known content of ai-context/cases-signup-core.json, converted to draft schema for a fresh /grill-section pass before republishing. No original Suite 6 source_case_ids were recorded when this was first migrated.",
   "cases": [
     {
@@ -443,6 +443,32 @@
       "plan_gate_flag": false,
       "rewrite_notes": "Restored verbatim from prior publish (ai-context/cases-signup-core.json) \u2014 no content change. No run_type set in the original publish. Source cases C70/C1148 disagreed on this expected result even before restoration \u2014 flagged in the original case. Not automatable this pass: requires a real signup, real inbox access, and deleting the account before verifying \u2014 a destructive precondition combined with email-required. Same adjacent evidence as the expired-token case applies here too: a garbage-token verify attempt reproduces the identical failure page and confirms the Resend button's success notification is exactly \"Verification email has been resent successfully.\" \u2014 this resolves the C70/C1148 disagreement in favor of that exact wording, though the account-deletion precondition specifically remains unconfirmed.",
       "grill_status": "skipped:destructive-precondition"
+    },
+    {
+      "title": "[Sign Up] Verify that clicking \"Resend Verification Email\" on the failure page starts a cooldown timer before it can be clicked again",
+      "preconditions": "A verification link has been invalidated for testing purposes:\n1. Take a verification link in the format `/user-verify?token=<token>&identity=<identity>`\n2. Replace the `token` and `identity` values with arbitrary invalid strings (the `identity` value must be invalid \u2014 a link with a real, already-verified `identity` will succeed even if the `token` is garbage)\n3. Navigate to the edited link\n\nUser is on the resulting \"Your email verification failed!\" page, which shows a \"Resend Verification Email\" button.",
+      "steps": [
+        {
+          "content": "Click \"Resend Verification Email\".",
+          "expected": "A \"Verification email has been resent successfully.\" notification should appear."
+        },
+        {
+          "content": "Observe the resend control immediately after the notification appears.",
+          "expected": "The \"Resend Verification Email\" button should no longer be present. In its place, the page should display \"Resend email in <N> seconds\" (observed starting between 56\u201358 seconds across separate checks)."
+        },
+        {
+          "content": "Wait several seconds without reloading the page.",
+          "expected": "The seconds count in \"Resend email in <N> seconds\" should visibly decrease over time (observed 58 \u2192 43 seconds), confirming it is a live countdown and not a static message."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "New case, no Suite 6 precedent \u2014 gap first identified 2026-07-21 during the Sign Up Core grill, drafted then but dropped unapproved when the review gate closed (see coverage-gaps.md). Re-verified live 2026-07-23: garbling both token and identity on a /user-verify link reliably reproduces the failure page without needing a real signup, a 1-hour wait, or inbox access \u2014 this is now folded into the precondition as the repro method. Clicking Resend replaces the button with countdown text (the button element is absent entirely, not merely disabled) and shows the same resend-success toast as sibling case 39710. Countdown observed ticking from 58s to 43s, confirming it's live. NOT verified this pass: whether the \"Resend Verification Email\" button reappears once the countdown reaches 0 \u2014 did not wait out the full duration. Distinct from case 37242 in cases-my-account.json, which covers an analogous cooldown on My Account's email-update flow, not signup verification. This case's precondition uses a manufactured invalid link (not a real 1-hour wait) because the cooldown behavior under test is triggered by the Resend click itself, not by the reason the page is showing a failure \u2014 same assumption 39710 already relies on for the page's copy/toast text. The unconfirmed real-expiry root cause remains 39710's open gap, not reintroduced here.",
+      "grill_status": "confirmed",
+      "id": 39737
     }
   ]
 }

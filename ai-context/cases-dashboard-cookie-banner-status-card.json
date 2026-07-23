@@ -1,0 +1,692 @@
+{
+  "section": "03. Dashboard > Cookie Banner Status Card",
+  "suite_id": 16,
+  "section_id": 1767,
+  "default_section_id": 1767,
+  "fetched_at": "2026-07-23T05:36:46Z",
+  "grilled_at": null,
+  "published_at": "2026-06-24T13:19:34Z",
+  "audited_at": null,
+  "note": "All 25 case(s) below were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline and were never tracked locally until this backfill (2026-07-23). Case IDs and creation dates indicate they predate this migration project. Content is taken verbatim (HTML converted to plain text only) -- no v2 style-rewrite, Plan Gates extraction check, or Suite 6 source_case_ids cross-reference has been done yet; grill_status is honestly marked not-tracked-by-repo rather than assumed confirmed. live TestRail section is named \"Banner Status Card\" (missing \"Cookie\") vs the doc's \"Cookie Banner Status Card\".",
+  "cases": [
+    {
+      "id": 36645,
+      "title": "[Dashboard] Verify that the Cookie Banner Status card renders with all required fields and controls",
+      "preconditions": "User is on the Dashboard. Banner installation is complete (banner Active).",
+      "steps": [
+        {
+          "content": "Locate the Cookie Banner Status card on the Dashboard.",
+          "expected": "A card showing the configured website URL should be displayed at the top, with a \"Cookie banner status\" label visible inside the left sub-section."
+        },
+        {
+          "content": "Observe the banner status indicator on the card.",
+          "expected": "The banner status (Active/Inactive) should be displayed below the \"Cookie banner status\" label."
+        },
+        {
+          "content": "Observe the Regulation field on the right side of the card.",
+          "expected": "The Regulation field should display the active regulation (e.g. GDPR)."
+        },
+        {
+          "content": "Observe the Targeted location field on the right side of the card.",
+          "expected": "The Targeted location field should display the current geo-target setting (e.g. Worldwide) with a \"Geo-target\" link displayed inline alongside the location value."
+        },
+        {
+          "content": "Verify the \"Customise banner\" link is present at the bottom of the card.",
+          "expected": "The \"Customise banner\" link should be visible and interactive at the bottom of the card."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:34Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36646,
+      "title": "[Dashboard] Verify that the Cookie Banner Status card shows Inactive with a Get installation code prompt when the installation code is not added",
+      "preconditions": "User is on the Dashboard. The CookieYes installation code has not been added to the site (banner Inactive).",
+      "steps": [
+        {
+          "content": "Locate the Cookie Banner Status card on the Dashboard.",
+          "expected": "A card showing the configured website URL should be displayed at the top of the card."
+        },
+        {
+          "content": "Observe the banner status value.",
+          "expected": "The status should read \"Inactive\" in red."
+        },
+        {
+          "content": "Observe the message below the status.",
+          "expected": "\"Looks like the installation code isn't added to your site yet!\" should be displayed."
+        },
+        {
+          "content": "Verify the installation link at the bottom of the left sub-section.",
+          "expected": "A \"Get installation code\" link should be displayed at the bottom of the left sub-section."
+        },
+        {
+          "content": "Verify the verify installation control next to the status.",
+          "expected": "A verify installation control should be displayed to the right of the \"Inactive\" status text."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:35Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36647,
+      "title": "[Dashboard] Verify that the Cookie Banner Status card shows Active when the installation code is verified",
+      "preconditions": "User is on the Dashboard. The CookieYes installation code is installed and verified (banner Active).",
+      "steps": [
+        {
+          "content": "Locate the Cookie Banner Status card on the Dashboard.",
+          "expected": "A card showing the configured website URL should be displayed at the top of the card."
+        },
+        {
+          "content": "Observe the banner status value.",
+          "expected": "The status should read \"Active\"."
+        },
+        {
+          "content": "Observe the message below the status.",
+          "expected": "\"You have successfully set up your cookie banner!\" should be displayed."
+        },
+        {
+          "content": "Verify the Get installation code control next to the status.",
+          "expected": "A \"Get installation code\" control should be displayed alongside the Active status."
+        },
+        {
+          "content": "Verify the link at the bottom of the section.",
+          "expected": "A \"Live preview banner\" link should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:37Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36648,
+      "title": "[Dashboard] Verify that the Get installation code modal opens with manual and GTM tabs when the code is not installed",
+      "preconditions": "User is on the Dashboard. The CookieYes installation code has not been added to the site (banner Inactive).",
+      "steps": [
+        {
+          "content": "Click the \"Get installation code\" link on the Cookie Banner Status card.",
+          "expected": "The banner installation modal should open."
+        },
+        {
+          "content": "Observe the alert banner at the top of the modal.",
+          "expected": "An alert should indicate the CookieYes installation code isn't added to the site."
+        },
+        {
+          "content": "Observe the tabs in the modal.",
+          "expected": "\"Install manually on website\" and \"Install with Google Tag Manager\" tabs should be displayed, with \"Install manually on website\" selected by default."
+        },
+        {
+          "content": "On the manual tab, verify the installation code snippet and its action buttons.",
+          "expected": "The installation code snippet should be displayed with \"Copy code\" and \"Send code to a teammate\" buttons, and a \"Verify\" button."
+        },
+        {
+          "content": "Click the \"Install with Google Tag Manager\" tab.",
+          "expected": "The GTM section should be displayed with the site/website key, \"Copy code\"/\"Send code to a teammate\" buttons, and a \"Verify\" button."
+        },
+        {
+          "content": "Click the close (X) control on the modal.",
+          "expected": "The installation modal should close."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:38Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36649,
+      "title": "[Dashboard] Verify that the Verify button in the installation modal confirms a successful installation after the code is added",
+      "preconditions": "User is on the Dashboard with the banner installation modal open on the \"Install manually on website\" tab. The installation code has been pasted into the site's source code.",
+      "steps": [
+        {
+          "content": "On the manual tab, click \"Copy code\".",
+          "expected": "The banner installation code should be copied to the clipboard."
+        },
+        {
+          "content": "After the code is present on the live site, return to the installation modal and click the \"Verify\" button.",
+          "expected": "A \"Connecting to your site to verify installation\" loader should be displayed and the site should open in a mini window."
+        },
+        {
+          "content": "Wait for verification to complete.",
+          "expected": "A success message should be displayed: \"You have successfully implemented a cookie banner on your site!\""
+        },
+        {
+          "content": "Observe the modal heading after verification.",
+          "expected": "The modal heading should update to \"CookieYes is installed on your site!\""
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:39Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36650,
+      "title": "[Dashboard] Verify that the installation modal shows installed confirmation when opened after the code is verified",
+      "preconditions": "User is on the Dashboard. The CookieYes installation code is installed and verified (banner Active).",
+      "steps": [
+        {
+          "content": "Click the \"Get installation code\" control on the Cookie Banner Status card.",
+          "expected": "The banner installation modal should open."
+        },
+        {
+          "content": "Observe the modal heading.",
+          "expected": "The heading should read \"CookieYes is installed on your site!\""
+        },
+        {
+          "content": "Observe the verification state under the steps.",
+          "expected": "A success indicator should be displayed: \"You have successfully implemented a cookie banner on your site!\""
+        },
+        {
+          "content": "Click the close (X) control.",
+          "expected": "The installation modal should close."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:41Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36651,
+      "title": "[Dashboard] Verify that the Live preview banner link opens the website with the cookie banner in a new tab",
+      "preconditions": "User is on the Dashboard. Banner installation is verified (banner Active).",
+      "steps": [
+        {
+          "content": "Verify the \"Live preview banner\" link is present on the Cookie Banner Status card.",
+          "expected": "The \"Live preview banner\" link with arrow icon should be displayed on the card."
+        },
+        {
+          "content": "Click the \"Live preview banner\" link.",
+          "expected": "The user's website with the CookieYes banner should open in a new tab."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:42Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36652,
+      "title": "[Dashboard] Verify that the Cookie Banner Status card shows Inactive with an Enable banner link when banner display is disabled",
+      "preconditions": "User is on the Dashboard. Banner display status is set to \"Disabled\" in Advanced Settings (banner Inactive).",
+      "steps": [
+        {
+          "content": "Locate the Cookie Banner Status card on the Dashboard.",
+          "expected": "A card showing the configured website URL should be displayed at the top of the card."
+        },
+        {
+          "content": "Observe the banner status value.",
+          "expected": "The status should read \"Inactive\"."
+        },
+        {
+          "content": "Observe the message below the status.",
+          "expected": "\"Looks like you have disabled the banner on your site.\" should be displayed."
+        },
+        {
+          "content": "Verify the link at the bottom of the left sub-section.",
+          "expected": "An \"Enable banner\" link with arrow icon should be displayed at the bottom of the left sub-section."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:44Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36653,
+      "title": "[Dashboard] Verify that the Cookie Banner Status card shows Inactive with an Enable banner link when banner display is disabled and the code is not installed",
+      "preconditions": "User is on the Dashboard. The installation code is not added to the site AND banner display is set to \"Disabled\" in Advanced Settings. The disabled state takes precedence over the not-installed prompt.",
+      "steps": [
+        {
+          "content": "Locate the Cookie Banner Status card on the Dashboard.",
+          "expected": "A card showing the configured website URL should be displayed at the top of the card."
+        },
+        {
+          "content": "Observe the banner status value.",
+          "expected": "The status should read \"Inactive\"."
+        },
+        {
+          "content": "Observe the message below the status.",
+          "expected": "\"Looks like you have disabled the banner on your site.\" should be displayed (disabled state takes precedence over the not-installed prompt)."
+        },
+        {
+          "content": "Verify the link at the bottom of the section.",
+          "expected": "An \"Enable banner\" link with arrow icon should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:45Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36654,
+      "title": "[Dashboard] Verify that the Cookie Banner Status card shows Inactive with an Upgrade prompt when the pageview limit is exceeded",
+      "preconditions": "User is on the Dashboard. The account's pageview usage has reached 100% of the plan limit (banner Inactive).",
+      "steps": [
+        {
+          "content": "Locate the Cookie Banner Status card on the Dashboard.",
+          "expected": "A card showing the configured website URL should be displayed at the top of the card."
+        },
+        {
+          "content": "Observe the banner status value.",
+          "expected": "The status should read \"Inactive\"."
+        },
+        {
+          "content": "Observe the message below the status.",
+          "expected": "\"Pageview limit exceeded: Upgrade to activate banner.\" should be displayed."
+        },
+        {
+          "content": "Verify the link at the bottom of the section.",
+          "expected": "An \"Upgrade current plan\" link with arrow icon should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:46Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36655,
+      "title": "[Dashboard] Verify that the installation status check control reports the banner is not installed when the code is absent",
+      "preconditions": "User is on the Dashboard. The CookieYes installation code has not been added to the site (banner Inactive).",
+      "steps": [
+        {
+          "content": "Verify the verify installation control is present to the right of the \"Inactive\" status.",
+          "expected": "The verify installation control should be displayed to the right of the \"Inactive\" status text."
+        },
+        {
+          "content": "Click the verify installation control.",
+          "expected": "A \"Connecting to your site to verify installation\" loader should be displayed and the site should open in a child window."
+        },
+        {
+          "content": "Wait for the check to complete.",
+          "expected": "The status should read \"Looks like the cookie banner isn't installed on your website yet!\" and the child window should close."
+        },
+        {
+          "content": "Observe the verify installation control after the check.",
+          "expected": "The verify installation control should remain displayed next to the \"Inactive\" status."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:48Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36656,
+      "title": "[Dashboard] Verify that the installation status check control activates the banner when the code is installed",
+      "preconditions": "User is on the Dashboard with the banner showing Inactive. The installation code has just been added to the live site but the Dashboard status has not yet refreshed.",
+      "steps": [
+        {
+          "content": "Click the verify installation control to the right of the \"Inactive\" status.",
+          "expected": "A \"Connecting to your site to verify installation\" loader should be displayed and the site should open in a child window."
+        },
+        {
+          "content": "Wait for the check to complete.",
+          "expected": "The status should update to indicate the banner is active on the website and the child window should close."
+        },
+        {
+          "content": "Observe the verify installation control after activation.",
+          "expected": "The verify installation control should no longer be displayed once the status is Active."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:49Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36657,
+      "title": "[Dashboard] Verify that the Enable banner link navigates to Advanced Settings when banner display is disabled",
+      "preconditions": "User is on the Dashboard. Banner display status is set to \"Disabled\" in Advanced Settings (banner Inactive).",
+      "steps": [
+        {
+          "content": "Verify the \"Enable banner\" link is present at the bottom of the left sub-section of the Cookie Banner Status card.",
+          "expected": "The \"Enable banner\" link with arrow icon should be displayed at the bottom of the left sub-section."
+        },
+        {
+          "content": "Click the \"Enable banner\" link.",
+          "expected": "The Advanced Settings page should be displayed, where the banner display toggle can be re-enabled."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:50Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36658,
+      "title": "[Dashboard] Verify that the Geo-target link opens the upgrade nudge for free and basic plan users",
+      "preconditions": "User is on the Dashboard on a Free or Basic plan.",
+      "steps": [
+        {
+          "content": "Locate the \"Geo-target\" link under the Targeted location field on the Cookie Banner Status card.",
+          "expected": "The \"Geo-target\" link should be displayed with a premium icon, indicating the feature is plan-gated on the current plan."
+        },
+        {
+          "content": "Click the \"Geo-target\" link.",
+          "expected": "The Geo-target in-app upgrade nudge should open."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:52Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36659,
+      "title": "[Dashboard] Verify that the Geo-target in-app nudge promotes the Pro and Ultimate plans",
+      "preconditions": "User is on the Dashboard on a Free or Basic plan with the Geo-target upgrade nudge open.",
+      "steps": [
+        {
+          "content": "Observe the content of the Geo-target nudge.",
+          "expected": "The nudge should display the Geo-target feature promo with text \"Display your banner to visitors from selected locations! Available in: Pro and Ultimate plans\"."
+        },
+        {
+          "content": "Verify the call-to-action button on the nudge.",
+          "expected": "A \"Try Pro for Free\" button should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:53Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36660,
+      "title": "[Dashboard] Verify that the Geo-target link opens the Cookie Banner page for pro and ultimate plan users",
+      "preconditions": "User is on the Dashboard on a Pro or Ultimate plan.",
+      "steps": [
+        {
+          "content": "Locate the \"Geo-target\" link under the Targeted location field on the Cookie Banner Status card.",
+          "expected": "The \"Geo-target\" link should be displayed with no premium icon, indicating the feature is unlocked on the current plan."
+        },
+        {
+          "content": "Click the \"Geo-target\" link.",
+          "expected": "The Cookie Banner customization page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:54Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36661,
+      "title": "[Dashboard] Verify that the \"Customise banner\" link navigates to the Cookie Banner page",
+      "preconditions": "User is on the Dashboard.",
+      "steps": [
+        {
+          "content": "Verify the \"Customise banner\" link is present at the bottom of the Cookie Banner Status card.",
+          "expected": "The \"Customise banner\" link with arrow icon should be displayed at the bottom of the card."
+        },
+        {
+          "content": "Click the \"Customise banner\" link.",
+          "expected": "The Cookie Banner customization page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:56Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36662,
+      "title": "[Dashboard] Verify that the Cookie Banner Status card shows Active after installing the code from the banner template selection page",
+      "preconditions": "User is on the banner template selection page, having completed the cookie banner setup flow. The installation code has been added to the live site.",
+      "steps": [
+        {
+          "content": "On the banner template page, click the \"Verify Installation\" link below the website URL.",
+          "expected": "A \"Connecting to your site to verify installation\" loader should be displayed and the site should open in a child window."
+        },
+        {
+          "content": "Wait for verification to complete.",
+          "expected": "The status should indicate the banner is active on the website, the child window should close, and the \"Verify Installation\" link should disappear."
+        },
+        {
+          "content": "Click \"Go to Dashboard\", then \"Done! Take me to Dashboard\".",
+          "expected": "The Dashboard page should be displayed."
+        },
+        {
+          "content": "Locate the Cookie Banner Status card.",
+          "expected": "The status should read \"Active\" with the message \"You have successfully set up your cookie banner!\""
+        },
+        {
+          "content": "Verify the link at the bottom of the section.",
+          "expected": "A \"Live preview banner\" link should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:57Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36806,
+      "title": "[Dashboard] Verify that the Regulation field shows GDPR when the GDPR consent template is selected in Cookie Banner settings",
+      "preconditions": "User is on the Dashboard. The Cookie Banner is configured with a regulation (e.g. GDPR).",
+      "steps": [
+        {
+          "content": "Navigate to Cookie Banner > General settings and select \"GDPR\" from the Consent Template dropdown and save.",
+          "expected": "The change should save successfully."
+        },
+        {
+          "content": "Return to the Dashboard.",
+          "expected": "The Dashboard should be displayed."
+        },
+        {
+          "content": "Observe the Regulation field on the Cookie Banner Status card.",
+          "expected": "The Regulation field should display \"GDPR\"."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-30T04:32:44Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36807,
+      "title": "[Dashboard] Verify that the Targeted location field shows Worldwide when geo-targeting is disabled in Cookie Banner settings",
+      "preconditions": "User is on the Dashboard on a Pro or Ultimate plan. The Cookie Banner has a targeted location configured (e.g. Worldwide).",
+      "steps": [
+        {
+          "content": "Navigate to Cookie Banner settings and disable geo-targeting (set to Worldwide) and save.",
+          "expected": "The change should save successfully."
+        },
+        {
+          "content": "Return to the Dashboard.",
+          "expected": "The Dashboard should be displayed."
+        },
+        {
+          "content": "Observe the Targeted location field on the Cookie Banner Status card.",
+          "expected": "The Targeted location field should display \"Worldwide\" with a \"Geo-target\" link alongside it."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-30T04:32:45Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36808,
+      "title": "[Dashboard] Verify that the Targeted location field shows Geo-targeted when geo-targeting is enabled in Cookie Banner settings",
+      "preconditions": "User is on the Dashboard on a Pro or Ultimate plan. Geo-targeting is currently disabled (Targeted location shows Worldwide).",
+      "steps": [
+        {
+          "content": "Navigate to Cookie Banner settings and enable geo-targeting (configure specific target locations) and save.",
+          "expected": "The change should save successfully."
+        },
+        {
+          "content": "Return to the Dashboard.",
+          "expected": "The Dashboard should be displayed."
+        },
+        {
+          "content": "Observe the Targeted location field on the Cookie Banner Status card.",
+          "expected": "The Targeted location field should display \"Geo-targeted\" with a \"Geo-target\" link alongside it."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-30T04:53:25Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36810,
+      "title": "[Dashboard] Verify that the Regulation field shows US State Laws when the US State Laws consent template is selected in Cookie Banner settings",
+      "preconditions": "User is on the Dashboard. The Cookie Banner consent template is not currently set to US State Laws.",
+      "steps": [
+        {
+          "content": "Navigate to Cookie Banner > General settings and select \"US State Laws\" from the Consent Template dropdown and save.",
+          "expected": "The change should save successfully."
+        },
+        {
+          "content": "Return to the Dashboard.",
+          "expected": "The Dashboard should be displayed."
+        },
+        {
+          "content": "Observe the Regulation field on the Cookie Banner Status card.",
+          "expected": "The Regulation field should display \"US State Laws\"."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-30T04:59:01Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36811,
+      "title": "[Dashboard] Verify that the Regulation field shows GDPR & US State Laws when the GDPR & US State Laws consent template is selected in Cookie Banner settings",
+      "preconditions": "User is on the Dashboard. The Cookie Banner consent template is not currently set to GDPR & US State Laws.",
+      "steps": [
+        {
+          "content": "Navigate to Cookie Banner > General settings and select \"GDPR & US State Laws\" from the Consent Template dropdown and save.",
+          "expected": "The change should save successfully."
+        },
+        {
+          "content": "Return to the Dashboard.",
+          "expected": "The Dashboard should be displayed."
+        },
+        {
+          "content": "Observe the Regulation field on the Cookie Banner Status card.",
+          "expected": "The Regulation field should display \"GDPR & US State Laws\"."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-30T04:59:03Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36829,
+      "title": "[Dashboard] Verify that the Regulation field on the Banner Status Card reflects a regulation change made in Cookie Banner settings",
+      "preconditions": "User is on the Dashboard. The Cookie Banner is configured with a regulation (e.g. GDPR).",
+      "steps": [
+        {
+          "content": "Note the current Regulation field value on the Cookie Banner Status card.",
+          "expected": "The Regulation field should display the currently active regulation (e.g. GDPR)."
+        },
+        {
+          "content": "Navigate to Cookie Banner settings and change the regulation (e.g. from GDPR to CCPA) and save.",
+          "expected": "The change should save successfully."
+        },
+        {
+          "content": "Return to the Dashboard.",
+          "expected": "The Dashboard should be displayed."
+        },
+        {
+          "content": "Observe the Regulation field on the Cookie Banner Status card.",
+          "expected": "The Regulation field should reflect the updated regulation (e.g. CCPA)."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-07-03T06:59:12Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36830,
+      "title": "[Dashboard] Verify that the Targeted location field on the Banner Status Card reflects a geo-target change made in Cookie Banner settings",
+      "preconditions": "User is on the Dashboard on a Pro or Ultimate plan. The Cookie Banner has a targeted location configured (e.g. Worldwide).",
+      "steps": [
+        {
+          "content": "Note the current Targeted location value on the Cookie Banner Status card.",
+          "expected": "The Targeted location field should display the currently configured location (e.g. Worldwide)."
+        },
+        {
+          "content": "Navigate to Cookie Banner settings and change the targeted location (e.g. from Worldwide to a specific country/region) and save.",
+          "expected": "The change should save successfully."
+        },
+        {
+          "content": "Return to the Dashboard.",
+          "expected": "The Dashboard should be displayed."
+        },
+        {
+          "content": "Observe the Targeted location field on the Cookie Banner Status card.",
+          "expected": "The Targeted location field should reflect the updated geo-target setting."
+        }
+      ],
+      "run_type": "regression",
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-07-03T06:59:13Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed.",
+      "grill_status": "not-tracked-by-repo"
+    }
+  ]
+}

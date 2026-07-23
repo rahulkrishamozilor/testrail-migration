@@ -197,8 +197,9 @@ File: `ai-context/cases-organisation-and-sites.json`
 
 ## 01. Authentication > Sign Up > Standard (Free)
 
-File: `ai-context/cases-signup-standard-free.json` (currently mid-restore, see
-`draft-signup-standard-free.json`)
+File: `ai-context/cases-signup-standard-free.json` (fully restored and published — all 3
+cases carry TestRail IDs, routing-verified 2026-07-23; the earlier "mid-restore" note here was
+stale, and no `draft-signup-standard-free.json` ever existed in this repo)
 
 - **Signup page has two different copy variants — confirmed intentional A/B experimentation,
   not a bug** — identified 2026-07-21 during the restore grill, cause confirmed by the user
@@ -241,19 +242,17 @@ File: `ai-context/cases-signup-standard-free.json` (currently mid-restore, see
 
 File: `ai-context/cases-signup-core.json`
 
-- **Resend-verification-email cooldown timer** — identified 2026-07-21 during the grill pass.
-  On the "Your email verification failed!" page, clicking "Resend Verification Email" shows
-  "Verification email has been resent successfully." and replaces the button with a countdown
-  ("Resend email in `<N>` seconds", observed starting at 56s) before it can be clicked again.
-  A full case spec was drafted and reviewed with the user, but never explicitly approved
-  (`approve 1`) before the review gate closed with `done` — per `/migrate-section`'s rule,
-  unapproved suggested cases are dropped rather than published. Repro: sign up for a new
-  account, open the real verification email, edit the `identity` query parameter (not `token`
-  alone — `identity` is what resolves the account; an invalid token with a still-valid,
-  already-verified `identity` succeeds instead of failing) to an invalid value, navigate to the
-  edited link to reach the failure page, then click Resend. Distinct from the similar-looking
-  cooldown already cased for My Account's email-update flow (case 37242 in
-  `cases-my-account.json`) — not a duplicate. Needs explicit approval before authoring.
+- ~~**Resend-verification-email cooldown timer**~~ — **closed 2026-07-23, published as case
+  39737.** Identified 2026-07-21 during the grill pass; a full spec was drafted and reviewed
+  but dropped unapproved when the review gate closed. Re-verified live 2026-07-23 via a
+  manufactured invalid-link repro (garbage `token` + garbage `identity`, folded into the case's
+  own precondition rather than requiring a real 1-hour wait) — clicking "Resend Verification
+  Email" shows "Verification email has been resent successfully." and the button is fully
+  replaced (not just disabled) by "Resend email in `<N>` seconds", observed ticking down live
+  from 58s to 43s. Not verified: whether the button reappears once the countdown hits 0 — a
+  live edge case, not a gap in the published case. Distinct from the similar-looking cooldown
+  already cased for My Account's email-update flow (case 37242 in `cases-my-account.json`) —
+  not a duplicate.
 
 ---
 

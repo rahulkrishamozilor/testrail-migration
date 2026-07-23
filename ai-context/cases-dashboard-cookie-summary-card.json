@@ -1,0 +1,146 @@
+{
+  "section": "03. Dashboard > Cookie Summary Card",
+  "suite_id": 16,
+  "section_id": 1768,
+  "default_section_id": 1768,
+  "fetched_at": "2026-07-23T05:36:46Z",
+  "grilled_at": null,
+  "published_at": "2026-06-24T13:19:58Z",
+  "audited_at": null,
+  "note": "All 5 case(s) below were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline and were never tracked locally until this backfill (2026-07-23). Case IDs and creation dates indicate they predate this migration project. Content is taken verbatim (HTML converted to plain text only) -- no v2 style-rewrite, Plan Gates extraction check, or Suite 6 source_case_ids cross-reference has been done yet; grill_status is honestly marked not-tracked-by-repo rather than assumed confirmed.",
+  "cases": [
+    {
+      "id": 36663,
+      "title": "[Dashboard] Verify that the Cookie Summary card displays cookie, category, scan and pages-scanned details",
+      "preconditions": "User is on the Dashboard. Site has not yet been scanned (default state).",
+      "steps": [
+        {
+          "content": "Locate the Cookie summary card on the Dashboard.",
+          "expected": "The Cookie summary card should be displayed on the Dashboard."
+        },
+        {
+          "content": "Observe the Total cookies count on the card.",
+          "expected": "The Total cookies count should be displayed and should read 0 before any scan."
+        },
+        {
+          "content": "Observe the Categories count on the card.",
+          "expected": "The Categories count should be displayed and should read 0 before any scan."
+        },
+        {
+          "content": "Observe the Last successful scan value.",
+          "expected": "Last successful scan should display \"Not available\" before any scan has run."
+        },
+        {
+          "content": "Observe the Pages scanned value.",
+          "expected": "Pages scanned should display 0 before any scan has run."
+        },
+        {
+          "content": "Observe the Next scan value.",
+          "expected": "Next scan should display \"Not scheduled\" with a \"Schedule\" link beside it."
+        },
+        {
+          "content": "Observe the bottom of the card.",
+          "expected": "A \"Manage cookies\" link should be displayed at the bottom of the card."
+        },
+        {
+          "content": "Run an initial scan of the site and return to the Dashboard.",
+          "expected": "Total cookies and Categories counts should update to reflect the scan results, and Last successful scan should display the scan date/time."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:58Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36664,
+      "title": "[Dashboard] Verify that the Schedule link on the Cookie Summary card opens the schedule-scan upgrade nudge on a free plan",
+      "preconditions": "User is the Account Owner on a free (unpaid) plan.",
+      "steps": [
+        {
+          "content": "On the Cookie summary card, locate the \"Schedule\" link next to Next scan (shown with a premium icon for free users).",
+          "expected": "The \"Schedule\" link with a premium icon should be displayed on the Cookie summary card."
+        },
+        {
+          "content": "Click the \"Schedule\" link.",
+          "expected": "The Schedule scan nudge pop-up should be displayed (scan scheduling is a Pro/Ultimate gated feature)."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:59Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36665,
+      "title": "[Dashboard] Verify that the schedule-scan nudge pop-up displays the upsell content and upgrade CTA",
+      "preconditions": "User is the Account Owner on a free (unpaid) plan. The schedule-scan nudge pop-up has been opened from the Cookie summary card Schedule link.",
+      "steps": [
+        {
+          "content": "Observe the body content of the schedule-scan nudge pop-up.",
+          "expected": "The pop-up should describe scheduling monthly cookie scans and indicate the feature is available in Pro and Ultimate plans."
+        },
+        {
+          "content": "Locate the upgrade CTA button on the pop-up.",
+          "expected": "An upgrade CTA button should be displayed (\"Try Pro for Free\" or \"Upgrade now\" depending on plan/build)."
+        },
+        {
+          "content": "Click the upgrade CTA button.",
+          "expected": "The upgrade page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:01Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36666,
+      "title": "[Dashboard] Verify that the Schedule link on the Cookie Summary card opens the Cookie Manager on a paid plan",
+      "preconditions": "User is on a paid plan (Pro or higher).",
+      "steps": [
+        {
+          "content": "On the Cookie summary card, locate the \"Schedule\" link next to Next scan (no premium icon on paid plans).",
+          "expected": "The \"Schedule\" link should be displayed without a premium icon."
+        },
+        {
+          "content": "Click the \"Schedule\" link.",
+          "expected": "The Cookie Manager page should be displayed (where scans can be scheduled)."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:02Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36667,
+      "title": "[Dashboard] Verify that the Manage cookies link on the Cookie Summary card opens the Cookie Manager",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "On the Cookie summary card, locate the \"Manage cookies\" link at the bottom of the card.",
+          "expected": "The \"Manage cookies\" link should be displayed at the bottom of the card."
+        },
+        {
+          "content": "Click the \"Manage cookies\" link.",
+          "expected": "The Cookie Manager page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:03Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    }
+  ]
+}

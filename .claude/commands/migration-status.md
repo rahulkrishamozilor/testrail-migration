@@ -43,36 +43,48 @@ If `$ARGUMENTS` scopes to one top-level section, keep only leaves under it for t
 command, but still run Step 2's file inventory globally (a file can be misfiled under the wrong
 number, which you can only catch by looking at everything).
 
-## Step 2 — Inventory ai-context files
+## Step 2 — Inventory ai-context files, verified against live TestRail
+
+TestRail is the source of truth for "does this case actually exist" — a file's own
+`published_at`/`migrated_at` fields are only a claim about that, and this pipeline has already
+shown they can drift (duplicate publishes, timestamp fabrication, files that predate the schema
+entirely). So verify every run, not just when a file looks ambiguous:
 
 ```bash
-ls ai-context/cases-*.json ai-context/draft-*.json 2>/dev/null
+uv run .claude/scripts/fetch_testrail.py validate-cases-file --all --verify-routing --project-id 1 --suite-id <v2_suite_id>
 ```
 
-For each file, read its JSON and classify:
+If `TESTRAIL_URL`/`TESTRAIL_USERNAME`/`TESTRAIL_API_KEY` aren't available in this environment, fall
+back to `validate-cases-file --all` without `--verify-routing` (still catches missing/duplicate ids
+purely locally) and say plainly in the report that live routing wasn't checked this run — don't
+silently skip the distinction.
 
-- **Bare list** (top-level JSON is an array, not `{section, cases: [...]}`): this predates the
-  draft/cases schema. Don't assume unpublished — check whether the cases inside carry real
-  (non-null) `id` fields. If TestRail credentials and a suite id are available, confirm with:
-  ```bash
-  uv run .claude/scripts/fetch_testrail.py validate-cases-file ai-context/<file> --verify-routing --project-id 1 --suite-id <v2_suite_id>
-  ```
-  Classify as **"legacy schema, published"** (real ids, routing verifies) or **"legacy schema,
-  unpublished"** (null ids or routing fails) — this is the same split `/audit-section` already
-  makes; reuse it rather than inventing a third category.
+For each file, classify using the validator's output as authoritative over the envelope's own
+timestamp claims, falling back to those claims only where the validator has nothing to say:
+
+- **Any case reported with no `id`** (the `unpublished_id` error, or `legacy_list_format`'s
+  "no id" case): **drafted**, regardless of what `published_at`/`migrated_at` say. If the file's
+  own field claims otherwise, that disagreement is exactly the kind of drift this command exists
+  to catch — call it out by name in Notes, don't quietly prefer one source. (This is the same check
+  that reclassified `cases-plan-gates-new.json` from "unknown schema" to "drafted" on 2026-07-22.)
+- **`legacy_list_format` with all cases carrying real ids**: published, but flag the legacy
+  bare-list shape as a normalize-later note — same split `/audit-section` already makes.
+- **`flag_routing_mismatch` / `flag_section_not_found`**: the case is still published, but
+  misrouted — a data-integrity flag, not a status change.
+- **No id-related errors, and `published_at` or `migrated_at` is truthy**: published (now
+  TestRail-confirmed, not just locally claimed). Still call out any file using `migrated_at`
+  instead of the documented `published_at` as a naming-drift note.
 - **`draft-<slug>.json` with no matching `cases-<slug>.json`**: drafted, not yet migrated.
 - **`draft-<slug>.json` AND `cases-<slug>.json` both present for the same slug**: a gap-closing
   publish that stopped short of `/migrate-section` Step 5c-ii's merge — flag this explicitly, it's
   a known transient state the workflow expects someone to finish, not a bug.
-- **`cases-<slug>.json` only, dict-shaped**: published. Read `published_at` for the publish
-  timestamp — **but also check `migrated_at`**, since at least one prior session used that
-  undocumented field name instead (`cookie-banner-layout`, `general`, as of the last check).
-  Treat either field as evidence of publish, and call out any file using `migrated_at` as a
-  naming-drift note in your output rather than silently normalizing it — that's a real
-  inconsistency against what `fetch-section.md`/`migrate-section.md` document, worth a human
-  eventually reconciling.
-- For every dict-shaped file, also read `fetched_at`, `grilled_at`, and `audited_at`. A published
-  file with an empty `audited_at` is due for `/audit-section`.
+- Neither an id-bearing case nor `published_at`/`migrated_at` set: not started (or drafted, if a
+  `draft-<slug>.json` exists for it).
+
+For every dict-shaped file, also read `fetched_at`, `grilled_at`, and `audited_at`. Publish is the
+terminal pipeline state — audit is a periodic, retrospective check layered on top of it, not a
+stage the file is "stuck in." Note `audited_at` as a plain fact in the **Audited** column (its
+date, or blank if not yet run); don't fold it into **Status**.
 
 ## Step 3 — Match files to tree leaves
 
@@ -100,9 +112,14 @@ Emit one table, grouped by top-level section number, in ascending order:
 | Section | Status | Cases | Fetched | Grilled | Published | Audited | Open Gaps | Notes |
 |---|---|---|---|---|---|---|---|---|
 
-- **Status** is one of: `Not started`, `Drafted`, `Gap-closing (needs merge)`, `Legacy (published)`,
-  `Legacy (unpublished)`, `Published`, `Published — audit due`.
+- **Status** is one of: `Not started`, `Drafted`, `Published`, `Gap-closing (needs merge)`,
+  `Legacy (published)`, `Legacy (unpublished)`. `Published` is the terminal pipeline state — there
+  is no separate "awaiting audit" status; audit recency is a fact in the **Audited** column, not a
+  status value.
 - **Cases** is the case count from the file, blank for `Not started`.
+- **Audited** is a plain fact, not a pipeline stage: the `audited_at` date if set, or blank if not.
+  A `Published` row with a blank **Audited** column is simply flagged as not yet audited — that's
+  expected and unremarkable for freshly-published work, not a problem to call out in Notes.
 - **Notes** carries anything from Steps 2–3 worth a human's attention: field-name drift, a fuzzy
   match worth double-checking, a bare list, a stale draft/cases pair.
 

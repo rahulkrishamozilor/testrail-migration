@@ -1,0 +1,245 @@
+{
+  "section": "03. Dashboard > Consent Trends Card",
+  "suite_id": 16,
+  "section_id": 1769,
+  "default_section_id": 1769,
+  "fetched_at": "2026-07-23T05:36:46Z",
+  "grilled_at": null,
+  "published_at": "2026-06-24T13:20:05Z",
+  "audited_at": null,
+  "note": "All 8 case(s) below were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline and were never tracked locally until this backfill (2026-07-23). Case IDs and creation dates indicate they predate this migration project. Content is taken verbatim (HTML converted to plain text only) -- no v2 style-rewrite, Plan Gates extraction check, or Suite 6 source_case_ids cross-reference has been done yet; grill_status is honestly marked not-tracked-by-repo rather than assumed confirmed. live TestRail section is named \"Consent Trends\" (missing \"Card\") vs the doc's \"Consent Trends Card\".",
+  "cases": [
+    {
+      "id": 36668,
+      "title": "[Dashboard] Verify that the Consent trends card shows the empty state when no consent has been logged",
+      "preconditions": "No visitor consent has been recorded for the connected website (consent logging produces no data). C134",
+      "steps": [
+        {
+          "content": "Locate the \"Consent trends\" card on the dashboard.",
+          "expected": "The \"Consent trends\" card should be displayed with the \"Last 7 days\" range indicator."
+        },
+        {
+          "content": "Observe the body of the card.",
+          "expected": "An empty-state illustration should be displayed with the message \"No visitor consent has been recorded yet\" and a prompt to enable consent logging."
+        },
+        {
+          "content": "Confirm the consent logging prompt contains an actionable link.",
+          "expected": "\"consent logging\" should be rendered as a clickable link within the empty-state message."
+        },
+        {
+          "content": "Confirm the card footer.",
+          "expected": "A \"View all data\" link with arrow icon should be displayed at the bottom of the card."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:05Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36669,
+      "title": "[Dashboard] Verify that the consent logging link in the Consent trends empty state opens Advanced settings",
+      "preconditions": "No visitor consent has been recorded, so the Consent trends card shows its empty state with the \"consent logging\" link. C134",
+      "steps": [
+        {
+          "content": "Locate the \"Consent trends\" card empty-state message.",
+          "expected": "The message \"No visitor consent has been recorded yet\" should be displayed with a \"consent logging\" link."
+        },
+        {
+          "content": "Click the \"consent logging\" link.",
+          "expected": "The Advanced settings page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:06Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36670,
+      "title": "[Dashboard] Verify that the Consent trends card renders the donut chart when consent has been logged",
+      "preconditions": "At least one visitor consent has been recorded for the connected website within the last 7 days. C205",
+      "steps": [
+        {
+          "content": "Locate the \"Consent trends\" card on the dashboard.",
+          "expected": "The \"Consent trends\" card should be displayed with the \"Last 7 days\" range indicator."
+        },
+        {
+          "content": "Observe the centre of the card.",
+          "expected": "A donut chart should be displayed with the total consent count and the label \"Total Consents\" shown in its centre."
+        },
+        {
+          "content": "Observe the chart legend.",
+          "expected": "The legend should list \"Accepted\" (green), \"Rejected\" (red), and \"Partially Accepted\" (blue) markers."
+        },
+        {
+          "content": "Confirm the card footer.",
+          "expected": "A \"View all data\" link with arrow icon should be displayed at the bottom of the card."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:07Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36671,
+      "title": "[Dashboard] Verify that the Consent trends donut chart reflects an Accepted consent",
+      "preconditions": "The connected website displays the CookieYes banner. No prior consent for the test visitor exists. C205",
+      "steps": [
+        {
+          "content": "On the connected website, click \"Accept All\" in the CookieYes banner.",
+          "expected": "The banner should collapse and the accept consent should be recorded."
+        },
+        {
+          "content": "Log in to the CookieYes webapp and open the dashboard.",
+          "expected": "The dashboard should be displayed with the \"Consent trends\" card."
+        },
+        {
+          "content": "Observe the donut chart in the Consent trends card.",
+          "expected": "The donut chart should include a green ring segment representing accepted consent."
+        },
+        {
+          "content": "Hover over the green segment of the donut chart.",
+          "expected": "A tooltip should display the accepted-consent percentage and the accepted count (\"Accepted: [count]\")."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:09Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36672,
+      "title": "[Dashboard] Verify that the Consent trends donut chart reflects a Rejected consent",
+      "preconditions": "The connected website displays the CookieYes banner. No prior consent for the test visitor exists. C205",
+      "steps": [
+        {
+          "content": "On the connected website, click \"Reject All\" in the CookieYes banner.",
+          "expected": "The banner should collapse and the reject consent should be recorded."
+        },
+        {
+          "content": "Log in to the CookieYes webapp and open the dashboard.",
+          "expected": "The dashboard should be displayed with the \"Consent trends\" card."
+        },
+        {
+          "content": "Observe the donut chart in the Consent trends card.",
+          "expected": "The donut chart should include a red ring segment representing rejected consent."
+        },
+        {
+          "content": "Hover over the red segment of the donut chart.",
+          "expected": "A tooltip should display the rejected-consent percentage and the rejected count (\"Rejected: [count]\")."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:10Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36673,
+      "title": "[Dashboard] Verify that the Consent trends donut chart reflects a Partially Accepted consent",
+      "preconditions": "The connected website displays the CookieYes banner. No prior consent for the test visitor exists. C205",
+      "steps": [
+        {
+          "content": "On the connected website, click \"Customize\" in the CookieYes banner.",
+          "expected": "The banner's second-layer category view with per-category toggles should be displayed, with all toggles off except Necessary."
+        },
+        {
+          "content": "Enable the toggle for one non-Necessary cookie category.",
+          "expected": "The selected category toggle should switch to the on state."
+        },
+        {
+          "content": "Click \"Save my Preferences\".",
+          "expected": "The banner should collapse and a partially-accepted consent should be recorded."
+        },
+        {
+          "content": "Log in to the CookieYes webapp and open the dashboard.",
+          "expected": "The dashboard should be displayed with the \"Consent trends\" card."
+        },
+        {
+          "content": "Observe the donut chart in the Consent trends card.",
+          "expected": "The donut chart should include a blue ring segment representing partially-accepted consent."
+        },
+        {
+          "content": "Hover over the blue segment of the donut chart.",
+          "expected": "A tooltip should display the partially-accepted percentage and count (\"Partially-accepted: [count]\")."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:42Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36674,
+      "title": "[Dashboard] Verify that the Consent trends donut chart reflects Accepted, Rejected, and Partially Accepted consents together",
+      "preconditions": "The connected website displays the CookieYes banner and the Revisit Consent widget is enabled so consent can be re-submitted. Accepted, Rejected, and Partially-accepted consents have each been recorded for the website. C205",
+      "steps": [
+        {
+          "content": "Record an accepted consent (Accept All), a rejected consent (Revisit Consent then Reject All), and a partially-accepted consent (Revisit Consent, Customize, enable one non-Necessary category, Save my Preferences) on the connected website.",
+          "expected": "All three consent types should be recorded for the website."
+        },
+        {
+          "content": "Log in to the CookieYes webapp and open the dashboard.",
+          "expected": "The dashboard should be displayed with the \"Consent trends\" card."
+        },
+        {
+          "content": "Observe the donut chart in the Consent trends card.",
+          "expected": "The donut chart should display green, red, and blue ring segments simultaneously."
+        },
+        {
+          "content": "Hover over the green segment.",
+          "expected": "A tooltip should display the accepted percentage and count."
+        },
+        {
+          "content": "Hover over the red segment.",
+          "expected": "A tooltip should display the rejected percentage and count."
+        },
+        {
+          "content": "Hover over the blue segment.",
+          "expected": "A tooltip should display the partially-accepted percentage and count."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:44Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36675,
+      "title": "[Dashboard] Verify that the View all data link on the Consent trends card opens the reports page",
+      "preconditions": "At least one visitor consent has been recorded so the Consent trends card is populated. C205",
+      "steps": [
+        {
+          "content": "Locate the \"View all data\" link with arrow at the bottom of the Consent trends card.",
+          "expected": "The \"View all data\" link should be displayed at the bottom of the card."
+        },
+        {
+          "content": "Click the \"View all data\" link.",
+          "expected": "The website reports page (/website-reports) should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:45Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    }
+  ]
+}

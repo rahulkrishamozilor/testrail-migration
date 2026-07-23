@@ -1,0 +1,402 @@
+{
+  "section": "03. Dashboard > Header",
+  "suite_id": 16,
+  "section_id": 1773,
+  "default_section_id": 1773,
+  "fetched_at": "2026-07-23T05:36:46Z",
+  "grilled_at": null,
+  "published_at": "2026-06-24T13:19:02Z",
+  "audited_at": null,
+  "note": "All 13 case(s) below were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline and were never tracked locally until this backfill (2026-07-23). Case IDs and creation dates indicate they predate this migration project. Content is taken verbatim (HTML converted to plain text only) -- no v2 style-rewrite, Plan Gates extraction check, or Suite 6 source_case_ids cross-reference has been done yet; grill_status is honestly marked not-tracked-by-repo rather than assumed confirmed. live TestRail section \"Header\" is a top-level section (no parent), not nested under \"Dashboard\" like the doc's tree shows.",
+  "cases": [
+    {
+      "id": 36622,
+      "title": "[Dashboard] Verify that the header bar renders with all required controls",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "Verify the CookieYes logo is present in the header.",
+          "expected": "The CookieYes logo should be visible in the header and should navigate to /dashboard when clicked."
+        },
+        {
+          "content": "Verify the website-selector dropdown is present next to the logo.",
+          "expected": "The website-selector dropdown should be visible showing the current site URL."
+        },
+        {
+          "content": "Verify the \"Become a partner\" dropdown is present on the right side of the header.",
+          "expected": "The \"Become a partner\" dropdown should be visible in the header."
+        },
+        {
+          "content": "Verify the Documentation icon is present in the header.",
+          "expected": "The Documentation icon should be visible in the header."
+        },
+        {
+          "content": "Verify the Notifications (bell) icon is present in the header.",
+          "expected": "The Notifications icon should be visible in the header."
+        },
+        {
+          "content": "Verify the Profile dropdown is present in the header.",
+          "expected": "The Profile dropdown should be visible at the right end of the header."
+        },
+        {
+          "content": "Verify the current plan area shows the plan label and pageviews usage.",
+          "expected": "\"Current plan: Free\" and \"Pageviews used: 0/5,000 (0%)\" with an info icon should be displayed."
+        },
+        {
+          "content": "Verify the plan button is present next to the current plan label.",
+          "expected": "A plan button reading \"Try Pro for free\" (when the free trial is available) or \"Upgrade\" (when it is not) should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:02Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36623,
+      "title": "[Dashboard] Verify that the website selector lists existing sites grouped by organisation",
+      "preconditions": "Account has at least one organisation with one or more sites.",
+      "steps": [
+        {
+          "content": "Confirm the website selector shows the current site URL.",
+          "expected": "The current website name/URL should be displayed in the website selector."
+        },
+        {
+          "content": "Click the website selector.",
+          "expected": "The dropdown should open with a search field and the list of existing websites, with the current site highlighted."
+        },
+        {
+          "content": "Observe how the websites are grouped.",
+          "expected": "Each website should be listed under its corresponding organisation, with the organisation name and Org ID shown as a group header."
+        },
+        {
+          "content": "Select a different website from the list.",
+          "expected": "The app should switch context and load the dashboard for the selected website."
+        },
+        {
+          "content": "Observe the bottom of the dropdown.",
+          "expected": "A \"+ New Site\" option should be displayed at the bottom of the dropdown."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:04Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36624,
+      "title": "[Dashboard] Verify that the website selector search returns the matching site for a valid URL",
+      "preconditions": "Account has at least one existing website.",
+      "steps": [
+        {
+          "content": "Click the website selector.",
+          "expected": "The dropdown should open with a search field and the existing websites list."
+        },
+        {
+          "content": "Enter the URL of an existing website in the search field.",
+          "expected": "The matching website should be displayed under its corresponding organisation."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:05Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36625,
+      "title": "[Dashboard] Verify that the website selector search shows an error for an invalid URL",
+      "preconditions": "Account has at least one existing website.",
+      "steps": [
+        {
+          "content": "Click the website selector.",
+          "expected": "The dropdown should open with a search field and the existing websites list."
+        },
+        {
+          "content": "Enter an invalid URL in the search field.",
+          "expected": "A \"No Websites Found!\" error message should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:07Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36626,
+      "title": "[Dashboard] Verify that the \"+ New Site\" option is disabled when the email is not verified",
+      "preconditions": "User's account email is not verified.",
+      "steps": [
+        {
+          "content": "Click the website selector.",
+          "expected": "The dropdown should open with a search field and the existing websites list."
+        },
+        {
+          "content": "Hover over the \"+ New Site\" option.",
+          "expected": "A \"Please verify your email to add new site\" notification should be displayed."
+        },
+        {
+          "content": "Click the \"+ New Site\" option.",
+          "expected": "The \"+ New Site\" option should be greyed out and not clickable, and the Add a new site page should not open."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:08Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36627,
+      "title": "[Dashboard] Verify that the Refer & Earn button opens the Join Referral Program form",
+      "preconditions": "User's account email is verified (Refer & Earn appears only after email verification).",
+      "steps": [
+        {
+          "content": "Confirm the \"Refer & Earn\" button is present in the header.",
+          "expected": "The \"Refer & Earn\" button should be visible in the header."
+        },
+        {
+          "content": "Click the \"Refer & Earn\" button.",
+          "expected": "The \"Join Referral Program\" popup should be displayed."
+        },
+        {
+          "content": "Observe the form fields in the popup.",
+          "expected": "First Name, Last Name, and a Reward Currency dropdown should be displayed, with the Terms and Conditions checkbox."
+        },
+        {
+          "content": "Open the Reward Currency dropdown.",
+          "expected": "The dropdown should offer USD $, GBP £, and EUR € options with USD $ selected by default."
+        },
+        {
+          "content": "Confirm the \"Join Program\" button is present.",
+          "expected": "The \"Join Program\" button should be visible and interactive."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:09Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36628,
+      "title": "[Dashboard] Verify that the Become a partner dropdown opens each partner onboarding page",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "Click the \"Become a partner\" dropdown in the header.",
+          "expected": "The dropdown should open with Agency Partner, Affiliate Partner, and Strategic Partner options."
+        },
+        {
+          "content": "Click the \"Agency Partner\" option.",
+          "expected": "The CookieYes Agency partner onboarding page should open in a new tab."
+        },
+        {
+          "content": "Click the \"Affiliate Partner\" option.",
+          "expected": "The CookieYes Affiliate partner onboarding page should open in a new tab."
+        },
+        {
+          "content": "Click the \"Strategic Partner\" option.",
+          "expected": "The CookieYes Strategic partner onboarding page should open in a new tab."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:11Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36629,
+      "title": "[Dashboard] Verify that the Documentation icon opens the CookieYes documentation page",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "Click the Documentation (help) icon in the header.",
+          "expected": "The CookieYes documentation page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:12Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36630,
+      "title": "[Dashboard] Verify that the Profile dropdown navigates to each account management page",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "Click the Profile dropdown in the header.",
+          "expected": "The Profile dropdown should open showing the account email plus Organisations & Sites, Team, Billing & Invoices, Notifications, My account, and Logout options."
+        },
+        {
+          "content": "Click \"Organisations & Sites\".",
+          "expected": "The Organisations & Sites page should be displayed."
+        },
+        {
+          "content": "Click \"Team\".",
+          "expected": "The Team page should be displayed."
+        },
+        {
+          "content": "Click \"Billing & Invoices\".",
+          "expected": "The Billing & Invoices page should be displayed."
+        },
+        {
+          "content": "Click \"My account\".",
+          "expected": "The My account page should be displayed."
+        },
+        {
+          "content": "Click \"Logout\".",
+          "expected": "The user should be logged out and the Login page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:13Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36631,
+      "title": "[Dashboard] Verify that the navigation tabs open their respective pages",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "Confirm the navigation bar shows the expected tabs.",
+          "expected": "Dashboard, Cookie Banner, Cookie Manager, Consent Log, Languages, Advanced Settings, Legal Policies, and Reports tabs should be displayed, with Dashboard active by default."
+        },
+        {
+          "content": "Click the \"Cookie Banner\" tab.",
+          "expected": "The Cookie Banner page should be displayed."
+        },
+        {
+          "content": "Click the \"Cookie Manager\" tab.",
+          "expected": "The Cookie Manager page should be displayed."
+        },
+        {
+          "content": "Click the \"Consent Log\" tab.",
+          "expected": "The Consent Log page should be displayed."
+        },
+        {
+          "content": "Click the \"Languages\" tab.",
+          "expected": "The Languages page should be displayed."
+        },
+        {
+          "content": "Click the \"Advanced Settings\" tab.",
+          "expected": "The Advanced Settings page should be displayed."
+        },
+        {
+          "content": "Open the \"Legal Policies\" dropdown and select each option.",
+          "expected": "The dropdown should show Cookie Policy Generator and Privacy Policy Generator, each opening its respective page."
+        },
+        {
+          "content": "Click the \"Reports\" tab.",
+          "expected": "The Reports page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:15Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36632,
+      "title": "[Dashboard] Verify that the pageviews usage is displayed and updates with website traffic",
+      "preconditions": "none",
+      "steps": [
+        {
+          "content": "Locate the pageviews usage under the current plan label.",
+          "expected": "Pageviews usage should be displayed in the format \"x / limit (n%) pageviews used\"."
+        },
+        {
+          "content": "Hover over the pageviews info icon.",
+          "expected": "A tooltip should be displayed showing the pageviews reset date and a \"Learn more\" link."
+        },
+        {
+          "content": "Click the \"Learn more\" link in the tooltip.",
+          "expected": "The pageviews documentation page should be displayed."
+        },
+        {
+          "content": "Generate website pageviews and return to the dashboard.",
+          "expected": "The pageviews count should increase to reflect the recorded website views."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:16Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36633,
+      "title": "[Dashboard] Verify that the header pageview counter shows plan plus extra pageviews with reset info",
+      "preconditions": "The account is on a non‑trial, active paid plan on a live website with an active banner configured.\n\nExtra pageviews are already enabled on the account (not being enabled during the test).\n\nPageview usage has exceeded the plan's allotted limit — i.e. usage is over 100%, so extra pageviews are actively being consumed (the counter must be past the limit, not exactly at it — at exactly 100% the header shows 100,000/100,000 (100%) with no + extra segment).",
+      "steps": [
+        {
+          "content": "Observe the pageview usage indicator in the dashboard header.",
+          "expected": "Pageviews used should be displayed in the format \"Pageviews used: [plan pageviews used] (n%) + [extra] extra\" with an info icon next to it."
+        },
+        {
+          "content": "Hover over the info icon next to the pageview counter.",
+          "expected": "A tooltip should appear stating the pageviews reset date (\"Pageviews will reset on [Month DD, YYYY]\") with a \"Learn more\" link."
+        },
+        {
+          "content": "Click the \"Learn more\" link in the tooltip.",
+          "expected": "The pageview documentation page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:18Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36634,
+      "title": "[Dashboard] Verify that the header pageview counter reflects extra pageviews after they are enabled",
+      "preconditions": "The account is on a non‑trial, active paid plan on a live website with an active banner configured.\n\nThe plan's allotted pageviews have been fully consumed.\n\nExtra pageviews have just been enabled from Billing & Invoices.",
+      "steps": [
+        {
+          "content": "Navigate to the Dashboard.",
+          "expected": "The Dashboard should be displayed."
+        },
+        {
+          "content": "Observe the pageview usage indicator in the header.",
+          "expected": "Pageviews used should be displayed in the format \"Pageviews used: n + [extra pageview count] extra\" with an info icon, reflecting the additional pageviews."
+        },
+        {
+          "content": "Hover over the info icon.",
+          "expected": "A tooltip should appear stating \"Pageviews will reset on [Month DD, YYYY]\" with a \"Learn more\" link."
+        },
+        {
+          "content": "Click the \"Learn more\" link.",
+          "expected": "The pageview documentation page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:19:19Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    }
+  ]
+}

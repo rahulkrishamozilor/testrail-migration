@@ -1,0 +1,146 @@
+{
+  "section": "03. Dashboard > Pageviews Card",
+  "suite_id": 16,
+  "section_id": 1770,
+  "default_section_id": 1770,
+  "fetched_at": "2026-07-23T05:36:46Z",
+  "grilled_at": null,
+  "published_at": "2026-06-24T13:20:47Z",
+  "audited_at": null,
+  "note": "All 5 case(s) below were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline and were never tracked locally until this backfill (2026-07-23). Case IDs and creation dates indicate they predate this migration project. Content is taken verbatim (HTML converted to plain text only) -- no v2 style-rewrite, Plan Gates extraction check, or Suite 6 source_case_ids cross-reference has been done yet; grill_status is honestly marked not-tracked-by-repo rather than assumed confirmed.",
+  "cases": [
+    {
+      "id": 36676,
+      "title": "[Dashboard] Verify that the Pageviews card shows the empty state when no pageviews have been recorded",
+      "preconditions": "No pageviews have been recorded for the site (installation code not yet added or no traffic). C134",
+      "steps": [
+        {
+          "content": "Locate the Pageviews card on the Dashboard.",
+          "expected": "The Pageviews card should be displayed with the title \"Pageviews\"."
+        },
+        {
+          "content": "Observe the body of the Pageviews card.",
+          "expected": "An empty-state illustration should be displayed in place of the line chart."
+        },
+        {
+          "content": "Read the empty-state message below the illustration.",
+          "expected": "The message should read \"No pageviews found!\" with the sub-text \"Pageviews may not have been recorded yet. Make sure you've added the installation code to your site\"."
+        },
+        {
+          "content": "Confirm the \"View all data\" link is present at the bottom of the card.",
+          "expected": "The \"View all data\" link with arrow should be visible and interactive."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:47Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36677,
+      "title": "[Dashboard] Verify that the Pageviews card renders the pageviews line chart when pageviews exist",
+      "preconditions": "Pageviews have been recorded for the site (banner installed and the website visited). C205",
+      "steps": [
+        {
+          "content": "Locate the Pageviews card on the Dashboard.",
+          "expected": "The Pageviews card should be displayed with the title \"Pageviews\"."
+        },
+        {
+          "content": "Observe the body of the Pageviews card.",
+          "expected": "A pageviews line chart should be rendered in place of the empty state."
+        },
+        {
+          "content": "Confirm the \"View all data\" link is present at the bottom of the card.",
+          "expected": "The \"View all data\" link with arrow should be visible and interactive."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:48Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36678,
+      "title": "[Dashboard] Verify that the Pageviews line chart plots pageview counts over the selected date range with hover details",
+      "preconditions": "Pageviews have been recorded for the site across one or more days. C205",
+      "steps": [
+        {
+          "content": "Locate the pageviews line chart in the Pageviews card.",
+          "expected": "The pageviews line chart should be rendered in the Pageviews card."
+        },
+        {
+          "content": "Inspect the Y axis of the chart.",
+          "expected": "The Y axis should display the pageview count scale."
+        },
+        {
+          "content": "Inspect the X axis of the chart.",
+          "expected": "The X axis should display the selected date range / time span."
+        },
+        {
+          "content": "Confirm a data point is plotted when only a single day of pageview data exists.",
+          "expected": "A pointer/marker should be displayed on the chart for the single-day pageview count."
+        },
+        {
+          "content": "Hover over a plotted point on the line chart.",
+          "expected": "A tooltip should display the selected date and its corresponding pageview count."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:49Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36679,
+      "title": "[Dashboard] Verify that the \"View all data\" link on the Pageviews card navigates to the website reports page",
+      "preconditions": "none C134",
+      "steps": [
+        {
+          "content": "Locate the \"View all data\" link at the bottom of the Pageviews card.",
+          "expected": "The \"View all data\" link with arrow should be visible and interactive."
+        },
+        {
+          "content": "Click the \"View all data\" link.",
+          "expected": "The website reports page (/website-reports) should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:51Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36680,
+      "title": "[Dashboard] Verify that the Dashboard Pageviews card chart highlights over-limit usage",
+      "preconditions": "The user has consumed more than 100% of the website's pageview limit.",
+      "steps": [
+        {
+          "content": "Navigate to the Dashboard and locate the \"Pageviews\" card.",
+          "expected": "The \"Pageviews\" card should be displayed with a chart reflecting pageviews used."
+        },
+        {
+          "content": "Observe the portion of the chart beyond the plan limit.",
+          "expected": "The over-limit portion should be highlighted in red, labelled with the exceeded pageview count."
+        },
+        {
+          "content": "Hover over the chart.",
+          "expected": "The exact pageview count should be displayed in a tooltip at the hovered point."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:20:52Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    }
+  ]
+}

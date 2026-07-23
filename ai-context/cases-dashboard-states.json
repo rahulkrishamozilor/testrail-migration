@@ -1,0 +1,95 @@
+{
+  "section": "03. Dashboard > Dashboard States (unplanned)",
+  "suite_id": 16,
+  "section_id": 1772,
+  "default_section_id": 1772,
+  "fetched_at": "2026-07-23T05:36:46Z",
+  "grilled_at": null,
+  "published_at": "2026-06-24T12:01:17Z",
+  "audited_at": null,
+  "note": "All 2 case(s) below were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline and were never tracked locally until this backfill (2026-07-23). Case IDs and creation dates indicate they predate this migration project. Content is taken verbatim (HTML converted to plain text only) -- no v2 style-rewrite, Plan Gates extraction check, or Suite 6 source_case_ids cross-reference has been done yet; grill_status is honestly marked not-tracked-by-repo rather than assumed confirmed. This section does not appear anywhere in testrail-suite-v2.md's tree. Its 2 cases (36612, 36613) predate this migration project (created by a different TestRail user, IDs far below this project's case range) and appear to be an early whole-dashboard render-state pair. They overlap substantially with the Header section case set below plus each card's own render case -- may be redundant now. Flagged for a human decision (keep as a standalone smoke-style pair, or retire) rather than silently dropped.",
+  "cases": [
+    {
+      "id": 36612,
+      "title": "[Dashboard] Verify that the Dashboard renders all required controls when the user's email is not verified",
+      "preconditions": "User's email address is not yet verified.",
+      "steps": [
+        {
+          "content": "Verify the website selector near the logo.",
+          "expected": "The website selector should show the current site URL and allow switching/adding sites."
+        },
+        {
+          "content": "Verify the email-verification banner below the header.",
+          "expected": "A banner \"Check the [email] mailbox to verify your email address.\" with a \"Resend Verification Email\" link should be displayed."
+        },
+        {
+          "content": "Verify the header controls.",
+          "expected": "Become a partner, Documentation, Notifications, and Profile should be displayed (no \"Refer & Earn\" while the email is unverified)."
+        },
+        {
+          "content": "Verify the top navigation tabs.",
+          "expected": "Dashboard, Cookie Banner, Cookie Manager, Consent Log, Languages, Advanced Settings, Legal Policies, and Reports should be displayed."
+        },
+        {
+          "content": "Open the Legal Policies dropdown.",
+          "expected": "Cookie Policy Generator and Privacy Policy Generator options should be displayed."
+        },
+        {
+          "content": "Verify the plan indicator in the header.",
+          "expected": "\"Current plan: Free\" and \"Pageviews used: 0/5,000 (0%)\" should be displayed, with a \"Try Pro for free\" button beside it."
+        },
+        {
+          "content": "Verify the dashboard cards.",
+          "expected": "Banner Status, Cookie Summary, Consent Trends, Pageviews, and Recent consent logs cards should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T12:01:17Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36613,
+      "title": "[Dashboard] Verify that the Dashboard renders all required controls when the user's email is verified",
+      "preconditions": "User's email address is verified.",
+      "steps": [
+        {
+          "content": "Verify the website selector near the logo.",
+          "expected": "The website selector should show the current site URL and allow switching/adding sites."
+        },
+        {
+          "content": "Verify the email-verification banner is absent.",
+          "expected": "No email-verification banner should be displayed once the email is verified."
+        },
+        {
+          "content": "Verify the header controls.",
+          "expected": "Refer & Earn, Become a partner, Documentation, Notifications, and Profile should be displayed (Refer & Earn appears once the email is verified)."
+        },
+        {
+          "content": "Verify the top navigation tabs.",
+          "expected": "Dashboard, Cookie Banner, Cookie Manager, Consent Log, Languages, Advanced Settings, Legal Policies, and Reports should be displayed."
+        },
+        {
+          "content": "Open the Legal Policies dropdown.",
+          "expected": "Cookie Policy Generator and Privacy Policy Generator options should be displayed."
+        },
+        {
+          "content": "Verify the plan indicator in the header.",
+          "expected": "\"Current plan: Free\" and \"Pageviews used: 0/5,000 (0%)\" should be displayed, with a \"Try Pro for free\" button beside it."
+        },
+        {
+          "content": "Verify the dashboard cards.",
+          "expected": "Banner Status, Cookie Summary, Consent Trends, Pageviews, and Recent consent logs cards should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T12:01:18Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    }
+  ]
+}

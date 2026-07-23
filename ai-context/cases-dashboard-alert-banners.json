@@ -1,0 +1,402 @@
+{
+  "section": "03. Dashboard > Alert Banners",
+  "suite_id": 16,
+  "section_id": 1766,
+  "default_section_id": 1766,
+  "fetched_at": "2026-07-23T05:36:46Z",
+  "grilled_at": null,
+  "published_at": "2026-06-24T12:01:20Z",
+  "audited_at": null,
+  "note": "All 13 case(s) below were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline and were never tracked locally until this backfill (2026-07-23). Case IDs and creation dates indicate they predate this migration project. Content is taken verbatim (HTML converted to plain text only) -- no v2 style-rewrite, Plan Gates extraction check, or Suite 6 source_case_ids cross-reference has been done yet; grill_status is honestly marked not-tracked-by-repo rather than assumed confirmed. live TestRail section is named \"Alert banners\" (lowercase b) vs the doc's \"Alert Banners\".",
+  "cases": [
+    {
+      "id": 36614,
+      "title": "[Dashboard] Verify that the Resend Verification Email link sends a new verification email",
+      "preconditions": "User's email address is not yet verified.",
+      "steps": [
+        {
+          "content": "Verify the email-verification banner.",
+          "expected": "A banner \"Check the [email] mailbox to verify your email address.\" with a \"Resend Verification Email\" link should be displayed."
+        },
+        {
+          "content": "Click the \"Resend Verification Email\" link.",
+          "expected": "A success toast should appear and a new verification email should be sent to the registered address."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T12:01:20Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36615,
+      "title": "[Dashboard] Verify that the onboarding installation alert banner links to the banner installation page",
+      "preconditions": "Cookie banner not installed and no scan completed yet (onboarding pending).",
+      "steps": [
+        {
+          "content": "Verify the \"You are almost there!\" installation alert banner.",
+          "expected": "The banner should be displayed with the body \"It's easy! Just copy and paste the code on your website. If you need any help, use our platform-wise guides.\""
+        },
+        {
+          "content": "Verify the \"Install banner\" button on the banner.",
+          "expected": "The \"Install banner\" button should be displayed."
+        },
+        {
+          "content": "Click the \"Install banner\" button.",
+          "expected": "The \"Install cookie banner on your website\" page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T12:01:21Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36616,
+      "title": "[Dashboard] Verify the \"80% of pageview limit\" warning banner display and actions",
+      "preconditions": "Website has reached 80% of its monthly pageview limit (set via the test pageview API).",
+      "steps": [
+        {
+          "content": "Verify the \"Heads up! You're at 80% of your pageview limit\" banner below the navigation bar.",
+          "expected": "The banner should be displayed with a warning icon."
+        },
+        {
+          "content": "Verify the banner action controls.",
+          "expected": "\"Upgrade now\" and \"Remind me later\" buttons and an \"enable extra pageviews\" link should be displayed."
+        },
+        {
+          "content": "Click \"Upgrade now\".",
+          "expected": "The in-app upgrade/pricing page should be displayed."
+        },
+        {
+          "content": "Click the \"enable extra pageviews\" link in the banner.",
+          "expected": "The Billing & Invoices page should be displayed. [inferred]"
+        },
+        {
+          "content": "Click \"Remind me later\".",
+          "expected": "The banner should close."
+        },
+        {
+          "content": "Start a new session.",
+          "expected": "The banner should reappear only on the next session."
+        },
+        {
+          "content": "Check the account email inbox.",
+          "expected": "An email with subject \"Urgent action required: You've reached 80% of your pageview limit\" should be received. [inferred]"
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T12:01:23Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36617,
+      "title": "[Dashboard] Verify the \"Action required! Your banner will be disabled soon\" alert banner display and actions",
+      "preconditions": "Website has reached its monthly pageview limit and the banner is scheduled for disabling (set via the test pageview/scheduled-task APIs).",
+      "steps": [
+        {
+          "content": "Verify the \"Action required! Your banner will be disabled soon\" banner below the navigation bar.",
+          "expected": "The banner should be displayed with a warning icon."
+        },
+        {
+          "content": "Verify the banner action controls.",
+          "expected": "\"Upgrade now\" and \"Remind me later\" buttons and an \"enable extra pageviews\" link should be displayed."
+        },
+        {
+          "content": "Click \"Upgrade now\".",
+          "expected": "The in-app upgrade/pricing page should be displayed."
+        },
+        {
+          "content": "Click the \"enable extra pageviews\" link in the banner.",
+          "expected": "The Billing & Invoices page should be displayed. [inferred]"
+        },
+        {
+          "content": "Click \"Remind me later\".",
+          "expected": "The banner should close."
+        },
+        {
+          "content": "Start a new session.",
+          "expected": "The banner should reappear only on the next session."
+        },
+        {
+          "content": "Check the account email inbox.",
+          "expected": "An email with subject \"Urgent action required: You've reached 95% of your pageview limit\" should be received. [inferred]"
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T12:01:24Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36618,
+      "title": "[Dashboard] Verify the \"Critical alert! Your banner is now disabled\" alert banner display and actions",
+      "preconditions": "Website has exceeded its monthly pageview limit and the banner has been disabled (set via the test pageview/scheduled-task/banner-disable APIs).",
+      "steps": [
+        {
+          "content": "Verify the \"Critical alert! Your banner is now disabled\" banner below the navigation bar.",
+          "expected": "The banner should be displayed with a warning icon."
+        },
+        {
+          "content": "Verify the banner action controls.",
+          "expected": "An \"Upgrade now\" button and an \"enable extra pageviews\" link should be displayed (no \"Remind me later\" — this banner is not dismissible)."
+        },
+        {
+          "content": "Click \"Upgrade now\".",
+          "expected": "The in-app upgrade/pricing page should be displayed."
+        },
+        {
+          "content": "Click the \"enable extra pageviews\" link in the banner.",
+          "expected": "The Billing & Invoices page should be displayed. [inferred]"
+        },
+        {
+          "content": "Open the live website that has exceeded its pageview limit.",
+          "expected": "The cookie banner should be disabled and no longer displayed on the website. [inferred]"
+        },
+        {
+          "content": "Check the account email inbox.",
+          "expected": "An email with subject \"Your cookie banner is disabled. Take action now\" should be received. [inferred]"
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T12:01:26Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36619,
+      "title": "[Dashboard] Verify the \"Uncategorised cookies detected\" compliance alert links to Cookie Manager",
+      "preconditions": "Initial cookie scan completed; the banner is active; the site has uncategorised cookies.",
+      "steps": [
+        {
+          "content": "Verify the \"Compliance alert. Uncategorised cookies detected\" banner at the top of the Dashboard.",
+          "expected": "The banner should be displayed."
+        },
+        {
+          "content": "Verify the \"Categorise banner\" button.",
+          "expected": "The \"Categorise banner\" button should be displayed."
+        },
+        {
+          "content": "Click \"Categorise banner\".",
+          "expected": "The Cookie Manager page should be displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T12:01:57Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36620,
+      "title": "[Dashboard] Verify the \"Cookie banner missing\" compliance alert appears and routes to Cookie Manager",
+      "preconditions": "Initial cookie scan completed; no active cookie banner on the site.",
+      "steps": [
+        {
+          "content": "Verify the \"Compliance alert: Cookie banner missing\" banner at the top of the Dashboard.",
+          "expected": "The banner should be displayed."
+        },
+        {
+          "content": "Verify the \"Enable consent banner\" button.",
+          "expected": "The \"Enable consent banner\" button should be displayed."
+        },
+        {
+          "content": "Click \"Enable consent banner\".",
+          "expected": "The \"Get installation code\" modal opens (titled \"CookieYes installation code isn't added to your site.\")."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T12:01:58Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36695,
+      "title": "[Dashboard] Verify that the \"Introducing extra pageviews\" promo banner renders and its actions route correctly",
+      "preconditions": "An active banner is configured on a live website.",
+      "steps": [
+        {
+          "content": "Observe the top of the Dashboard.",
+          "expected": "The \"Introducing extra pageviews for your sites!\" promo banner should be displayed at the top of the Dashboard."
+        },
+        {
+          "content": "Click the \"Enable extra pageviews\" button in the banner.",
+          "expected": "The Billing & Invoices page should be displayed."
+        },
+        {
+          "content": "Return to the Dashboard and click the \"Learn more\" link in the banner.",
+          "expected": "The pageview overage documentation page should be displayed."
+        },
+        {
+          "content": "Return to the Dashboard and click the close (X) button on the banner.",
+          "expected": "The promo banner should be dismissed and no longer displayed."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:21:24Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36696,
+      "title": "[Dashboard] Verify that the \"You've hit 100% of your pageview limit\" banner shows and routes correctly (extra-pageviews auto-enabled path)",
+      "preconditions": "An active banner is configured on a live website. The existing user has consumed 100% of the plan's pageview limit with extra pageviews enabled.",
+      "steps": [
+        {
+          "content": "Observe the Dashboard.",
+          "expected": "The \"You've hit 100% of your pageview limit\" banner should be displayed on the Dashboard."
+        },
+        {
+          "content": "Click the \"review usage\" link in the banner.",
+          "expected": "The Reports page should be displayed."
+        },
+        {
+          "content": "Return to the Dashboard and click the \"Upgrade now\" button in the banner.",
+          "expected": "The pricing plan page should be displayed."
+        },
+        {
+          "content": "Check the account email inbox.",
+          "expected": "An email with subject \"You've reached 100% of your pageview limit\" should be received confirming the banner stays active and extra pageviews now apply."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:21:27Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36697,
+      "title": "[Dashboard] Verify that the \"Your pageview usage is surging\" banner shows and routes correctly",
+      "preconditions": "An active banner is configured on a live website. The existing user has consumed 100% of the plan limit, is using extra pageviews, and has reached ~65% of the next plan tier's pageview limit.",
+      "steps": [
+        {
+          "content": "Observe the Dashboard.",
+          "expected": "The \"Your pageview usage is surging\" banner should be displayed on the Dashboard."
+        },
+        {
+          "content": "Click the \"review usage\" link in the banner.",
+          "expected": "The Reports page should be displayed."
+        },
+        {
+          "content": "Return to the Dashboard and click the \"Upgrade now\" button in the banner.",
+          "expected": "The pricing plan page should be displayed."
+        },
+        {
+          "content": "Check the account email inbox.",
+          "expected": "An email with subject \"Heads up: Your pageview usage continues to grow\" should be received."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:21:28Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36698,
+      "title": "[Dashboard] Verify that the new-user \"You've used up 80% of your pageview limit\" banner shows and routes correctly",
+      "preconditions": "An active banner is configured on a live website. The new user has reached 80% of the website's pageview limit.",
+      "steps": [
+        {
+          "content": "Observe the Dashboard.",
+          "expected": "The \"You've used up 80% of your pageview limit\" banner should be displayed on the Dashboard."
+        },
+        {
+          "content": "Click the \"review usage\" link in the banner.",
+          "expected": "The Reports page should be displayed."
+        },
+        {
+          "content": "Return to the Dashboard and click the \"Upgrade now\" button in the banner.",
+          "expected": "The pricing plan page should be displayed."
+        },
+        {
+          "content": "Check the account email inbox.",
+          "expected": "An email with subject \"You've reached 80% of your pageview limit, but you're covered\" should be received."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:21:29Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36699,
+      "title": "[Dashboard] Verify that the new-user \"You've hit 100% of your pageview limit\" banner shows and routes correctly",
+      "preconditions": "An active banner is configured on a live website. The new user has reached 100% of the website's pageview limit.",
+      "steps": [
+        {
+          "content": "Observe the Dashboard.",
+          "expected": "The \"You've hit 100% of your pageview limit\" banner should be displayed on the Dashboard."
+        },
+        {
+          "content": "Click the \"review usage\" link in the banner.",
+          "expected": "The Reports page should be displayed."
+        },
+        {
+          "content": "Return to the Dashboard and click the \"Upgrade now\" button in the banner.",
+          "expected": "The pricing plan page should be displayed."
+        },
+        {
+          "content": "Check the account email inbox.",
+          "expected": "An email with subject \"You've reached 100% of your pageview limit\" should be received."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:21:32Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    },
+    {
+      "id": 36700,
+      "title": "[Dashboard] Verify that the new-user \"Your pageview usage is growing\" banner shows and routes correctly",
+      "preconditions": "An active banner is configured on a live website. The new user has consumed 100% of the plan limit, is using extra pageviews, and has reached ~65% of the next plan tier's pageview limit.",
+      "steps": [
+        {
+          "content": "Observe the Dashboard.",
+          "expected": "The \"Your pageview usage is growing\" banner should be displayed on the Dashboard."
+        },
+        {
+          "content": "Click the \"review usage\" link in the banner.",
+          "expected": "The Reports page should be displayed."
+        },
+        {
+          "content": "Return to the Dashboard and click the \"Upgrade now\" button in the banner.",
+          "expected": "The pricing plan page should be displayed."
+        },
+        {
+          "content": "Check the account email inbox.",
+          "expected": "An email with subject \"Heads up: Your pageview usage continues to grow\" should be received."
+        }
+      ],
+      "source_case_ids": [],
+      "permission_flag": false,
+      "platform_flag": false,
+      "plan_gate_flag": false,
+      "rewrite_notes": "Backfilled from live TestRail — this case was already published (created 2026-06-24T13:21:33Z) before this repo's local tracking existed for this section. Content taken verbatim from the live case (HTML formatting converted to plain text; no wording changes). Not yet run through this project's /grill-section or /audit-section pipeline, and not yet checked against migration-conventions.md routing rules (e.g. Plan Gates extraction) or cross-referenced to Suite 6 for source_case_ids -- grill_status reflects that honestly rather than assuming confirmed. No run_type set on the live case.",
+      "grill_status": "not-tracked-by-repo"
+    }
+  ]
+}
