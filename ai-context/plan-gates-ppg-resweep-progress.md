@@ -1,12 +1,18 @@
 # Plan Gates + nudge behaviour re-sweep — Privacy Policy Generator
 
-**Status: COMPLETE (2026-07-23).** Recommendation approved and authored — 3 feature-scoped
-Layer 2 cases published to `11. Billing & Upgrade > Plan Gates`: cases 39738 (Free plan), 39739
-(Basic plan), 39740 (Pro plan, precondition covers Pro or Ultimate since the sweep found no
-behavioral difference between those two tiers). See `coverage-gaps.md`'s "Layer 2 Plan Gates
-cases missing for this feature" entry for the closure note and the still-open suite-wide
-question this doesn't resolve. Rest of this file kept as-is for historical context on the sweep
-itself.
+**Status: COMPLETE (2026-07-23).** Both outputs of this sweep have been actioned:
+1. Recommendation approved and authored — 3 feature-scoped Layer 2 cases published to
+   `11. Billing & Upgrade > Plan Gates`: cases 39738 (Free plan), 39739 (Basic plan), 39740 (Pro
+   plan, precondition covers Pro or Ultimate since the sweep found no behavioral difference
+   between those two tiers). See `coverage-gaps.md`'s "Layer 2 Plan Gates cases missing for this
+   feature" entry for the closure note and the still-open suite-wide question this doesn't
+   resolve.
+2. The CCPA-chip-visibility side-finding has been applied to
+   `docs/wiki/09-legal-policies/privacy-policy-generator.md` (the footnote at the Personal
+   Information chip groups, and the Plan gating patterns section) — the wiki no longer needs
+   this file to stay correct; the mention of this file there is provenance only.
+
+Rest of this file kept as-is for historical context on the sweep itself.
 
 Full live re-sweep across Free / Basic / Pro / Ultimate for all 6 known PPG plan-gated
 touchpoints (existing cases 39493-39498, all currently Free-plan-only) plus nudge button
