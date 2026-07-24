@@ -40,6 +40,10 @@ uv run .claude/scripts/fetch_testrail.py get-cases 1 6 --section-id <id>
 # Get cases across multiple sections
 uv run .claude/scripts/fetch_testrail.py get-cases-for-sections 1 6 --match "keyword"
 
+# Check whether the v2 suite already has something like this — live, mid-run, paginated
+# automatically. Omit --section-ids to search the entire suite.
+uv run .claude/scripts/fetch_testrail.py get-cases-for-sections 1 <v2_suite_id> --match "keyword"
+
 # Create a section in the v2 suite
 uv run .claude/scripts/fetch_testrail.py add-section 1 <v2_suite_id> "<name>" <parent_id>
 
@@ -56,6 +60,15 @@ uv run .claude/scripts/fetch_testrail.py validate-cases-file --all --verify-rout
 `migrate-section.md` Step 5d also runs this automatically (with `--verify-routing`) right after
 every publish — a non-zero exit there means stop and fix the file before reporting the migration
 done, not report success anyway.
+
+**Checking whether the v2 suite already covers something, mid-run:** use
+`get-cases-for-sections <project_id> <v2_suite_id> --match "keyword"` (omit `--section-ids` to
+search the whole suite) — it fetches live cases, paginates automatically, and filters by title
+keyword. For a more rigorous check before publishing a batch of new cases, use `dedup-check`
+(fuzzy-matches title + body against a section's existing live cases, flags anything at/above a
+similarity threshold). Prefer either of these over scanning local `ai-context/cases-*.json` files
+for this purpose — the local files are this project's own mirror and can go stale if TestRail was
+ever edited directly or a file was never written back.
 
 ### testrail-search MCP
 Hybrid semantic + keyword search over the indexed Suite 6 cases. Use it to find relevant
@@ -88,6 +101,14 @@ top-level section): what's not started, drafted, published, or due for audit, pl
 counts from `coverage-gaps.md`. Run anytime; makes no edits. Useful before picking the next
 section to work on, or to spot pipeline drift (e.g. a file stuck mid-merge, an inconsistent
 timestamp field) that's invisible looking at one section at a time.
+
+**`/wiki-sync [section]`** — keeps `docs/wiki/` (the LLM-readable app knowledge base) in sync with
+what `/grill-section`/`/audit-section` have actually verified. Not a numbered pipeline step and
+not scoped to the migration — it's a periodic health check meant to keep running long after
+Suite 6 → v2 work is done, same standing as `/migration-status`. Natural times to run it: after
+`/audit-section` finishes on a section (its `audit_note`/`audit_status` fields are one of its
+main sources), or periodically across `all` sections to catch drift. Never writes to
+`docs/wiki/*.md` without explicit approval.
 
 Cases are never created without explicit user approval.
 

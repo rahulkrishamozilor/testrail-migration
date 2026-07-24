@@ -1,5 +1,5 @@
 {
-  "section": "03. Dashboard > Add a New Site",
+  "section": "Add a New Site",
   "suite_id": 16,
   "section_id": 1777,
   "default_section_id": 1777,
@@ -7,7 +7,7 @@
   "grilled_at": null,
   "published_at": "2026-06-24T13:19:21Z",
   "audited_at": null,
-  "note": "All 10 case(s) below were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline and were never tracked locally until this backfill (2026-07-23). Case IDs and creation dates indicate they predate this migration project. Content is taken verbatim (HTML converted to plain text only) -- no v2 style-rewrite, Plan Gates extraction check, or Suite 6 source_case_ids cross-reference has been done yet; grill_status is honestly marked not-tracked-by-repo rather than assumed confirmed. live TestRail section \"Add a New Site\" is a top-level section (no parent), not nested under \"Dashboard\" like the doc's tree shows.",
+  "note": "All 10 case(s) below were published directly to TestRail outside this repo's /fetch-section -> /migrate-section pipeline and were never tracked locally until this backfill (2026-07-23). Case IDs and creation dates indicate they predate this migration project. Content is taken verbatim (HTML converted to plain text only) -- no v2 style-rewrite, Plan Gates extraction check, or Suite 6 source_case_ids cross-reference has been done yet; grill_status is honestly marked not-tracked-by-repo rather than assumed confirmed. live TestRail section \"Add a New Site\" is a top-level section (no parent), not nested under \"Dashboard\". testrail-suite-v2.md's tree was updated 2026-07-23 to reflect this as top-level section 19.",
   "cases": [
     {
       "id": 36635,

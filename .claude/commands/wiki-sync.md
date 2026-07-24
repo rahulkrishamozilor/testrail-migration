@@ -56,10 +56,15 @@ reconciliation stops being a manual archaeology exercise).
 
 ### 1b. Published case notes
 
-Load `ai-context/cases-<slug>.json`. Pull every `rewrite_notes` / `audit_notes` / `grill_note` /
-`grill_notes` field. This is the primary, ongoing source once migration itself winds down — new
-cases written by any future workflow will keep populating these fields regardless of whether this
-specific command's pipeline authored them.
+Load `ai-context/cases-<slug>.json`. Pull every `rewrite_notes` and `audit_note` field (prose),
+plus every case's `grill_status` and `audit_status` value. This is the primary, ongoing source
+once migration itself winds down — new cases written by any future workflow will keep populating
+these fields regardless of whether this specific command's pipeline authored them.
+
+`grill_status` is an enum, not prose — `/grill-section` never writes a separate note field. The
+signal is the value itself (see Step 2's bucket mapping), and for a `"fixed"` case the new fact
+*is* the case's own corrected `expected`/step text — there's no separate note to go read, the
+corrected field content is what gets reconciled against the wiki page in Step 4.
 
 ### 1c. The wiki page itself and its freshness
 
@@ -76,11 +81,15 @@ Every note pulled in Step 1 falls into one of three buckets. Getting this right 
 command from drowning its own output in noise — most notes in a well-covered section just say
 "confirmed matches source," which is not new information.
 
-- **Routine confirmation** — "confirmed," "matches source," "verbatim-confirmed" with nothing
-  else notable. No new information. Skip; do not surface in the report.
-- **Change-signaling** — language like "resolved," "corrected," "previously undocumented,"
-  "contradicts," "gap found," "reworded-fixed," or anything describing a finding rather than a
-  routine pass. These are candidates for a wiki update — carry them to Step 3.
+- **Routine confirmation** — `grill_status: "confirmed"` or `"skipped:<reason-code>"`;
+  `audit_status: "verbatim-confirmed"`; or prose (`rewrite_notes`/`audit_note`) saying
+  "confirmed," "matches source" with nothing else notable. No new information. Skip; do not
+  surface in the report.
+- **Change-signaling** — `grill_status: "fixed"` (the case's corrected field content is the new
+  fact — see 1b) or `"needs-manual-check"`; `audit_status: "reworded-fixed"` or
+  `"reworded-flagged"`; or prose language like "resolved," "corrected," "previously undocumented,"
+  "contradicts," "gap found," or anything describing a finding rather than a routine pass. These
+  are candidates for a wiki update — carry them to Step 3.
 - **Unverified source** — `grill_status`/`audit_status` literally `"not-tracked-by-repo"`, or
   `rewrite_notes` language like "backfilled from live TestRail," "outside this repo's pipeline,"
   or similar. **Never let one of these alone back a wiki fact.** Either:
@@ -116,12 +125,15 @@ verification" rather than silently trusted or silently dropped. `auto` (default)
 triggers as written.
 
 **Mechanism — do not write new Playwright-driving instructions.** Construct a synthetic,
-throwaway case object in the same shape `/grill-section` already consumes —
+throwaway case object in the same shape the `verify-case-live` skill consumes —
 `{title, preconditions, customStepsSeparated: [{content, expected}]}` — either lifted directly
 from an existing case if the fact is tied to one, or authored fresh in the same shape if it's a
-synthesized cross-cutting conclusion from a progress file. Then run `/grill-section`'s Step 3
-(3a navigate, 3b execute and compare, 3c record) against that one synthetic case exactly as
-written there — reuse its login/session-switching (its Step 2) rather than re-deriving it.
+synthesized cross-cutting conclusion from a progress file. Then invoke the `verify-case-live`
+skill (`.claude/skills/verify-case-live/SKILL.md`) with that one synthetic case — it owns
+login/session-switching, navigation, step execution/comparison, and returns a verdict per step.
+Take that verdict directly as the live-checked value for this fact. This skill never writes to
+any file, so there's nothing to clean up afterward — unlike `/grill-section`, this command has no
+draft file to write a `grill_status` back to.
 
 **Ask the user before starting a browser session** — same courtesy `/audit-section` Step 4
 already extends, for the same reason (real cost proportional to how many facts need checking).
@@ -234,7 +246,7 @@ the per-section reports — same shape as `/audit-section`'s `all` mode.
   doc / possible app regression) and let the user decide. No exceptions for "obvious" cases.
 - A `not-tracked-by-repo` (or equivalent unverified) note never solely backs a wiki fact — corroborate,
   live-check, or flag as pipeline debt instead.
-- Live-check mechanism is always a reused `/grill-section` Step 3 run against a synthetic
+- Live-check mechanism is always the `verify-case-live` skill invoked against a synthetic
   case-shaped object — never invent new Playwright-driving instructions here.
 - Every applied change gets a `docs/wiki/log.md` entry. No silent edits.
 - Every drafted addition/correction is held to `migration-conventions.md` §0 before being

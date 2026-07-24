@@ -5,7 +5,7 @@
   "fetched_at": "2026-07-14T08:31:02Z",
   "grilled_at": "2026-07-14T11:24:33Z",
   "published_at": "2026-07-23T07:31:57Z",
-  "audited_at": "2026-07-15T12:38:32Z",
+  "audited_at": "2026-07-24T06:14:09Z",
   "source_docs": [
     "internal-docs/PPG - Questionnaire & Clauses - Privacy Policy.pdf",
     "internal-docs/Character limit - Privacy Policy Fields (1).pdf",
@@ -14,15 +14,15 @@
   "out_of_scope_notes": [
     {
       "topic": "Final 'Generate privacy policy' action",
-      "reason": "RESOLVED 2026-07-14 \u2014 exercised live end-to-end on the disposableuser account's Pro-plan site (jih.ko), safe because the account is meant to absorb exactly this kind of mutating/irreversible action. 5 cases added covering: policy creation itself, the 'Add policy to site' modal, the Code snippet method flow, the 'Complete generation' confirmation, and the final 'Yes, I have installed' terminal state. Further gaps found and left open: the 'HTML format' method, the 'Install code' alternate button, and the post-generation editing surface (Version history, Options menu, Publish changes) were not exercised this pass."
+      "reason": "RESOLVED 2026-07-14 — exercised live end-to-end on the disposableuser account's Pro-plan site (jih.ko), safe because the account is meant to absorb exactly this kind of mutating/irreversible action. 5 cases added covering: policy creation itself, the 'Add policy to site' modal, the Code snippet method flow, the 'Complete generation' confirmation, and the final 'Yes, I have installed' terminal state. Further gaps found and left open: the 'HTML format' method, the 'Install code' alternate button, and the post-generation editing surface (Version history, Options menu, Publish changes) were not exercised this pass."
     },
     {
       "topic": "Non-English secondary-language generation and per-language editing in Preview",
-      "reason": "PARTIALLY RESOLVED 2026-07-15 \u2014 case 39604 confirms multi-language selection (Deutsch primary, Fran\u00e7ais/Italiano secondary) persists correctly after Save draft and a browser refresh on a Pro account, closing the \"never unlocked during the live crawl\" half of this gap. Still open: per-language editing in Preview (editing an already-selected secondary language's translated content) was not exercised this pass and remains uncased."
+      "reason": "PARTIALLY RESOLVED 2026-07-15 — case 39604 confirms multi-language selection (Deutsch primary, Français/Italiano secondary) persists correctly after Save draft and a browser refresh on a Pro account, closing the \"never unlocked during the live crawl\" half of this gap. Still open: per-language editing in Preview (editing an already-selected secondary language's translated content) was not exercised this pass and remains uncased."
     },
     {
       "topic": "Field-level boundary values beyond the representative cases (18, 43)",
-      "reason": "PARTIALLY RESOLVED 2026-07-16 \u2014 /grill-section's gap-closing pass added boundary-value tests (required + character-limit enforcement) for Data Retention's custom-period and \"Not yet decided\" fields, and Disclosure of Data's age-category opt-in/opt-out, delete/correct/access, sensitive-info, and third-party-disclosure fields (cases 39613-39621). Still open: boundary values for fields elsewhere in the wizard (Company Details, Collection of Data, Miscellaneous Disclosures) remain untested individually, covered only by representative equivalence-partitioning patterns. UPDATED 2026-07-21 \u2014 /grill-section + /migrate-section gap-closing pass added boundary-value tests for Miscellaneous Disclosures (DPO/controller-2000, CCPA metrics-2000, custom-safeguard-3000, cases 39730-39735) and Collection of Data > Additional Information (cookie-policy-link-2000, DNT-2500, review-change-process-2500, case 39736). Still open: Company Details boundary values remain untested individually, covered only by representative equivalence-partitioning patterns."
+      "reason": "PARTIALLY RESOLVED 2026-07-16 — /grill-section's gap-closing pass added boundary-value tests (required + character-limit enforcement) for Data Retention's custom-period and \"Not yet decided\" fields, and Disclosure of Data's age-category opt-in/opt-out, delete/correct/access, sensitive-info, and third-party-disclosure fields (cases 39613-39621). Still open: boundary values for fields elsewhere in the wizard (Company Details, Collection of Data, Miscellaneous Disclosures) remain untested individually, covered only by representative equivalence-partitioning patterns. UPDATED 2026-07-21 — /grill-section + /migrate-section gap-closing pass added boundary-value tests for Miscellaneous Disclosures (DPO/controller-2000, CCPA metrics-2000, custom-safeguard-3000, cases 39730-39735) and Collection of Data > Additional Information (cookie-policy-link-2000, DNT-2500, review-change-process-2500, case 39736). Still open: Company Details boundary values remain untested individually, covered only by representative equivalence-partitioning patterns."
     },
     {
       "topic": "\"HTML format\" method on the Add-policy-to-site modal",
@@ -40,7 +40,7 @@
   "reconciliation_notes": [
     {
       "type": "live-ahead-of-docs",
-      "detail": "Wizard step list is dynamic \u2014 'Disclosure of data' only appears once sell/share=Yes OR CCPA thresholds=Yes OR Include-CCPA-clauses=Yes (cases 2, 48)"
+      "detail": "Wizard step list is dynamic — 'Disclosure of data' only appears once sell/share=Yes OR CCPA thresholds=Yes OR Include-CCPA-clauses=Yes (cases 2, 48)"
     },
     {
       "type": "live-ahead-of-docs",
@@ -56,7 +56,7 @@
     },
     {
       "type": "live-ahead-of-docs",
-      "detail": "Three distinct plan-gate UX patterns coexist in this feature: disabled control + modal (cases 13/14/29), clickable chip + toast (case 21), visibly-disabled chip with inline Pro+ label (case 32) \u2014 neither doc distinguishes these"
+      "detail": "Three distinct plan-gate UX patterns coexist in this feature: disabled control + modal (cases 13/14/29), clickable chip + toast (case 21), visibly-disabled chip with inline Pro+ label (case 32) — neither doc distinguishes these"
     },
     {
       "type": "live-ahead-of-docs",
@@ -64,11 +64,11 @@
     },
     {
       "type": "live-ahead-of-docs",
-      "detail": "Direct-URL navigation between wizard steps bypasses in-page 'Next' validation entirely \u2014 used as a crawl workaround this session, not documented anywhere; worth flagging to the app team separately"
+      "detail": "Direct-URL navigation between wizard steps bypasses in-page 'Next' validation entirely — used as a crawl workaround this session, not documented anywhere; worth flagging to the app team separately"
     },
     {
       "type": "live-ahead-of-docs",
-      "detail": "Persistent 'fields not completely filled out' validation banner on Additional Information that did not clear even once every visible required field appeared filled \u2014 root cause unresolved (case 27)"
+      "detail": "Persistent 'fields not completely filled out' validation banner on Additional Information that did not clear even once every visible required field appeared filled — root cause unresolved (case 27)"
     },
     {
       "type": "live-ahead-of-docs",
@@ -80,11 +80,11 @@
     },
     {
       "type": "doc-ahead-of-live",
-      "detail": "CCPA 'users under 13' question and its Children's Privacy clause \u2014 Pro+-gated behind the unanswered for-profit question, never reached live; now covered via the manual test case file instead (case 48 area)"
+      "detail": "CCPA 'users under 13' question and its Children's Privacy clause — Pro+-gated behind the unanswered for-profit question, never reached live; now covered via the manual test case file instead (case 48 area)"
     },
     {
       "type": "doc-ahead-of-live",
-      "detail": "Secondary-language generation and the 'translations don't auto-update' caveat \u2014 only seen locked live, never exercised unlocked (case 40, doc-sourced)"
+      "detail": "Secondary-language generation and the 'translations don't auto-update' caveat — only seen locked live, never exercised unlocked (case 40, doc-sourced)"
     },
     {
       "type": "doc-live-mismatch",
@@ -96,19 +96,19 @@
     },
     {
       "type": "doc-live-mismatch",
-      "detail": "The character-limit doc flags roughly a dozen of its own current limits as wrong ('Increase'/'Add') \u2014 a pre-existing internal inconsistency in that source, not a live conflict"
+      "detail": "The character-limit doc flags roughly a dozen of its own current limits as wrong ('Increase'/'Add') — a pre-existing internal inconsistency in that source, not a live conflict"
     },
     {
       "type": "live-ahead-of-docs",
-      "detail": "The standalone \"Preview privacy policy\" button (reachable from the Language preferences step at 0% wizard completion) renders the full policy translated into the current primary language using default content for unfilled sections. TC10 in PPG TESTCASES only checks that the popup opens/closes without errors \u2014 it doesn't mention this translation behavior at all."
+      "detail": "The standalone \"Preview privacy policy\" button (reachable from the Language preferences step at 0% wizard completion) renders the full policy translated into the current primary language using default content for unfilled sections. TC10 in PPG TESTCASES only checks that the popup opens/closes without errors — it doesn't mention this translation behavior at all."
     },
     {
       "type": "doc-live-mismatch",
-      "detail": "The questionnaire doc marks both the DPO-contact and data-controller/representative fields on Miscellaneous disclosures 'Shown if: Users in EU/EEA = Yes'. Confirmed live that DPO correctly hides when EU/EEA is set to No, but the data-controller/representative field does not \u2014 it stays visible and editable, and its value is then silently dropped from the generated policy with no indication to the user."
+      "detail": "The questionnaire doc marks both the DPO-contact and data-controller/representative fields on Miscellaneous disclosures 'Shown if: Users in EU/EEA = Yes'. Confirmed live that DPO correctly hides when EU/EEA is set to No, but the data-controller/representative field does not — it stays visible and editable, and its value is then silently dropped from the generated policy with no indication to the user."
     },
     {
       "type": "live-ahead-of-docs",
-      "detail": "The questionnaire doc's footnote ('H1, H2, H3, & H4 are set to 18, 16, 14, & 12 respectively, to understand the hierarchy') predicts a two-tier CCPA \"Children's privacy\" clause \u2014 ages 13\u201316 get explicit user consent, under 13 gets parental consent \u2014 that isn't documented anywhere in the testcases sheet. Confirmed live this pass."
+      "detail": "The questionnaire doc's footnote ('H1, H2, H3, & H4 are set to 18, 16, 14, & 12 respectively, to understand the hierarchy') predicts a two-tier CCPA \"Children's privacy\" clause — ages 13–16 get explicit user consent, under 13 gets parental consent — that isn't documented anywhere in the testcases sheet. Confirmed live this pass."
     },
     {
       "type": "live-ahead-of-docs",
@@ -116,11 +116,11 @@
     },
     {
       "type": "doc-live-mismatch",
-      "detail": "Resolves a previously-unconfirmed out_of_scope_note from the language-preferences pass: the questionnaire doc's 'Legal bases for collecting the data' EU/EEA=Yes gating claim is now confirmed live both directions \u2014 absent when EU/EEA=No, present when EU/EEA=Yes, alongside the under-16 age-gating question which is gated identically. Confirmed during the Business Details matrix sweep (2026-07-15)."
+      "detail": "Resolves a previously-unconfirmed out_of_scope_note from the language-preferences pass: the questionnaire doc's 'Legal bases for collecting the data' EU/EEA=Yes gating claim is now confirmed live both directions — absent when EU/EEA=No, present when EU/EEA=Yes, alongside the under-16 age-gating question which is gated identically. Confirmed during the Business Details matrix sweep (2026-07-15)."
     },
     {
       "type": "doc-live-mismatch",
-      "detail": "First-pass text extraction of internal-docs/Character limit - Privacy Policy Fields (1).pdf (pdftotext -layout) appeared to show a CCPA-gated 'other purposes' question in Use of Data. Viewing the actual rendered PDF pages (5 and 12) resolved this: the CCPA condition belongs to a Disclosure of Data field ('Do you not sell or share data with any of the listed age groups?'), not to Use of Data's 'Are there any other purposes for which you use the collected data?' field, which has no gating condition at all. No real mismatch \u2014 resolved before writing any case, per migration-conventions.md \u00a712's falsification-check discipline."
+      "detail": "First-pass text extraction of internal-docs/Character limit - Privacy Policy Fields (1).pdf (pdftotext -layout) appeared to show a CCPA-gated 'other purposes' question in Use of Data. Viewing the actual rendered PDF pages (5 and 12) resolved this: the CCPA condition belongs to a Disclosure of Data field ('Do you not sell or share data with any of the listed age groups?'), not to Use of Data's 'Are there any other purposes for which you use the collected data?' field, which has no gating condition at all. No real mismatch — resolved before writing any case, per migration-conventions.md §12's falsification-check discipline."
     },
     {
       "type": "live-ahead-of-docs",
@@ -128,23 +128,23 @@
     },
     {
       "type": "doc-live-mismatch",
-      "detail": "Data retention's 'Add your own retention period' free-text field: doc (internal-docs/Character limit - Privacy Policy Fields (1).pdf p.13, current-limit table) states the current character limit is 500. Live testing (typing progressively longer strings and reading the submit-time inline error) confirmed the actual live limit is 1000 \u2014 which matches the doc's own 'recommended' value on p.20, not its 'current' value. The doc's current-state column is stale; the recommendation appears to have already been implemented."
+      "detail": "Data retention's 'Add your own retention period' free-text field: doc (internal-docs/Character limit - Privacy Policy Fields (1).pdf p.13, current-limit table) states the current character limit is 500. Live testing (typing progressively longer strings and reading the submit-time inline error) confirmed the actual live limit is 1000 — which matches the doc's own 'recommended' value on p.20, not its 'current' value. The doc's current-state column is stale; the recommendation appears to have already been implemented."
     },
     {
       "type": "doc-live-mismatch",
-      "detail": "Data retention's 'Not yet decided' (Pro+) free-text field: doc (p.13) states the current character limit is 2000. Live testing confirmed the actual live limit is 2500 \u2014 again matching the doc's 'recommended' value (p.20) rather than its stated 'current' value. Same stale-doc pattern as the custom-period field above."
+      "detail": "Data retention's 'Not yet decided' (Pro+) free-text field: doc (p.13) states the current character limit is 2000. Live testing confirmed the actual live limit is 2500 — again matching the doc's 'recommended' value (p.20) rather than its stated 'current' value. Same stale-doc pattern as the custom-period field above."
     },
     {
       "type": "live-ahead-of-docs",
-      "detail": "The 'Not yet decided' free-text field (only reachable on Pro+, since it's disabled on Free per existing case 39498) was never previously live-verified. Live confirms it renders a required field labeled 'Disclose how the retention period is determined.' \u2014 the doc (p.6, p.13) only names the field internally as 'not_yet_decided_additional' with a functional description ('Provide additional details about your data retention timeline'), not its exact live copy. Not a conflict, just previously unconfirmed."
+      "detail": "The 'Not yet decided' free-text field (only reachable on Pro+, since it's disabled on Free per existing case 39498) was never previously live-verified. Live confirms it renders a required field labeled 'Disclose how the retention period is determined.' — the doc (p.6, p.13) only names the field internally as 'not_yet_decided_additional' with a functional description ('Provide additional details about your data retention timeline'), not its exact live copy. Not a conflict, just previously unconfirmed."
     },
     {
       "type": "live-ahead-of-docs",
-      "detail": "Verified the 'Disclosure of data' step's full trigger rule live on Company details > Business details, on a clean rebuilt baseline (not the shared Pro account's pre-existing dirty draft state): EU/EEA=Yes alone never triggers it; California=Yes + for-profit=Yes alone (thresholds=No) is a confirmed no-op (matches existing case 39611); the step only appears once California=Yes AND (sell/share=Yes OR thresholds=Yes OR the 'Do you want to include CCPA-compliant clauses even if not legally required?' opt-in=Yes). That opt-in question \u2014 referenced only by case 39611's title, never walked through before \u2014 is a plain Business-details Yes/No question (not a modal) that only renders once for-profit=Yes and thresholds=No, and toggles the step on/off live with no confirmation dialog (unlike the EU/EEA and California toggles, which prompt 'Remove GDPR/CCPA clauses from your policy?' first). Not part of the internal docs at all; confirmed by direct live testing."
+      "detail": "Verified the 'Disclosure of data' step's full trigger rule live on Company details > Business details, on a clean rebuilt baseline (not the shared Pro account's pre-existing dirty draft state): EU/EEA=Yes alone never triggers it; California=Yes + for-profit=Yes alone (thresholds=No) is a confirmed no-op (matches existing case 39611); the step only appears once California=Yes AND (sell/share=Yes OR thresholds=Yes OR the 'Do you want to include CCPA-compliant clauses even if not legally required?' opt-in=Yes). That opt-in question — referenced only by case 39611's title, never walked through before — is a plain Business-details Yes/No question (not a modal) that only renders once for-profit=Yes and thresholds=No, and toggles the step on/off live with no confirmation dialog (unlike the EU/EEA and California toggles, which prompt 'Remove GDPR/CCPA clauses from your policy?' first). Not part of the internal docs at all; confirmed by direct live testing."
     },
     {
       "type": "doc-live-mismatch",
-      "detail": "Disclosure of data's four field-level free-text limits (age-category opt-in/opt-out under 16 and under 13, the delete/correct/access process field, the sensitive-info-exemptions reveal, and both third-party-past-12-months reveal fields) all doc-state a current limit of 2000 (internal-docs/Character limit - Privacy Policy Fields (1).pdf p.12). Live testing (submit-time inline error) confirms the actual limit is 2500 across every one of them \u2014 matching the doc's own 'recommended' value (p.19) rather than its 'current' value. Same stale-doc-current-column pattern already found on Data Retention's fields."
+      "detail": "Disclosure of data's four field-level free-text limits (age-category opt-in/opt-out under 16 and under 13, the delete/correct/access process field, the sensitive-info-exemptions reveal, and both third-party-past-12-months reveal fields) all doc-state a current limit of 2000 (internal-docs/Character limit - Privacy Policy Fields (1).pdf p.12). Live testing (submit-time inline error) confirms the actual limit is 2500 across every one of them — matching the doc's own 'recommended' value (p.19) rather than its 'current' value. Same stale-doc-current-column pattern already found on Data Retention's fields."
     },
     {
       "type": "doc-live-mismatch",
@@ -152,19 +152,19 @@
     },
     {
       "type": "live-ahead-of-docs",
-      "detail": "The 'Do you sell or share the personal information of users in the following categories?' question's three options (Users under 16 / Users under 13 / None) are a mutually-exclusive accordion, confirmed by direct testing (selecting one option collapses whichever was previously expanded and clears its fields from view). Neither doc states this. Also confirmed the under-13 opt-in/opt-out field wording explicitly references parental/guardian consent ('How can parents or guardians of such users opt in to a sale?'), while the under-16 wording does not ('What is the process by which such users can opt in to such a sale?') \u2014 a genuine content difference between the two brackets, not just a label swap."
+      "detail": "The 'Do you sell or share the personal information of users in the following categories?' question's three options (Users under 16 / Users under 13 / None) are a mutually-exclusive accordion, confirmed by direct testing (selecting one option collapses whichever was previously expanded and clears its fields from view). Neither doc states this. Also confirmed the under-13 opt-in/opt-out field wording explicitly references parental/guardian consent ('How can parents or guardians of such users opt in to a sale?'), while the under-16 wording does not ('What is the process by which such users can opt in to such a sale?') — a genuine content difference between the two brackets, not just a label swap."
     },
     {
       "type": "doc-live-mismatch",
-      "detail": "DPO contact-details and data controller/representative fields: internal-docs/Character limit - Privacy Policy Fields (1).pdf p.13-14 states a current limit of 1000 for both; live enforces 2000, matching the doc's own recommended value (p.20-21) rather than its current column \u2014 same stale-doc-current-column pattern already found on Data Retention and Disclosure of Data fields."
+      "detail": "DPO contact-details and data controller/representative fields: internal-docs/Character limit - Privacy Policy Fields (1).pdf p.13-14 states a current limit of 1000 for both; live enforces 2000, matching the doc's own recommended value (p.20-21) rather than its current column — same stale-doc-current-column pattern already found on Data Retention and Disclosure of Data fields."
     },
     {
       "type": "doc-live-mismatch",
-      "detail": "Custom data-transfer-safeguards free-text field ('Add your own'): doc p.14 states current limit 2000; live enforces 3000, matching the doc's recommended value (p.21) \u2014 same stale-doc pattern."
+      "detail": "Custom data-transfer-safeguards free-text field ('Add your own'): doc p.14 states current limit 2000; live enforces 3000, matching the doc's recommended value (p.21) — same stale-doc pattern."
     },
     {
       "type": "doc-live-mismatch",
-      "detail": "CCPA metrics-link field: doc p.14 states current limit 500; live enforces 2000, matching the doc's recommended value (p.21) \u2014 same stale-doc pattern."
+      "detail": "CCPA metrics-link field: doc p.14 states current limit 500; live enforces 2000, matching the doc's recommended value (p.21) — same stale-doc pattern."
     },
     {
       "type": "doc-live-mismatch",
@@ -172,15 +172,15 @@
     },
     {
       "type": "live-ahead-of-docs",
-      "detail": "The 'What applicable safeguards have been implemented?' chip-select is multi-select, not mutually exclusive \u2014 confirmed live that 'Standard contractual clauses' and 'Add your own' can be selected simultaneously. Neither doc states this."
+      "detail": "The 'What applicable safeguards have been implemented?' chip-select is multi-select, not mutually exclusive — confirmed live that 'Standard contractual clauses' and 'Add your own' can be selected simultaneously. Neither doc states this."
     },
     {
       "type": "live-ahead-of-docs",
-      "detail": "The 'Add your own' custom safeguard slot holds only one entry at a time \u2014 adding a new value replaces the existing custom chip rather than appending a second one. Neither doc states this, and it differs from other custom-entry lists elsewhere in the wizard (e.g. Use of data's custom-purpose list) which do accumulate multiple values."
+      "detail": "The 'Add your own' custom safeguard slot holds only one entry at a time — adding a new value replaces the existing custom chip rather than appending a second one. Neither doc states this, and it differs from other custom-entry lists elsewhere in the wizard (e.g. Use of data's custom-purpose list) which do accumulate multiple values."
     },
     {
       "type": "live-ahead-of-docs",
-      "detail": "Duplicate-value and whitespace-only rejection on the custom safeguard input (Add button stays disabled for whitespace; exact duplicates are silently not re-added) \u2014 same undocumented pattern already found on Data Retention's custom-period field."
+      "detail": "Duplicate-value and whitespace-only rejection on the custom safeguard input (Add button stays disabled for whitespace; exact duplicates are silently not re-added) — same undocumented pattern already found on Data Retention's custom-period field."
     },
     {
       "type": "doc-live-mismatch",
@@ -207,7 +207,7 @@
         },
         {
           "content": "Observe the step sidebar.",
-          "expected": "A vertical list of steps should be displayed: Language preferences, Company details, Collection of data, Use of data, Data retention, Miscellaneous disclosures, Preview & add policy \u2014 all steps except Language preferences shown disabled until reached."
+          "expected": "A vertical list of steps should be displayed: Language preferences, Company details, Collection of data, Use of data, Data retention, Miscellaneous disclosures, Preview & add policy — all steps except Language preferences shown disabled until reached."
         },
         {
           "content": "Observe the progress indicator.",
@@ -251,10 +251,10 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "live-ahead-of-docs \u2014 new finding",
+      "rewrite_notes": "live-ahead-of-docs — new finding",
       "section_id": 1960,
       "audit_status": "no-source-case",
-      "audit_note": "Dialog title/body/buttons (\"Resume your draft?\", \"You have a saved privacy policy draft. Continue where you left off or start over from the beginning.\", \"Start over\", \"Resume draft\") authored from a single live-crawl observation; never independently re-confirmed by grill or this audit. No Suite 6 source to diff against \u2014 recommend a live spot-check."
+      "audit_note": "Dialog title/body/buttons (\"Resume your draft?\", \"You have a saved privacy policy draft. Continue where you left off or start over from the beginning.\", \"Start over\", \"Resume draft\") authored from a single live-crawl observation; never independently re-confirmed by grill or this audit. No Suite 6 source to diff against — recommend a live spot-check."
     },
     {
       "id": 39443,
@@ -277,10 +277,10 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "not exercised in this pass either, for the same reason \u2014 the account's draft was actively needed by many other cases this session (Business details answers, Collection of data selections, Preview content). Recommend testing this once, deliberately, on a disposable account/site right before this section is migrated.",
+      "rewrite_notes": "not exercised in this pass either, for the same reason — the account's draft was actively needed by many other cases this session (Business details answers, Collection of data selections, Preview content). Recommend testing this once, deliberately, on a disposable account/site right before this section is migrated.",
       "section_id": 1960,
       "audit_status": "no-source-case",
-      "audit_note": "The \"Start over\" click-through behavior was explicitly not exercised during the crawl (author avoided it to protect session state, per rewrite_notes) \u2014 the case's own expected result is caveated \"[verify against live app]\". Needs a live check on a disposable account before this can be trusted."
+      "audit_note": "The \"Start over\" click-through behavior was explicitly not exercised during the crawl (author avoided it to protect session state, per rewrite_notes) — the case's own expected result is caveated \"[verify against live app]\". Needs a live check on a disposable account before this can be trusted."
     },
     {
       "id": 39444,
@@ -363,7 +363,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live (2026-07-14) exactly as specced \u2014 the field correctly reverted to its last-saved value, scoped only to the edited field/step (contrast with the \"Back to Dashboard\" Discard, which was found to revert the entire draft \u2014 see the Save Progress dialog case's notes; the two Discard actions behave differently and only the Dashboard-exit one is defective).",
+      "rewrite_notes": "confirmed live (2026-07-14) exactly as specced — the field correctly reverted to its last-saved value, scoped only to the edited field/step (contrast with the \"Back to Dashboard\" Discard, which was found to revert the entire draft — see the Save Progress dialog case's notes; the two Discard actions behave differently and only the Dashboard-exit one is defective).",
       "section_id": 1960,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -401,11 +401,11 @@
       "steps": [
         {
           "content": "Click \"Back to Dashboard\".",
-          "expected": "A dialog titled \"Save progress?\" should appear with body text \"Save a draft to continue where you left off when you return.\" and buttons \"Discard\", \"Save draft\" (plus a Close icon) \u2014 confirmed word-for-word live."
+          "expected": "A dialog titled \"Save progress?\" should appear with body text \"Save a draft to continue where you left off when you return.\" and buttons \"Discard\", \"Save draft\" (plus a Close icon) — confirmed word-for-word live."
         },
         {
           "content": "Click \"Discard\".",
-          "expected": "The dialog should close and the user should be navigated to the Dashboard. [APP DEFECT \u2014 confirmed broad] On live re-test, Discard reverted the ENTIRE draft, not just the current step's unsaved edit: after discarding one unsaved DPO-field edit on Miscellaneous disclosures, Company details > Contact information (Name/Website/Email/URL-to-contact/Full address) came back completely blank, progress dropped to 10% complete, and the \"Disclosure of data\" step disappeared from the sidebar (sell/share=Yes reverted). This is a full-draft rollback to some earlier checkpoint, not a scoped undo of the current field \u2014 confirmed reproducible, root cause (which checkpoint it reverts to) not determinable from the UI alone; flag to engineering as a data-loss risk."
+          "expected": "The dialog should close and the user should be navigated to the Dashboard. [APP DEFECT — confirmed broad] On live re-test, Discard reverted the ENTIRE draft, not just the current step's unsaved edit: after discarding one unsaved DPO-field edit on Miscellaneous disclosures, Company details > Contact information (Name/Website/Email/URL-to-contact/Full address) came back completely blank, progress dropped to 10% complete, and the \"Disclosure of data\" step disappeared from the sidebar (sell/share=Yes reverted). This is a full-draft rollback to some earlier checkpoint, not a scoped undo of the current field — confirmed reproducible, root cause (which checkpoint it reverts to) not determinable from the UI alone; flag to engineering as a data-loss risk."
         },
         {
           "content": "Repeat and click \"Save draft\" instead.",
@@ -423,10 +423,10 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "dialog text/buttons confirmed live exactly (2026-07-14). Discard's over-broad revert is a real, reproduced concern \u2014 recorded as an open defect rather than silently treated as case-authoring error. Save-draft and Close-icon sub-paths not independently re-run this pass after the Discard finding; still need direct confirmation.",
+      "rewrite_notes": "dialog text/buttons confirmed live exactly (2026-07-14). Discard's over-broad revert is a real, reproduced concern — recorded as an open defect rather than silently treated as case-authoring error. Save-draft and Close-icon sub-paths not independently re-run this pass after the Discard finding; still need direct confirmation.",
       "section_id": 1960,
       "audit_status": "no-source-case",
-      "audit_note": "Dialog title/body/buttons confirmed live exactly, and the Discard over-broad-revert defect was independently reproduced \u2014 but per this case's own rewrite_notes, the \"Draft saved successfully!\" message (Save-draft sub-path, step 3) and the Close-icon sub-path (step 4) were \"not independently re-run this pass after the Discard finding; still need direct confirmation.\" Needs a live check on those two remaining sub-paths."
+      "audit_note": "Dialog title/body/buttons confirmed live exactly, and the Discard over-broad-revert defect was independently reproduced — but per this case's own rewrite_notes, the \"Draft saved successfully!\" message (Save-draft sub-path, step 3) and the Close-icon sub-path (step 4) were \"not independently re-run this pass after the Discard finding; still need direct confirmation.\" Needs a live check on those two remaining sub-paths."
     },
     {
       "id": 39449,
@@ -435,7 +435,7 @@
       "steps": [
         {
           "content": "Open the Language preferences step.",
-          "expected": "A primary-language selector should be displayed offering English, Fran\u00e7ais, Deutsch, Italiano, and Espa\u00f1ol."
+          "expected": "A primary-language selector should be displayed offering English, Français, Deutsch, Italiano, and Español."
         },
         {
           "content": "Select a primary language (e.g. English).",
@@ -454,7 +454,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "plan-gated render case per migration-conventions \u00a711 \u2014 factual mention, not itself a re-test of the lock",
+      "rewrite_notes": "plan-gated render case per migration-conventions §11 — factual mention, not itself a re-test of the lock",
       "section_id": 1961,
       "audit_status": "no-source-case",
       "audit_note": "Quoted plan-gate copy \"Upgrade to Basic or above to enable multi-language support.\" authored from live crawl only; not independently re-confirmed since. Needs a live check."
@@ -498,7 +498,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live (2026-07-14) on a Pro account: selected Fran\u00e7ais and Deutsch as secondary languages, both remained selected simultaneously (verified via selected-state CSS class), unlike the primary-language selector which is single-select.",
+      "rewrite_notes": "confirmed live (2026-07-14) on a Pro account: selected Français and Deutsch as secondary languages, both remained selected simultaneously (verified via selected-state CSS class), unlike the primary-language selector which is single-select.",
       "section_id": 1961,
       "audit_status": "not-applicable",
       "audit_note": "No specific on-page text quoted; behavior/state-only assertions."
@@ -528,7 +528,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live (2026-07-14): saved English, then selected Fran\u00e7ais without saving, refreshed \u2014 English (saved) remained selected, Fran\u00e7ais (unsaved) reverted, exactly as specced.",
+      "rewrite_notes": "confirmed live (2026-07-14): saved English, then selected Français without saving, refreshed — English (saved) remained selected, Français (unsaved) reverted, exactly as specced.",
       "section_id": 1961,
       "audit_status": "not-applicable",
       "audit_note": "No specific on-page text quoted; behavior/state-only assertions."
@@ -642,7 +642,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live (2026-07-14) \u2014 every message matched exactly: Name 300-char limit, Website URL invalid-format (\"Please enter valid URL\") and 500-char limit, Email invalid-format (\"Please enter valid email address\"), URL to Contact confirmed optional (proceeds with it empty) and its 2000-char limit, Full Address 1000-char limit. All messages verified via exact string match against the rendered page.",
+      "rewrite_notes": "confirmed live (2026-07-14) — every message matched exactly: Name 300-char limit, Website URL invalid-format (\"Please enter valid URL\") and 500-char limit, Email invalid-format (\"Please enter valid email address\"), URL to Contact confirmed optional (proceeds with it empty) and its 2000-char limit, Full Address 1000-char limit. All messages verified via exact string match against the rendered page.",
       "section_id": 1969,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -654,7 +654,7 @@
       "steps": [
         {
           "content": "Hover over the tooltip icon next to \"URL to Contact (if applicable)\".",
-          "expected": "Tooltip should display: \"The \u2018URL to contact\u2019 refers to the link users can use to reach support in case of issues or questions regarding the privacy policy. This is not a mandatory field.\" (note: live uses typographic curly quotes \u2018 \u2019 around \u2018URL to contact\u2019, not straight quotes)."
+          "expected": "Tooltip should display: \"The ‘URL to contact’ refers to the link users can use to reach support in case of issues or questions regarding the privacy policy. This is not a mandatory field.\" (note: live uses typographic curly quotes ‘ ’ around ‘URL to contact’, not straight quotes)."
         },
         {
           "content": "Move the cursor away.",
@@ -669,7 +669,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live (2026-07-14) except quote style: draft used straight quotes around \u2018URL to contact\u2019, live renders typographic curly quotes \u2018 \u2019 there. Minor character-level fix per the exact-match standard; body text otherwise verbatim.",
+      "rewrite_notes": "confirmed live (2026-07-14) except quote style: draft used straight quotes around ‘URL to contact’, live renders typographic curly quotes ‘ ’ there. Minor character-level fix per the exact-match standard; body text otherwise verbatim.",
       "section_id": 1969,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -708,7 +708,7 @@
       "steps": [
         {
           "content": "Confirm the step sidebar before answering any Business details question.",
-          "expected": "Sidebar should list 6 steps: Language preferences, Company details, Collection of data, Use of data, Data retention, Miscellaneous disclosures, Preview & add policy \u2014 no \"Disclosure of data\" step present."
+          "expected": "Sidebar should list 6 steps: Language preferences, Company details, Collection of data, Use of data, Data retention, Miscellaneous disclosures, Preview & add policy — no \"Disclosure of data\" step present."
         },
         {
           "content": "Answer \"Do you sell or share the personal information of users?\" = Yes, leaving CCPA thresholds and Include-CCPA-clauses at their default/No state.",
@@ -731,7 +731,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "revised \u2014 the trigger is an OR across three conditions (sell/share, CCPA thresholds, Include CCPA clauses), not sell/share alone as first observed live; step 3 requires a Pro/Ultimate account. Step 3 confirmed live on a Pro account (2026-07-14): with sell/share reverted to No, both thresholds=Yes alone and (thresholds=No + include-clauses=Yes) independently kept \"Disclosure of data\" visible; setting all three to No removed it. Full three-way OR logic confirmed.",
+      "rewrite_notes": "revised — the trigger is an OR across three conditions (sell/share, CCPA thresholds, Include CCPA clauses), not sell/share alone as first observed live; step 3 requires a Pro/Ultimate account. Step 3 confirmed live on a Pro account (2026-07-14): with sell/share reverted to No, both thresholds=Yes alone and (thresholds=No + include-clauses=Yes) independently kept \"Disclosure of data\" visible; setting all three to No removed it. Full three-way OR logic confirmed.",
       "section_id": 1970,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -786,7 +786,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live in this grill pass (2026-07-14): entered 2001 chars, clicked Next, got exactly \"Please limit your response to 2000 characters.\" Both internal spec docs' stated 500-char limit is stale; the 'increase to 2000' recommendation has already shipped. Same mechanism confirmed for Do-Not-Track response and review/update-process description (2500 chars each) and the Public Task / Legitimate Interest justification fields (2000 chars each) \u2014 not individually re-cased, this is the representative pattern for all of them.",
+      "rewrite_notes": "confirmed live in this grill pass (2026-07-14): entered 2001 chars, clicked Next, got exactly \"Please limit your response to 2000 characters.\" Both internal spec docs' stated 500-char limit is stale; the 'increase to 2000' recommendation has already shipped. Same mechanism confirmed for Do-Not-Track response and review/update-process description (2500 chars each) and the Public Task / Legitimate Interest justification fields (2000 chars each) — not individually re-cased, this is the representative pattern for all of them.",
       "section_id": 1970,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -798,7 +798,7 @@
       "steps": [
         {
           "content": "Observe \"Do you cross one or more of the following thresholds?\".",
-          "expected": "Should be visible with Yes/No options and the three threshold criteria listed verbatim: \"$25 million or more gross revenue in the previous calendar year.\"; \"Process information for 100,000 or more customers\"; \"Earns 50% or more revenue from the sale of the personal information of the customers (including those shared for of cross-context behavioural advertising)\" (note: this third bullet's live wording \u2014 including the \"shared for of\" phrasing \u2014 differs from a cleaner paraphrase; quote it exactly, not the smoother alternative)."
+          "expected": "Should be visible with Yes/No options and the three threshold criteria listed verbatim: \"$25 million or more gross revenue in the previous calendar year.\"; \"Process information for 100,000 or more customers\"; \"Earns 50% or more revenue from the sale of the personal information of the customers (including those shared for of cross-context behavioural advertising)\" (note: this third bullet's live wording — including the \"shared for of\" phrasing — differs from a cleaner paraphrase; quote it exactly, not the smoother alternative)."
         },
         {
           "content": "Answer \"No\" to the thresholds question.",
@@ -824,7 +824,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live (2026-07-14) on a Pro account \u2014 full chain works exactly as specced (each of the 3 OR-conditions independently shows/keeps/hides the Disclosure of data step). MISMATCH found: the draft paraphrased the third threshold bullet; live text is \"Earns 50% or more revenue from the sale of the personal information of the customers (including those shared for of cross-context behavioural advertising)\" \u2014 extracted verbatim via DOM query, including its slightly awkward \"shared for of\" phrasing. Not plan_gate_flag: this case verifies the working chain on a paid tier, not a locked state, so it stays in the feature section rather than routing to Plan Gates.",
+      "rewrite_notes": "confirmed live (2026-07-14) on a Pro account — full chain works exactly as specced (each of the 3 OR-conditions independently shows/keeps/hides the Disclosure of data step). MISMATCH found: the draft paraphrased the third threshold bullet; live text is \"Earns 50% or more revenue from the sale of the personal information of the customers (including those shared for of cross-context behavioural advertising)\" — extracted verbatim via DOM query, including its slightly awkward \"shared for of\" phrasing. Not plan_gate_flag: this case verifies the working chain on a paid tier, not a locked state, so it stays in the feature section rather than routing to Plan Gates.",
       "section_id": 1970,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -850,10 +850,10 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "this is a data-removal confirmation, not an upgrade nudge \u2014 not routed to Plan Gates",
+      "rewrite_notes": "this is a data-removal confirmation, not an upgrade nudge — not routed to Plan Gates",
       "section_id": 1970,
       "audit_status": "no-source-case",
-      "audit_note": "Quoted dialog title/body/buttons (\"Remove CCPA clauses from your policy?\", body text, \"Keep clause\"/\"Remove\"/\"Close\") authored from live crawl only; not independently re-confirmed since \u2014 contrast with the sibling GDPR-removal dialog (case 39464), which was re-confirmed word-for-word during grill; this CCPA-side dialog wasn't."
+      "audit_note": "Quoted dialog title/body/buttons (\"Remove CCPA clauses from your policy?\", body text, \"Keep clause\"/\"Remove\"/\"Close\") authored from live crawl only; not independently re-confirmed since — contrast with the sibling GDPR-removal dialog (case 39464), which was re-confirmed word-for-word during grill; this CCPA-side dialog wasn't."
     },
     {
       "id": 39463,
@@ -879,7 +879,7 @@
       "rewrite_notes": "low-traffic cancel path",
       "section_id": 1970,
       "audit_status": "no-source-case",
-      "audit_note": "Quoted button \"Keep clause\" \u2014 same gap as its sibling case 39462, never independently re-confirmed."
+      "audit_note": "Quoted button \"Keep clause\" — same gap as its sibling case 39462, never independently re-confirmed."
     },
     {
       "id": 39464,
@@ -907,7 +907,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live (2026-07-14) \u2014 dialog title/body/buttons match exactly, Keep clause retains Yes, Remove switches to No and hides GDPR-specific fields (for-profit question was already gone since California was independently set to No earlier in this pass; the EU/EEA-specific effect itself confirmed via the answer flipping and dialog behavior).",
+      "rewrite_notes": "confirmed live (2026-07-14) — dialog title/body/buttons match exactly, Keep clause retains Yes, Remove switches to No and hides GDPR-specific fields (for-profit question was already gone since California was independently set to No earlier in this pass; the EU/EEA-specific effect itself confirmed via the answer flipping and dialog behavior).",
       "section_id": 1970,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -935,7 +935,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "MISMATCH fixed (2026-07-14): EU/EEA tooltip live text is \"Applies to any business that collects and processes the information of EU/EEA residents. List of EU/EEA countries:\" plus a link to https://www.gov.uk/eu-eea \u2014 the draft's original expected text omitted the \"List of EU/EEA countries:\" lead-in sentence before the link. California tooltip confirmed verbatim, no changes.",
+      "rewrite_notes": "MISMATCH fixed (2026-07-14): EU/EEA tooltip live text is \"Applies to any business that collects and processes the information of EU/EEA residents. List of EU/EEA countries:\" plus a link to https://www.gov.uk/eu-eea — the draft's original expected text omitted the \"List of EU/EEA countries:\" lead-in sentence before the link. California tooltip confirmed verbatim, no changes.",
       "section_id": 1970,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -991,7 +991,7 @@
       "rewrite_notes": "authored from live crawl",
       "section_id": 1971,
       "audit_status": "no-source-case",
-      "audit_note": "Quoted category/sub-section labels (Personal data, Behavioral & financial data, Professional & educational data, Sensitive personal information groups, sidebar tips) authored from live crawl only; not re-confirmed since \u2014 a long, detailed list, so worth a live check."
+      "audit_note": "Quoted category/sub-section labels (Personal data, Behavioral & financial data, Professional & educational data, Sensitive personal information groups, sidebar tips) authored from live crawl only; not re-confirmed since — a long, detailed list, so worth a live check."
     },
     {
       "id": 39468,
@@ -1038,7 +1038,7 @@
         },
         {
           "content": "On a Pro/Ultimate account with either thresholds or include-clauses = Yes, EU/EEA = No, observe.",
-          "expected": "CCPA-specific categories should be shown in addition to the defaults: Birthday, Political and religious affiliations, Biometric information added to Personal data; new sections \"Behavioral & financial data\", \"Accounts & authentication\", \"Location tracking\", and \"Communications & financial data\" appear under Sensitive personal information. GDPR-specific categories (Identification ID number, Location data, Political opinions) should not be displayed. On this Pro account the CCPA-specific chips (e.g. Birthday) render as fully normal, unlocked, selectable chips \u2014 no lock icon, no disabled state, no Pro+ badge (that gating only applies on Free plan)."
+          "expected": "CCPA-specific categories should be shown in addition to the defaults: Birthday, Political and religious affiliations, Biometric information added to Personal data; new sections \"Behavioral & financial data\", \"Accounts & authentication\", \"Location tracking\", and \"Communications & financial data\" appear under Sensitive personal information. GDPR-specific categories (Identification ID number, Location data, Political opinions) should not be displayed. On this Pro account the CCPA-specific chips (e.g. Birthday) render as fully normal, unlocked, selectable chips — no lock icon, no disabled state, no Pro+ badge (that gating only applies on Free plan)."
         }
       ],
       "run_type": "regression",
@@ -1055,16 +1055,16 @@
     },
     {
       "id": 39470,
-      "title": "[Privacy Policy Generator] Verify that Custom Data You Collect entries validate length, duplicates, empty input, and whitespace, and support add/remove \u2014 Personal and Sensitive sections",
+      "title": "[Privacy Policy Generator] Verify that Custom Data You Collect entries validate length, duplicates, empty input, and whitespace, and support add/remove — Personal and Sensitive sections",
       "preconditions": "Collection of data > Personal information tab.",
       "steps": [
         {
-          "content": "Enter a custom data label of up to 500 characters under \"Custom data you collect\" (Personal data) and click \"Add (\u2713)\".",
+          "content": "Enter a custom data label of up to 500 characters under \"Custom data you collect\" (Personal data) and click \"Add (✓)\".",
           "expected": "The entry should be added as a separate chip/card below the section, and the input field should clear."
         },
         {
           "content": "Enter a custom data label of more than 500 characters.",
-          "expected": "The \"Add (\u2713)\" button should remain disabled, or an appropriate validation message should be shown, and the entry should not be added."
+          "expected": "The \"Add (✓)\" button should remain disabled, or an appropriate validation message should be shown, and the entry should not be added."
         },
         {
           "content": "Enter a value with leading/trailing spaces and add it.",
@@ -1094,7 +1094,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live (2026-07-14) on the Personal data custom-data section: add, whitespace-trim, duplicate-rejection, empty-rejection, 500-char limit (\"Please limit your response to 500 characters.\" exact match), and remove all behave as specced. Sensitive-section repeat not independently re-run \u2014 same component pattern, representative per equivalence partitioning.",
+      "rewrite_notes": "confirmed live (2026-07-14) on the Personal data custom-data section: add, whitespace-trim, duplicate-rejection, empty-rejection, 500-char limit (\"Please limit your response to 500 characters.\" exact match), and remove all behave as specced. Sensitive-section repeat not independently re-run — same component pattern, representative per equivalence partitioning.",
       "section_id": 1971,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -1285,10 +1285,10 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "MISMATCH fixed via live re-verification (2026-07-14): the doc/manual-test-case-file's button labels were wrong \u2014 live shows an icon-only \"Confirm\" button (not \"Add (\u2713)\") that becomes an icon-only red \"Remove\" button (not literal \"(-) Remove\" text) on save. All other behavior (2000-char limit + exact validation message, Next-blocked banner, deselect hides field, clear-on-remove) confirmed live exactly as specced for \"Public task\"; \"Legitimate interest of the controller\" not independently re-run \u2014 same component pattern, representative per equivalence partitioning.",
+      "rewrite_notes": "MISMATCH fixed via live re-verification (2026-07-14): the doc/manual-test-case-file's button labels were wrong — live shows an icon-only \"Confirm\" button (not \"Add (✓)\") that becomes an icon-only red \"Remove\" button (not literal \"(-) Remove\" text) on save. All other behavior (2000-char limit + exact validation message, Next-blocked banner, deselect hides field, clear-on-remove) confirmed live exactly as specced for \"Public task\"; \"Legitimate interest of the controller\" not independently re-run — same component pattern, representative per equivalence partitioning.",
       "section_id": 1972,
       "audit_status": "verbatim-confirmed",
-      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found. Minor residual gap: the \"Legitimate interest of the controller\" field label (\"What are these legitimate interests?\") was not independently re-run this pass \u2014 assumed via equivalence partitioning with the confirmed \"Public task\" path, not itself directly re-verified."
+      "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found. Minor residual gap: the \"Legitimate interest of the controller\" field label (\"What are these legitimate interests?\") was not independently re-run this pass — assumed via equivalence partitioning with the confirmed \"Public task\" path, not itself directly re-verified."
     },
     {
       "id": 39478,
@@ -1319,7 +1319,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live (2026-07-14) on a Pro account: with EU/EEA=No and CCPA not applicable, only the default questions (cookies/tracking, DNT, legal-bases) appeared \u2014 no age-16/age-13/review-process questions. Setting thresholds=Yes (CCPA applicable) alone added only the under-13 question. Then additionally setting EU/EEA=Yes and sell/share=Yes together produced all three conditional questions simultaneously (under-16, under-13, review-process) alongside the defaults \u2014 confirming each trigger independently controls its own question.",
+      "rewrite_notes": "confirmed live (2026-07-14) on a Pro account: with EU/EEA=No and CCPA not applicable, only the default questions (cookies/tracking, DNT, legal-bases) appeared — no age-16/age-13/review-process questions. Setting thresholds=Yes (CCPA applicable) alone added only the under-13 question. Then additionally setting EU/EEA=Yes and sell/share=Yes together produced all three conditional questions simultaneously (under-16, under-13, review-process) alongside the defaults — confirming each trigger independently controls its own question.",
       "section_id": 1972,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -1335,7 +1335,7 @@
         },
         {
           "content": "Complete every visible field on both Personal information and Additional information tabs (at least one data-category chip selected, cookies/DNT/age/legal-basis/review-process all answered) and click \"Next\" again.",
-          "expected": "[APP DEFECT] The banner does NOT clear and the wizard does NOT proceed, even though no visibly-incomplete field remains on either tab. Reproduced live on 2026-07-14 with a Free-plan account: Name/Address/Email selected on Personal information, and on Additional information cookies=Yes+URL filled, DNT response filled, age-question answered, Consent chip selected, review-process=Yes+description filled \u2014 banner persisted regardless. Root cause not identifiable from the UI alone (likely a hidden/required field not rendered for this plan tier, or a stale validation flag); flag to engineering rather than treating as a case-authoring error."
+          "expected": "[APP DEFECT] The banner does NOT clear and the wizard does NOT proceed, even though no visibly-incomplete field remains on either tab. Reproduced live on 2026-07-14 with a Free-plan account: Name/Address/Email selected on Personal information, and on Additional information cookies=Yes+URL filled, DNT response filled, age-question answered, Consent chip selected, review-process=Yes+description filled — banner persisted regardless. Root cause not identifiable from the UI alone (likely a hidden/required field not rendered for this plan tier, or a stale validation flag); flag to engineering rather than treating as a case-authoring error."
         }
       ],
       "run_type": "regression",
@@ -1345,7 +1345,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "app defect confirmed live, not a crawl artifact \u2014 the persistent-banner-after-all-fields-filled behavior reproduces reliably. Case kept as regression documenting current (buggy) behavior; step 1 (banner appears via genuinely incomplete required field) is the migratable assertion, step 2 documents the open defect for the report.",
+      "rewrite_notes": "app defect confirmed live, not a crawl artifact — the persistent-banner-after-all-fields-filled behavior reproduces reliably. Case kept as regression documenting current (buggy) behavior; step 1 (banner appears via genuinely incomplete required field) is the migratable assertion, step 2 documents the open defect for the report.",
       "section_id": 1972,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -1378,7 +1378,7 @@
       "rewrite_notes": "authored from live crawl",
       "section_id": 1964,
       "audit_status": "no-source-case",
-      "audit_note": "Quoted purposes-list chip options (9 distinct strings) authored from live crawl only; not re-confirmed since \u2014 a long list, worth a live check."
+      "audit_note": "Quoted purposes-list chip options (9 distinct strings) authored from live crawl only; not re-confirmed since — a long list, worth a live check."
     },
     {
       "id": 39481,
@@ -1402,9 +1402,9 @@
       "platform_flag": false,
       "plan_gate_flag": false,
       "section_id": 1965,
-      "rewrite_notes": "New case authored during /migrate-section (2026-07-14): split out of the original Disclosure-of-data plan-gate case so the feature section retains a render case per migration-conventions.md \u00a711, while the deep lock-state verification stays in Plan Gates unchanged.",
+      "rewrite_notes": "New case authored during /migrate-section (2026-07-14): split out of the original Disclosure-of-data plan-gate case so the feature section retains a render case per migration-conventions.md §11, while the deep lock-state verification stays in Plan Gates unchanged.",
       "audit_status": "no-source-case",
-      "audit_note": "The plan-gate copy (\"Upgrade to Pro or higher to add this clause.\") is explicitly tagged \"[inferred]\" in this case's own expected result \u2014 a self-flagged guess, not an observed string. Highest-priority item in this batch: needs live confirmation before it can be trusted."
+      "audit_note": "The plan-gate copy (\"Upgrade to Pro or higher to add this clause.\") is explicitly tagged \"[inferred]\" in this case's own expected result — a self-flagged guess, not an observed string. Highest-priority item in this batch: needs live confirmation before it can be trusted."
     },
     {
       "id": 39482,
@@ -1525,7 +1525,7 @@
         },
         {
           "content": "Navigate to Preview & add policy again.",
-          "expected": "The \"GDPR Disclosures > Automatic processing of data\" heading still renders (it is not GDPR-presence-gated, only its wording is answer-conditional), now reading \"We do not use any automated processing of the personal information we collect.\" \u2014 with no trace of the prior Yes-variant text."
+          "expected": "The \"GDPR Disclosures > Automatic processing of data\" heading still renders (it is not GDPR-presence-gated, only its wording is answer-conditional), now reading \"We do not use any automated processing of the personal information we collect.\" — with no trace of the prior Yes-variant text."
         }
       ],
       "run_type": "regression",
@@ -1536,7 +1536,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live (2026-07-14): answered Yes, clicked Save draft, then navigated to Preview & add policy via Next \u2014 the \"GDPR Disclosures > Automatic processing of data\" section reads exactly \"We use automated processing of the personal information we collect to personalise our services for you and others.\" The clean save round-trip works correctly; the earlier doubt was purely a crawl-methodology artifact from editing via direct URL without saving first. Extended 2026-07-21 during /migrate-section (merged in place of publishing a new near-duplicate case, dedup-check score 0.517): confirmed live that toggling the answer back to No cleanly swaps in \"We do not use any automated processing of the personal information we collect.\" with no stale Yes-variant content \u2014 this closes the gap the grill pass flagged (39486 previously covered only the Yes-path).",
+      "rewrite_notes": "confirmed live (2026-07-14): answered Yes, clicked Save draft, then navigated to Preview & add policy via Next — the \"GDPR Disclosures > Automatic processing of data\" section reads exactly \"We use automated processing of the personal information we collect to personalise our services for you and others.\" The clean save round-trip works correctly; the earlier doubt was purely a crawl-methodology artifact from editing via direct URL without saving first. Extended 2026-07-21 during /migrate-section (merged in place of publishing a new near-duplicate case, dedup-check score 0.517): confirmed live that toggling the answer back to No cleanly swaps in \"We do not use any automated processing of the personal information we collect.\" with no stale Yes-variant content — this closes the gap the grill pass flagged (39486 previously covered only the Yes-path).",
       "section_id": 1967,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes for both the Yes-variant and the No-variant; no discrepancy from source found."
@@ -1570,10 +1570,10 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "this step exists live but is completely undocumented in either internal spec PDF \u2014 live-ahead-of-docs. This is the single most critical happy-path check for this feature area.",
+      "rewrite_notes": "this step exists live but is completely undocumented in either internal spec PDF — live-ahead-of-docs. This is the single most critical happy-path check for this feature area.",
       "section_id": 1968,
       "audit_status": "no-source-case",
-      "audit_note": "Quoted heading/subtext, the full legal disclaimer paragraph, section headings, and footer credit link authored from live crawl only; not re-confirmed since. This case is run_type=smoke (the section's single most-critical happy-path check) and contains a lengthy legal disclaimer \u2014 high-priority live re-check despite lacking a Suite 6 source."
+      "audit_note": "Quoted heading/subtext, the full legal disclaimer paragraph, section headings, and footer credit link authored from live crawl only; not re-confirmed since. This case is run_type=smoke (the section's single most-critical happy-path check) and contains a lengthy legal disclaimer — high-priority live re-check despite lacking a Suite 6 source."
     },
     {
       "id": 39488,
@@ -1604,10 +1604,10 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "verbatim-text fidelity per migration-conventions \u00a74 \u2014 the generated clause text is user-content echo and must not be paraphrased in the case",
+      "rewrite_notes": "verbatim-text fidelity per migration-conventions §4 — the generated clause text is user-content echo and must not be paraphrased in the case",
       "section_id": 1968,
       "audit_status": "no-source-case",
-      "audit_note": "The three fixed connector phrases (\"please visit our cookie policy.\", \"The categories of personal information that are sold or shared with third parties are as follows:\", \"The categories of third parties to whom the information is disclosed are as follows:\") have never been confirmed against the live app \u2014 rewrite_notes only explains the migration-conventions \u00a74 rationale for keeping user-echoed content verbatim, it does not state these fixed phrases were checked live. Needs a live check."
+      "audit_note": "The three fixed connector phrases (\"please visit our cookie policy.\", \"The categories of personal information that are sold or shared with third parties are as follows:\", \"The categories of third parties to whom the information is disclosed are as follows:\") have never been confirmed against the live app — rewrite_notes only explains the migration-conventions §4 rationale for keeping user-echoed content verbatim, it does not state these fixed phrases were checked live. Needs a live check."
     },
     {
       "id": 39489,
@@ -1629,7 +1629,7 @@
       "rewrite_notes": "thin edge-case check on the default single-language menu state",
       "section_id": 1968,
       "audit_status": "no-source-case",
-      "audit_note": "Quoted menu item \"Edit policy\" authored from live crawl only; not re-confirmed since (low risk \u2014 the same menu's other item was independently confirmed live in case 39491)."
+      "audit_note": "Quoted menu item \"Edit policy\" authored from live crawl only; not re-confirmed since (low risk — the same menu's other item was independently confirmed live in case 39491)."
     },
     {
       "id": 39490,
@@ -1642,7 +1642,7 @@
         },
         {
           "content": "Click the \"Deutsch\" language button.",
-          "expected": "The entire generated policy body should re-render fully translated into German \u2014 heading (\"Datenschutzerkl\u00e4rung\"), all section headings, all body paragraphs, and the footer credit link (\"CookieYes - Datenschutzrichtlinien-Generator\") should all be in German. User-entered content that has no fixed translation (e.g. the categories-sold-or-shared free text, third-party names) remains in the original language it was entered in."
+          "expected": "The entire generated policy body should re-render fully translated into German — heading (\"Datenschutzerklärung\"), all section headings, all body paragraphs, and the footer credit link (\"CookieYes - Datenschutzrichtlinien-Generator\") should all be in German. User-entered content that has no fixed translation (e.g. the categories-sold-or-shared free text, third-party names) remains in the original language it was entered in."
         },
         {
           "content": "Click back on \"English (Primary)\".",
@@ -1651,12 +1651,12 @@
       ],
       "run_type": "regression",
       "source_case_ids": [
-        "live crawl \u2014 gap found during /grill-section"
+        "live crawl — gap found during /grill-section"
       ],
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "gap found during grill-section gap-hunting (2026-07-14): the entire multi-language auto-translation preview-switching mechanism was untested by the original draft, which only covered the single-language Preview state. Confirmed live on a Pro account with Deutsch as a secondary language \u2014 this is a real, working feature deserving its own case.",
+      "rewrite_notes": "gap found during grill-section gap-hunting (2026-07-14): the entire multi-language auto-translation preview-switching mechanism was untested by the original draft, which only covered the single-language Preview state. Confirmed live on a Pro account with Deutsch as a secondary language — this is a real, working feature deserving its own case.",
       "section_id": 1968,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -1668,12 +1668,12 @@
       "steps": [
         {
           "content": "Click \"Language options\" next to the language row.",
-          "expected": "A menu should open with two items: \"Edit policy\" and \"Delete language\" (contrast with the single-language state, which shows only \"Edit policy\" \u2014 see the existing case for that state)."
+          "expected": "A menu should open with two items: \"Edit policy\" and \"Delete language\" (contrast with the single-language state, which shows only \"Edit policy\" — see the existing case for that state)."
         }
       ],
       "run_type": "regression",
       "source_case_ids": [
-        "live crawl \u2014 gap found during /grill-section"
+        "live crawl — gap found during /grill-section"
       ],
       "permission_flag": false,
       "platform_flag": false,
@@ -1690,7 +1690,7 @@
       "steps": [
         {
           "content": "Click \"Language options\" then \"Delete language\".",
-          "expected": "A confirmation dialog should appear with body text \"Are you sure you want to remove the [language] draft of your privacy policy?\" (e.g. \"Deutsch\") and buttons \"Keep version\", \"Delete\" (plus a Close icon). [APP DEFECT \u2014 verify] Live observation (2026-07-14) showed the dialog's title text \"Delete language?\" rendered twice in sequence before the body text \u2014 possibly a duplicate-heading rendering bug; re-verify by inspecting the rendered DOM directly rather than relying on an accessibility-tree snapshot, since this was not extracted via element-level text query."
+          "expected": "A confirmation dialog should appear with body text \"Are you sure you want to remove the [language] draft of your privacy policy?\" (e.g. \"Deutsch\") and buttons \"Keep version\", \"Delete\" (plus a Close icon). [APP DEFECT — verify] Live observation (2026-07-14) showed the dialog's title text \"Delete language?\" rendered twice in sequence before the body text — possibly a duplicate-heading rendering bug; re-verify by inspecting the rendered DOM directly rather than relying on an accessibility-tree snapshot, since this was not extracted via element-level text query."
         },
         {
           "content": "Click \"Keep version\".",
@@ -1703,7 +1703,7 @@
       ],
       "run_type": "regression",
       "source_case_ids": [
-        "live crawl \u2014 gap found during /grill-section"
+        "live crawl — gap found during /grill-section"
       ],
       "permission_flag": false,
       "platform_flag": false,
@@ -1711,7 +1711,7 @@
       "rewrite_notes": "gap found during grill-section gap-hunting (2026-07-14). \"Keep version\" (cancel) path confirmed live; \"Delete\" path deliberately not exercised (destructive-precondition), and the duplicated dialog title needs a DOM-level re-check before treating it as a confirmed defect.",
       "section_id": 1968,
       "audit_status": "no-source-case",
-      "audit_note": "Dialog body/buttons (\"Are you sure you want to remove the [language] draft...\", \"Keep version\") confirmed live via the Keep-version path \u2014 but the claimed app defect (dialog title \"Delete language?\" rendering twice) explicitly \"needs a DOM-level re-check\" per this case's own notes, and the Delete-path outcome was deliberately never exercised (destructive precondition). Needs a live/DOM-level re-check."
+      "audit_note": "Dialog body/buttons (\"Are you sure you want to remove the [language] draft...\", \"Keep version\") confirmed live via the Keep-version path — but the claimed app defect (dialog title \"Delete language?\" rendering twice) explicitly \"needs a DOM-level re-check\" per this case's own notes, and the Delete-path outcome was deliberately never exercised (destructive precondition). Needs a live/DOM-level re-check."
     },
     {
       "id": 39493,
@@ -1745,7 +1745,7 @@
       "rewrite_notes": "authored from live crawl",
       "section_id": 1793,
       "audit_status": "no-source-case",
-      "audit_note": "Quoted upgrade-modal title/body/plan pricing (\"Your Privacy Policy is incomplete\", bullet list, \"$10/mo\"/\"$25/mo\", button labels) authored from live crawl only; not re-confirmed since \u2014 pricing text especially worth a live check given plans change."
+      "audit_note": "Quoted upgrade-modal title/body/plan pricing (\"Your Privacy Policy is incomplete\", bullet list, \"$10/mo\"/\"$25/mo\", button labels) authored from live crawl only; not re-confirmed since — pricing text especially worth a live check given plans change."
     },
     {
       "id": 39494,
@@ -1772,7 +1772,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": true,
-      "rewrite_notes": "distinct modal copy from the Basic+ multi-language modal \u2014 do not assume upgrade dialogs share identical wording across gates in this feature",
+      "rewrite_notes": "distinct modal copy from the Basic+ multi-language modal — do not assume upgrade dialogs share identical wording across gates in this feature",
       "section_id": 1793,
       "audit_status": "no-source-case",
       "audit_note": "Quoted upgrade-gate inline text and modal body authored from live crawl only; not re-confirmed since."
@@ -1798,7 +1798,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": true,
-      "rewrite_notes": "confirmed live (2026-07-14) \u2014 but only once every OTHER required field on the tab was answered; with another field also incomplete (sell/share unanswered), clicking Next instead surfaces the generic \"Please make sure that all fields are completely filled out...\" banner, not this modal. Precondition matters: this modal only appears when the locked Pro+ field is the sole remaining gap.",
+      "rewrite_notes": "confirmed live (2026-07-14) — but only once every OTHER required field on the tab was answered; with another field also incomplete (sell/share unanswered), clicking Next instead surfaces the generic \"Please make sure that all fields are completely filled out...\" banner, not this modal. Precondition matters: this modal only appears when the locked Pro+ field is the sole remaining gap.",
       "section_id": 1793,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -1810,7 +1810,7 @@
       "steps": [
         {
           "content": "Click the \"Birthday\" chip under Personal data.",
-          "expected": "The chip should render visually locked \u2014 greyed-out label, a lock icon on the left, and an amber Pro+/crown badge on the right \u2014 but is not a native disabled control; it remains clickable. Clicking it should not select it. An inline toast-style popup should appear directly below the chip: \"CCPA/CPRA-related clauses are available on the Pro plan and above.\" with an \"Upgrade now\" link."
+          "expected": "The chip should render visually locked — greyed-out label, a lock icon on the left, and an amber Pro+/crown badge on the right — but is not a native disabled control; it remains clickable. Clicking it should not select it. An inline toast-style popup should appear directly below the chip: \"CCPA/CPRA-related clauses are available on the Pro plan and above.\" with an \"Upgrade now\" link."
         }
       ],
       "run_type": "regression",
@@ -1820,7 +1820,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": true,
-      "rewrite_notes": "CONFLICT RESOLVED via /grill-section live re-verification (2026-07-14): neither source was fully correct. The chip does show a lock icon + Pro+ badge as internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC083-087 (case 49) claimed \u2014 contradicting this case's original 'no lock icon' description \u2014 but it is not natively disabled/unclickable as TC083-087 claimed either; clicking it works and surfaces the toast this case originally described, word-for-word confirmed live.",
+      "rewrite_notes": "CONFLICT RESOLVED via /grill-section live re-verification (2026-07-14): neither source was fully correct. The chip does show a lock icon + Pro+ badge as internal-docs/PPG TESTCASES - Sheet1 (1).pdf TC083-087 (case 49) claimed — contradicting this case's original 'no lock icon' description — but it is not natively disabled/unclickable as TC083-087 claimed either; clicking it works and surfaces the toast this case originally described, word-for-word confirmed live.",
       "section_id": 1793,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -1848,7 +1848,7 @@
         },
         {
           "content": "Click \"Upgrade to Pro\" on any of the above.",
-          "expected": "The same \"Your Privacy Policy is incomplete\" upgrade modal opens as the Business Details for-profit gate \u2014 identical title, bullet list (\"CCPA/CPRA clauses for US users\", \"Create your policy in multiple languages\", \"Auto-translated policies for your global audience\"), single Pro plan card, and buttons (\"Get started with Pro plan\" / \"Continue with limited policy\" / \"Close\")."
+          "expected": "The same \"Your Privacy Policy is incomplete\" upgrade modal opens as the Business Details for-profit gate — identical title, bullet list (\"CCPA/CPRA clauses for US users\", \"Create your policy in multiple languages\", \"Auto-translated policies for your global audience\"), single Pro plan card, and buttons (\"Get started with Pro plan\" / \"Continue with limited policy\" / \"Close\")."
         }
       ],
       "run_type": "regression",
@@ -1858,7 +1858,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": true,
-      "rewrite_notes": "confirmed live (2026-07-14): this step's inline gate copy ('Upgrade to Pro or higher to add this clause.') is indeed shorter than the Business Details for-profit gate's inline copy, but the resulting upgrade MODAL is byte-identical between the two gates \u2014 the draft's speculation that the modal itself would have step-specific wording was wrong; it's one shared modal component reused across all Pro+ gates in this feature.",
+      "rewrite_notes": "confirmed live (2026-07-14): this step's inline gate copy ('Upgrade to Pro or higher to add this clause.') is indeed shorter than the Business Details for-profit gate's inline copy, but the resulting upgrade MODAL is byte-identical between the two gates — the draft's speculation that the modal itself would have step-specific wording was wrong; it's one shared modal component reused across all Pro+ gates in this feature.",
       "section_id": 1793,
       "audit_status": "verbatim-confirmed",
       "audit_note": "Quoted text confirmed live word-for-word per rewrite_notes; no discrepancy from source found."
@@ -1870,7 +1870,7 @@
       "steps": [
         {
           "content": "Observe the \"Not yet decided\" option.",
-          "expected": "The chip renders visibly disabled up front (not clickable), with an inline \"Pro+\" label shown directly on the chip. No click interaction is available \u2014 the button is disabled at the DOM level, so clicking it has no effect and no toast or upgrade modal opens."
+          "expected": "The chip renders visibly disabled up front (not clickable), with an inline \"Pro+\" label shown directly on the chip. No click interaction is available — the button is disabled at the DOM level, so clicking it has no effect and no toast or upgrade modal opens."
         }
       ],
       "run_type": "regression",
@@ -1880,10 +1880,10 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": true,
-      "rewrite_notes": "third distinct plan-gate UX pattern observed in this feature \u2014 keep distinguishable from the other two",
+      "rewrite_notes": "third distinct plan-gate UX pattern observed in this feature — keep distinguishable from the other two",
       "section_id": 1793,
       "audit_status": "verbatim-confirmed",
-      "audit_note": "Re-verified live 2026-07-22: confirmed the chip carries a native HTML `disabled` attribute (Playwright's own actionability check refuses to click it \u2014 \"element is not enabled\"), with \"Pro+\" rendered as a child element directly on the chip, and no toast/modal appears since no click can register. Expected result rewritten to be self-contained (previously referenced two other cases' patterns by name without describing them, failing the isolation test) and title unquoted to match the established \"plain field reference, not a trigger condition\" convention."
+      "audit_note": "Re-verified live 2026-07-22: confirmed the chip carries a native HTML `disabled` attribute (Playwright's own actionability check refuses to click it — \"element is not enabled\"), with \"Pro+\" rendered as a child element directly on the chip, and no toast/modal appears since no click can register. Expected result rewritten to be self-contained (previously referenced two other cases' patterns by name without describing them, failing the isolation test) and title unquoted to match the established \"plain field reference, not a trigger condition\" convention."
     },
     {
       "title": "[Privacy Policy Generator] Verify that clicking \"Generate privacy policy\" creates a versioned policy and opens the policy management view",
@@ -1895,7 +1895,7 @@
         },
         {
           "content": "Observe the bottom action bar.",
-          "expected": "A single \"Add policy to site\" button is shown \u2014 the \"Previous\", \"Save draft\", and \"Generate privacy policy\" controls from the wizard are gone."
+          "expected": "A single \"Add policy to site\" button is shown — the \"Previous\", \"Save draft\", and \"Generate privacy policy\" controls from the wizard are gone."
         }
       ],
       "run_type": "regression",
@@ -1905,7 +1905,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account, Pro-plan site). This closes the out_of_scope_notes item 'Final Generate privacy policy action' \u2014 exercised live end-to-end on a disposable site specifically so the irreversible action was safe to perform. FLAG FOR HUMAN REVIEW: this is arguably the single most critical happy-path action in the entire feature, more so than case 39487's 'renders the generated policy' check, which currently holds the section's one run_type=smoke slot. Consider moving smoke to this case instead \u2014 not changed here since this run is additive-only and that edit touches an already-published case.",
+      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account, Pro-plan site). This closes the out_of_scope_notes item 'Final Generate privacy policy action' — exercised live end-to-end on a disposable site specifically so the irreversible action was safe to perform. FLAG FOR HUMAN REVIEW: this is arguably the single most critical happy-path action in the entire feature, more so than case 39487's 'renders the generated policy' check, which currently holds the section's one run_type=smoke slot. Consider moving smoke to this case instead — not changed here since this run is additive-only and that edit touches an already-published case.",
       "section_id": 1968,
       "grill_status": "confirmed",
       "id": 39596,
@@ -1928,7 +1928,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). Entirely undocumented in either spec PDF or the prior draft \u2014 the whole 'Add policy to site' distribution flow was out of scope until now.",
+      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). Entirely undocumented in either spec PDF or the prior draft — the whole 'Add policy to site' distribution flow was out of scope until now.",
       "section_id": 1968,
       "grill_status": "confirmed",
       "id": 39597,
@@ -1955,7 +1955,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). Note the gap between visual default state and actual selection state \u2014 the option must be explicitly clicked to register, a default-highlighted look is not enough to unlock the next step. HTML format's equivalent flow was not exercised this pass \u2014 flagged as a further gap, not covered by this case.",
+      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). Note the gap between visual default state and actual selection state — the option must be explicitly clicked to register, a default-highlighted look is not enough to unlock the next step. HTML format's equivalent flow was not exercised this pass — flagged as a further gap, not covered by this case.",
       "section_id": 1968,
       "grill_status": "confirmed",
       "id": 39598,
@@ -1978,7 +1978,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). The \"Install code\" path (as opposed to \"Yes, I have installed\") was not exercised this pass \u2014 flagged as a further gap.",
+      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). The \"Install code\" path (as opposed to \"Yes, I have installed\") was not exercised this pass — flagged as a further gap.",
       "section_id": 1968,
       "grill_status": "confirmed",
       "id": 39599,
@@ -2001,7 +2001,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). This is the true terminal state of the wizard's happy path \u2014 previously nothing in this section covered past the Preview step. \"Publish changes\", \"Version history\", and the post-generation \"Options\" menu are a distinct post-generation editing surface, not exercised further this pass \u2014 flagged as a further gap for a future targeted pass, not this one.",
+      "rewrite_notes": "grill_status: suggested (targeted re-grill 2026-07-14, disposableuser account). This is the true terminal state of the wizard's happy path — previously nothing in this section covered past the Preview step. \"Publish changes\", \"Version history\", and the post-generation \"Options\" menu are a distinct post-generation editing surface, not exercised further this pass — flagged as a further gap for a future targeted pass, not this one.",
       "section_id": 1968,
       "grill_status": "confirmed",
       "id": 39600,
@@ -2019,7 +2019,7 @@
         },
         {
           "content": "Review the card's content.",
-          "expected": "Two Q&A entries are displayed verbatim: \"Are translations available for these languages?\" \u2014 \"Yes. We provide default translations for the languages you select. After generating your policy in the primary language, you can review and customise each translation to ensure accuracy and local relevance. Offering your privacy policy in multiple languages helps meet legal requirements for clarity and accessibility under laws like GDPR and CCPA.\" \"Will updates to the default content apply to all translations?\" \u2014 \"No. Changes made to the default content won\u2019t automatically update your translated versions. Be sure to review and adjust each translation after editing your primary policy.\""
+          "expected": "Two Q&A entries are displayed verbatim: \"Are translations available for these languages?\" — \"Yes. We provide default translations for the languages you select. After generating your policy in the primary language, you can review and customise each translation to ensure accuracy and local relevance. Offering your privacy policy in multiple languages helps meet legal requirements for clarity and accessibility under laws like GDPR and CCPA.\" \"Will updates to the default content apply to all translations?\" — \"No. Changes made to the default content won’t automatically update your translated versions. Be sure to review and adjust each translation after editing your primary policy.\""
         }
       ],
       "run_type": "regression",
@@ -2046,12 +2046,12 @@
           "expected": "English should be marked selected."
         },
         {
-          "content": "Select Fran\u00e7ais as the primary language.",
-          "expected": "Fran\u00e7ais should be marked selected; English should no longer be marked selected \u2014 only one primary language remains selected at a time."
+          "content": "Select Français as the primary language.",
+          "expected": "Français should be marked selected; English should no longer be marked selected — only one primary language remains selected at a time."
         },
         {
           "content": "Select Italiano as the primary language.",
-          "expected": "Italiano should be marked selected; Fran\u00e7ais should no longer be marked selected."
+          "expected": "Italiano should be marked selected; Français should no longer be marked selected."
         }
       ],
       "run_type": "regression",
@@ -2075,11 +2075,11 @@
       "steps": [
         {
           "content": "Select a primary language (e.g. Deutsch).",
-          "expected": "Deutsch is marked primary; the \"Generate policy in multiple languages\" section lists English, Fran\u00e7ais, Italiano, and Espa\u00f1ol as secondary options."
+          "expected": "Deutsch is marked primary; the \"Generate policy in multiple languages\" section lists English, Français, Italiano, and Español as secondary options."
         },
         {
-          "content": "Select a different primary language (e.g. Fran\u00e7ais).",
-          "expected": "Fran\u00e7ais is marked primary; the secondary-language list updates to English, Deutsch, Italiano, and Espa\u00f1ol \u2014 Fran\u00e7ais no longer appears as a secondary option."
+          "content": "Select a different primary language (e.g. Français).",
+          "expected": "Français is marked primary; the secondary-language list updates to English, Deutsch, Italiano, and Español — Français no longer appears as a secondary option."
         }
       ],
       "run_type": "regression",
@@ -2090,7 +2090,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live 2026-07-15 on both Free (hd.com, disabled secondary buttons) and Pro (hi.com, enabled secondary buttons) \u2014 same exclusion behavior reproduced on both tiers.",
+      "rewrite_notes": "confirmed live 2026-07-15 on both Free (hd.com, disabled secondary buttons) and Pro (hi.com, enabled secondary buttons) — same exclusion behavior reproduced on both tiers.",
       "section_id": 1961,
       "grill_status": "confirmed",
       "audit_status": "verbatim-confirmed",
@@ -2102,8 +2102,8 @@
       "preconditions": "User has a Basic, Pro, or Ultimate plan. A non-English primary language and one or more secondary languages have been selected.",
       "steps": [
         {
-          "content": "Select Deutsch as primary, and Fran\u00e7ais and Italiano as secondary languages.",
-          "expected": "All three show as selected (Deutsch as primary; Fran\u00e7ais and Italiano as secondary)."
+          "content": "Select Deutsch as primary, and Français and Italiano as secondary languages.",
+          "expected": "All three show as selected (Deutsch as primary; Français and Italiano as secondary)."
         },
         {
           "content": "Click \"Save draft\".",
@@ -2115,7 +2115,7 @@
         },
         {
           "content": "Observe the selected languages.",
-          "expected": "Deutsch remains selected as primary; Fran\u00e7ais and Italiano both remain selected as secondary languages."
+          "expected": "Deutsch remains selected as primary; Français and Italiano both remain selected as secondary languages."
         }
       ],
       "run_type": "regression",
@@ -2125,7 +2125,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "gap-closing pass (2026-07-15) targeting the coverage-gaps.md \"Non-English secondary-language generation\" entry \u2014 extends existing case 39451 (simultaneous selection) with an actual save-and-refresh persistence check, confirmed live on Pro (hi.com).",
+      "rewrite_notes": "gap-closing pass (2026-07-15) targeting the coverage-gaps.md \"Non-English secondary-language generation\" entry — extends existing case 39451 (simultaneous selection) with an actual save-and-refresh persistence check, confirmed live on Pro (hi.com).",
       "section_id": 1961,
       "grill_status": "confirmed",
       "audit_status": "verbatim-confirmed",
@@ -2142,7 +2142,7 @@
         },
         {
           "content": "Observe the rendered policy body.",
-          "expected": "The entire policy \u2014 heading (\"Datenschutzerkl\u00e4rung\"), every section heading (e.g. \"Welche Informationen erheben wir \u00fcber Sie?\", \"Cookies und \u00e4hnliche Technologien\"), and the footer credit link (\"CookieYes - Datenschutzrichtlinien-Generator\") \u2014 renders fully in German, using default content for sections not yet filled in."
+          "expected": "The entire policy — heading (\"Datenschutzerklärung\"), every section heading (e.g. \"Welche Informationen erheben wir über Sie?\", \"Cookies und ähnliche Technologien\"), and the footer credit link (\"CookieYes - Datenschutzrichtlinien-Generator\") — renders fully in German, using default content for sections not yet filled in."
         },
         {
           "content": "Close the dialog.",
@@ -2151,12 +2151,12 @@
       ],
       "run_type": "regression",
       "source_case_ids": [
-        "live crawl \u2014 gap found during this pass, not documented in either internal doc"
+        "live crawl — gap found during this pass, not documented in either internal doc"
       ],
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "distinct surface from the \"Preview & add policy\" wizard step (case 39487+); confirmed live on Pro (hi.com) 2026-07-15 \u2014 accessible and fully functional even at 0% wizard completion.",
+      "rewrite_notes": "distinct surface from the \"Preview & add policy\" wizard step (case 39487+); confirmed live on Pro (hi.com) 2026-07-15 — accessible and fully functional even at 0% wizard completion.",
       "section_id": 1960,
       "grill_status": "confirmed",
       "audit_status": "verbatim-confirmed",
@@ -2178,12 +2178,12 @@
       ],
       "run_type": "regression",
       "source_case_ids": [
-        "live crawl \u2014 previously entirely uncased"
+        "live crawl — previously entirely uncased"
       ],
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live on Pro (hi.com), 2026-07-15 \u2014 neither field was in any of the 63 previously published cases.",
+      "rewrite_notes": "confirmed live on Pro (hi.com), 2026-07-15 — neither field was in any of the 63 previously published cases.",
       "section_id": 1967,
       "grill_status": "confirmed",
       "audit_status": "verbatim-confirmed",
@@ -2206,7 +2206,7 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "verbatim-text fidelity per migration-conventions \u00a74; confirmed live on Pro (hi.com), 2026-07-15.",
+      "rewrite_notes": "verbatim-text fidelity per migration-conventions §4; confirmed live on Pro (hi.com), 2026-07-15.",
       "section_id": 1968,
       "grill_status": "confirmed",
       "audit_status": "verbatim-confirmed",
@@ -2223,7 +2223,7 @@
         },
         {
           "content": "Locate the CCPA disclosures' own \"Children's privacy\" subsection.",
-          "expected": "It shows two distinct clauses: ages 13\u201316 require the user's own explicit consent; under 13 requires parental/legal-guardian consent \u2014 a two-tier structure, not a single clause."
+          "expected": "It shows two distinct clauses: ages 13–16 require the user's own explicit consent; under 13 requires parental/legal-guardian consent — a two-tier structure, not a single clause."
         }
       ],
       "run_type": "regression",
@@ -2242,30 +2242,30 @@
     },
     {
       "id": 39609,
-      "title": "[Privacy Policy Generator] [APP DEFECT \u2014 confirmed] The data controller/representative field is not hidden by EU/EEA=No and its value is silently dropped from the generated policy",
+      "title": "[Privacy Policy Generator] [APP DEFECT — confirmed] The data controller/representative field is not hidden by EU/EEA=No and its value is silently dropped from the generated policy",
       "preconditions": "EU/EEA=Yes initially with the data controller/representative field filled in, then EU/EEA switched to No via the \"Remove GDPR clauses?\" dialog.",
       "steps": [
         {
           "content": "Set EU/EEA=No and confirm \"Remove\" on the dialog.",
-          "expected": "The DPO field disappears from Miscellaneous disclosures as expected \u2014 but the data controller/representative field remains visible and still shows its previously entered value."
+          "expected": "The DPO field disappears from Miscellaneous disclosures as expected — but the data controller/representative field remains visible and still shows its previously entered value."
         },
         {
           "content": "Navigate to Preview & add policy (confirmed via hard reload, not a caching artifact).",
-          "expected": "The data-controller/representative contact line is absent from the Contact section \u2014 the field's value is silently dropped despite the field still being shown and editable in the wizard."
+          "expected": "The data-controller/representative contact line is absent from the Contact section — the field's value is silently dropped despite the field still being shown and editable in the wizard."
         },
         {
           "content": "Re-run the sequence with an explicit \"Save draft\" click immediately after confirming \"Remove\" on the EU/EEA dialog, before checking Miscellaneous disclosures or Preview (falsification check: rules out a save-timing artifact like the one found in case 39486).",
-          "expected": "EU/EEA=No persists after a hard reload of Company details > Business details. Despite the confirmed save, the data controller/representative field still remains visible in Miscellaneous disclosures with its value intact, and the value is still completely absent from the generated policy's Contact us section (verified via direct text search of the rendered Preview dialog, not just the Contact heading) \u2014 the defect is not a save-timing artifact."
+          "expected": "EU/EEA=No persists after a hard reload of Company details > Business details. Despite the confirmed save, the data controller/representative field still remains visible in Miscellaneous disclosures with its value intact, and the value is still completely absent from the generated policy's Contact us section (verified via direct text search of the rendered Preview dialog, not just the Contact heading) — the defect is not a save-timing artifact."
         }
       ],
       "run_type": "regression",
       "source_case_ids": [
-        "live crawl \u2014 gap found during this pass"
+        "live crawl — gap found during this pass"
       ],
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "contradicts the questionnaire doc, which marks this field 'Shown if: Users in EU/EEA = Yes' same as its sibling DPO field. Worth reporting to the app team, not just cased as a regression check. Confirmed live on Pro (hi.com), 2026-07-15. FALSIFICATION CHECK RUN 2026-07-16: re-tested with an explicit Save draft click after the EU/EEA Yes\u2192No removal (the disconfirming state suggested by case 39486's earlier save-timing artifact) and hard-reload-verified the EU/EEA=No persisted before checking downstream state. The field-visibility bug and the silent value-drop from the generated Preview both still reproduced. Per migration-conventions.md \u00a712, upgraded from [verify] to [confirmed].",
+      "rewrite_notes": "contradicts the questionnaire doc, which marks this field 'Shown if: Users in EU/EEA = Yes' same as its sibling DPO field. Worth reporting to the app team, not just cased as a regression check. Confirmed live on Pro (hi.com), 2026-07-15. FALSIFICATION CHECK RUN 2026-07-16: re-tested with an explicit Save draft click after the EU/EEA Yes→No removal (the disconfirming state suggested by case 39486's earlier save-timing artifact) and hard-reload-verified the EU/EEA=No persisted before checking downstream state. The field-visibility bug and the silent value-drop from the generated Preview both still reproduced. Per migration-conventions.md §12, upgraded from [verify] to [confirmed].",
       "section_id": 1967,
       "grill_status": "confirmed",
       "audit_status": "verbatim-confirmed",
@@ -2287,7 +2287,7 @@
       ],
       "run_type": "regression",
       "source_case_ids": [
-        "live crawl \u2014 Business Details matrix sweep"
+        "live crawl — Business Details matrix sweep"
       ],
       "permission_flag": false,
       "platform_flag": false,
@@ -2314,12 +2314,12 @@
       ],
       "run_type": "regression",
       "source_case_ids": [
-        "live crawl \u2014 Business Details matrix sweep"
+        "live crawl — Business Details matrix sweep"
       ],
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "resolves the \"for-profit alone is believed to be a no-op downstream\" open question carried over from the matrix-sweep handoff notes. Confirmed live on Pro (hi.com), 2026-07-15 \u2014 the actual CCPA-content trigger is thresholds=Yes OR include-clauses=Yes, not for-profit alone. plan_gate_flag corrected from true to false during /migrate-section Step 3b: this is a Layer-1 functional case (the CCPA-content gating logic itself), not a Layer-2 Plan Gates case (testing that the for-profit control is properly locked/nudged for Free users) \u2014 that distinction is in testrail-suite-v2.md's Plan-gated features section. Requiring a Pro+ account as a precondition does not by itself make a case a plan-gate case.",
+      "rewrite_notes": "resolves the \"for-profit alone is believed to be a no-op downstream\" open question carried over from the matrix-sweep handoff notes. Confirmed live on Pro (hi.com), 2026-07-15 — the actual CCPA-content trigger is thresholds=Yes OR include-clauses=Yes, not for-profit alone. plan_gate_flag corrected from true to false during /migrate-section Step 3b: this is a Layer-1 functional case (the CCPA-content gating logic itself), not a Layer-2 Plan Gates case (testing that the for-profit control is properly locked/nudged for Free users) — that distinction is in testrail-suite-v2.md's Plan-gated features section. Requiring a Pro+ account as a precondition does not by itself make a case a plan-gate case.",
       "section_id": 1970,
       "grill_status": "confirmed",
       "audit_status": "verbatim-confirmed",
@@ -2341,12 +2341,12 @@
       ],
       "run_type": "regression",
       "source_case_ids": [
-        "live crawl \u2014 gap found during Business Details matrix sweep, previously entirely undocumented"
+        "live crawl — gap found during Business Details matrix sweep, previously entirely undocumented"
       ],
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "confirmed live on Pro (hi.com), 2026-07-15 \u2014 this section is not mentioned in either source doc.",
+      "rewrite_notes": "confirmed live on Pro (hi.com), 2026-07-15 — this section is not mentioned in either source doc.",
       "section_id": 1968,
       "grill_status": "confirmed",
       "audit_status": "verbatim-confirmed",
@@ -2387,9 +2387,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "authored from live crawl \u2014 gap-closing pass on Use of Data (flagged as thin/unswept for plan-tier gating in docs/wiki/09-legal-policies/privacy-policy-generator.md); confirmed no plan-gating exists on this step at all, and boundary/duplicate/removal behavior for the custom-purpose field wasn't covered by existing case 39480",
+      "rewrite_notes": "authored from live crawl — gap-closing pass on Use of Data (flagged as thin/unswept for plan-tier gating in docs/wiki/09-legal-policies/privacy-policy-generator.md); confirmed no plan-gating exists on this step at all, and boundary/duplicate/removal behavior for the custom-purpose field wasn't covered by existing case 39480",
       "grill_status": "confirmed",
-      "section_id": 1964
+      "section_id": 1964,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed (live-verified during /draft-section grilling, 2026-07-14); source is live crawl + internal-docs char-limit sheet, not a Suite 6 case, so no source diff applies per audit rule 3b."
     },
     {
       "id": 39614,
@@ -2423,9 +2425,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "gap-closing pass on Data retention (flagged as thin/unswept in docs/wiki/09-legal-policies/privacy-policy-generator.md); doc-live-mismatch confirmed \u2014 doc's stated current limit (500) is stale, live enforces 1000 (matching the doc's own recommended value)",
+      "rewrite_notes": "gap-closing pass on Data retention (flagged as thin/unswept in docs/wiki/09-legal-policies/privacy-policy-generator.md); doc-live-mismatch confirmed — doc's stated current limit (500) is stale, live enforces 1000 (matching the doc's own recommended value)",
       "grill_status": "confirmed",
-      "section_id": 1966
+      "section_id": 1966,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl + internal-docs char-limit sheet, not Suite 6 — no source diff applies."
     },
     {
       "id": 39615,
@@ -2463,9 +2467,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "previously-undocumented, never-live-verified scenario \u2014 existing case 39498 only covers the disabled/Free-plan state of \"Not yet decided\"; this case is the unlocked Pro+ behavior the doc hinted at (a field appearing when selected_option=not_yet_decided) but that no one had tested live since it's plan-gated. Same doc-live-mismatch pattern as the sibling case: doc's current limit (2000) is stale, live enforces 2500 (the doc's recommended value).",
+      "rewrite_notes": "previously-undocumented, never-live-verified scenario — existing case 39498 only covers the disabled/Free-plan state of \"Not yet decided\"; this case is the unlocked Pro+ behavior the doc hinted at (a field appearing when selected_option=not_yet_decided) but that no one had tested live since it's plan-gated. Same doc-live-mismatch pattern as the sibling case: doc's current limit (2000) is stale, live enforces 2500 (the doc's recommended value).",
       "grill_status": "confirmed",
-      "section_id": 1966
+      "section_id": 1966,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl + internal-docs char-limit sheet, not Suite 6 — no source diff applies."
     },
     {
       "id": 39616,
@@ -2478,7 +2484,7 @@
         },
         {
           "content": "Check the wizard sidebar before answering.",
-          "expected": "The sidebar lists Language preferences, Company details, Collection of data, Use of data, Data retention, Miscellaneous disclosures, and Preview & add policy \u2014 no \"Disclosure of data\" step is present."
+          "expected": "The sidebar lists Language preferences, Company details, Collection of data, Use of data, Data retention, Miscellaneous disclosures, and Preview & add policy — no \"Disclosure of data\" step is present."
         },
         {
           "content": "Click \"Yes\" on the opt-in question.",
@@ -2486,7 +2492,7 @@
         },
         {
           "content": "Click \"No\" on the opt-in question.",
-          "expected": "\"Disclosure of data\" is immediately removed from the sidebar with no confirmation dialog \u2014 unlike the \"users in EU/EEA?\" and \"users in California?\" toggles, which prompt \"Remove GDPR/CCPA clauses from your policy?\" before removing their sections."
+          "expected": "\"Disclosure of data\" is immediately removed from the sidebar with no confirmation dialog — unlike the \"users in EU/EEA?\" and \"users in California?\" toggles, which prompt \"Remove GDPR/CCPA clauses from your policy?\" before removing their sections."
         }
       ],
       "run_type": "regression",
@@ -2498,7 +2504,9 @@
       "plan_gate_flag": false,
       "rewrite_notes": "authored at explicit user request after live-verifying the 'Disclosure of data' step's full sidebar-visibility trigger rule (EU/EEA vs California+for-profit). Covers the opt-in path referenced only by existing case 39611's title (\"...without crossing thresholds or opting in to CCPA clauses anyway\") but never walked through step-by-step until now. Confirms the opt-in is a plain Business-details Yes/No question, not a modal, and that it toggles the step silently (no confirmation dialog), unlike the sibling EU/EEA and California toggles.",
       "grill_status": "confirmed",
-      "section_id": 1970
+      "section_id": 1970,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl only, not Suite 6 — no source diff applies."
     },
     {
       "id": 39617,
@@ -2515,7 +2523,7 @@
         },
         {
           "content": "Select \"Users under the age of 13 years\" instead.",
-          "expected": "The under-16 fields collapse and two different fields appear: \"How can parents or guardians of such users opt in to a sale?\" and \"How can users opt out of sharing or selling information?\" \u2014 the options are mutually exclusive, and the under-13 wording explicitly references parental/guardian consent unlike under-16's."
+          "expected": "The under-16 fields collapse and two different fields appear: \"How can parents or guardians of such users opt in to a sale?\" and \"How can users opt out of sharing or selling information?\" — the options are mutually exclusive, and the under-13 wording explicitly references parental/guardian consent unlike under-16's."
         },
         {
           "content": "Select \"None.\"",
@@ -2531,9 +2539,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "none of the existing cases (39458/39459/39460/39461/39481/39497) test what happens when an age category is actually selected \u2014 they only list the question and its 3 options",
+      "rewrite_notes": "none of the existing cases (39458/39459/39460/39461/39481/39497) test what happens when an age category is actually selected — they only list the question and its 3 options",
       "grill_status": "confirmed",
-      "section_id": 1965
+      "section_id": 1965,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl + internal-docs char-limit sheet, not Suite 6 — no source diff applies."
     },
     {
       "id": 39618,
@@ -2562,9 +2572,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "doc-live-mismatch \u2014 doc states current limit 2000, live enforces 2500 (matches doc's own recommended value), same pattern already found on Data Retention's fields",
+      "rewrite_notes": "doc-live-mismatch — doc states current limit 2000, live enforces 2500 (matches doc's own recommended value), same pattern already found on Data Retention's fields",
       "grill_status": "confirmed",
-      "section_id": 1965
+      "section_id": 1965,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl + internal-docs char-limit sheet, not Suite 6 — no source diff applies."
     },
     {
       "id": 39619,
@@ -2581,7 +2593,7 @@
         },
         {
           "content": "Reduce it to a valid value, then answer \"Do you disclose sensitive information for purposes beyond listed exemptions?\" = Yes.",
-          "expected": "A single field, \"Describe the purposes for which you disclose Sensitive Personal Information beyond the listed exemptions,\" appears \u2014 not the two separate fields (categories disclosed and third parties shared with) the field-mapping doc predicts for this question."
+          "expected": "A single field, \"Describe the purposes for which you disclose Sensitive Personal Information beyond the listed exemptions,\" appears — not the two separate fields (categories disclosed and third parties shared with) the field-mapping doc predicts for this question."
         },
         {
           "content": "Leave that field empty and click \"Next.\"",
@@ -2600,9 +2612,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "doc-live-mismatch \u2014 doc's field map predicts two reveal fields for the sensitive-info Yes path; live only has one",
+      "rewrite_notes": "doc-live-mismatch — doc's field map predicts two reveal fields for the sensitive-info Yes path; live only has one",
       "grill_status": "confirmed",
-      "section_id": 1965
+      "section_id": 1965,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl + internal-docs char-limit sheet, not Suite 6 — no source diff applies."
     },
     {
       "id": 39620,
@@ -2641,7 +2655,9 @@
       "plan_gate_flag": false,
       "rewrite_notes": "matches the doc's 2-field prediction for this question (unlike the sensitive-info question in the sibling case); confirms the reveal/limit/hide-on-No cycle",
       "grill_status": "confirmed",
-      "section_id": 1965
+      "section_id": 1965,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl + internal-docs char-limit sheet, not Suite 6 — no source diff applies."
     },
     {
       "id": 39621,
@@ -2662,12 +2678,14 @@
       "plan_gate_flag": false,
       "rewrite_notes": "gap found during /grill-section gap-hunt: existing case 39481 only observes that the sensitive-info question renders, never toggles it after answering Yes; no case in this file or elsewhere tests the hide-on-No behavior for this specific field (case 8's sibling third-party-disclosure question does test hide-on-No, but the sensitive-info question's own toggle was untested until now)",
       "grill_status": "confirmed",
-      "section_id": 1965
+      "section_id": 1965,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl only, not Suite 6 — no source diff applies."
     },
     {
       "id": 39730,
       "title": "[Privacy Policy Generator] Verify that the data-transfer and automatic-processing toggles on Miscellaneous disclosures are required before advancing",
-      "preconditions": "Miscellaneous disclosures step, with \"Do you have users in EU/EEA?\" = Yes on Business details \u2014 these two questions are GDPR-gated and do not render otherwise.",
+      "preconditions": "Miscellaneous disclosures step, with \"Do you have users in EU/EEA?\" = Yes on Business details — these two questions are GDPR-gated and do not render otherwise.",
       "steps": [
         {
           "content": "Leave \"Do you transfer data collected to a non-adequate country or region outside the EU?\" and \"Do you automatically process the data that you have collected?\" unanswered and click \"Next.\"",
@@ -2685,9 +2703,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "authored from live crawl \u2014 gap-closing pass, required-field validation not previously cased for this step",
+      "rewrite_notes": "authored from live crawl — gap-closing pass, required-field validation not previously cased for this step",
       "grill_status": "fixed",
-      "section_id": 1967
+      "section_id": 1967,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=fixed (wording actively corrected against live app during grilling); source is live crawl only, not Suite 6 — no source diff applies."
     },
     {
       "id": 39731,
@@ -2696,7 +2716,7 @@
       "steps": [
         {
           "content": "Leave both \"Provide the contact details of the Data Protection Officer (DPO).\" and \"Provide the details of the data controller/representative if applicable.\" empty and click \"Next.\"",
-          "expected": "The wizard advances with no validation error \u2014 both fields are optional."
+          "expected": "The wizard advances with no validation error — both fields are optional."
         },
         {
           "content": "Return to Miscellaneous disclosures and enter exactly 2000 characters into the DPO field.",
@@ -2719,9 +2739,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "authored from live crawl \u2014 gap-closing pass, boundary values for this field were the targeted coverage-gaps.md item",
+      "rewrite_notes": "authored from live crawl — gap-closing pass, boundary values for this field were the targeted coverage-gaps.md item",
       "grill_status": "confirmed",
-      "section_id": 1967
+      "section_id": 1967,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl + internal-docs char-limit sheet, not Suite 6 — no source diff applies."
     },
     {
       "id": 39732,
@@ -2730,7 +2752,7 @@
       "steps": [
         {
           "content": "Click \"Add your own\" without deselecting \"Standard contractual clauses.\"",
-          "expected": "Both chips remain selected simultaneously \u2014 the safeguards field is multi-select, not mutually exclusive."
+          "expected": "Both chips remain selected simultaneously — the safeguards field is multi-select, not mutually exclusive."
         },
         {
           "content": "Type a valid custom safeguard (e.g. \"Data processed under an approved certification mechanism\") into the field that appears and click \"Add.\"",
@@ -2750,7 +2772,7 @@
         },
         {
           "content": "Type a second, different valid value and click \"Add.\"",
-          "expected": "The new value replaces the existing custom chip rather than being added alongside it \u2014 only one custom safeguard entry is retained at a time, unlike duplicate-entry chip lists used elsewhere in the wizard (e.g. Use of data's custom-purpose list)."
+          "expected": "The new value replaces the existing custom chip rather than being added alongside it — only one custom safeguard entry is retained at a time, unlike duplicate-entry chip lists used elsewhere in the wizard (e.g. Use of data's custom-purpose list)."
         }
       ],
       "run_type": "regression",
@@ -2761,9 +2783,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "authored from live crawl \u2014 gap-closing pass, boundary values plus incidental multi-select/cardinality findings not previously cased",
+      "rewrite_notes": "authored from live crawl — gap-closing pass, boundary values plus incidental multi-select/cardinality findings not previously cased",
       "grill_status": "confirmed",
-      "section_id": 1967
+      "section_id": 1967,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl + internal-docs char-limit sheet, not Suite 6 — no source diff applies."
     },
     {
       "id": 39733,
@@ -2772,7 +2796,7 @@
       "steps": [
         {
           "content": "Save the draft and navigate to Preview & add policy.",
-          "expected": "The \"GDPR Disclosures > Cross border data transfer\" section includes the standard \"Standard Contractual Clauses:\" explanatory paragraph, followed by a separate paragraph containing the exact custom safeguard text entered \u2014 rendered verbatim, not paraphrased or merged into the standard paragraph."
+          "expected": "The \"GDPR Disclosures > Cross border data transfer\" section includes the standard \"Standard Contractual Clauses:\" explanatory paragraph, followed by a separate paragraph containing the exact custom safeguard text entered — rendered verbatim, not paraphrased or merged into the standard paragraph."
         }
       ],
       "run_type": "regression",
@@ -2782,9 +2806,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "authored from live crawl \u2014 verbatim-text fidelity check per migration-conventions.md \u00a74",
+      "rewrite_notes": "authored from live crawl — verbatim-text fidelity check per migration-conventions.md §4",
       "grill_status": "confirmed",
-      "section_id": 1967
+      "section_id": 1967,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl only, not Suite 6 — no source diff applies."
     },
     {
       "id": 39734,
@@ -2816,9 +2842,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "authored from live crawl \u2014 gap-closing pass, boundary values for this field were the targeted coverage-gaps.md item; also surfaces a doc-live-mismatch on the field's Optional/required status",
+      "rewrite_notes": "authored from live crawl — gap-closing pass, boundary values for this field were the targeted coverage-gaps.md item; also surfaces a doc-live-mismatch on the field's Optional/required status",
       "grill_status": "confirmed",
-      "section_id": 1967
+      "section_id": 1967,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl + internal-docs char-limit sheet, not Suite 6 — no source diff applies."
     },
     {
       "id": 39735,
@@ -2841,9 +2869,11 @@
       "permission_flag": false,
       "platform_flag": false,
       "plan_gate_flag": false,
-      "rewrite_notes": "authored from live crawl \u2014 confirmed-clean toggle-to-No behavior, contrasting with the stale-content-on-toggle-to-No defect pattern logged in coverage-gaps.md for other fields in this wizard",
+      "rewrite_notes": "authored from live crawl — confirmed-clean toggle-to-No behavior, contrasting with the stale-content-on-toggle-to-No defect pattern logged in coverage-gaps.md for other fields in this wizard",
       "grill_status": "confirmed",
-      "section_id": 1967
+      "section_id": 1967,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl only, not Suite 6 — no source diff applies."
     },
     {
       "id": 39736,
@@ -2871,16 +2901,18 @@
       "platform_flag": false,
       "plan_gate_flag": false,
       "section_id": 1972,
-      "rewrite_notes": "authored from live crawl \u2014 character limit audit of Company Details/Collection of Data/Use of Data (BACKLOG.md item); limits re-confirmed live 2026-07-21 (2000/2500/2500), live behavior taken as source of truth, not the internal field-mapping doc",
-      "grill_status": "confirmed"
+      "rewrite_notes": "authored from live crawl — character limit audit of Company Details/Collection of Data/Use of Data (BACKLOG.md item); limits re-confirmed live 2026-07-21 (2000/2500/2500), live behavior taken as source of truth, not the internal field-mapping doc",
+      "grill_status": "confirmed",
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; source is live crawl only, not Suite 6 — no source diff applies."
     },
     {
-      "title": "[Plan Gates] Privacy Policy Generator \u2014 Free plan",
+      "title": "[Plan Gates] Privacy Policy Generator — Free plan",
       "preconditions": "User is on a Free plan.",
       "steps": [
         {
           "content": "Navigate to Privacy Policy Generator > Language preferences, select a primary language, then observe the \"Generate policy in multiple languages\" section.",
-          "expected": "The secondary-language buttons (Fran\u00e7ais, Deutsch, Italiano, Espa\u00f1ol) should be disabled, with an \"Upgrade to Basic\" button shown."
+          "expected": "The secondary-language buttons (Français, Deutsch, Italiano, Español) should be disabled, with an \"Upgrade to Basic\" button shown."
         },
         {
           "content": "Click \"Upgrade to Basic\".",
@@ -2900,7 +2932,7 @@
         },
         {
           "content": "On Collection of data > Personal information, click a CCPA-gated chip (e.g. \"Birthday\").",
-          "expected": "The chip should render visually locked \u2014 greyed-out label, lock icon, amber Pro+/crown badge \u2014 but remain clickable without selecting. An inline toast should appear: \"CCPA/CPRA-related clauses are available on the Pro plan and above.\" with an \"Upgrade now\" link."
+          "expected": "The chip should render visually locked — greyed-out label, lock icon, amber Pro+/crown badge — but remain clickable without selecting. An inline toast should appear: \"CCPA/CPRA-related clauses are available on the Pro plan and above.\" with an \"Upgrade now\" link."
         },
         {
           "content": "Set \"Do you sell or share the personal information of users?\" = Yes on Business details, then navigate to the Disclosure of data step.",
@@ -2908,7 +2940,7 @@
         },
         {
           "content": "Navigate to the Data retention step and observe the \"Not yet decided\" option.",
-          "expected": "The chip should render visibly disabled with an inline \"Pro+\" label. No click interaction should be available \u2014 no toast or upgrade modal opens."
+          "expected": "The chip should render visibly disabled with an inline \"Pro+\" label. No click interaction should be available — no toast or upgrade modal opens."
         }
       ],
       "run_type": "smoke",
@@ -2927,19 +2959,21 @@
       "rewrite_notes": "Authored per testrail-suite-v2.md's Layer 2 feature-scoped exception (one case per plan, walking through all 6 gated touchpoints in one case), consolidating touchpoints already verified individually in 39493-39498. Content sourced entirely from the 2026-07-23 live Plan Gates re-sweep (ai-context/plan-gates-ppg-resweep-progress.md), not re-derived.",
       "grill_status": "confirmed",
       "grill_note": "All 6 touchpoints live-verified on Free plan during the 2026-07-23 re-sweep; zero defects found.",
-      "id": 39738
+      "id": 39738,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; Plan Gates case aggregating already-audited feature cases (39493-39498) plus its own quoted dialog/badge copy, all live-verified during grilling — no Suite 6 source to diff."
     },
     {
-      "title": "[Plan Gates] Privacy Policy Generator \u2014 Basic plan",
+      "title": "[Plan Gates] Privacy Policy Generator — Basic plan",
       "preconditions": "User is on a Basic plan.",
       "steps": [
         {
           "content": "Navigate to Privacy Policy Generator > Language preferences, select a primary language, then observe the \"Generate policy in multiple languages\" section.",
-          "expected": "The secondary-language buttons (Fran\u00e7ais, Deutsch, Italiano, Espa\u00f1ol) should be fully enabled \u2014 no Basic+ badge, no upgrade prompt."
+          "expected": "The secondary-language buttons (Français, Deutsch, Italiano, Español) should be fully enabled — no Basic+ badge, no upgrade prompt."
         },
         {
           "content": "Navigate to Company details > Business details, and set \"Do you have users in California?\" = Yes.",
-          "expected": "The \"Are you a 'for-profit' organisation?\" question should still show a \"Pro+\" badge, disabled \"Yes\"/\"No\" buttons, and the same upgrade-to-Pro inline text as on a Free plan \u2014 Basic does not unlock Pro+ features."
+          "expected": "The \"Are you a 'for-profit' organisation?\" question should still show a \"Pro+\" badge, disabled \"Yes\"/\"No\" buttons, and the same upgrade-to-Pro inline text as on a Free plan — Basic does not unlock Pro+ features."
         },
         {
           "content": "Click \"Upgrade to Pro\".",
@@ -2951,11 +2985,11 @@
         },
         {
           "content": "On Collection of data > Personal information, click a CCPA-gated chip (e.g. \"Birthday\").",
-          "expected": "The chip should render locked identically to a Free plan \u2014 greyed-out label, lock icon, amber Pro+/crown badge, clickable without selecting \u2014 with the same \"CCPA/CPRA-related clauses are available on the Pro plan and above.\" toast."
+          "expected": "The chip should render locked identically to a Free plan — greyed-out label, lock icon, amber Pro+/crown badge, clickable without selecting — with the same \"CCPA/CPRA-related clauses are available on the Pro plan and above.\" toast."
         },
         {
           "content": "Set \"Do you sell or share the personal information of users?\" = Yes on Business details, then navigate to the Disclosure of data step.",
-          "expected": "All 4 field groups should be Pro+-gated identically to a Free plan \u2014 \"Pro+\" badge, disabled controls, \"Upgrade to Pro\" prompt."
+          "expected": "All 4 field groups should be Pro+-gated identically to a Free plan — \"Pro+\" badge, disabled controls, \"Upgrade to Pro\" prompt."
         },
         {
           "content": "Navigate to the Data retention step and observe the \"Not yet decided\" option.",
@@ -2977,16 +3011,18 @@
       "section_id": 1793,
       "rewrite_notes": "Authored per testrail-suite-v2.md's Layer 2 feature-scoped exception (one case per plan, walking through all 6 gated touchpoints in one case), consolidating touchpoints already verified individually in 39493-39498. Content sourced entirely from the 2026-07-23 live Plan Gates re-sweep (ai-context/plan-gates-ppg-resweep-progress.md), not re-derived.",
       "grill_status": "confirmed",
-      "grill_note": "All 6 touchpoints live-verified on Basic plan during the 2026-07-23 re-sweep \u2014 touchpoint 1 (Basic+ gate) unlocked as expected, touchpoints 2-6 (Pro+ gates) remain locked identically to Free. Zero defects found.",
-      "id": 39739
+      "grill_note": "All 6 touchpoints live-verified on Basic plan during the 2026-07-23 re-sweep — touchpoint 1 (Basic+ gate) unlocked as expected, touchpoints 2-6 (Pro+ gates) remain locked identically to Free. Zero defects found.",
+      "id": 39739,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; same basis as the Free-plan Plan Gates case (39738) — live-verified during grilling, no Suite 6 source."
     },
     {
-      "title": "[Plan Gates] Privacy Policy Generator \u2014 Pro plan",
+      "title": "[Plan Gates] Privacy Policy Generator — Pro plan",
       "preconditions": "User is on a Pro or Ultimate plan.",
       "steps": [
         {
           "content": "Navigate to Privacy Policy Generator > Language preferences, select a primary language, then observe the \"Generate policy in multiple languages\" section.",
-          "expected": "The secondary-language buttons should be fully enabled \u2014 no badge, no upgrade prompt."
+          "expected": "The secondary-language buttons should be fully enabled — no badge, no upgrade prompt."
         },
         {
           "content": "Navigate to Company details > Business details, set \"Do you have users in California?\" = Yes, then observe \"Are you a 'for-profit' organisation?\".",
@@ -2998,11 +3034,11 @@
         },
         {
           "content": "Fill in every remaining required field on the tab and click \"Next\".",
-          "expected": "The wizard should advance straight to Collection of data with no upgrade modal \u2014 nothing was locked or left unanswered."
+          "expected": "The wizard should advance straight to Collection of data with no upgrade modal — nothing was locked or left unanswered."
         },
         {
           "content": "On Collection of data > Personal information, observe the CCPA-gated data-category chips (e.g. under \"Accounts & authentication\").",
-          "expected": "The chips should render fully normal \u2014 checkmark icon, no lock icon, no Pro+/crown badge \u2014 and remain freely selectable."
+          "expected": "The chips should render fully normal — checkmark icon, no lock icon, no Pro+/crown badge — and remain freely selectable."
         },
         {
           "content": "Set \"Do you sell or share the personal information of users?\" = Yes on Business details, then navigate to the Disclosure of data step.",
@@ -3010,7 +3046,7 @@
         },
         {
           "content": "Navigate to the Data retention step and observe the \"Not yet decided\" option.",
-          "expected": "The chip should render as a plain enabled button \u2014 no disabled attribute, no Pro+ badge or text."
+          "expected": "The chip should render as a plain enabled button — no disabled attribute, no Pro+ badge or text."
         }
       ],
       "run_type": "smoke",
@@ -3026,10 +3062,12 @@
       "platform_flag": false,
       "plan_gate_flag": true,
       "section_id": 1793,
-      "rewrite_notes": "Precondition covers both Pro and Ultimate \u2014 the 2026-07-23 re-sweep found zero behavioral difference between the two tiers across all 6 touchpoints (all gates are \"Pro+\", not Pro-exclusive), consistent with testrail-suite-v2.md's equivalence-partitioning convention (write separate cases only when behaviour differs).",
+      "rewrite_notes": "Precondition covers both Pro and Ultimate — the 2026-07-23 re-sweep found zero behavioral difference between the two tiers across all 6 touchpoints (all gates are \"Pro+\", not Pro-exclusive), consistent with testrail-suite-v2.md's equivalence-partitioning convention (write separate cases only when behaviour differs).",
       "grill_status": "confirmed",
       "grill_note": "All 6 touchpoints live-verified on both Pro and Ultimate plans during the 2026-07-23 re-sweep (24 checks across 4 plans total, zero defects found). Pro and Ultimate confirmed behaviorally identical for every touchpoint.",
-      "id": 39740
+      "id": 39740,
+      "audit_status": "verbatim-confirmed",
+      "audit_note": "grill_status=confirmed; same basis as the Free-plan Plan Gates case (39738) — live-verified during grilling, no Suite 6 source."
     }
   ],
   "default_section_id": 1960
